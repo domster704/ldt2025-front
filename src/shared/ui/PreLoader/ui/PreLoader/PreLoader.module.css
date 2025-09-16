@@ -1,0 +1,14 @@
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding-block: 10%;
+
+  img {
+    width: 11.25rem;
+    height: 7.5rem;
+    margin-block: auto;
+  }
+}

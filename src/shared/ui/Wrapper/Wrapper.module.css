@@ -1,0 +1,7 @@
+.block {
+  --body-padding-inline: 0;
+  --body-padding-block: 0.75rem;
+  padding: var(--body-padding-inline) var(--body-padding-block);
+  padding-top: 0;
+  width: 100%;
+}
