@@ -1,21 +1,29 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {User, UserMainData, UserPromoLinkInfo} from "@entities/user/model/User";
-import {fetchUserByPhoneTelegramUserID, fetchUserSetUserData} from "@entities/user/api/userThunk";
+import {User, UserMainData} from "@entities/user/model/User";
+import {
+  fetchSetUserPassOnboarding,
+  fetchUserByPhoneTelegramUserID,
+  fetchUserSetUserData
+} from "@entities/user/api/userThunk";
 
 let initialState: {
   user: User,
-  userPromoLiked: UserPromoLinkInfo[],
-  userPromoActivated: UserPromoLinkInfo[],
 } = {
-  user: {} as User,
-  userPromoLiked: [],
-  userPromoActivated: []
+  user: {
+    first_name: 'dev',
+    last_name: 'dev',
+    phone: '+79127458900',
+    email: ''
+  } as User,
 }
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    /**
+     * Установка user_id из tg_user_id. Обычно берется из Telegram.unsafe_initData.
+     */
     setUserId: (state, action: PayloadAction<string>) => {
       state.user.user_id = action.payload;
     },
@@ -36,6 +44,9 @@ const userSlice = createSlice({
           ...state.user,
           ...action.payload
         };
+      })
+      .addCase(fetchSetUserPassOnboarding.fulfilled, (state, action: PayloadAction<any>) => {
+        state.user.isPassedOnboarding = true;
       })
   }
 });

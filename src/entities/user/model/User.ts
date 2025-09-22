@@ -18,20 +18,3 @@ export interface UserMainData {
   last_name: string,
   email: string,
 }
-
-export enum ActivationType {
-  social = "social",
-  web = "web",
-  telephone = "telephone",
-}
-
-export interface UserPromoActivationInfo {
-  user_id: string,
-  promo_id: number,
-  activationType: ActivationType
-}
-
-export interface UserPromoLinkInfo {
-  user_id: string,
-  promo_id: number
-}

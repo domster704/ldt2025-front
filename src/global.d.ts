@@ -1,6 +1,5 @@
 declare module "*.module.css";
 
-
 declare module '*.svg' {
   import * as React from 'react';
   export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
@@ -8,17 +7,13 @@ declare module '*.svg' {
   export default src;
 }
 
+
 declare module '*.png' {
   const content: string;
   export default content;
 }
 
 declare module '*.jpg' {
-  const content: string;
-  export default content;
-}
-
-declare module '*.webp' {
   const content: string;
   export default content;
 }

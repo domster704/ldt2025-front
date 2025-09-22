@@ -1,6 +1,9 @@
 import axios, {AxiosError} from 'axios';
 import {$apiUrl} from "@shared/const/constants";
 
+let isRefreshing = false;
+let failedQueue: any[] = [];
+
 export const $api = axios.create({
   baseURL: $apiUrl,
   headers: {'Content-Type': 'application/json'}
@@ -21,13 +24,39 @@ $api.interceptors.response.use(
   response => response,
   async (error: AxiosError) => {
     const originalRequest: any = error.config;
-    try {
-      const newToken = await login();
-      originalRequest.headers.Authorization = `Bearer ${newToken}`;
-      return $api(originalRequest);
-    } catch (e) {
-      return Promise.reject(error);
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      if (isRefreshing) {
+        // если уже идёт обновление токена => ждём, когда оно закончится
+        return new Promise((resolve, reject) => {
+          failedQueue.push({resolve, reject});
+        })
+          .then((token) => {
+            originalRequest.headers.Authorization = `Bearer ${token}`;
+            return $api(originalRequest);
+          })
+          .catch(err => Promise.reject(err));
+      }
+
+      originalRequest._retry = true;
+      isRefreshing = true;
+
+      try {
+        const newToken = await login();
+        processQueue(null, newToken);
+
+        // пробуем выполнить запрос снова с новым токеном
+        originalRequest.headers.Authorization = `Bearer ${newToken}`;
+        return $api(originalRequest);
+      } catch (err) {
+        processQueue(err as AxiosError, null);
+        return Promise.reject(err);
+      } finally {
+        isRefreshing = false;
+      }
     }
+
+    return Promise.reject(error);
   }
 );
 
@@ -42,4 +71,15 @@ export const login = async (): Promise<string> => {
 
   localStorage.setItem('token', jwt);
   return jwt;
+};
+
+const processQueue = (error: AxiosError | null, token: string | null) => {
+  failedQueue.forEach(prom => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
+  failedQueue = [];
 };

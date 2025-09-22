@@ -1,0 +1,30 @@
+:root {
+  --dot: radial-gradient(farthest-side, var(--color-3) 98%, #fff);
+}
+
+.loader {
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 2rem;
+  aspect-ratio: 3;
+  border: 0.5rem solid #fff;
+  box-sizing: border-box;
+
+  background: var(--dot) left/20px 20px no-repeat,
+  var(--dot) left/20px 20px no-repeat,
+  var(--dot) center/20px 20px no-repeat,
+  var(--dot) right/20px 20px no-repeat,
+  #fff;
+  filter: blur(4px) contrast(10);
+
+  animation: l14 1s infinite;
+}
+
+@keyframes l14 {
+  100% {
+    background-position: right, left, center, right
+  }
+}

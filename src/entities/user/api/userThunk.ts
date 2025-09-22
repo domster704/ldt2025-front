@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {User, UserMainData} from "@entities/user/model/User";
-import {ThunkApi} from "@shared/types";
+import {ThunkApi} from "@shared/types/types";
 import {$api} from "@shared/api/axiosConfig";
 
 /**
@@ -30,3 +30,16 @@ export const fetchUserSetUserData = createAsyncThunk<UserMainData | null, Partia
     return response.data;
   }
 );
+
+export const fetchSetUserPassOnboarding = createAsyncThunk<any, void, ThunkApi>(
+  'users/fetchSetUserPassOnboarding',
+  async () => {
+    const response = await $api.put(`/tg-user/pass-onboarding`);
+    return response.data;
+  }
+);
+
+export const fetchSetLastVisit = async (user_id: string) => {
+  await $api.put(`/tg-user/last-visit`, {user_id});
+}
+

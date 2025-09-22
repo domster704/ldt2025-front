@@ -1,1 +1,1 @@
-export {default as PreLoader} from './ui/PreLoader/PreLoader'
+export {default as PreLoader} from './PreLoader'

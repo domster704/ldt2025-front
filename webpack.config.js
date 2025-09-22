@@ -1,7 +1,6 @@
 // const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const webpack = require("webpack");
 const path = require("path");
-// const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
     resolve: {
@@ -41,8 +40,7 @@ module.exports = {
                         }
                     }
                 ]
-            },
-            {
+            }, {
                 test: /\.svg$/i,
                 issuer: /\.[jt]sx?$/,
                 use: [
@@ -53,8 +51,7 @@ module.exports = {
                         },
                     },
                 ],
-            },
-            {
+            }, {
                 test: /\.(png|jpg|jpeg|gif|svg|webp)$/i,
                 use: [
                     {
@@ -68,16 +65,6 @@ module.exports = {
         new webpack.DefinePlugin({
             "process.env": JSON.stringify(process.env)
         }),
-        // new ESLintPlugin({
-        //     context: path.resolve(__dirname, 'src'), // где искать файлы
-        //     extensions: ['js', 'jsx', 'ts', 'tsx', 'vue'], // какие расширения проверять
-        //     emitWarning: true,    // выводить нарушения как ворнинги, а не ошибки сборки
-        //     emitError: true,      // выводить ошибки ESLint как ошибки сборки
-        //     failOnError: false,   // завершать сборку при ошибках (можно true для CI)
-        //     fix: false,           // авто‑фикс там, где возможно (npm run build)
-        //     cache: true,          // кешировать результаты, ускоряет повторные сборки
-        //     lintDirtyModulesOnly: true, // проверять только изменённые файлы в watch‑режиме
-        // }),
         // new ForkTsCheckerWebpackPlugin({
         //     async: false,
         //     eslint: {
@@ -86,15 +73,11 @@ module.exports = {
         // }),
     ],
     devServer: {
-        server: {
-            type: 'http',
-        },
         static: {
             directory: __dirname + '/build',
         },
-        allowedHosts: 'all',
         compress: true,
-        port: 9001,
+        port: 9007,
         client: {
             progress: false,
         },

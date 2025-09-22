@@ -10,10 +10,10 @@ COPY build/ build/
 COPY src/ src/
 COPY .babelrc tsconfig.json webpack.config.js ./
 
-RUN npm i
+RUN npm ci
 RUN npm run-script build
 
-FROM nginx:1.27-alpine AS nginx
+FROM nginx:1.27.1-alpine3.20 AS nginx
 
 LABEL developer="domster704"
 

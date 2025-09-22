@@ -1,12 +1,11 @@
 import React, {Suspense, useEffect} from "react";
 import {Outlet, useLocation} from "react-router-dom";
-import {Header} from "@widgets/Header";
-import {Footer} from "@widgets/Footer";
-import Wrapper from "@shared/ui/Wrapper";
 import {useAppDispatch} from "@app/store/store";
 import {setCurrentPage} from "@entities/global/model/globalSlice";
 import {APP_URL} from "@shared/const/constants";
+import {Footer} from "@widgets/Footer";
 import {PreLoader} from "@shared/ui/PreLoader";
+import Header from "@widgets/Header";
 
 const RootLayout = () => {
   const location = useLocation();
@@ -16,14 +15,13 @@ const RootLayout = () => {
     dispatch(setCurrentPage(location.pathname as APP_URL));
   }, [location.pathname]);
 
+
   return (
     <>
       <Header/>
-      <Wrapper>
-        <Suspense fallback={<PreLoader/>}>
-          <Outlet/>
-        </Suspense>
-      </Wrapper>
+      <Suspense fallback={<PreLoader/>}>
+        <Outlet/>
+      </Suspense>
       <Footer/>
     </>
   );

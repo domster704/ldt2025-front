@@ -1,11 +1,16 @@
 import React, {FC} from 'react';
 import * as style from './Footer.module.css'
 
+
+/**
+ * WeekDay для контента с навигационными кнопками
+ * @constructor
+ */
 const Footer: FC = () => {
   return (
-    <div className={style.footer}>
+    <footer className={style.footer}>
       footer
-    </div>
+    </footer>
   );
 }
 

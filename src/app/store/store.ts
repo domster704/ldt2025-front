@@ -1,12 +1,12 @@
 import {configureStore, createSelector} from '@reduxjs/toolkit';
 import {useDispatch, useSelector} from "react-redux";
-import userSlice from "@entities/user/model/userSlice";
 import globalSlice from "@entities/global/model/globalSlice";
+import userSlice from "@entities/user/model/userSlice";
 
 const store = configureStore({
   reducer: {
     global: globalSlice,
-    user: userSlice,
+    user: userSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false
