@@ -1,5 +1,6 @@
 import React, {FC, useEffect, useRef, useState} from "react";
 import {WebsocketContext} from "@shared/providers/websocket/lib/context";
+import {$wsApiUrl} from "@shared/const/constants";
 
 interface WebsocketProviderProps {
   children: React.ReactNode;
@@ -12,13 +13,18 @@ export const WebsocketProvider: FC<WebsocketProviderProps> = ({children}) => {
   const ws = useRef<WebSocket | null>(null);
 
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:8000/ws");
+    const socket = new WebSocket($wsApiUrl);
 
     socket.onopen = () => {
       setIsReady(true);
     }
-    socket.onclose = () => {
+    socket.onclose = (event) => {
+      console.warn("WebSocket закрыт:", event.code, event.reason);
       setIsReady(false);
+    }
+
+    socket.onerror = (e) => {
+      console.log("error", e)
     }
     socket.onmessage = (event) => {
       setValue(event.data);
