@@ -9,7 +9,6 @@ export const $api = axios.create({
   headers: {'Content-Type': 'application/json'}
 });
 
-// каждый запрос добавляет токен, если он есть
 $api.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
 
@@ -19,7 +18,6 @@ $api.interceptors.request.use(config => {
   return config;
 });
 
-// обработчик ответов
 $api.interceptors.response.use(
   response => response,
   async (error: AxiosError) => {

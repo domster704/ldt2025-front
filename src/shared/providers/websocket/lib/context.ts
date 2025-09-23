@@ -1,9 +1,11 @@
 import {createContext} from "react";
 
+export type sendSignature = (data: string) => void
+
 type WebsocketContextType = [
   boolean,
     string | null,
-  ((data: string) => void)?
+  sendSignature?
 ]
 
 export const WebsocketContext = createContext<WebsocketContextType>([

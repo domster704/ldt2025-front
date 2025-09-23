@@ -2,11 +2,15 @@ import {configureStore, createSelector} from '@reduxjs/toolkit';
 import {useDispatch, useSelector} from "react-redux";
 import globalSlice from "@entities/global/model/globalSlice";
 import userSlice from "@entities/user/model/userSlice";
+import uploadSlice from "@entities/session-upload/model/uploadSlice";
+import sessionStreamSlice from "@entities/session-stream/model/sessionStreamSlice";
 
 const store = configureStore({
   reducer: {
     global: globalSlice,
-    user: userSlice
+    user: userSlice,
+    upload: uploadSlice,
+    sessionStream: sessionStreamSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false

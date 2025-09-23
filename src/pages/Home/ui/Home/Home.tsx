@@ -3,6 +3,8 @@ import * as style from './Home.module.css'
 import {useAppDispatch} from "@app/store/store";
 import {WebsocketContext} from "@shared/providers/websocket/lib/context";
 import Threshold from "@widgets/Threshold";
+import UploadData from "@features/upload-data/ui/UploadData";
+import StartStreamingButton from "@widgets/StartStreamingButton";
 
 let i = 0;
 
@@ -27,7 +29,9 @@ const Home: FC = (props) => {
 
   return (
     <main className={style.main}>
-      <Threshold/>
+      <UploadData />
+      <StartStreamingButton />
+      <Threshold />
     </main>
   );
 }
