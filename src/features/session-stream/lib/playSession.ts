@@ -1,22 +1,22 @@
 // src/features/session-stream/lib/playSession.ts
 import {AppDispatch} from "@app/store/store";
-import {MonitoringSession} from "@entities/session-upload/model/types";
+import {SessionUploaded} from "@entities/session-upload/model/types";
 import {addFhrPoint, addUcPoint, resetStream} from "@entities/session-stream/model/sessionStreamSlice";
 
 const STEP = 10;
-const SPEED_COEFFICIENT = 0.5;
+const SPEED_COEFFICIENT = 0.3;
 
-export function playSession(session: MonitoringSession, dispatch: AppDispatch) {
+export function playSession(session: SessionUploaded, dispatch: AppDispatch) {
   dispatch(resetStream());
 
   let totalDelay = 0;
 
-  session.heartRate.forEach((point, i) => {
+  session.bpm.forEach((point, i) => {
     if (isNaN(point.value)) return;
 
     let delay = 0;
     if (i > 0) {
-      delay = (point.time - session.heartRate[i - 1].time) * 1000 * SPEED_COEFFICIENT;
+      delay = (point.time_sec - session.bpm[i - 1].time_sec) * 1000 * SPEED_COEFFICIENT;
     }
     totalDelay += delay;
 
@@ -25,10 +25,10 @@ export function playSession(session: MonitoringSession, dispatch: AppDispatch) {
     }, totalDelay);
   });
 
-  session.uterineContractions.forEach((point, i) => {
+  session.uc.forEach((point, i) => {
     let delay = 0;
     if (i > 0) {
-      delay = (point.time - session.uterineContractions[i - 1].time) * 1000;
+      delay = (point.time_sec - session.uc[i - 1].time_sec) * 1000;
     }
     totalDelay += delay;
 

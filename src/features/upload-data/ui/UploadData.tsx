@@ -1,8 +1,6 @@
 import React, {FC} from "react";
-import Papa from "papaparse";
 import {useAppDispatch} from "@app/store/store";
-import {DataPoint, MonitoringSession} from "@entities/session-upload/model/types";
-import {addSession} from "@entities/session-upload/model/uploadSlice";
+import {fetchMonitoringSession} from "@entities/session-upload/api/sessionUploadThunk";
 
 interface CSVType {
   time_sec: number;
@@ -18,25 +16,7 @@ const UploadData: FC = () => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    Papa.parse(file, {
-      header: true,
-      dynamicTyping: true,
-      complete: (results) => {
-        const heartRates = (results.data as any[]).map((row: CSVType) => ({
-          time: Number(row.time_sec),
-          value: Number(row.value),
-        })) as DataPoint[];
-
-        const session: MonitoringSession = {
-          id: crypto.randomUUID(),
-          heartRate: heartRates,
-          uterineContractions: [],
-        };
-        console.log(session)
-
-        dispatch(addSession(session));
-      },
-    });
+    dispatch(fetchMonitoringSession(file));
   };
 
   return (
@@ -44,7 +24,7 @@ const UploadData: FC = () => {
       <span>Загрузить CSV</span>
       <input
         type="file"
-        accept=".csv"
+        accept=".zip"
         style={{display: "none"}}
         onChange={handleFile}
       />

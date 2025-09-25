@@ -1,1 +1,1 @@
-export type {MonitoringSession} from './model/types'
+export type {SessionUploaded} from './model/types'

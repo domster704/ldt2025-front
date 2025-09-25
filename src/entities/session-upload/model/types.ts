@@ -1,12 +1,14 @@
+import {EntityState} from "@reduxjs/toolkit";
+
 export interface DataPoint {
-  time: number;
+  time_sec: number;
   value: number;
 }
 
-export interface MonitoringSession {
+export interface SessionUploaded {
   id: string;
-  heartRate: DataPoint[];
-  uterineContractions: DataPoint[];
+  bpm: DataPoint[];
+  uc: DataPoint[];
   meta?: {
     source?: string;
     uploadedAt: Date;
@@ -14,5 +16,9 @@ export interface MonitoringSession {
 }
 
 export interface UploadState {
-  sessions: MonitoringSession[];
+  session: SessionUploaded | null;
+}
+
+export interface SessionUploadedState {
+  items: EntityState<SessionUploaded, string>;
 }

@@ -3,10 +3,11 @@ import {WebsocketContext} from "@shared/providers/websocket/lib/context";
 import {$wsApiUrl} from "@shared/const/constants";
 
 interface WebsocketProviderProps {
+  wsUrl: string;
   children: React.ReactNode;
 }
 
-export const WebsocketProvider: FC<WebsocketProviderProps> = ({children}) => {
+export const WebsocketProvider: FC<WebsocketProviderProps> = ({children, wsUrl}) => {
   const [isReady, setIsReady] = useState(false);
   const [value, setValue] = useState<string | null>(null);
   const [messages, setMessages] = useState<any[]>([]);
@@ -14,7 +15,7 @@ export const WebsocketProvider: FC<WebsocketProviderProps> = ({children}) => {
   const ws = useRef<WebSocket | null>(null);
 
   useEffect(() => {
-    const socket = new WebSocket($wsApiUrl);
+    const socket = new WebSocket(wsUrl);
 
     socket.onopen = () => {
       setIsReady(true);

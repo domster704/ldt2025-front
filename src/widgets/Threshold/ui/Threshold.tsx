@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import {scaleLinear} from "@visx/scale";
 import {useAppSelector} from "@app/store/store";
 import {StreamPoint} from "@entities/session-stream/model/types";
+import {selectHeartRates, selectUterineContractions} from "@entities/session-stream/model/selectors";
 
 interface Point {
   x: number;
@@ -29,8 +30,9 @@ const LivePath = ({
   const xScale = scaleLinear({domain: [0, width], range: [0, width]});
   const yScale = scaleLinear({domain: yDomain, range: [height, 0]});
 
+  const lastElement: StreamPoint | undefined = dataSource[dataSource.length - 1];
+
   useEffect(() => {
-    const lastElement: StreamPoint = dataSource[dataSource.length - 1];
     const preLastElement: StreamPoint = dataSource[dataSource.length - 2];
 
     if (lastElement && lastElement.x > width - 500) {
@@ -79,8 +81,8 @@ const Threshold = () => {
     return () => observer.disconnect();
   }, []);
 
-  const fhrData = useAppSelector(state => state.sessionStream.heartRates);
-  const ucData = useAppSelector(state => state.sessionStream.uterineContractions);
+  const fhrData = useAppSelector(selectHeartRates);
+  const ucData = useAppSelector(selectUterineContractions);
 
   return (
     <svg ref={ref} width={WIDTH} height={HEIGHT} style={{border: "1px solid black"}}>
@@ -88,7 +90,7 @@ const Threshold = () => {
 
       <LivePath
         color="red"
-        yDomain={[100, 250]}
+        yDomain={[120, 280]}
         width={width}
         height={HEIGHT}
         dataSource={fhrData}

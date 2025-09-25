@@ -6,7 +6,6 @@ import {APP_URL} from "@shared/const/constants";
 import {Footer} from "@widgets/Footer";
 import {PreLoader} from "@shared/ui/PreLoader";
 import Header from "@widgets/Header";
-import {WebsocketProvider} from "@shared/providers/websocket/ui/WebsocketProvider";
 
 const RootLayout = () => {
   const location = useLocation();
@@ -21,9 +20,7 @@ const RootLayout = () => {
     <>
       <Header/>
       <Suspense fallback={<PreLoader/>}>
-        <WebsocketProvider>
-          <Outlet/>
-        </WebsocketProvider>
+        <Outlet/>
       </Suspense>
       <Footer/>
     </>

@@ -1,37 +1,20 @@
-import React, {FC, useContext, useEffect} from 'react';
+import React, {FC} from 'react';
 import * as style from './Home.module.css'
-import {useAppDispatch} from "@app/store/store";
-import {WebsocketContext} from "@shared/providers/websocket/lib/context";
 import Threshold from "@widgets/Threshold";
 import UploadData from "@features/upload-data/ui/UploadData";
 import StartStreamingButton from "@widgets/StartStreamingButton";
+import {WebsocketProvider} from "@shared/providers/websocket/ui/WebsocketProvider";
+import {$wsApiUrl} from "@shared/const/constants";
 
-let i = 0;
 
 const Home: FC = (props) => {
-  const [ready, value, send] = useContext(WebsocketContext);
-
-  // useEffect(() => {
-  //   if (!send || !ready) {
-  //     return;
-  //   }
-  //
-  //   const interval = setInterval(() => {
-  //     send(i++ + '')
-  //   }, 100)
-  //
-  //   return () => {
-  //     clearInterval(interval)
-  //   }
-  // }, [ready, send]);
-
-  const dispatch = useAppDispatch();
-
   return (
     <main className={style.main}>
-      <UploadData />
-      <StartStreamingButton />
-      <Threshold />
+      <UploadData/>
+      <WebsocketProvider wsUrl={$wsApiUrl}>
+        <StartStreamingButton/>
+        <Threshold/>
+      </WebsocketProvider>
     </main>
   );
 }
