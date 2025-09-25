@@ -1,6 +1,5 @@
 import React, {FC, useEffect, useRef, useState} from "react";
 import {WebsocketContext} from "@shared/providers/websocket/lib/context";
-import {$wsApiUrl} from "@shared/const/constants";
 
 interface WebsocketProviderProps {
   wsUrl: string;

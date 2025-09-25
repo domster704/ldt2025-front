@@ -6,5 +6,7 @@ const selectors = sessionUploadedAdapter.getSelectors();
 
 export const selectOneSession = createAppSelector(
   baseSelector,
-  (state) => selectors.selectAll(state)[0]
+  (state) => selectors.selectAll(state)[0] ?? null
 );
+
+export const selectLoadingStatus = (state: RootState) => state.upload.loading;

@@ -15,7 +15,6 @@ const RootLayout = () => {
     dispatch(setCurrentPage(location.pathname as APP_URL));
   }, [location.pathname]);
 
-
   return (
     <>
       <Header/>

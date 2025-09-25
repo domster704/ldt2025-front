@@ -4,7 +4,7 @@ import {APP_URL, HOME_PAGE_URL} from "@shared/const/constants";
 let initialState = {
   currentPage: HOME_PAGE_URL,
   trialPeriodExpired: false
-}
+};
 
 const globalSlice = createSlice({
   name: 'global',

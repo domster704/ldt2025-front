@@ -21,4 +21,5 @@ export interface UploadState {
 
 export interface SessionUploadedState {
   items: EntityState<SessionUploaded, string>;
+  loading: boolean;
 }

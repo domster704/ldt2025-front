@@ -1,22 +1,36 @@
 import React, {FC} from 'react';
-import * as style from './Home.module.css'
-import Threshold from "@widgets/Threshold";
-import UploadData from "@features/upload-data/ui/UploadData";
+import * as style from './Home.module.css';
+import UploadData from "@features/upload-data/";
 import StartStreamingButton from "@widgets/StartStreamingButton";
-import {WebsocketProvider} from "@shared/providers/websocket/ui/WebsocketProvider";
-import {$wsApiUrl} from "@shared/const/constants";
+import Dashboard from "@widgets/Dashboard";
+import {useAppSelector} from "@app/store/store";
+import {selectLoadingStatus} from "@entities/session-upload/model/selectors";
+import {PreLoader} from "@shared/ui/PreLoader";
 
 
-const Home: FC = (props) => {
+const Home: FC = () => {
+  const isLoading = useAppSelector(selectLoadingStatus);
+
   return (
-    <main className={style.main}>
-      <UploadData/>
-      <WebsocketProvider wsUrl={$wsApiUrl}>
+    <>
+      <main className={style.main}>
+        <UploadData/>
+        {/*<WebsocketProvider wsUrl={$wsApiUrl}>*/}
         <StartStreamingButton/>
-        <Threshold/>
-      </WebsocketProvider>
-    </main>
+        <Dashboard/>
+        {/*</WebsocketProvider>*/}
+      </main>
+
+      {
+        isLoading &&
+          <div className={style.preloaderContainer}>
+              <div className={style.preloaderContent}>
+                  <PreLoader/>
+              </div>
+          </div>
+      }
+    </>
   );
-}
+};
 
 export default Home;

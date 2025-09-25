@@ -7,10 +7,10 @@ export const fetchMonitoringSession = createAsyncThunk<SessionUploaded, File, Th
   'sessionUpload/fetchMonitoringSession',
   async (file) => {
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("archive", file);
 
     try {
-      const response = await fetch(`${$apiUrl}/api/session-upload`, {
+      const response = await fetch(`${$apiUrl}/extract-bpm-uc-signals`, {
         method: 'POST',
         body: formData,
       });

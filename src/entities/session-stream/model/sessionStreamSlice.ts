@@ -1,7 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {StreamPoint, StreamState} from "@entities/session-stream/model/types";
 
-
 const initialState: StreamState = {
   results: [],
   heartRates: [],
@@ -24,6 +23,7 @@ const sessionStreamSlice = createSlice({
     resetStream: () => initialState
   },
 });
+
 export const {
   addResult,
   addFhrPoint,

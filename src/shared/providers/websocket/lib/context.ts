@@ -1,6 +1,6 @@
 import {createContext} from "react";
 
-export type sendSignature = (data: string) => void
+export type sendSignature = (data: string) => void;
 
 type WebsocketContextType = [
   boolean,

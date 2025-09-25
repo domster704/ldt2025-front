@@ -3,22 +3,26 @@ import {SessionUploaded, SessionUploadedState} from "@entities/session-upload/mo
 import {fetchMonitoringSession} from "@entities/session-upload/api/sessionUploadThunk";
 import {sessionUploadedAdapter} from "@entities/session-upload/model/adapter";
 
-
 const initialState: SessionUploadedState = {
-  items: sessionUploadedAdapter.getInitialState()
+  items: sessionUploadedAdapter.getInitialState(),
+  loading: false
 };
 
 const uploadSlice = createSlice({
   name: "upload",
   initialState,
   reducers: {
-    // addSession: (state, action: PayloadAction<SessionUploaded>) => {
-    //   state.session = action.payload;
-    // },
   },
   extraReducers: builder => {
     builder
+      .addCase(fetchMonitoringSession.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(fetchMonitoringSession.rejected, (state, action) => {
+        state.loading = false;
+      })
       .addCase(fetchMonitoringSession.fulfilled, (state, action: PayloadAction<SessionUploaded>) => {
+        state.loading = false;
         sessionUploadedAdapter.addOne(state.items, action.payload);
       })
   }
