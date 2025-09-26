@@ -1,9 +1,13 @@
 .container {
-  width: 100%;
   overflow-x: auto;
-  border: 1px solid #ccc;
+  overflow-y: hidden;
 
-  svg {
-    overflow: hidden;
-  }
+  overscroll-behavior-x: contain;
+}
+
+.container svg {
+  overflow: hidden;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
 }

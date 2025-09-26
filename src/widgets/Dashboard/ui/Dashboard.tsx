@@ -3,7 +3,7 @@ import {useAppSelector} from "@app/store/store";
 import {selectHeartRates, selectUterineContractions} from "@entities/session-stream/model/selectors";
 
 import * as style from './Dashboard.module.css';
-import Chart from "@shared/ui/Chart";
+import SessionChart from "@widgets/SessionChart";
 
 
 const Dashboard = () => {
@@ -12,8 +12,8 @@ const Dashboard = () => {
 
   return (
     <div className={style.dashboard}>
-      <Chart color="red" dataSource={fhrData}/>
-      <Chart color="blue" dataSource={ucData}/>
+      <SessionChart color="red" dataSource={fhrData} />
+      <SessionChart color="blue" dataSource={ucData} />
     </div>
   );
 };

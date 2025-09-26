@@ -8,6 +8,7 @@ interface ScaleOptions {
   dataSource: { x: number; y: number }[];
   window: number;
   padding: number;
+  scrollOffset: number;
 }
 
 export function useChartScales({
@@ -17,6 +18,7 @@ export function useChartScales({
                                  dataSource,
                                  window,
                                  padding,
+                                 scrollOffset,
                                }: ScaleOptions) {
   return useMemo(() => {
     const xMax = Math.max(0, width - margins.left - margins.right);
@@ -28,8 +30,11 @@ export function useChartScales({
 
     const lastX = dataSource.length ? dataSource[dataSource.length - 1].x : 0;
 
+    const right = Math.max(0, lastX - scrollOffset);
+    const left = Math.max(0, right - window);
+
     const xScale = scaleLinear<number>({
-      domain: [Math.max(0, lastX - window), lastX],
+      domain: [left, right],
       range: [0, xMax],
     });
 
@@ -38,6 +43,6 @@ export function useChartScales({
       range: [yMax, 0],
     });
 
-    return { xMax, yMax, xScale, yScale };
-  }, [width, height, margins, dataSource, window, padding]);
+    return { xMax, yMax, xScale, yScale, left, right };
+  }, [width, height, margins, dataSource, window, padding, scrollOffset]);
 }
