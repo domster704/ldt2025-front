@@ -26,6 +26,9 @@ const SessionChart: FC<SessionChartProps> = ({ color, dataSource }) => {
     handleMouseDown,
     handleMouseMove,
     handleMouseUp,
+    handleTouchStart,
+    handleTouchMove,
+    handleTouchEnd,
   } = useChartScroll({ window: WINDOW, xMax: width });
 
   const { xMax, yMax, xScale, yScale } = useChartScales({
@@ -53,6 +56,9 @@ const SessionChart: FC<SessionChartProps> = ({ color, dataSource }) => {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     />
   );
 };

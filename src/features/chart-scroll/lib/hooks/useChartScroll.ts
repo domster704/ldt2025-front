@@ -7,7 +7,7 @@ export function useChartScroll({window, xMax}: { window: number; xMax: number })
 
   const handleWheel = useCallback((e: React.WheelEvent) => {
     const step = 1;
-    setScrollOffset((o) => (e.deltaY > 0 ? o + step : Math.max(0, o - step)));
+    setScrollOffset((prevOffset) => (e.deltaY > 0 ? prevOffset + step : Math.max(0, prevOffset - step)));
   }, []);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
@@ -20,18 +20,23 @@ export function useChartScroll({window, xMax}: { window: number; xMax: number })
       if (!isDragging || dragStart.current === null) return;
       const dx = e.clientX - dragStart.current;
       const secPerPx = window / xMax;
-      setScrollOffset((o) => Math.max(0, o - dx * secPerPx));
+      setScrollOffset((prevOffset) => Math.max(0, prevOffset + dx * secPerPx));
       dragStart.current = e.clientX;
     },
     [isDragging, window, xMax]
   );
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+    dragStart.current = null;
+  }, []);
 
   const handleTouchMove = useCallback(
     (e: React.TouchEvent) => {
       if (!isDragging || dragStart.current === null) return;
       const dx = e.touches[0].clientX - dragStart.current;
       const secPerPx = window / xMax;
-      setScrollOffset((o) => Math.max(0, o - dx * secPerPx));
+      setScrollOffset((prevOffset) => Math.max(0, prevOffset + dx * secPerPx));
       dragStart.current = e.touches[0].clientX;
     },
     [isDragging, window, xMax]
@@ -45,11 +50,6 @@ export function useChartScroll({window, xMax}: { window: number; xMax: number })
   }, []);
 
   const handleTouchEnd = useCallback(() => {
-    setIsDragging(false);
-    dragStart.current = null;
-  }, []);
-
-  const handleMouseUp = useCallback(() => {
     setIsDragging(false);
     dragStart.current = null;
   }, []);
