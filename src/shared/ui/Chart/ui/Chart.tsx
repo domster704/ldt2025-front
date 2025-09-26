@@ -1,8 +1,8 @@
-import React, { forwardRef } from "react";
+import React, {forwardRef} from "react";
 import LivePath from "@shared/ui/LivePath";
-import { GridColumns, GridRows } from "@visx/grid";
-import { AxisBottom, AxisRight } from "@visx/axis";
-import { ScaleLinear } from "d3";
+import {GridColumns, GridRows} from "@visx/grid";
+import {AxisBottom, AxisRight} from "@visx/axis";
+import {ScaleLinear} from "d3";
 
 import * as style from "./Chart.module.css";
 
@@ -27,7 +27,7 @@ interface ChartProps {
 }
 
 const HEIGHT = 300;
-const MARGIN = { top: 8, right: 48, bottom: 24, left: 16 };
+const MARGIN = {top: 8, right: 48, bottom: 24, left: 16};
 
 const Chart = forwardRef<SVGSVGElement, ChartProps>(
   (
@@ -64,12 +64,16 @@ const Chart = forwardRef<SVGSVGElement, ChartProps>(
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
-          style={{ cursor: isDragging ? "grabbing" : "default" }}
+          style={{cursor: isDragging ? "grabbing" : "default"}}
         >
-          <rect x={0} y={0} width="100%" height={HEIGHT} fill="#fff" />
+          <rect x={0} y={0} width="100%" height={HEIGHT} fill="#fff"/>
 
           <g transform={`translate(${MARGIN.left},${MARGIN.top})`}>
-            <GridRows scale={yScale} width={xMax} height={yMax} stroke="#eee" />
+            <GridRows
+              scale={yScale}
+              width={xMax}
+              height={yMax}
+              stroke="#eee"/>
             <GridColumns
               scale={xScale}
               width={xMax}
@@ -90,7 +94,10 @@ const Chart = forwardRef<SVGSVGElement, ChartProps>(
               numTicks={6}
               tickFormat={(v) => `${v}s`}
             />
-            <AxisRight left={xMax} scale={yScale} numTicks={5} />
+            <AxisRight left={xMax}
+                       scale={yScale}
+                       numTicks={5}
+            />
           </g>
         </svg>
       </div>

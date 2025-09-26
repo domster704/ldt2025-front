@@ -4,6 +4,8 @@ import {line} from "@visx/shape";
 import {curveMonotoneX} from "d3-shape";
 import {ScaleLinear} from "d3";
 
+const RIGHT_OFFSET = 10;
+
 interface LivePathProps {
   color: string;
   dataSource: StreamPoint[];
@@ -21,7 +23,7 @@ const LivePath: FC<LivePathProps> = ({
   const pathD = useMemo(() => {
     const lineGenerator = line<StreamPoint>()
       .defined(d => !isNaN(d.y))
-      .x(d => xScale(d.x) - 10)
+      .x(d => xScale(d.x) - RIGHT_OFFSET)
       .y(d => yScale(d.y))
       .curve(curveMonotoneX);
     return lineGenerator(dataSource) || "";

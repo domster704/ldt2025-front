@@ -1,11 +1,10 @@
-import React, { FC, useRef } from "react";
-import { useResizeObserver } from "@shared/lib/hooks/useResizeObserver";
-import Chart from "@shared/ui/Chart";
+import React, {FC, useRef} from "react";
+import {useResizeObserver} from "@shared/lib/hooks/useResizeObserver";
+import Chart, {useChartScales} from "@shared/ui/Chart";
 import {useChartScroll} from "@features/chart-scroll/lib/hooks/useChartScroll";
-import {useChartScales} from "@shared/ui/Chart/lib/hooks";
 
 const HEIGHT = 300;
-const MARGIN = { top: 8, right: 48, bottom: 24, left: 16 };
+const MARGIN = {top: 8, right: 48, bottom: 24, left: 16};
 const PADDING = 10;
 const WINDOW = 20;
 
@@ -14,7 +13,7 @@ interface SessionChartProps {
   dataSource: { x: number; y: number }[];
 }
 
-const SessionChart: FC<SessionChartProps> = ({ color, dataSource }) => {
+const SessionChart: FC<SessionChartProps> = ({color, dataSource}) => {
   const ref = useRef<SVGSVGElement>(null);
 
   const width = useResizeObserver(ref);
@@ -29,14 +28,14 @@ const SessionChart: FC<SessionChartProps> = ({ color, dataSource }) => {
     handleTouchStart,
     handleTouchMove,
     handleTouchEnd,
-  } = useChartScroll({ window: WINDOW, xMax: width });
+  } = useChartScroll({window: WINDOW, xMax: width});
 
-  const { xMax, yMax, xScale, yScale } = useChartScales({
+  const {xMax, yMax, xScale, yScale} = useChartScales({
     width,
     height: HEIGHT,
     margins: MARGIN,
     dataSource,
-    window: WINDOW,
+    window_: WINDOW,
     padding: PADDING,
     scrollOffset,
   });

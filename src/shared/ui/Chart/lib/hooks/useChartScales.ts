@@ -6,7 +6,7 @@ interface ScaleOptions {
   height: number;
   margins: { top: number; right: number; bottom: number; left: number };
   dataSource: { x: number; y: number }[];
-  window: number;
+  window_: number;
   padding: number;
   scrollOffset: number;
 }
@@ -16,7 +16,7 @@ export function useChartScales({
                                  height,
                                  margins,
                                  dataSource,
-                                 window,
+                                 window_,
                                  padding,
                                  scrollOffset,
                                }: ScaleOptions) {
@@ -31,7 +31,7 @@ export function useChartScales({
     const lastX = dataSource.length ? dataSource[dataSource.length - 1].x : 0;
 
     const right = Math.max(0, lastX - scrollOffset);
-    const left = Math.max(0, right - window);
+    const left = Math.max(0, right - window_);
 
     const xScale = scaleLinear<number>({
       domain: [left, right],
@@ -44,5 +44,5 @@ export function useChartScales({
     });
 
     return { xMax, yMax, xScale, yScale, left, right };
-  }, [width, height, margins, dataSource, window, padding, scrollOffset]);
+  }, [width, height, margins, dataSource, window_, padding, scrollOffset]);
 }
