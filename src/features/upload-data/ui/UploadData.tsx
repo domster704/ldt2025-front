@@ -1,6 +1,7 @@
 import React, {FC} from "react";
 import {useAppDispatch} from "@app/store/store";
 import {fetchMonitoringSession} from "@entities/session-upload/api/sessionUploadThunk";
+import {validateFile} from "@features/upload-data/lib/validation";
 
 
 const UploadData: FC = () => {
@@ -9,7 +10,13 @@ const UploadData: FC = () => {
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
     const file = e.target.files?.[0];
-    if (!file) return;
+    if (!file) {
+      return;
+    }
+    if (!validateFile(file)) {
+      alert("Поддерживаются только .zip файлы");
+      return;
+    }
 
     dispatch(fetchMonitoringSession(file));
   };

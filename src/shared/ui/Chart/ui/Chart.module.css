@@ -1,0 +1,9 @@
+.container {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #ccc;
+
+  svg {
+    overflow: hidden;
+  }
+}

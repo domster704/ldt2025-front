@@ -1,4 +1,3 @@
-// const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const webpack = require("webpack");
 const path = require("path");
 
@@ -65,12 +64,6 @@ module.exports = {
         new webpack.DefinePlugin({
             "process.env": JSON.stringify(process.env)
         }),
-        // new ForkTsCheckerWebpackPlugin({
-        //     async: false,
-        //     eslint: {
-        //         files: "./src/**/*",
-        //     },
-        // }),
     ],
     devServer: {
         static: {

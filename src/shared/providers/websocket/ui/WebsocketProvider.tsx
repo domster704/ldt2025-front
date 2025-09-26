@@ -52,7 +52,7 @@ export const WebsocketProvider: FC<WebsocketProviderProps> = ({children, wsUrl})
   }
 
   return (
-    <WebsocketContext.Provider value={[isReady, value, safeSend]}>
+    <WebsocketContext.Provider value={{isReady, messages, send: safeSend}}>
       {children}
     </WebsocketContext.Provider>
   )
