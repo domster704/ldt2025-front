@@ -5,7 +5,7 @@ import {useChartScroll} from "@features/chart-scroll/lib/hooks/useChartScroll";
 
 const MARGIN = {top: 8, right: 16, bottom: 24, left: 30};
 const PADDING = 30;
-const WINDOW = 240;
+const SLIDE_WINDOW_TIME = 300;
 
 interface SessionChartProps {
   color: string;
@@ -27,14 +27,14 @@ const SessionChart: FC<SessionChartProps> = ({color, dataSource}) => {
     handleTouchStart,
     handleTouchMove,
     handleTouchEnd,
-  } = useChartScroll({window: WINDOW, xMax: width});
+  } = useChartScroll({window: SLIDE_WINDOW_TIME, xMax: width});
 
   const {xMax, yMax, xScale, yScale} = useChartScales({
     width,
     height,
     margins: MARGIN,
     dataSource,
-    window_: WINDOW,
+    window_: SLIDE_WINDOW_TIME,
     padding: PADDING,
     scrollOffset,
   });
