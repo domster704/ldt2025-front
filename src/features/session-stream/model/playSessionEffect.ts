@@ -5,13 +5,11 @@ import {buildSessionEvents} from "../lib/buildSessionEvents";
 
 const SPEED_COEFFICIENT = 1;
 
-// Глобальные ссылки для отмены предыдущего воспроизведения
 let currentRaf: number | null = null;
 let cancelFlag = false;
 
 export const playSessionEffect =
   (session: SessionUploaded) => (dispatch: AppDispatch) => {
-    // Останавливаем предыдущее проигрывание, если было
     if (currentRaf !== null) {
       cancelFlag = true;
       cancelAnimationFrame(currentRaf);
@@ -27,7 +25,7 @@ export const playSessionEffect =
 
     cancelFlag = false;
 
-    const startEventTime = events[0].time; // в миллисекундах (по текущей логике)
+    const startEventTime = events[0].time;
     let idx = 0;
     const speed = SPEED_COEFFICIENT;
 
@@ -37,14 +35,13 @@ export const playSessionEffect =
       if (cancelFlag) return;
 
       const now = performance.now();
-      const elapsedReal = now - startMono; // в мс
-      const elapsedPlayed = elapsedReal * speed; // учитываем скорость
+      const elapsedReal = now - startMono;
+      const elapsedPlayed = elapsedReal * speed;
       const currentTime = startEventTime + elapsedPlayed;
 
-      // Добавляем все события, которые «наступили» к текущему времени
       while (idx < events.length && events[idx].time <= currentTime) {
         const e = events[idx++];
-        const timeSec = e.time / 1000; // x в секундах (как и было)
+        const timeSec = e.time / 1000;
         const value = e.value;
 
         if (e.type === "bpm") {

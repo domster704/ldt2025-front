@@ -1,4 +1,4 @@
-import {StreamPoint} from "@entities/session-stream/model/types";
+import {StreamPoint} from "@entities/session-stream";
 import React, {FC, useMemo} from "react";
 import {line} from "@visx/shape";
 import {curveMonotoneX} from "d3-shape";

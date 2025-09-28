@@ -6,7 +6,7 @@ import {useChartScroll} from "@features/chart-scroll/lib/hooks/useChartScroll";
 const HEIGHT = 300;
 const MARGIN = {top: 8, right: 48, bottom: 24, left: 16};
 const PADDING = 10;
-const WINDOW = 20;
+const WINDOW = 120;
 
 interface SessionChartProps {
   color: string;

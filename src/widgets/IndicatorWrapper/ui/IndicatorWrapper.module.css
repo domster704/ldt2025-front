@@ -1,0 +1,13 @@
+:root {
+  --indicator-wrapper-padding: 1.625rem;
+  --indicator-border-width: 0.875rem;
+}
+
+.indicatorWrapper {
+  width: 100vw;
+  height: 100vh;
+
+  padding: var(--indicator-wrapper-padding);
+  border: var(--indicator-border-width) solid var(--indicator-color);
+  background: color-mix(in srgb, var(--indicator-color) 20%, transparent);
+}

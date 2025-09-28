@@ -8,54 +8,33 @@
 }
 
 :root {
-  --color-3: #e0d49c;
-  --color-4: #ff9033;
-  --color-5: #1e1e1e;
-  --color-6: #339372;
-  --color-7: #547cef;
-  --color-8: #ac2a11;
-  --color-9: #b1a3f6;
-  --color-10: #a8cfe0;
-  --color-11: #f1bc3e;
+  --obvodka: #c3c3c3;
+  --ikonki: #959595;
+  --oranzh-taro: #f25430;
+  --zheltyy-taro: #ffb94f;
+
+  --good-color: #00a619;
+  --warning-color: #e87000;
+
+  --indicator-color: unset;
 }
 
 :root {
   --body-padding-inline: 1.25rem;
 }
 
-@font-face {
-  font-family: 'IBM Plex Mono';
-  src: url('../../shared/assets/fonts/IBMPlexMono-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Monomakh Unicode';
-  src: url('../../shared/assets/fonts/MonomakhUnicode.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Lithium Typeface (LT)';
-  src: url('../../shared/assets/fonts/Lithium_tf.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
-  --font-family: "IBM Plex Mono", sans-serif;
-  --second-family: "Monomakh Unicode", sans-serif;
-  --third-family: "Lithium Typeface (LT)", sans-serif;
-  --font3: "Playfair Display", sans-serif;
+  --font-family: "Inter", sans-serif;
+  --second-family: "Graphik LCG", sans-serif;
+  --third-family: "Roboto", sans-serif;
+  --font3: "Soyuz Grotesk", sans-serif;
+  --font4: "SF Pro Rounded", sans-serif;
+  --font5: "Kontrabanda", sans-serif;
 }
 
 html, body {
   height: 100%;
+  font-size: clamp(1rem, 1vw, 2rem);
 }
 
 button, input, textarea {

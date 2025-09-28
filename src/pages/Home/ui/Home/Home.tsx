@@ -6,30 +6,40 @@ import Dashboard from "@widgets/Dashboard";
 import {useAppSelector} from "@app/store/store";
 import {selectLoadingStatus} from "@entities/session-upload/model/selectors";
 import {PreLoader} from "@shared/ui/PreLoader";
+import Header from "@widgets/Header";
+import {Footer} from "@widgets/Footer";
+import IndicatorWrapper from "@widgets/IndicatorWrapper";
+import ColorProvider from "@shared/providers/color-provider";
 
 
 const Home: FC = () => {
   const isLoading = useAppSelector(selectLoadingStatus);
 
   return (
-    <>
-      <main className={style.main}>
-        <UploadData/>
-        {/*<WebsocketProvider wsUrl={$wsApiUrl}>*/}
-        <StartStreamingButton/>
-        <Dashboard/>
-        {/*</WebsocketProvider>*/}
-      </main>
+    <ColorProvider>
+      <IndicatorWrapper>
+        <Header/>
+        <div>
+          <main className={style.main}>
+            <UploadData/>
+            <StartStreamingButton/>
+            {/*<WebsocketProvider wsUrl={$wsApiUrl}>*/}
+            <Dashboard/>
+            {/*</WebsocketProvider>*/}
+          </main>
 
-      {
-        isLoading &&
-          <div className={style.preloaderContainer}>
-              <div className={style.preloaderContent}>
-                  <PreLoader/>
+          {
+            isLoading &&
+              <div className={style.preloaderContainer}>
+                  <div className={style.preloaderContent}>
+                      <PreLoader/>
+                  </div>
               </div>
-          </div>
-      }
-    </>
+          }
+        </div>
+        <Footer/>
+      </IndicatorWrapper>
+    </ColorProvider>
   );
 };
 
