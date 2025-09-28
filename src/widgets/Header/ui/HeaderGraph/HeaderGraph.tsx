@@ -5,7 +5,7 @@ import userIcon from "@shared/assets/img/user.svg";
 import {useColorsStatus} from "@shared/providers/color-provider";
 import {ColorHealthStatus} from "@shared/providers/color-provider/model/types";
 
-const HeaderGraph: FC = (props) => {
+const HeaderGraph: FC = () => {
   const {status} = useColorsStatus();
   const statusText = useMemo(() => {
     if (status === ColorHealthStatus.Good) {

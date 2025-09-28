@@ -1,9 +1,10 @@
 import {createHashRouter, RouteObject,} from "react-router-dom";
 import RootLayout from "./RootLayout";
 import React from "react";
-import {HOME_PAGE_URL} from "@shared/const/constants";
+import {HOME_PAGE_URL, SETTINGS_PAGE_URL} from "@shared/const/constants";
 
 const HomePageLazy = React.lazy(() => import('@pages/Home'));
+const SettingsPageLazy = React.lazy(() => import('@pages/Settings'));
 
 export const routes: RouteObject[] = [
     {
@@ -14,6 +15,10 @@ export const routes: RouteObject[] = [
           index: true,
           path: HOME_PAGE_URL,
           element: <HomePageLazy/>,
+        },
+        {
+          path: SETTINGS_PAGE_URL,
+          element: <SettingsPageLazy/>,
         },
         {
           path: "*",

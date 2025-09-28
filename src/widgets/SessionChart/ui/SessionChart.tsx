@@ -5,7 +5,7 @@ import {useChartScroll} from "@features/chart-scroll/lib/hooks/useChartScroll";
 
 const MARGIN = {top: 8, right: 16, bottom: 24, left: 30};
 const PADDING = 30;
-const SLIDE_WINDOW_TIME = 300;
+const SLIDE_WINDOW_TIME = 360;
 
 interface SessionChartProps {
   color: string;

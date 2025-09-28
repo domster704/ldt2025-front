@@ -1,0 +1,9 @@
+.actionsPanel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5.5rem;
+
+  margin-inline: 10.625rem;
+}
