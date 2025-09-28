@@ -1,0 +1,38 @@
+export const mockHistory = [
+  {
+    id: 1,
+    date: '07.09.25',
+    gestation: '38+2 нед',
+    hr: 130,
+    uc: 12,
+    figo: 'Нормальный',
+    forecast: 'Сомнительный',
+  },
+  {
+    id: 2,
+    date: '07.08.25',
+    gestation: '38+1 нед',
+    hr: 140,
+    uc: 15,
+    figo: 'Нормальный',
+    forecast: 'Нормальный',
+  },
+  {
+    id: 3,
+    date: '07.08.25',
+    gestation: '38+1 нед',
+    hr: 140,
+    uc: 15,
+    figo: 'Сомнительная',
+    forecast: 'Патологическая',
+  },
+  {
+    id: 4,
+    date: '07.08.25',
+    gestation: '38+1 нед',
+    hr: 140,
+    uc: 15,
+    figo: 'Нормальный',
+    forecast: 'Нормальный',
+  },
+];
