@@ -10,13 +10,14 @@ interface ColorProviderProps {
 
 export const ColorProvider: FC<ColorProviderProps> = ({children}) => {
   const status = useAppSelector((state: RootState) => state.sessionStream.status);
-  const current = colors[status] ?? colors[ColorHealthStatus.GOOD];
+  const current = colors[status] ?? colors[ColorHealthStatus.Good];
 
   return (
     <ColorContext.Provider value={{status, color: current}}>
       <div style={{
         "--indicator-color": current.hex,
         "--indicator-color-rgb": current.rgb,
+        height: "100%"
       }}>
         {children}
       </div>

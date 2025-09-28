@@ -1,23 +1,19 @@
 import React, {FC, useMemo} from 'react';
 import * as style from './HeaderGraph.module.css'
-import {useAppDispatch, useAppSelector} from "@app/store/store";
 
-import userIcon from "./assets/user.svg";
+import userIcon from "@shared/assets/img/user.svg";
 import {useColorsStatus} from "@shared/providers/color-provider";
 import {ColorHealthStatus} from "@shared/providers/color-provider/model/types";
 
 const HeaderGraph: FC = (props) => {
   const {status} = useColorsStatus();
   const statusText = useMemo(() => {
-    if (status === ColorHealthStatus.GOOD) {
+    if (status === ColorHealthStatus.Good) {
       return "В норме";
-    } else if (status === ColorHealthStatus.WARNING) {
+    } else if (status === ColorHealthStatus.Warning) {
       return "Требуется внимание";
     }
-  }, [status])
-
-  const global = useAppSelector(state => state.global);
-  const dispatch = useAppDispatch();
+  }, [status]);
 
   return (
     <header className={style.header}>
@@ -31,6 +27,6 @@ const HeaderGraph: FC = (props) => {
       </div>
     </header>
   );
-}
+};
 
 export default HeaderGraph;

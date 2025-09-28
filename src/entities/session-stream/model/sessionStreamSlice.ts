@@ -6,7 +6,7 @@ const initialState: StreamState = {
   results: [],
   heartRates: [],
   uterineContractions: [],
-  status: ColorHealthStatus.GOOD
+  status: ColorHealthStatus.Good
 };
 
 const sessionStreamSlice = createSlice({

@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { scaleLinear } from "@visx/scale";
+import {useMemo} from "react";
+import {scaleLinear} from "@visx/scale";
 
 interface ScaleOptions {
   width: number;
@@ -43,6 +43,6 @@ export function useChartScales({
       range: [yMax, 0],
     });
 
-    return { xMax, yMax, xScale, yScale, left, right };
+    return {xMax, yMax, xScale, yScale, left, right};
   }, [width, height, margins, dataSource, window_, padding, scrollOffset]);
 }

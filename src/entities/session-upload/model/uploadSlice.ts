@@ -11,8 +11,7 @@ const initialState: SessionUploadedState = {
 const uploadSlice = createSlice({
   name: "upload",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: builder => {
     builder
       .addCase(fetchMonitoringSession.pending, (state, action) => {

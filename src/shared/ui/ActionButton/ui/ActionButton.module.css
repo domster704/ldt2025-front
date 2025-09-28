@@ -1,0 +1,33 @@
+.actionButton {
+  display: flex;
+
+  height: 100%;
+
+  &.vertical {
+    flex-direction: column;
+    gap: 0.375rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.horizontal {
+    flex-direction: row;
+    gap: 3.125rem;
+    align-items: center;
+  }
+}
+
+.actionButton__img {
+  /*height: 100%;*/
+}
+
+.actionButton__text {
+  font-family: var(--third-family);
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: #003650;
+}
+
+.actionButton.horizontal .actionButton__text {
+  text-transform: uppercase;
+}

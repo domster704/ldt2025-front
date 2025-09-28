@@ -35,7 +35,8 @@
 }
 
 html, body {
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   font-size: 1rem;
 
   @media (min-width: 1921px) {

@@ -5,7 +5,7 @@
 
 .indicatorWrapper {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 
   padding: var(--indicator-wrapper-padding);
   border: var(--indicator-border-width) solid var(--indicator-color);

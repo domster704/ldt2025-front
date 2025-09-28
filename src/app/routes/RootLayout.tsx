@@ -4,6 +4,9 @@ import {useAppDispatch} from "@app/store/store";
 import {setCurrentPage} from "@entities/global/model/globalSlice";
 import {APP_URL} from "@shared/const/constants";
 import {PreLoader} from "@shared/ui/PreLoader";
+import {Footer} from "@widgets/Footer";
+
+import * as style from '../styles/App.module.css'
 
 const RootLayout = () => {
   const location = useLocation();
@@ -14,9 +17,14 @@ const RootLayout = () => {
   }, [location.pathname]);
 
   return (
-    <Suspense fallback={<PreLoader/>}>
-      <Outlet/>
-    </Suspense>
+    <div className={style.layout}>
+      <div className={style.content}>
+        <Suspense fallback={<PreLoader/>}>
+          <Outlet/>
+        </Suspense>
+      </div>
+      <Footer/>
+    </div>
   );
 };
 

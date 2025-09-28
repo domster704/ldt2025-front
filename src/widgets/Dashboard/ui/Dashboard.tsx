@@ -12,8 +12,8 @@ const Dashboard = () => {
 
   return (
     <div className={style.dashboard}>
-      <SessionChart color="red" dataSource={fhrData} />
-      <SessionChart color="blue" dataSource={ucData} />
+      <SessionChart color="red" dataSource={fhrData}/>
+      <SessionChart color="blue" dataSource={ucData}/>
     </div>
   );
 };
