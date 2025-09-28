@@ -89,6 +89,11 @@ const Chart = forwardRef<SVGSVGElement, ChartProps>(
                          width={xMax}
                          height={yMax}
                          stroke="#ccc"/>
+            <line x1={xMax}
+                  x2={xMax}
+                  y1={0}
+                  y2={yMax}
+                  stroke="#ccc"/>
 
             <LivePath color={color}
                       dataSource={dataSource}

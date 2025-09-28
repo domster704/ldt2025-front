@@ -3,7 +3,7 @@ import {useResizeObserver} from "@shared/lib/hooks/useResizeObserver";
 import Chart, {useChartScales} from "@shared/ui/Chart";
 import {useChartScroll} from "@features/chart-scroll/lib/hooks/useChartScroll";
 
-const MARGIN = {top: 8, right: 48, bottom: 24, left: 30};
+const MARGIN = {top: 8, right: 16, bottom: 24, left: 30};
 const PADDING = 30;
 const WINDOW = 240;
 
