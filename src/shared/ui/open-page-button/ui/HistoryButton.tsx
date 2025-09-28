@@ -2,21 +2,21 @@ import React, {FC} from 'react';
 import settingsImg from '@shared/assets/img/settings.svg';
 import ActionButton from "@shared/ui/action-button";
 import {Link} from "react-router-dom";
-import {SETTINGS_PAGE_URL} from "@shared/const/constants";
+import {HISTORY_PAGE_URL, SETTINGS_PAGE_URL} from "@shared/const/constants";
 
-import * as style from './SettingsButton.module.css';
+import * as style from './HistoryButton.module.css';
 
 interface SettingsButtonProps {
 
 }
 
-const SettingsButton: FC<SettingsButtonProps> = ({}) => {
+const HistoryButton: FC<SettingsButtonProps> = ({}) => {
   return (
-    <Link to={SETTINGS_PAGE_URL} className={style.settingsButtonLink}>
+    <Link to={HISTORY_PAGE_URL} className={style.settingsButtonLink}>
       <ActionButton icon={settingsImg}
                     text={"Настройки"}/>
     </Link>
   );
 }
 
-export default SettingsButton;
+export default HistoryButton;

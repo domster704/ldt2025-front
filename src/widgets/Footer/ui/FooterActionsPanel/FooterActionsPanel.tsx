@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import * as style from './FooterActionsPanel.module.css'
-import ActionButton from "@shared/ui/ActionButton";
+import ActionButton from "@shared/ui/action-button";
 import StartEmulationButton from "@features/start-session/ui/StartEmulationButton";
 import SettingsButton from "@features/open-settings";
 

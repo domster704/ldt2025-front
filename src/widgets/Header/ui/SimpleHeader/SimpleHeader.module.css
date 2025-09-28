@@ -8,4 +8,13 @@
   background: #0097df;
 
   margin-bottom: 1.5rem;
+
+  h2 {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 28px;
+    text-align: right;
+    color: #fff;
+    text-transform: uppercase;
+  }
 }

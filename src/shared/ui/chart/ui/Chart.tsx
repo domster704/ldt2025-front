@@ -1,5 +1,5 @@
 import React, {forwardRef, useEffect, useRef} from "react";
-import LivePath from "@shared/ui/LivePath";
+import LivePath from "@shared/ui/live-path";
 import {GridColumns, GridRows} from "@visx/grid";
 import {AxisBottom, AxisLeft} from "@visx/axis";
 import {ScaleLinear} from "d3";

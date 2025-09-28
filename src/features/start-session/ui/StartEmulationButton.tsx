@@ -2,7 +2,7 @@ import React, {FC, useRef} from "react";
 import {useAppDispatch} from "@app/store/store";
 import {validateFile} from "@features/start-session/lib/validation";
 import {fetchMonitoringSession} from "@entities/session-upload/api/sessionUploadThunk";
-import ActionButton from "@shared/ui/ActionButton";
+import ActionButton from "@shared/ui/action-button";
 
 import startIcon from "@shared/assets/img/start.svg";
 import {playSessionEffect} from "@features/session-stream";

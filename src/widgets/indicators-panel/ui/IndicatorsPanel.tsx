@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import * as style from './IndicatorsPanel.module.css'
 import {useAppDispatch, useAppSelector} from "@app/store/store";
-import IndicatorContainer from "@shared/ui/IndicatorContainer";
+import IndicatorContainer from "@shared/ui/indicator-container";
 
 interface IndicatorsPanelProps {
 

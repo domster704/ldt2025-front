@@ -3,8 +3,8 @@ import {useAppSelector} from "@app/store/store";
 import {selectHeartRates, selectUterineContractions} from "@entities/session-stream/model/selectors";
 
 import * as style from './Dashboard.module.css';
-import SessionChart from "@widgets/SessionChart";
-import IndicatorsPanel from "@widgets/IndicatorsPanel";
+import SessionChart from "@widgets/session-chart";
+import IndicatorsPanel from "@widgets/indicators-panel";
 
 
 const Dashboard = () => {

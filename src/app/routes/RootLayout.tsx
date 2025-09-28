@@ -3,8 +3,8 @@ import {Outlet, useLocation} from "react-router-dom";
 import {useAppDispatch} from "@app/store/store";
 import {setCurrentPage} from "@entities/global/model/globalSlice";
 import {APP_URL} from "@shared/const/constants";
-import {PreLoader} from "@shared/ui/PreLoader";
-import {Footer} from "@widgets/Footer";
+import Preloader from "@shared/ui/preloader";
+import {Footer} from "@widgets/footer";
 
 import * as style from '../styles/App.module.css'
 
@@ -19,7 +19,7 @@ const RootLayout = () => {
   return (
     <div className={style.layout}>
       <div className={style.content}>
-        <Suspense fallback={<PreLoader/>}>
+        <Suspense fallback={<Preloader/>}>
           <Outlet/>
         </Suspense>
       </div>

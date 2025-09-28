@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import * as style from './HeaderSettings.module.css'
+import * as style from '../SimpleHeader.module.css'
 
 const HeaderSettings: FC = () => {
   return (

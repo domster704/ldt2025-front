@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 import * as style from './Home.module.css';
-import Dashboard from "@widgets/Dashboard";
+import Dashboard from "@widgets/dashboard";
 import {useAppSelector} from "@app/store/store";
 import {selectLoadingStatus} from "@entities/session-upload/model/selectors";
-import {PreLoader} from "@shared/ui/PreLoader";
-import HeaderGraph from "@widgets/Header";
-import ColorSignalWrapper from "@widgets/ColorSignalWrapper";
+import PreLoader from "@shared/ui/preloader";
+import {HeaderGraph} from "@widgets/header";
+import ColorSignalWrapper from "@widgets/color-signal-wrapper";
 import ColorProvider from "@shared/providers/color-provider";
 
 
