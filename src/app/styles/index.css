@@ -16,7 +16,9 @@
   --good-color: #00a619;
   --warning-color: #e87000;
 
+  /*Индикаторные цвета, изменяемые в ColorProvider*/
   --indicator-color: unset;
+  --indicator-color-rgb: unset;
 }
 
 :root {
@@ -34,7 +36,11 @@
 
 html, body {
   height: 100%;
-  font-size: clamp(1rem, 1vw, 2rem);
+  font-size: 1rem;
+
+  @media (min-width: 1921px) {
+    font-size: 1vw;
+  }
 }
 
 button, input, textarea {

@@ -6,7 +6,7 @@ import Dashboard from "@widgets/Dashboard";
 import {useAppSelector} from "@app/store/store";
 import {selectLoadingStatus} from "@entities/session-upload/model/selectors";
 import {PreLoader} from "@shared/ui/PreLoader";
-import Header from "@widgets/Header";
+import HeaderGraph from "@widgets/Header";
 import {Footer} from "@widgets/Footer";
 import IndicatorWrapper from "@widgets/IndicatorWrapper";
 import ColorProvider from "@shared/providers/color-provider";
@@ -18,7 +18,7 @@ const Home: FC = () => {
   return (
     <ColorProvider>
       <IndicatorWrapper>
-        <Header/>
+        <HeaderGraph/>
         <div>
           <main className={style.main}>
             <UploadData/>
