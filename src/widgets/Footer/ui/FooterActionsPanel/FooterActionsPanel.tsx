@@ -2,13 +2,16 @@ import React, {FC} from "react";
 import * as style from './FooterActionsPanel.module.css'
 import ActionButton from "@shared/ui/action-button";
 import StartEmulationButton from "@features/start-session/ui/StartEmulationButton";
-import SettingsButton from "@features/open-settings";
 
 import autoZeroImg from '@shared/assets/img/autoZero.svg';
 import brightnessImg from '@shared/assets/img/brightness.svg';
 import exportImg from '@shared/assets/img/export.svg';
 import printImg from '@shared/assets/img/print.svg';
 import withoutSoundImg from '@shared/assets/img/withoutSound.svg';
+import settingsImg from '@shared/assets/img/settings.svg';
+
+import OpenPageButton from "@shared/ui/open-page-button";
+import {SETTINGS_PAGE_URL} from "@shared/const/constants";
 
 const FooterActionsPanel: FC = () => {
   return (
@@ -19,7 +22,9 @@ const FooterActionsPanel: FC = () => {
       <ActionButton icon={printImg} text="Печать"/>
       <ActionButton icon={exportImg} text="Выгрузка"/>
       <ActionButton icon={brightnessImg} text="Яркость"/>
-      <SettingsButton/>
+      <OpenPageButton page={SETTINGS_PAGE_URL}
+                      icon={settingsImg}
+                      text="Настройки"/>
     </nav>
   );
 };

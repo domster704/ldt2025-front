@@ -1,1 +1,1 @@
-export {default} from './ui/HistoryButton';
+export {default} from './ui/OpenPageButton';

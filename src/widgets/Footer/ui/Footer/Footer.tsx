@@ -4,10 +4,12 @@ import * as style from './Footer.module.css'
 import arrowLeftImg from '@shared/assets/img/arrowLeft.svg';
 import arrowRightImg from '@shared/assets/img/arrowRight.svg';
 import ActionButton from "@shared/ui/action-button";
-import {useIsSettingsPage} from "@widgets/Footer/hooks/useIsSettingsPage";
 import {ActionButtonAlignment} from "@shared/ui/action-button/ui/ActionButton";
 import {useNavigate} from "react-router-dom";
-import FooterActionsPanel from "@widgets/Footer/ui/FooterActionsPanel/FooterActionsPanel";
+import OpenPageButton from "@shared/ui/open-page-button";
+import {HISTORY_PAGE_URL, HOME_PAGE_URL} from "@shared/const/constants";
+import {useIsSettingsPage} from "@widgets/footer/hooks/useIsSettingsPage";
+import FooterActionsPanel from "@widgets/footer/ui/FooterActionsPanel/FooterActionsPanel";
 
 const Footer: FC = () => {
   const navigate = useNavigate();
@@ -31,14 +33,13 @@ const Footer: FC = () => {
 
   return (
     <footer className={style.footer}>
-      <ActionButton icon={arrowLeftImg}
-                    onClick={() => {
-
-                    }}/>
+      <OpenPageButton page={HOME_PAGE_URL}
+                      icon={arrowLeftImg}/>
 
       <FooterActionsPanel/>
 
-      <ActionButton icon={arrowRightImg}/>
+      <OpenPageButton page={HISTORY_PAGE_URL}
+                      icon={arrowRightImg}/>
     </footer>
   );
 }

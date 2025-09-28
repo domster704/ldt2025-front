@@ -1,10 +1,10 @@
 import React, {FC, memo} from "react";
-import * as style from './PreLoader.module.css';
+import * as style from './Preloader.module.css';
 
-interface PreLoaderProps extends React.HTMLAttributes<HTMLDivElement> {
+interface PreloaderProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
-const PreLoader: FC<PreLoaderProps> = memo(({...props}) => {
+const Preloader: FC<PreloaderProps> = memo(({...props}) => {
   return (
     <div {...props} className={[
       style.loader,
@@ -14,4 +14,4 @@ const PreLoader: FC<PreLoaderProps> = memo(({...props}) => {
   );
 });
 
-export default PreLoader
+export default Preloader
