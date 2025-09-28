@@ -1,18 +1,26 @@
 import React, {useEffect, useState} from "react";
 
+
 export function useResizeObserver<T extends Element>(ref: React.RefObject<T | null>) {
-  const [width, setWidth] = useState(0);
+  const [size, setSize] = useState({width: 0, height: 0});
 
   useEffect(() => {
     if (!ref.current) return;
-    const observer = new ResizeObserver(() => {
+
+    const updateSize = () => {
       if (ref.current) {
-        setWidth(ref.current.getBoundingClientRect().width);
+        const rect = ref.current.getBoundingClientRect();
+        setSize({width: rect.width, height: rect.height});
       }
-    });
+    };
+
+    const observer = new ResizeObserver(updateSize);
     observer.observe(ref.current);
+
+    updateSize();
+
     return () => observer.disconnect();
   }, [ref]);
 
-  return width;
+  return size;
 }

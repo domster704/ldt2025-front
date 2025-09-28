@@ -1,12 +1,12 @@
 import React, {FC} from "react";
 
-import * as style from './IndicatorWrapper.module.css';
+import * as style from './ColorSignalWrapper.module.css';
 
 interface IndicatorWrapperProps {
   children: React.ReactNode;
 }
 
-const IndicatorWrapper: FC<IndicatorWrapperProps> = ({children}) => {
+const ColorSignalWrapper: FC<IndicatorWrapperProps> = ({children}) => {
   return (
     <div className={style.indicatorWrapper}>
       {children}
@@ -14,4 +14,4 @@ const IndicatorWrapper: FC<IndicatorWrapperProps> = ({children}) => {
   )
 }
 
-export default IndicatorWrapper;
+export default ColorSignalWrapper;

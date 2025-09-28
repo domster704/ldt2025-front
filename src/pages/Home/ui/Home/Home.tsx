@@ -5,7 +5,7 @@ import {useAppSelector} from "@app/store/store";
 import {selectLoadingStatus} from "@entities/session-upload/model/selectors";
 import {PreLoader} from "@shared/ui/PreLoader";
 import HeaderGraph from "@widgets/Header";
-import IndicatorWrapper from "@widgets/IndicatorWrapper";
+import ColorSignalWrapper from "@widgets/ColorSignalWrapper";
 import ColorProvider from "@shared/providers/color-provider";
 
 
@@ -15,14 +15,14 @@ const Home: FC = () => {
   return (
     <>
       <ColorProvider>
-        <IndicatorWrapper>
+        <ColorSignalWrapper>
           <HeaderGraph/>
           <main className={style.main}>
             {/*<WebsocketProvider wsUrl={$wsApiUrl}>*/}
             <Dashboard/>
             {/*</WebsocketProvider>*/}
           </main>
-        </IndicatorWrapper>
+        </ColorSignalWrapper>
       </ColorProvider>
       {
         isLoading &&

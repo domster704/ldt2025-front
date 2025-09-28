@@ -23,7 +23,7 @@ const LivePath: FC<LivePathProps> = ({
   const pathD = useMemo(() => {
     const lineGenerator = line<StreamPoint>()
       .defined(d => !isNaN(d.y))
-      .x(d => xScale(d.x) - RIGHT_OFFSET)
+      .x(d => xScale(d.x))
       .y(d => yScale(d.y))
       .curve(curveMonotoneX);
     return lineGenerator(dataSource) || "";

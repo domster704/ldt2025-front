@@ -24,9 +24,10 @@ export function useChartScales({
     const xMax = Math.max(0, width - margins.left - margins.right);
     const yMax = Math.max(0, height - margins.top - margins.bottom);
 
-    const ys = dataSource.map((d) => d.y).filter((y) => !isNaN(y));
-    const minY = ys.length ? Math.min(...ys) : 0;
-    const maxY = ys.length ? Math.max(...ys) : 1;
+    const ys = dataSource.map((d) => d.y);
+    const lastN = ys.slice(-width);
+    const minY = lastN.length ? Math.min(...lastN) : 0;
+    const maxY = lastN.length ? Math.max(...lastN) : 1;
 
     const lastX = dataSource.length ? dataSource[dataSource.length - 1].x : 0;
 

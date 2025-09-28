@@ -4,6 +4,7 @@ import {selectHeartRates, selectUterineContractions} from "@entities/session-str
 
 import * as style from './Dashboard.module.css';
 import SessionChart from "@widgets/SessionChart";
+import IndicatorsPanel from "@widgets/IndicatorsPanel";
 
 
 const Dashboard = () => {
@@ -12,8 +13,14 @@ const Dashboard = () => {
 
   return (
     <div className={style.dashboard}>
-      <SessionChart color="red" dataSource={fhrData}/>
-      <SessionChart color="blue" dataSource={ucData}/>
+      <div className={style.dashboard__graphs}>
+        <SessionChart color="#c59e00"
+                      dataSource={fhrData}/>
+        <SessionChart color="#003459"
+                      dataSource={ucData}/>
+      </div>
+
+      <IndicatorsPanel/>
     </div>
   );
 };

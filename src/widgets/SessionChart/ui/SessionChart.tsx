@@ -3,10 +3,9 @@ import {useResizeObserver} from "@shared/lib/hooks/useResizeObserver";
 import Chart, {useChartScales} from "@shared/ui/Chart";
 import {useChartScroll} from "@features/chart-scroll/lib/hooks/useChartScroll";
 
-const HEIGHT = 300;
-const MARGIN = {top: 8, right: 48, bottom: 24, left: 16};
-const PADDING = 10;
-const WINDOW = 120;
+const MARGIN = {top: 8, right: 48, bottom: 24, left: 30};
+const PADDING = 30;
+const WINDOW = 240;
 
 interface SessionChartProps {
   color: string;
@@ -16,7 +15,7 @@ interface SessionChartProps {
 const SessionChart: FC<SessionChartProps> = ({color, dataSource}) => {
   const ref = useRef<SVGSVGElement>(null);
 
-  const width = useResizeObserver(ref);
+  const {width, height} = useResizeObserver(ref);
 
   const {
     scrollOffset,
@@ -32,7 +31,7 @@ const SessionChart: FC<SessionChartProps> = ({color, dataSource}) => {
 
   const {xMax, yMax, xScale, yScale} = useChartScales({
     width,
-    height: HEIGHT,
+    height,
     margins: MARGIN,
     dataSource,
     window_: WINDOW,
@@ -41,23 +40,23 @@ const SessionChart: FC<SessionChartProps> = ({color, dataSource}) => {
   });
 
   return (
-    <Chart
-      ref={ref}
-      color={color}
-      dataSource={dataSource}
-      xScale={xScale}
-      yScale={yScale}
-      xMax={xMax}
-      yMax={yMax}
-      isDragging={isDragging}
-      onWheel={handleWheel}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
+    <Chart ref={ref}
+           margins={MARGIN}
+           color={color}
+           dataSource={dataSource}
+           xScale={xScale}
+           yScale={yScale}
+           xMax={xMax}
+           yMax={yMax}
+           isDragging={isDragging}
+           onWheel={handleWheel}
+           onMouseDown={handleMouseDown}
+           onMouseMove={handleMouseMove}
+           onMouseUp={handleMouseUp}
+           onMouseLeave={handleMouseUp}
+           onTouchStart={handleTouchStart}
+           onTouchMove={handleTouchMove}
+           onTouchEnd={handleTouchEnd}
     />
   );
 };

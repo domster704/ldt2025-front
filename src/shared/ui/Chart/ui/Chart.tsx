@@ -1,12 +1,13 @@
-import React, {forwardRef} from "react";
+import React, {forwardRef, useEffect, useRef} from "react";
 import LivePath from "@shared/ui/LivePath";
 import {GridColumns, GridRows} from "@visx/grid";
-import {AxisBottom, AxisRight} from "@visx/axis";
+import {AxisBottom, AxisLeft} from "@visx/axis";
 import {ScaleLinear} from "d3";
 
 import * as style from "./Chart.module.css";
 
 interface ChartProps {
+  margins: { top: number; right: number; bottom: number; left: number };
   color: string;
   dataSource: { x: number; y: number }[];
   xScale: ScaleLinear<number, number>;
@@ -26,12 +27,10 @@ interface ChartProps {
   onTouchEnd?: (e: React.TouchEvent<SVGSVGElement>) => void;
 }
 
-const HEIGHT = 300;
-const MARGIN = {top: 8, right: 48, bottom: 24, left: 16};
-
 const Chart = forwardRef<SVGSVGElement, ChartProps>(
   (
     {
+      margins,
       color,
       dataSource,
       xScale,
@@ -50,54 +49,72 @@ const Chart = forwardRef<SVGSVGElement, ChartProps>(
     },
     ref
   ) => {
+    const startTimeRef = useRef<number | null>(null);
+
+    useEffect(() => {
+      if (dataSource.length > 0 && startTimeRef.current === null) {
+        startTimeRef.current = Date.now();
+      }
+    }, [dataSource]);
+
     return (
       <div className={style.container}>
-        <svg
-          ref={ref}
-          width="100%"
-          height={HEIGHT}
-          onWheel={onWheel}
-          onMouseDown={onMouseDown}
-          onMouseMove={onMouseMove}
-          onMouseUp={onMouseUp}
-          onMouseLeave={onMouseLeave}
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
-          style={{cursor: isDragging ? "grabbing" : "default"}}
-        >
-          <rect x={0} y={0} width="100%" height={HEIGHT} fill="#fff"/>
+        <svg ref={ref}
+             width="100%"
+             onWheel={onWheel}
+             onMouseDown={onMouseDown}
+             onMouseMove={onMouseMove}
+             onMouseUp={onMouseUp}
+             onMouseLeave={onMouseLeave}
+             onTouchStart={onTouchStart}
+             onTouchMove={onTouchMove}
+             onTouchEnd={onTouchEnd}
+             style={{
+               cursor: isDragging ? "grabbing" : "default",
+             }}>
+          <g transform={`translate(${margins.left},${margins.top})`}>
 
-          <g transform={`translate(${MARGIN.left},${MARGIN.top})`}>
-            <GridRows
-              scale={yScale}
-              width={xMax}
-              height={yMax}
-              stroke="#eee"/>
-            <GridColumns
-              scale={xScale}
-              width={xMax}
-              height={yMax}
-              stroke="#eee"
-            />
+            <rect x={0}
+                  y={yScale(150)}
+                  width={xMax}
+                  height={Math.min(yScale(110), yMax) - yScale(150)}
+                  fill="#cceddd"/>
 
-            <LivePath
-              color={color}
-              dataSource={dataSource}
-              xScale={xScale}
-              yScale={yScale}
-            />
+            <GridRows scale={yScale}
+                      width={xMax}
+                      height={yMax}
+                      stroke="#ccc"/>
 
-            <AxisBottom
-              top={yMax}
-              scale={xScale}
-              numTicks={6}
-              tickFormat={(v) => `${v}s`}
-            />
-            <AxisRight left={xMax}
-                       scale={yScale}
-                       numTicks={5}
-            />
+            <GridColumns scale={xScale}
+                         width={xMax}
+                         height={yMax}
+                         stroke="#ccc"/>
+
+            <LivePath color={color}
+                      dataSource={dataSource}
+                      xScale={xScale}
+                      yScale={yScale}/>
+
+            <AxisLeft scale={yScale}
+                      numTicks={5}/>
+
+            <AxisBottom top={yMax}
+                        scale={xScale}
+                        numTicks={6}
+                        tickFormat={(v) => {
+                          const time = new Date((startTimeRef.current || Date.now()) + (v as number) * 1000);
+                          return time.toLocaleTimeString("ru-RU", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            second: "2-digit"
+                          });
+                        }}
+                        tickLabelProps={() => ({
+                          fontWeight: "bold",
+                          textAnchor: "middle",
+                          fontSize: "0.625rem",
+                          dy: "0.25rem",
+                        })}/>
           </g>
         </svg>
       </div>

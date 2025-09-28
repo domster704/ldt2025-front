@@ -1,0 +1,46 @@
+.indicatorContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0.5rem;
+}
+
+.indicatorContainer__header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  line-height: 100%;
+}
+
+.indicatorContainer__indicatorName {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 20px;
+  color: #000;
+}
+
+.indicatorContainer__indicatorLabel {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #3473b6;
+}
+
+.indicatorContainer__value {
+  font-family: var(--font-family);
+  font-weight: 900;
+  font-size: 4.75rem;
+  color: var(--indicator-color);
+
+  line-height: 100%;
+}
+
+.indicatorContainer__subLabel {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-align: center;
+  color: #000;
+}

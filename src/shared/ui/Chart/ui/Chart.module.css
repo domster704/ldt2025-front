@@ -10,4 +10,5 @@
   display: block;
   user-select: none;
   -webkit-user-drag: none;
+  height: 100%;
 }

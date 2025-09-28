@@ -1,0 +1,23 @@
+.panel {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  height: min-content;
+
+  background: #fff;
+}
+
+.panel > div {
+  border: 1px solid #448cff;
+}
+
+.panel__twoColumns {
+  grid-column: 1 / -1;
+  align-items: center;
+}
+
+.panel__doubleDataInColumn {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
