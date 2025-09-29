@@ -8,12 +8,12 @@ import {ActionButtonAlignment} from "@shared/ui/action-button/ui/ActionButton";
 import {useNavigate} from "react-router-dom";
 import OpenPageButton from "@shared/ui/open-page-button";
 import {HISTORY_PAGE_URL, HOME_PAGE_URL} from "@shared/const/constants";
-import {useIsSettingsPage} from "@widgets/footer/hooks/useIsSettingsPage";
+import {useIsPageWithBackButton} from "@widgets/footer/hooks/useIsPageWithBackButton";
 import FooterActionsPanel from "@widgets/footer/ui/FooterActionsPanel/FooterActionsPanel";
 
 const Footer: FC = () => {
   const navigate = useNavigate();
-  const isSettingsPage = useIsSettingsPage();
+  const isSettingsPage = useIsPageWithBackButton();
 
   if (isSettingsPage) {
     return (
