@@ -12,13 +12,15 @@ import settingsImg from '@shared/assets/img/settings.svg';
 import patientsImg from '@shared/assets/img/patients.svg';
 
 import OpenPageButton from "@shared/ui/open-page-button";
-import {SETTINGS_PAGE_URL} from "@shared/const/constants";
+import {PATIENT_PICKER_PAGE_URL, SETTINGS_PAGE_URL} from "@shared/const/constants";
 
 const FooterActionsPanel: FC = () => {
   return (
     <nav className={style.actionsPanel}>
       <StartEmulationButton/>
-      <ActionButton icon={patientsImg} text={"Пациенты"}/>
+      <OpenPageButton page={PATIENT_PICKER_PAGE_URL}
+                      icon={patientsImg}
+                      text="Пациенты"/>
       <ActionButton icon={withoutSoundImg} text="Без звука"/>
       <ActionButton icon={autoZeroImg} text="Auto Zero"/>
       <ActionButton icon={printImg} text="Печать"/>

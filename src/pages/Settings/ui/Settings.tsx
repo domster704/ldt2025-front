@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import * as style from './Settings.module.css'
-import {HeaderSettings} from "@widgets/header";
 import PageWrapper from "@shared/ui/page-wrapper";
+import {SimpleHeader} from "@widgets/header";
 
 interface SettingsProps {
 
@@ -10,7 +10,7 @@ interface SettingsProps {
 const Settings: FC<SettingsProps> = ({}) => {
   return (
     <PageWrapper>
-      <HeaderSettings/>
+      <SimpleHeader headerText={"Настройки"}/>
       <section className={style.settings}>
         <div className={style.settings__section}>
           <span className={style.settings__sectionLabel}>Цветовая индикация фона</span>
