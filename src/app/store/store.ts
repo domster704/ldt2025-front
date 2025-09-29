@@ -3,12 +3,14 @@ import {useDispatch, useSelector} from "react-redux";
 import globalSlice from "@entities/global/model/globalSlice";
 import uploadSlice from "@entities/session-upload/model/uploadSlice";
 import sessionStreamSlice from "@entities/session-stream/model/sessionStreamSlice";
+import ctgHistorySlice from "@entities/ctg-history/model/ctgHistorySlice";
 
 const store = configureStore({
   reducer: {
     global: globalSlice,
     upload: uploadSlice,
-    sessionStream: sessionStreamSlice
+    sessionStream: sessionStreamSlice,
+    ctgHistory: ctgHistorySlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false

@@ -1,12 +1,15 @@
 import React, {FC} from "react";
 import * as style from "./HistoryTable.module.css";
-import {mockHistory} from "../lib/mockData";
-import {statusMap} from "../lib/statusMap";
-import {colors} from "@shared/providers/color-provider/model/types";
 
 import arrowRightImg from "@shared/assets/img/arrowRight.svg";
+import {historyColors} from "@widgets/history-table/model/types";
+import {useAppSelector} from "@app/store/store";
+import {selectAllCTGHistory} from "@entities/ctg-history/model/selectors";
+import {CTGHistory} from "@entities/ctg-history/model/types";
 
 const HistoryTable: FC = () => {
+  const ctgHistory = useAppSelector(selectAllCTGHistory);
+
   return (
     <div className={style.tableWrapper}>
       <table className={style.table}>
@@ -22,26 +25,26 @@ const HistoryTable: FC = () => {
         </tr>
         </thead>
         <tbody>
-        {mockHistory.map(row => {
-          const figoStatus = statusMap[row.figo];
-          const forecastStatus = statusMap[row.forecast];
+        {ctgHistory.map((ctgHistoryItem: CTGHistory) => {
+          const figoColor = historyColors[ctgHistoryItem.figo];
+          const forecastColor = historyColors[ctgHistoryItem.forecast];
 
           return (
-            <tr key={row.id}>
-              <td>{row.date}</td>
-              <td>{row.gestation}</td>
-              <td>{row.hr}</td>
-              <td>{row.uc}</td>
+            <tr key={ctgHistoryItem.id}>
+              <td>{ctgHistoryItem.date.getUTCDate()}</td>
+              <td>{ctgHistoryItem.gestation}</td>
+              <td>{ctgHistoryItem.hr}</td>
+              <td>{ctgHistoryItem.uc}</td>
               <td>
                 <span className={style.status}
-                      style={{backgroundColor: colors[figoStatus]?.hex}}>
-                  {row.figo}
+                      style={{backgroundColor: figoColor}}>
+                  {ctgHistoryItem.figo}
                 </span>
               </td>
               <td>
                 <span className={style.status}
-                      style={{backgroundColor: colors[forecastStatus]?.hex}}>
-                  {row.forecast}
+                      style={{backgroundColor: forecastColor}}>
+                  {ctgHistoryItem.forecast}
                 </span>
               </td>
               <td>
