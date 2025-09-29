@@ -1,8 +1,7 @@
 import React, {FC} from 'react';
-import settingsImg from '@shared/assets/img/settings.svg';
 import ActionButton from "@shared/ui/action-button";
 import {Link} from "react-router-dom";
-import {APP_URL, HISTORY_PAGE_URL} from "@shared/const/constants";
+import {APP_URL} from "@shared/const/constants";
 
 import * as style from './OpenPageButton.module.css';
 

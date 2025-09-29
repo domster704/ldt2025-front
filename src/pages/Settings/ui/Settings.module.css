@@ -6,7 +6,7 @@
   font-family: var(--third-family);
   font-weight: 400;
   font-size: 1.5rem;
-  color: #000;
+  color: var(--chernyy-);
 }
 
 .settings__wrapper {
@@ -15,10 +15,11 @@
 }
 
 .settings__section {
-  position: relative;
-  border: 1px solid #448cff;
+  padding: 3rem 3rem 2.25rem;
+}
 
-  padding: 3rem;
+.soundManager__container {
+  padding-inline: 0;
 }
 
 .settings__sectionLabel {
@@ -27,47 +28,10 @@
   left: 0;
 
   padding: 0.5rem 1.25rem;
-  background: #0097df;
+  background: var(--sistemnyy-siniy);
 
   font-family: var(--third-family);
   font-weight: 500;
   font-size: 1.75rem;
-  color: #fff;
-}
-
-.settings__colorPicker {
-  display: flex;
-  gap: 4rem;
-  padding-top: 4rem;
-}
-
-.colorPicker__colorWithText {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-
-  p {
-    font-family: var(--third-family);
-    font-weight: 400;
-    font-size: 1.5rem;
-    color: #000;
-  }
-}
-
-.colorPicker__color {
-  display: block;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 100%;
-
-  &.checked:before {
-    content: "✓";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-
-    font-size: 2rem;
-  }
+  color: var(--belyy-);
 }

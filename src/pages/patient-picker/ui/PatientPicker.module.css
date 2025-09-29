@@ -3,5 +3,5 @@
   flex: 1;
 
   height: 100%;
-  border: 1px solid #448cff;
+  border: 1px solid var(--obvodka-blokov);
 }

@@ -2,10 +2,10 @@ import React, {FC} from 'react';
 import * as style from './Settings.module.css'
 import PageWrapper from "@shared/ui/page-wrapper";
 import {SimpleHeader} from "@widgets/header";
-import {availableGoodColors, availableWarningColors} from "@shared/const/colors";
-import {useAppDispatch, useAppSelector} from "@app/store/store";
-import {selectGoodColor, selectWarningColor} from "@entities/settings/model/selectors";
-import {setChosenGoodColor, setChosenWarningColor} from "@entities/settings/model/settingsSlice";
+import {useAppDispatch} from "@app/store/store";
+import ColorsPicker from "@features/settings-colors-picker";
+import SoundManager from "@widgets/sound-manager";
+import ContainerWithLabel from "@shared/ui/container-with-label";
 
 interface SettingsProps {
 
@@ -13,60 +13,26 @@ interface SettingsProps {
 
 const Settings: FC<SettingsProps> = ({}) => {
   const dispatch = useAppDispatch();
-  const chosenWarningColor = useAppSelector(selectWarningColor);
-  const chosenGoodColor = useAppSelector(selectGoodColor);
 
   return (
     <PageWrapper>
       <SimpleHeader headerText={"Настройки"}/>
       <section className={style.settings}>
-        <div className={style.settings__section}>
-          <span className={style.settings__sectionLabel}>Цветовая индикация фона</span>
+        <ContainerWithLabel label={"Цветовая индикация фона"}
+                            className={style.settings__section}>
+          <ColorsPicker/>
+        </ContainerWithLabel>
 
-          <div className={style.settings__colorPicker}>
-            <div className={style.colorPicker__colorWithText}>
-              {
-                availableGoodColors.map(color => (
-                  <button key={color}
-                          className={[
-                            style.colorPicker__color,
-                            chosenGoodColor === color ? style.checked : ""
-                          ].join(" ")}
-                          style={{background: color}}
-                          onClick={() => dispatch(setChosenGoodColor(color))}
-                  />
-                ))
-              }
+        <ContainerWithLabel label={"Звуковые сигналы"}
+                            className={[
+                              style.settings__section,
+                              style.soundManager__container,
+                            ].join(' ')}>
+          <SoundManager/>
+        </ContainerWithLabel>
 
-              <p>Норма</p>
-            </div>
-
-            <div className={style.colorPicker__colorWithText}>
-              {
-                availableWarningColors.map(color => (
-                  <button key={color}
-                          className={[
-                            style.colorPicker__color,
-                            chosenWarningColor === color ? style.checked : ""
-                          ].join(" ")}
-                          style={{background: color}}
-                          onClick={() => dispatch(setChosenWarningColor(color))}
-                  />
-                ))
-              }
-
-              <p>Ухудшение или негативный прогноз</p>
-            </div>
-          </div>
-        </div>
-
-        <div className={style.settings__section}>
-          <span className={style.settings__sectionLabel}>Звуковые сигналы</span>
-        </div>
-
-        <div className={style.settings__section}>
-          <span className={style.settings__sectionLabel}>Системная информация</span>
-
+        <ContainerWithLabel label={"Системная информация"}
+                            className={style.settings__section}>
           <br/>
           <p>
             <b>Текущая заполненность внутренней памяти: 0 GB</b>
@@ -75,7 +41,7 @@ const Settings: FC<SettingsProps> = ({}) => {
           <p>
             <b>Последняя выгрузка архива:</b> 29.09.25
           </p>
-        </div>
+        </ContainerWithLabel>
       </section>
     </PageWrapper>
   );

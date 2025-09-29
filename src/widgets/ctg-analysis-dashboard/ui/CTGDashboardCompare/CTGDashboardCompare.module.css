@@ -2,7 +2,7 @@
   padding: 1rem;
   border: 0.1rem solid #ccc;
   border-radius: 0.5rem;
-  background: #fff;
+  background: var(--belyy-);
   font-size: 0.9rem;
 }
 

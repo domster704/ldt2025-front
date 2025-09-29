@@ -4,7 +4,7 @@
   align-items: center;
 
   padding: 0.625rem 1rem;
-  background: #ddf4ff;
+  background: var(--fony-sistemnye-);
 
   margin-bottom: 1.875rem;
 }
@@ -19,13 +19,13 @@
     font-family: var(--font-family);
     font-weight: 600;
     font-size: 1.5rem;
-    color: #000;
+    color: var(--chernyy-);
   }
 
   p {
     font-family: var(--font-family);
     font-weight: 400;
     font-size: 1.25rem;
-    color: #000;
+    color: var(--chernyy-);
   }
 }

@@ -5,7 +5,7 @@
   justify-content: center;
 
   padding: 1.875rem;
-  background: #0097df;
+  background: var(--sistemnyy-siniy);
 
   margin-bottom: 1.5rem;
 
@@ -14,7 +14,7 @@
     font-weight: 700;
     font-size: 28px;
     text-align: right;
-    color: #fff;
+    color: var(--belyy-);
     text-transform: uppercase;
   }
 }

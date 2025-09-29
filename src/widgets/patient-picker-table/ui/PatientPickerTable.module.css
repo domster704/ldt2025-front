@@ -9,7 +9,7 @@
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 1.25rem;
-  color: #000;
+  color: var(--chernyy-);
   text-align: center;
 }
 
@@ -18,12 +18,12 @@
   font-family: var(--third-family);
   font-weight: 500;
   font-size: 1.25rem;
-  color: #000;
+  color: var(--chernyy-);
   text-align: center;
 }
 
 .patientPicker__table tbody tr {
-  background-color: #fff;
+  background-color: var(--belyy-);
 
   &:nth-child(odd) {
     background-color: #e6f7ff;

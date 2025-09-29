@@ -21,7 +21,7 @@
   font-weight: 400;
   font-size: 1.25rem;
   text-align: center;
-  color: #000;
+  color: var(--chernyy-);
 }
 
 .table :is(td, th) {
@@ -30,7 +30,7 @@
 }
 
 .table tbody tr {
-  border: 1px solid #448cff;
+  border: 1px solid var(--obvodka-blokov);
 }
 
 .status {
@@ -49,5 +49,5 @@ td:has(.status) {
 }
 
 .selected {
-  background: #ddf4ff;
+  background: var(--fony-sistemnye-);
 }

@@ -12,9 +12,30 @@
   --ikonki: #959595;
   --oranzh-taro: #f25430;
   --zheltyy-taro: #ffb94f;
-
-  --good-color: #00a619;
-  --warning-color: #e87000;
+  --ikonki-itelma: #003650;
+  --trevozhnyy-oranzhevyy: #e87000;
+  --trevozhnyy-oranzh-fon: rgba(232, 112, 0, 0.2);
+  --zelenyy-norma: #00a619;
+  --trevozhnyy-rozovyy: #e80080;
+  --trevozhnyy-siniy: #3a00e8;
+  --belyy-: #fff;
+  --chernyy-: #000;
+  --setka-grafikov: #d6d6d6;
+  --status-ktg-norma: #83e462;
+  --status-ktg-somnitelnyy: #ffa653;
+  --status-ktg-patologicheskiy: #ff7053;
+  --status-ktg-preterminalnyy: #d9bbff;
+  --zelenyy-norma-fon: rgba(0, 166, 25, 0.2);
+  --krasnyy-trevozhnyy: #e82700;
+  --krasnyy-otklonenie-na-grafikah: #ffc2ac;
+  --zelenyy-norm-na-grafikah: #c3ffac;
+  --oranzh-otklonenie-na-grafikah: #ffe7ac;
+  --2-oy-plod-liniya-na-grafike: #c55500;
+  --zelenyy-norm-dlya-cifr-pokazateley: #00a018;
+  --oranzh-ne-norm-dlya-cifr-pokazateley: #e87000;
+  --obvodka-blokov: #448cff;
+  --fony-sistemnye-: #ddf4ff;
+  --sistemnyy-siniy: #0097df;
 
   /*Индикаторные цвета, изменяемые в ColorProvider*/
   --indicator-color: unset;

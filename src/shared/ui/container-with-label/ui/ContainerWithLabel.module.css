@@ -1,0 +1,25 @@
+.containerWithLabel {
+  position: relative;
+  border: 1px solid var(--obvodka-blokov);
+}
+
+.containerWithLabel__label {
+  position: absolute;
+  top: 0;
+
+  padding: 0.5rem 1.25rem;
+  background: var(--sistemnyy-siniy);
+
+  font-family: var(--third-family);
+  font-weight: 500;
+  font-size: 1.75rem;
+  color: var(--belyy-);
+
+  &.left {
+    left: 0;
+  }
+
+  &.right {
+    right: 0;
+  }
+}

@@ -4,11 +4,11 @@
 
   height: min-content;
 
-  background: #fff;
+  background: var(--belyy-);
 }
 
 .panel > div {
-  border: 1px solid #448cff;
+  border: 1px solid var(--obvodka-blokov);
 }
 
 .panel__twoColumns {

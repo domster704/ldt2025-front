@@ -1,0 +1,36 @@
+.colorPicker {
+  display: flex;
+  gap: 4rem;
+  padding-top: 4rem;
+}
+
+.colorPicker__colorWithText {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  p {
+    font-family: var(--third-family);
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--chernyy-);
+  }
+}
+
+.colorPicker__color {
+  display: block;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 100%;
+
+  &.checked:before {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--belyy-);
+
+    font-size: 2rem;
+  }
+}

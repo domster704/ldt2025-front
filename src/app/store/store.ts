@@ -6,6 +6,7 @@ import sessionStreamSlice from "@entities/session-stream/model/sessionStreamSlic
 import ctgHistorySlice from "@entities/ctg-history/model/ctgHistorySlice";
 import patientSlice from "@entities/patient/model/patientSlice";
 import settingsSlice from "@entities/settings/model/settingsSlice";
+import soundsSlice from "@entities/sound/model/soundSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,7 +15,8 @@ const store = configureStore({
     upload: uploadSlice,
     sessionStream: sessionStreamSlice,
     ctgHistory: ctgHistorySlice,
-    patients: patientSlice
+    patients: patientSlice,
+    sound: soundsSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false

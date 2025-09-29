@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
 
-  background: #ddf4ff;
+  background: var(--fony-sistemnye-);
 
   padding: 0.875rem;
 
