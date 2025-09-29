@@ -4,13 +4,15 @@ import globalSlice from "@entities/global/model/globalSlice";
 import uploadSlice from "@entities/session-upload/model/uploadSlice";
 import sessionStreamSlice from "@entities/session-stream/model/sessionStreamSlice";
 import ctgHistorySlice from "@entities/ctg-history/model/ctgHistorySlice";
+import patientSlice from "@entities/patient/model/patientSlice";
 
 const store = configureStore({
   reducer: {
     global: globalSlice,
     upload: uploadSlice,
     sessionStream: sessionStreamSlice,
-    ctgHistory: ctgHistorySlice
+    ctgHistory: ctgHistorySlice,
+    patients: patientSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false

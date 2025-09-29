@@ -3,6 +3,7 @@ import * as style from './PatientPicker.module.css'
 import {useAppDispatch, useAppSelector} from "@app/store/store";
 import PageWrapper from "@shared/ui/page-wrapper";
 import {SimpleHeader} from "@widgets/header";
+import PatientPickerTable from "@widgets/patient-picker-table";
 
 interface PatientPickerProps {
 
@@ -16,7 +17,7 @@ const PatientPicker: FC<PatientPickerProps> = ({}) => {
     <PageWrapper>
       <SimpleHeader headerText={"Выбор пациента"}/>
       <div className={style.content}>
-        content
+        <PatientPickerTable/>
       </div>
     </PageWrapper>
   );

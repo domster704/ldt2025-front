@@ -1,0 +1,48 @@
+.patientPicker__table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.patientPicker__table thead th {
+  padding: 1rem;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: #000;
+  text-align: center;
+}
+
+.patientPicker__table tbody td {
+  padding: 1.5rem 1rem;
+  font-family: var(--third-family);
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: #000;
+  text-align: center;
+}
+
+.patientPicker__table tbody tr {
+  background-color: #fff;
+
+  &:nth-child(odd) {
+    background-color: #e6f7ff;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.patientName {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.patientPicker__table td:first-child,
+.patientPicker__table th:first-child {
+  padding-left: 4.5rem;
+}
