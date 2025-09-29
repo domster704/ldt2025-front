@@ -15,19 +15,3 @@
   width: 100%;
   height: 14rem;
 }
-
-.charts__top {
-  height: 12rem;
-  border: 0.1rem solid #ccc;
-}
-
-.charts__bottom {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-}
-
-.charts__small {
-  height: 10rem;
-  border: 0.1rem solid #ccc;
-}

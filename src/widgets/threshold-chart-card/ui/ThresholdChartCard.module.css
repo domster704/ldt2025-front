@@ -1,0 +1,18 @@
+.thresholdChartCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  align-items: flex-start;
+
+  h4 {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--chernyy-);
+  }
+}
+
+.chart {
+  min-height: 18rem;
+  width: 100%;
+}
