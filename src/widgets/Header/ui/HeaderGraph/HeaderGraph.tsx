@@ -4,9 +4,13 @@ import * as style from './HeaderGraph.module.css'
 import userIcon from "@shared/assets/img/userWhite.svg";
 import {useColorsStatus} from "@shared/providers/color-provider";
 import {ColorHealthStatus} from "@shared/providers/color-provider/model/types";
+import {useAppSelector} from "@app/store/store";
+import {selectChosenPatient} from "@entities/patient/model/selectors";
 
 const HeaderGraph: FC = () => {
+  const patient = useAppSelector(selectChosenPatient);
   const {status} = useColorsStatus();
+
   const statusText = useMemo(() => {
     if (status === ColorHealthStatus.Good) {
       return "В норме";
@@ -15,11 +19,18 @@ const HeaderGraph: FC = () => {
     }
   }, [status]);
 
+  if (!patient) {
+    return (
+      <header className={style.header}>
+      </header>
+    );
+  }
+
   return (
     <header className={style.header}>
       <div className={style.info}>
         <img src={userIcon} alt={""}/>
-        <p>Платонова А.А.</p>
+        <p>{patient.name}</p>
         <p>Срок: 38+2 нед</p>
       </div>
       <div className={style.status}>

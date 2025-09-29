@@ -6,17 +6,20 @@ import {selectAllPatients} from "@entities/patient/model/selectors";
 import userBlackImg from '@shared/assets/img/userBlack.svg';
 import {setChosen} from "@entities/patient/model/patientSlice";
 import {Patient} from "@entities/patient/model/types";
+import {useNavigate} from "react-router-dom";
 
 interface PatientPickerTableProps {
 
 }
 
 const PatientPickerTable: FC<PatientPickerTableProps> = ({}) => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const patients = useAppSelector(selectAllPatients);
 
   const handleSelectPatient = (patient: Patient) => {
     dispatch(setChosen(patient));
+    navigate(-1);
   }
 
   return (

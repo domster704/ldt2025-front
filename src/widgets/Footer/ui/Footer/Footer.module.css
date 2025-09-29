@@ -10,7 +10,8 @@
 
   &.settingsPageOpen {
     justify-content: flex-start;
-    padding-left: 1.5rem;
+    padding-left: 3.5rem;
+    padding-block: 2rem;
   }
 }
 
