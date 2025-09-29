@@ -9,6 +9,7 @@ import exportImg from '@shared/assets/img/export.svg';
 import printImg from '@shared/assets/img/print.svg';
 import withoutSoundImg from '@shared/assets/img/withoutSound.svg';
 import settingsImg from '@shared/assets/img/settings.svg';
+import patientsImg from '@shared/assets/img/patients.svg';
 
 import OpenPageButton from "@shared/ui/open-page-button";
 import {SETTINGS_PAGE_URL} from "@shared/const/constants";
@@ -17,6 +18,7 @@ const FooterActionsPanel: FC = () => {
   return (
     <nav className={style.actionsPanel}>
       <StartEmulationButton/>
+      <ActionButton icon={patientsImg} text={"Пациенты"}/>
       <ActionButton icon={withoutSoundImg} text="Без звука"/>
       <ActionButton icon={autoZeroImg} text="Auto Zero"/>
       <ActionButton icon={printImg} text="Печать"/>

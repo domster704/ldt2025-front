@@ -2,10 +2,9 @@ import React, {FC} from "react";
 import * as style from "./HistoryTable.module.css";
 
 import arrowRightImg from "@shared/assets/img/arrowRight.svg";
-import {historyColors} from "@widgets/history-table/model/types";
 import {useAppSelector} from "@app/store/store";
 import {selectAllCTGHistory} from "@entities/ctg-history/model/selectors";
-import {CTGHistory} from "@entities/ctg-history/model/types";
+import {CTGHistory, historyColors} from "@entities/ctg-history/model/types";
 import {useCTGHistory} from "@features/ctg-history-selection-provider";
 
 const HistoryTable: FC = () => {
@@ -42,7 +41,7 @@ const HistoryTable: FC = () => {
 
               return (
                 <tr key={ctgHistoryItem.id}
-                    className={isSelected && style.selected}>
+                    className={isSelected ? style.selected : ""}>
                   <td>{ctgHistoryItem.date.toLocaleDateString()}</td>
                   <td>{ctgHistoryItem.gestation}</td>
                   <td>{ctgHistoryItem.hr}</td>

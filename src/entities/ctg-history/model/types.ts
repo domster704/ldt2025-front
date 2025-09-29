@@ -3,7 +3,6 @@ import {EntityState} from "@reduxjs/toolkit";
 export enum HistoryStatus {
   Normal = "Нормальный",
   Doubtful = "Сомнительный",
-  DoubtfulAlt = "Сомнительная",
   Pathological = "Патологическая",
   Preterminal = "Претерминальная",
 }
@@ -25,3 +24,10 @@ export interface CTGHistoryState {
 export interface CTGHistoryData {
   data: CTGHistory[];
 }
+
+export const historyColors: Record<HistoryStatus, string> = {
+  [HistoryStatus.Normal]: "#83e462",
+  [HistoryStatus.Doubtful]: "#ffa653",
+  [HistoryStatus.Pathological]: "#ff7053",
+  [HistoryStatus.Preterminal]: "#d9bbff",
+};
