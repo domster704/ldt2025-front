@@ -20,7 +20,7 @@ const store = configureStore({
     sound: soundsSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    serializableCheck: false
+    serializableCheck: true
   }).prepend(soundListeners.middleware)
 });
 

@@ -15,7 +15,7 @@ const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
         date: item.date
       }
     })
-  }, [ctgHistory.length]);
+  }, [ctgHistory]);
 
   const hrData = useMemo(() => {
     return ctgHistory.map((item) => {
@@ -24,7 +24,7 @@ const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
         date: item.date
       }
     })
-  }, [ctgHistory.length]);
+  }, [ctgHistory]);
 
   const accelerationData = useMemo(() => {
     return ctgHistory.map((item) => {
@@ -33,7 +33,7 @@ const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
         date: item.date
       }
     })
-  }, [ctgHistory.length]);
+  }, [ctgHistory]);
 
   return (
     <div className={style.charts__valuesCharts}>

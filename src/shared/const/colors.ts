@@ -7,5 +7,5 @@ export const availableWarningColors: string[] = [
 
 export const availableGoodColors: string[] = [
   "#00a619",
-  "var(--sistemnyy-siniy)"
+  "#0097df"
 ]

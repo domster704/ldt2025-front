@@ -20,12 +20,17 @@ export interface CTGHistory {
   acceleration : number;
 }
 
+export interface CTGHistoryDTO extends Omit<CTGHistory, "date">{
+  date: string;
+}
+
+
 export interface CTGHistoryState {
-  items: EntityState<CTGHistory, number>;
+  items: EntityState<CTGHistoryDTO, number>;
 }
 
 export interface CTGHistoryData {
-  data: CTGHistory[];
+  data: CTGHistoryDTO[];
 }
 
 export const historyColors: Record<HistoryStatus, string> = {

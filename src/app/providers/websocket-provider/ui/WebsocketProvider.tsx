@@ -8,7 +8,6 @@ interface WebsocketProviderProps {
 
 export const WebsocketProvider: FC<WebsocketProviderProps> = ({children, wsUrl}) => {
   const [isReady, setIsReady] = useState(false);
-  const [value, setValue] = useState<string | null>(null);
   const [messages, setMessages] = useState<any[]>([]);
 
   const ws = useRef<WebSocket | null>(null);
@@ -41,7 +40,7 @@ export const WebsocketProvider: FC<WebsocketProviderProps> = ({children, wsUrl})
     return () => {
       socket.close();
     }
-  }, []);
+  }, [wsUrl]);
 
   const safeSend = (data: string) => {
     if (ws.current && ws.current.readyState === WebSocket.OPEN) {

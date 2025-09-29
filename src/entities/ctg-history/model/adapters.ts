@@ -1,6 +1,6 @@
 import {createEntityAdapter} from '@reduxjs/toolkit';
-import {CTGHistory} from "@entities/ctg-history/model/types";
+import {CTGHistory, CTGHistoryDTO} from "@entities/ctg-history/model/types";
 
-export const ctgHistoryAdapter = createEntityAdapter<CTGHistory, number>({
+export const ctgHistoryAdapter = createEntityAdapter<CTGHistoryDTO, number>({
   selectId: ctg => ctg.id,
 });

@@ -29,7 +29,7 @@ const SessionChart: FC<SessionChartProps> = ({color, dataSource, highlightBands}
     handleTouchStart,
     handleTouchMove,
     handleTouchEnd,
-  } = useChartScroll({window: SLIDE_WINDOW_TIME, xMax: width});
+  } = useChartScroll({window_: SLIDE_WINDOW_TIME, xMax: width});
 
   const {xMax, yMax, xScale, yScale} = useChartScales({
     width,

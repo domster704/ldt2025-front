@@ -28,25 +28,25 @@ function randomStatusKey(): keyof typeof HistoryStatus {
 }
 
 function randomDateString(): string {
-  const day = Math.floor(Math.random() * 20) + 1; // 1–20 число
+  const day = Math.floor(Math.random() * 20) + 1;
   const dayStr = String(day).padStart(2, "0");
   return `2025-08-${dayStr}`;
 }
 
 export function generateMockHistory(count = 15): string {
   return Array.from({ length: count }, (_, i) => {
-    const dateStr = randomDateString();
+    const date = randomDateString();
 
     const figoKey = randomStatusKey();
     const forecastKey = randomStatusKey();
 
     return `{
       id: ${i + 1},
-      date: new Date("${dateStr}"),
+      date: "${date}",
       gestation: "${Math.floor(Math.random() * 4) + 37}+${Math.floor(Math.random() * 7)} нед",
       hr: ${randInt(110, 160)},
       uc: ${randInt(5, 50)},
-      stv: ${(Math.random() * 8 + 2).toFixed(1)},
+      stv: ${(Math.random() * 4 + 2).toFixed(1)},
       acceleration: ${randInt(0, 5)},
       figo: HistoryStatus.${figoKey},
       forecast: HistoryStatus.${forecastKey},
