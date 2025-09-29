@@ -9,7 +9,6 @@ import CTGThresholdCharts from "@widgets/ctg-analysis-dashboard/ui/CTGDashboardC
 const CTGDashboardCharts = () => {
   const ctgHistory = useAppSelector(selectAllCTGHistory);
 
-
   return (
     <div className={style.charts}>
       <h4 className={style.charts__headerText}>Динамика FIGO по истории КТГ</h4>
