@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {StreamPoint, StreamState} from "@entities/session-stream/model/types";
-import {ColorHealthStatus} from "@shared/providers/color-provider/model/types";
+import {ColorHealthStatus} from "@app/providers/color-provider/model/types";
 
 const initialState: StreamState = {
   results: [],

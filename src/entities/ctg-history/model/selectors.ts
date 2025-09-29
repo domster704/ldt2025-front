@@ -8,5 +8,5 @@ export const selectAllCTGHistory = createAppSelector(
   (state) =>
     selectors
       .selectAll(state)
-      .sort((a, b) => a.date.getDate() - b.date.getDate())
+      .sort((a, b) => a.date.getTime() - b.date.getTime())
 );

@@ -7,6 +7,7 @@ import ctgHistorySlice from "@entities/ctg-history/model/ctgHistorySlice";
 import patientSlice from "@entities/patient/model/patientSlice";
 import settingsSlice from "@entities/settings/model/settingsSlice";
 import soundsSlice from "@entities/sound/model/soundSlice";
+import {soundListeners} from "@app/store/listeners/sound";
 
 const store = configureStore({
   reducer: {
@@ -20,7 +21,7 @@ const store = configureStore({
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false
-  })
+  }).prepend(soundListeners.middleware)
 });
 
 export type AppDispatch = typeof store.dispatch;

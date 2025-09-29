@@ -2,6 +2,7 @@ import React, {FC, useRef} from "react";
 import {useResizeObserver} from "@shared/lib/hooks/useResizeObserver";
 import Chart, {useChartScales} from "@shared/ui/chart";
 import {useChartScroll} from "@features/chart-scroll/lib/hooks/useChartScroll";
+import {HighlightBand} from "@shared/ui/chart/ui/Chart";
 
 const MARGIN = {top: 8, right: 16, bottom: 24, left: 30};
 const PADDING = 30;
@@ -10,9 +11,10 @@ const SLIDE_WINDOW_TIME = 360;
 interface SessionChartProps {
   color: string;
   dataSource: { x: number; y: number }[];
+  highlightBands?: HighlightBand[];
 }
 
-const SessionChart: FC<SessionChartProps> = ({color, dataSource}) => {
+const SessionChart: FC<SessionChartProps> = ({color, dataSource, highlightBands}) => {
   const ref = useRef<SVGSVGElement>(null);
 
   const {width, height} = useResizeObserver(ref);
@@ -48,6 +50,7 @@ const SessionChart: FC<SessionChartProps> = ({color, dataSource}) => {
            yScale={yScale}
            xMax={xMax}
            yMax={yMax}
+           highlightBands={highlightBands}
            isDragging={isDragging}
            onWheel={handleWheel}
            onMouseDown={handleMouseDown}

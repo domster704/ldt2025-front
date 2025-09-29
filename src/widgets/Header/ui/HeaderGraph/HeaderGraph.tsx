@@ -2,8 +2,8 @@ import React, {FC, useMemo} from 'react';
 import * as style from './HeaderGraph.module.css'
 
 import userIcon from "@shared/assets/img/userWhite.svg";
-import {useColorsStatus} from "@shared/providers/color-provider";
-import {ColorHealthStatus} from "@shared/providers/color-provider/model/types";
+import {useColorsStatus} from "@app/providers/color-provider";
+import {ColorHealthStatus} from "@app/providers/color-provider/model/types";
 import {useAppSelector} from "@app/store/store";
 import {selectChosenPatient} from "@entities/patient/model/selectors";
 

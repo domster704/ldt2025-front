@@ -1,4 +1,4 @@
-import {ColorHealthStatus} from "@shared/providers/color-provider/model/types";
+import {ColorHealthStatus} from "@app/providers/color-provider/model/types";
 
 export interface StreamPoint {
   x: number;

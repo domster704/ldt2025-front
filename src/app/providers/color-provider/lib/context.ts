@@ -1,5 +1,5 @@
 import {createContext} from "react";
-import {ColorHealthStatus} from "@shared/providers/color-provider/model/types";
+import {ColorHealthStatus} from "@app/providers/color-provider/model/types";
 
 export interface IColorContext {
   status: ColorHealthStatus;

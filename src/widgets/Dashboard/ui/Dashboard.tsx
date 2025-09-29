@@ -14,9 +14,14 @@ const Dashboard = () => {
   return (
     <div className={style.dashboard}>
       <div className={style.dashboard__graphs}>
-        <SessionChart color="#c59e00"
-                      dataSource={fhrData}/>
-        <SessionChart color="#003459"
+        <SessionChart color={"#c59e00"}
+                      dataSource={fhrData}
+                      highlightBands={[{
+                        from: 110,
+                        to: 150,
+                        fill: "#ccedd1"
+                      }]}/>
+        <SessionChart color={"#003459"}
                       dataSource={ucData}/>
       </div>
 

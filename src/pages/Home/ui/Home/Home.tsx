@@ -6,7 +6,7 @@ import {selectLoadingStatus} from "@entities/session-upload/model/selectors";
 import PreLoader from "@shared/ui/preloader";
 import {HeaderGraph} from "@widgets/header";
 import ColorSignalWrapper from "@widgets/color-signal-wrapper";
-import ColorProvider from "@shared/providers/color-provider";
+import ColorProvider from "@app/providers/color-provider";
 
 const Home: FC = () => {
   const isLoading = useAppSelector(selectLoadingStatus);

@@ -1,7 +1,7 @@
 import React, {FC, ReactNode} from "react";
-import {ColorContext} from "@shared/providers/color-provider/lib/context";
+import {ColorContext} from "@app/providers/color-provider/lib/context";
 import {RootState, useAppSelector} from "@app/store/store";
-import {ColorHealthStatus} from "@shared/providers/color-provider/model/types";
+import {ColorHealthStatus} from "@app/providers/color-provider/model/types";
 import {selectGoodColor, selectWarningColor} from "@entities/settings/model/selectors";
 import {hexToRgb} from "@shared/lib/utils/convertHEXToRGB";
 
@@ -9,7 +9,6 @@ import {hexToRgb} from "@shared/lib/utils/convertHEXToRGB";
 interface ColorProviderProps {
   children: ReactNode;
 }
-
 
 export const ColorProvider: FC<ColorProviderProps> = ({children}) => {
   const status = useAppSelector((state: RootState) => state.sessionStream.status);

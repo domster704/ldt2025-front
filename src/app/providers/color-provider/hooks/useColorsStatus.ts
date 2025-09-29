@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {ColorContext} from "@shared/providers/color-provider/lib/context";
+import {ColorContext} from "@app/providers/color-provider/lib/context";
 
 export function useColorsStatus() {
   const ctx = useContext(ColorContext);

@@ -1,10 +1,17 @@
+// src/shared/ui/chart/ui/Chart.tsx
 import React, {forwardRef, useEffect, useRef} from "react";
 import LivePath from "@shared/ui/live-path";
 import {GridColumns, GridRows} from "@visx/grid";
 import {AxisBottom, AxisLeft} from "@visx/axis";
-import {ScaleLinear} from "d3";
 
 import * as style from "./Chart.module.css";
+import {ScaleLinear} from "d3";
+
+export interface HighlightBand {
+  from: number;
+  to: number;
+  fill: string;
+}
 
 interface ChartProps {
   margins: { top: number; right: number; bottom: number; left: number };
@@ -15,6 +22,8 @@ interface ChartProps {
   xMax: number;
   yMax: number;
   isDragging?: boolean;
+
+  highlightBands?: HighlightBand[];
 
   onWheel?: (e: React.WheelEvent<SVGSVGElement>) => void;
   onMouseDown?: (e: React.MouseEvent<SVGSVGElement>) => void;
@@ -38,6 +47,7 @@ const Chart = forwardRef<SVGSVGElement, ChartProps>(
       xMax,
       yMax,
       isDragging,
+      highlightBands,
       onWheel,
       onMouseDown,
       onMouseMove,
@@ -59,49 +69,46 @@ const Chart = forwardRef<SVGSVGElement, ChartProps>(
 
     return (
       <div className={style.container}>
-        <svg ref={ref}
-             width="100%"
-             onWheel={onWheel}
-             onMouseDown={onMouseDown}
-             onMouseMove={onMouseMove}
-             onMouseUp={onMouseUp}
-             onMouseLeave={onMouseLeave}
-             onTouchStart={onTouchStart}
-             onTouchMove={onTouchMove}
-             onTouchEnd={onTouchEnd}
-             style={{
-               cursor: isDragging ? "grabbing" : "default",
-             }}>
+        <svg
+          ref={ref}
+          width="100%"
+          onWheel={onWheel}
+          onMouseDown={onMouseDown}
+          onMouseMove={onMouseMove}
+          onMouseUp={onMouseUp}
+          onMouseLeave={onMouseLeave}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          style={{
+            cursor: isDragging ? "grabbing" : "default",
+          }}
+        >
           <g transform={`translate(${margins.left},${margins.top})`}>
 
-            <rect x={0}
-                  y={yScale(150)}
-                  width={xMax}
-                  height={Math.min(yScale(110), yMax) - yScale(150)}
-                  fill="#cceddd"/>
-
-            <GridRows scale={yScale}
+            {highlightBands?.map((band, i) => {
+              const y1 = yScale(band.to);
+              const y2 = yScale(band.from);
+              const h = Math.max(0, Math.min(y2, yMax) - Math.max(y1, 0));
+              return (
+                <rect key={`band-${i}`}
+                      x={0}
+                      y={y1}
                       width={xMax}
-                      height={yMax}
-                      stroke="#ccc"/>
+                      height={h}
+                      fill={band.fill}
+                />
+              );
+            })}
 
-            <GridColumns scale={xScale}
-                         width={xMax}
-                         height={yMax}
-                         stroke="#ccc"/>
-            <line x1={xMax}
-                  x2={xMax}
-                  y1={0}
-                  y2={yMax}
-                  stroke="#ccc"/>
+            <GridRows scale={yScale} width={xMax} height={yMax} stroke="#ccc"/>
+            <GridColumns scale={xScale} width={xMax} height={yMax} stroke="#ccc"/>
 
-            <LivePath color={color}
-                      dataSource={dataSource}
-                      xScale={xScale}
-                      yScale={yScale}/>
+            <line x1={xMax} x2={xMax} y1={0} y2={yMax} stroke="#ccc"/>
 
-            <AxisLeft scale={yScale}
-                      numTicks={5}/>
+            <LivePath color={color} dataSource={dataSource} xScale={xScale} yScale={yScale}/>
+
+            <AxisLeft scale={yScale} numTicks={5}/>
 
             <AxisBottom top={yMax}
                         scale={xScale}
@@ -111,7 +118,7 @@ const Chart = forwardRef<SVGSVGElement, ChartProps>(
                           return time.toLocaleTimeString("ru-RU", {
                             hour: "2-digit",
                             minute: "2-digit",
-                            second: "2-digit"
+                            second: "2-digit",
                           });
                         }}
                         tickLabelProps={() => ({
@@ -119,7 +126,8 @@ const Chart = forwardRef<SVGSVGElement, ChartProps>(
                           textAnchor: "middle",
                           fontSize: "0.625rem",
                           dy: "0.25rem",
-                        })}/>
+                        })}
+            />
           </g>
         </svg>
       </div>

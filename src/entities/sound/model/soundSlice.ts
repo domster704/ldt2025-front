@@ -50,7 +50,6 @@ const soundSlice = createSlice({
       const sound = state.items.find(s => s.id === action.payload);
       if (sound) {
         sound.enabled = !sound.enabled;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       }
     },
     replaceSound(state, action: PayloadAction<{ id: SoundType; fileName: string }>) {
@@ -58,12 +57,10 @@ const soundSlice = createSlice({
       if (sound) {
         sound.fileName = action.payload.fileName;
         sound.custom = true;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       }
     },
     setPlaying(state, action: PayloadAction<SoundType | null>) {
       state.playing = action.payload;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     },
     setInitialSounds(state, action: PayloadAction<SoundState>) {
       return action.payload;

@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useRef, useState} from "react";
-import {WebsocketContext} from "@shared/providers/websocket/lib/context";
+import {WebsocketContext} from "@app/providers/websocket-provider/lib/context";
 
 interface WebsocketProviderProps {
   wsUrl: string;
