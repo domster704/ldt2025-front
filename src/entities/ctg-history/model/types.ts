@@ -8,13 +8,16 @@ export enum HistoryStatus {
 }
 
 export interface CTGHistory {
-  id: number,
-  date: Date,
-  gestation: string,
-  hr: number,
-  uc: number,
-  figo: HistoryStatus,
-  forecast: HistoryStatus,
+  id: number;
+  date: Date;
+  gestation: string;
+  figo: HistoryStatus;
+  forecast: HistoryStatus;
+
+  stv: number;
+  hr: number;
+  uc: number;
+  acceleration : number;
 }
 
 export interface CTGHistoryState {

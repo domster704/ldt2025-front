@@ -23,7 +23,11 @@ const FooterActionsPanel: FC = () => {
                       text="Пациенты"/>
       <ActionButton icon={withoutSoundImg} text="Без звука"/>
       <ActionButton icon={autoZeroImg} text="Auto Zero"/>
-      <ActionButton icon={printImg} text="Печать"/>
+      <ActionButton icon={printImg}
+                    text="Печать"
+                    onClick={() => {
+                      print();
+                    }}/>
       <ActionButton icon={exportImg} text="Выгрузка"/>
       <ActionButton icon={brightnessImg} text="Яркость"/>
       <OpenPageButton page={SETTINGS_PAGE_URL}
