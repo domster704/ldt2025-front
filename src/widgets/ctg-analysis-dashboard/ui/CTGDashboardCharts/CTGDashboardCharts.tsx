@@ -18,6 +18,10 @@ const CTGDashboardCharts = () => {
       </div>
 
       <CTGThresholdCharts ctgHistory={ctgHistory}/>
+
+      <div className={style.charts__trand}>
+        <p><b>Тренд:</b> повышение БЧСС, вероятность такихардии</p>
+      </div>
     </div>
   );
 };
