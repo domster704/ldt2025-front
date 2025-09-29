@@ -3,6 +3,7 @@ import * as style from './History.module.css'
 import PageWrapper from "@shared/ui/page-wrapper";
 import {HeaderHistory} from "@widgets/header";
 import HistoryTable from "@widgets/history-table";
+import CTGHistorySelectionProvider from "@features/ctg-history-selection-provider";
 
 interface HistoryProps {
 
@@ -12,9 +13,12 @@ const History: FC<HistoryProps> = ({}) => {
   return (
     <PageWrapper>
       <HeaderHistory/>
-      <section className={style.content}>
-        <HistoryTable/>
-      </section>
+      <CTGHistorySelectionProvider>
+        <section className={style.content}>
+          <HistoryTable/>
+          <div></div>
+        </section>
+      </CTGHistorySelectionProvider>
     </PageWrapper>
   );
 }
