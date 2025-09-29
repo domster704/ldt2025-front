@@ -4,6 +4,7 @@ import PageWrapper from "@shared/ui/page-wrapper";
 import {HeaderHistory} from "@widgets/header";
 import HistoryTable from "@widgets/history-table";
 import CTGHistorySelectionProvider from "@features/ctg-history-selection-provider";
+import CTGAnalysisDashboard from "@widgets/ctg-analysis-dashboard";
 
 interface HistoryProps {
 
@@ -16,7 +17,7 @@ const History: FC<HistoryProps> = ({}) => {
       <CTGHistorySelectionProvider>
         <section className={style.content}>
           <HistoryTable/>
-          <div></div>
+          <CTGAnalysisDashboard/>
         </section>
       </CTGHistorySelectionProvider>
     </PageWrapper>

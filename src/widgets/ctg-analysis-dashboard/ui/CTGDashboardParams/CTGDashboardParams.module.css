@@ -1,0 +1,5 @@
+.params, .compare, .detail {
+  border: 0.1rem solid #ccc;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
