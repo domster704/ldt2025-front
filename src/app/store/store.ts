@@ -5,10 +5,12 @@ import uploadSlice from "@entities/session-upload/model/uploadSlice";
 import sessionStreamSlice from "@entities/session-stream/model/sessionStreamSlice";
 import ctgHistorySlice from "@entities/ctg-history/model/ctgHistorySlice";
 import patientSlice from "@entities/patient/model/patientSlice";
+import settingsSlice from "@entities/settings/model/settingsSlice";
 
 const store = configureStore({
   reducer: {
     global: globalSlice,
+    settings: settingsSlice,
     upload: uploadSlice,
     sessionStream: sessionStreamSlice,
     ctgHistory: ctgHistorySlice,

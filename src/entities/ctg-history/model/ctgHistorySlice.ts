@@ -12,7 +12,7 @@ const initialState: CTGHistoryState = {
 };
 
 const ctgHistorySlice = createSlice({
-  name: 'ctgHistorySlice',
+  name: 'ctgHistory',
   initialState,
   reducers: {},
   extraReducers: builder => {

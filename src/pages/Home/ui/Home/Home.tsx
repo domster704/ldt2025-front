@@ -8,7 +8,6 @@ import {HeaderGraph} from "@widgets/header";
 import ColorSignalWrapper from "@widgets/color-signal-wrapper";
 import ColorProvider from "@shared/providers/color-provider";
 
-
 const Home: FC = () => {
   const isLoading = useAppSelector(selectLoadingStatus);
 

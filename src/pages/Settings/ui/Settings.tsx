@@ -2,12 +2,20 @@ import React, {FC} from 'react';
 import * as style from './Settings.module.css'
 import PageWrapper from "@shared/ui/page-wrapper";
 import {SimpleHeader} from "@widgets/header";
+import {availableGoodColors, availableWarningColors} from "@shared/const/colors";
+import {useAppDispatch, useAppSelector} from "@app/store/store";
+import {selectGoodColor, selectWarningColor} from "@entities/settings/model/selectors";
+import {setChosenGoodColor, setChosenWarningColor} from "@entities/settings/model/settingsSlice";
 
 interface SettingsProps {
 
 }
 
 const Settings: FC<SettingsProps> = ({}) => {
+  const dispatch = useAppDispatch();
+  const chosenWarningColor = useAppSelector(selectWarningColor);
+  const chosenGoodColor = useAppSelector(selectGoodColor);
+
   return (
     <PageWrapper>
       <SimpleHeader headerText={"Настройки"}/>
@@ -17,37 +25,44 @@ const Settings: FC<SettingsProps> = ({}) => {
 
           <div className={style.settings__colorPicker}>
             <div className={style.colorPicker__colorWithText}>
-              <span className={style.colorPicker__color} style={{
-                background: "#00a619"
-              }}></span>
+              {
+                availableGoodColors.map(color => (
+                  <button key={color}
+                          className={[
+                            style.colorPicker__color,
+                            chosenGoodColor === color ? style.checked : ""
+                          ].join(" ")}
+                          style={{background: color}}
+                          onClick={() => dispatch(setChosenGoodColor(color))}
+                  />
+                ))
+              }
+
               <p>Норма</p>
             </div>
 
             <div className={style.colorPicker__colorWithText}>
-              <button className={[
-                style.colorPicker__color,
-                style.checked
-              ].join(' ')} style={{
-                background: "#e87000"
-              }}></button>
-              <button className={style.colorPicker__color} style={{
-                background: "#e82700"
-              }}></button>
-              <button className={style.colorPicker__color} style={{
-                background: "#3a00e8"
-              }}></button>
-              <button className={style.colorPicker__color} style={{
-                background: "#e80080"
-              }}></button>
+              {
+                availableWarningColors.map(color => (
+                  <button key={color}
+                          className={[
+                            style.colorPicker__color,
+                            chosenWarningColor === color ? style.checked : ""
+                          ].join(" ")}
+                          style={{background: color}}
+                          onClick={() => dispatch(setChosenWarningColor(color))}
+                  />
+                ))
+              }
 
               <p>Ухудшение или негативный прогноз</p>
             </div>
           </div>
         </div>
 
-        {/*<div className={style.settings__section}>*/}
-        {/*  <span className={style.settings__sectionLabel}>Звуковые сигналы</span>*/}
-        {/*</div>*/}
+        <div className={style.settings__section}>
+          <span className={style.settings__sectionLabel}>Звуковые сигналы</span>
+        </div>
 
         <div className={style.settings__section}>
           <span className={style.settings__sectionLabel}>Системная информация</span>

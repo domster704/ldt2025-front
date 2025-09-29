@@ -13,7 +13,7 @@ const initialState: PatientState = {
 };
 
 const patientSlice = createSlice({
-  name: 'patientSlice',
+  name: 'patient',
   initialState,
   reducers: {
     setChosen(state, action: PayloadAction<Patient>) {
