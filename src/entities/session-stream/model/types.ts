@@ -5,9 +5,16 @@ export interface StreamPoint {
   y: number;
 }
 
+export interface StreamData {
+  bpm: number;
+  uc: number;
+  timestamp: number;
+}
+
 export interface StreamState {
   results: any[];
   heartRates: StreamPoint[];
   uterineContractions: StreamPoint[];
-  status: ColorHealthStatus
+  status: ColorHealthStatus;
+  streaming: boolean;
 }

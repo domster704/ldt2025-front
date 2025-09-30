@@ -5,16 +5,15 @@ import {useChartScroll} from "@features/chart-scroll/lib/hooks/useChartScroll";
 import {HighlightBand} from "@shared/ui/chart/ui/Chart";
 import {StreamPoint} from "@entities/session-stream";
 
-const MARGIN = {top: 8, right: 16, bottom: 24, left: 30};
+const MARGIN = {top: 8, right: 32, bottom: 24, left: 30};
 const PADDING = 30;
-const SLIDE_WINDOW_TIME = 360;
+const SLIDE_WINDOW_TIME = 6 * 60 * 1000;
 
 interface SessionChartProps {
   color: string;
   dataSource: StreamPoint[];
   highlightBands?: HighlightBand[];
   slideWindowTime?: number;
-  isScrollEnabled?: boolean;
   maxPoints?: number;
 }
 
@@ -29,7 +28,6 @@ const SessionChart: FC<SessionChartProps> = ({
                                                dataSource,
                                                highlightBands,
                                                slideWindowTime = SLIDE_WINDOW_TIME,
-                                               isScrollEnabled = true,
                                                maxPoints = 1000,
                                              }) => {
   const ref = useRef<SVGSVGElement>(null);

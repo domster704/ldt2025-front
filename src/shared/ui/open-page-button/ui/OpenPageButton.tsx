@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import ActionButton from "@shared/ui/action-button";
-import {Link, useLocation} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {APP_URL} from "@shared/const/constants";
 
 import * as style from './OpenPageButton.module.css';

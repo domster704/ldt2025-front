@@ -6,13 +6,23 @@ const initialState: StreamState = {
   results: [],
   heartRates: [],
   uterineContractions: [],
-  status: ColorHealthStatus.Good
+  status: ColorHealthStatus.Good,
+  streaming: false
 };
 
 const sessionStreamSlice = createSlice({
   name: "sessionStream",
   initialState,
   reducers: {
+    startStreaming: (state) => {
+      state.streaming = true;
+      state.results = [];
+      state.heartRates = [];
+      state.uterineContractions = [];
+    },
+    stopStreaming: (state) => {
+      state.streaming = false;
+    },
     addResult: (state, action: PayloadAction<any>) => {
       state.results.push(action.payload);
     },
@@ -27,9 +37,12 @@ const sessionStreamSlice = createSlice({
 });
 
 export const {
+  startStreaming,
+  stopStreaming,
   addResult,
-  addFhrPoint,
+    addFhrPoint,
   addUcPoint,
   resetStream
 } = sessionStreamSlice.actions;
+
 export default sessionStreamSlice.reducer;

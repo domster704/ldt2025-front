@@ -7,8 +7,11 @@ import PreLoader from "@shared/ui/preloader";
 import {HeaderGraph} from "@widgets/header";
 import ColorSignalWrapper from "@widgets/color-signal-wrapper";
 import ColorProvider from "@app/providers/color-provider";
+import {WebsocketProvider} from "@app/providers/websocket-provider/ui/WebsocketProvider";
+import {$wsApiUrl} from "@shared/const/constants";
 
 const Home: FC = () => {
+  const streaming = useAppSelector((state) => state.sessionStream.streaming);
   const isLoading = useAppSelector(selectLoadingStatus);
 
   return (
@@ -17,9 +20,9 @@ const Home: FC = () => {
         <ColorSignalWrapper>
           <HeaderGraph/>
           <main className={style.main}>
-            {/*<WebsocketProvider wsUrl={$wsApiUrl}>*/}
-            <DashboardStream/>
-            {/*</WebsocketProvider>*/}
+            <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
+              <DashboardStream/>
+            </WebsocketProvider>
           </main>
         </ColorSignalWrapper>
       </ColorProvider>

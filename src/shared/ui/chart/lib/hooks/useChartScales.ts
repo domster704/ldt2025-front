@@ -26,13 +26,19 @@ export function useChartScales({
 
     const ys = dataSource.map((d) => d.y);
     const lastN = ys.slice(-width);
+
     const minY = lastN.length ? Math.min(...lastN) : 0;
     const maxY = lastN.length ? Math.max(...lastN) : 1;
 
     const lastX = dataSource.length ? dataSource[dataSource.length - 1].x : 0;
 
-    const right = Math.max(0, lastX - scrollOffset);
-    const left = Math.max(0, right - window_);
+    const minX = dataSource.length ? dataSource[0].x : 0;
+    const maxX = dataSource.length ? dataSource[dataSource.length - 1].x : window_;
+
+    const right = maxX - scrollOffset;
+    const left = Math.max(minX, right - window_);
+
+    console.log(left, right, minX, maxX)
 
     const xScale = scaleLinear<number>({
       domain: [left, right],
