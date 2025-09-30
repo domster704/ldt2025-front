@@ -1,5 +1,14 @@
-.params__chartsConainer {
-  padding: 3rem 1rem;
+.paramsContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.params__chartsContainer {
+  flex: 1;
+  min-height: 0;
+  padding: 3rem 1rem 1rem 1rem;
   height: 100%;
 }
 
@@ -7,9 +16,34 @@
   height: 100%;
 }
 
-.params, .compare, .detail {
-  border: 0.1rem solid #ccc;
-  border-radius: 0.5rem;
-  padding: 1rem;
+.params {
+  flex-shrink: 0;
+  border: 1px solid var(--obvodka-blokov);
+
+  padding-top: 0.625rem;
 }
 
+.params__predict {
+  & > div {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.params table {
+  width: 100%;
+  border-collapse: collapse;
+
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 1.12rem;
+  color: var(--chernyy-);
+}
+
+.params td {
+  padding: 0.125rem 0.75rem;
+}
+
+.params tr:nth-child(odd) {
+  background: var(--fony-sistemnye-);
+}
