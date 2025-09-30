@@ -37,9 +37,8 @@ const CTGAnalysisDashboard: FC<CTGAnalysisDashboardProps> = ({}) => {
       <CTGDashboardHint/>
 
       {mode === CTGAnalysisDashboardMode.charts && <CTGDashboardCharts/>}
-      {mode === CTGAnalysisDashboardMode.params && <CTGDashboardParams/>}
+      {mode === CTGAnalysisDashboardMode.params && <CTGDashboardParams ctgHistoryId={selected[0]}/>}
       {mode === CTGAnalysisDashboardMode.compare && <CTGDashboardCompare ids={selected}/>}
-      {/*{mode === CTGAnalysisDashboardMode.charts && <CTGDashboardDetail id={selected[0]} />}*/}
     </div>
   );
 }

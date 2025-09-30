@@ -6,7 +6,7 @@ interface CTGHistorySelectionProviderProps {
 }
 
 export const CTGHistorySelectionProvider: FC<CTGHistorySelectionProviderProps> = ({children}) => {
-  const [selected, setSelected] = useState<number[]>([]);
+  const [selected, setSelected] = useState<number[]>([1]);
 
   const toggle = useCallback((id: number) => {
     setSelected(prev => {
@@ -15,7 +15,7 @@ export const CTGHistorySelectionProvider: FC<CTGHistorySelectionProviderProps> =
       }
 
       if (prev.length >= 2) {
-        return [prev[prev.length - 1], id]; // или сбросить на [id], зависит от UX
+        return [prev[prev.length - 1], id];
       }
       return [...prev, id];
     });

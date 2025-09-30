@@ -69,44 +69,50 @@ const Chart = forwardRef<SVGSVGElement, ChartProps>(
 
     return (
       <div className={style.container}>
-        <svg
-          ref={ref}
-          width="100%"
-          onWheel={onWheel}
-          onMouseDown={onMouseDown}
-          onMouseMove={onMouseMove}
-          onMouseUp={onMouseUp}
-          onMouseLeave={onMouseLeave}
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
-          style={{
-            cursor: isDragging ? "grabbing" : "default",
-          }}
-        >
+        <svg ref={ref}
+             width="100%"
+             onWheel={onWheel}
+             onMouseDown={onMouseDown}
+             onMouseMove={onMouseMove}
+             onMouseUp={onMouseUp}
+             onMouseLeave={onMouseLeave}
+             onTouchStart={onTouchStart}
+             onTouchMove={onTouchMove}
+             onTouchEnd={onTouchEnd}
+             style={{
+               cursor: isDragging ? "grabbing" : "default",
+             }}>
+          <defs>
+            <clipPath id="chart-area">
+              <rect x={0} y={0} width={xMax} height={yMax}/>
+            </clipPath>
+          </defs>
+
           <g transform={`translate(${margins.left},${margins.top})`}>
+            <g clipPath="url(#chart-area)">
 
-            {highlightBands?.map((band, i) => {
-              const y1 = yScale(band.to);
-              const y2 = yScale(band.from);
-              const h = Math.max(0, Math.min(y2, yMax) - Math.max(y1, 0));
-              return (
-                <rect key={`band-${i}`}
-                      x={0}
-                      y={y1}
-                      width={xMax}
-                      height={h}
-                      fill={band.fill}
-                />
-              );
-            })}
+              {highlightBands?.map((band, i) => {
+                const y1 = yScale(band.to);
+                const y2 = yScale(band.from);
+                const h = Math.max(0, Math.min(y2, yMax) - Math.max(y1, 0));
+                return (
+                  <rect key={`band-${i}`}
+                        x={0}
+                        y={y1}
+                        width={xMax}
+                        height={h}
+                        fill={band.fill}
+                  />
+                );
+              })}
 
-            <GridRows scale={yScale} width={xMax} height={yMax} stroke="#ccc"/>
-            <GridColumns scale={xScale} width={xMax} height={yMax} stroke="#ccc"/>
+              <GridRows scale={yScale} width={xMax} height={yMax} stroke="#ccc"/>
+              <GridColumns scale={xScale} width={xMax} height={yMax} stroke="#ccc"/>
 
-            <line x1={xMax} x2={xMax} y1={0} y2={yMax} stroke="#ccc"/>
+              <line x1={xMax} x2={xMax} y1={0} y2={yMax} stroke="#ccc"/>
 
-            <LivePath color={color} dataSource={dataSource} xScale={xScale} yScale={yScale}/>
+              <LivePath color={color} dataSource={dataSource} xScale={xScale} yScale={yScale}/>
+            </g>
 
             <AxisLeft scale={yScale} numTicks={5}/>
 

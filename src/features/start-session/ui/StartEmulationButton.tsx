@@ -29,6 +29,7 @@ const StartEmulationButton: FC = () => {
     const resultAction = await dispatch(fetchMonitoringSession(file));
     if (fetchMonitoringSession.fulfilled.match(resultAction)) {
       const newSession = resultAction.payload;
+      console.log(newSession)
       dispatch(playSessionEffect(newSession));
     }
   };

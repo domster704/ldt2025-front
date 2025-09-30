@@ -1,4 +1,5 @@
 import {EntityState} from "@reduxjs/toolkit";
+import {SessionUploaded} from "@entities/session-upload";
 
 export enum HistoryStatus {
   Normal = "Нормальный",
@@ -18,6 +19,8 @@ export interface CTGHistory {
   hr: number;
   uc: number;
   acceleration : number;
+
+  graph: SessionUploaded;
 }
 
 export interface CTGHistoryDTO extends Omit<CTGHistory, "date">{

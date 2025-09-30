@@ -1,5 +1,15 @@
+.params__chartsConainer {
+  padding: 3rem 1rem;
+  height: 100%;
+}
+
+.params__dashboard {
+  height: 100%;
+}
+
 .params, .compare, .detail {
   border: 0.1rem solid #ccc;
   border-radius: 0.5rem;
   padding: 1rem;
 }
+

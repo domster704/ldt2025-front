@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import * as style from './Home.module.css';
-import Dashboard from "@widgets/dashboard";
+import {DashboardStream} from "@widgets/dashboard";
 import {useAppSelector} from "@app/store/store";
 import {selectLoadingStatus} from "@entities/session-upload/model/selectors";
 import PreLoader from "@shared/ui/preloader";
@@ -18,7 +18,7 @@ const Home: FC = () => {
           <HeaderGraph/>
           <main className={style.main}>
             {/*<WebsocketProvider wsUrl={$wsApiUrl}>*/}
-            <Dashboard/>
+            <DashboardStream/>
             {/*</WebsocketProvider>*/}
           </main>
         </ColorSignalWrapper>

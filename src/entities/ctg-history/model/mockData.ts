@@ -1,16 +1,19 @@
-import {CTGHistory, CTGHistoryDTO, HistoryStatus} from "@entities/ctg-history/model/types";
+import {CTGHistoryDTO, HistoryStatus} from "@entities/ctg-history/model/types";
+import {mockGraph} from "@entities/ctg-history/model/mockGraphHistory";
 
-export const mockHistory: CTGHistoryDTO[] = [{
-  id: 1,
-  date: "2025-08-19",
-  gestation: "40+0 нед",
-  hr: 142,
-  uc: 10,
-  stv: 3.3,
-  acceleration: 3,
-  figo: HistoryStatus.Pathological,
-  forecast: HistoryStatus.Normal,
-},
+export const mockHistory: CTGHistoryDTO[] = [
+  {
+    id: 1,
+    date: "2025-08-19",
+    gestation: "40+0 нед",
+    hr: 142,
+    uc: 10,
+    stv: 3.3,
+    acceleration: 3,
+    figo: HistoryStatus.Pathological,
+    forecast: HistoryStatus.Normal,
+    graph: mockGraph
+  },
   {
     id: 2,
     date: "2025-08-12",
@@ -21,6 +24,7 @@ export const mockHistory: CTGHistoryDTO[] = [{
     acceleration: 4,
     figo: HistoryStatus.Preterminal,
     forecast: HistoryStatus.Pathological,
+    graph: mockGraph
   },
   {
     id: 3,
@@ -32,6 +36,7 @@ export const mockHistory: CTGHistoryDTO[] = [{
     acceleration: 1,
     figo: HistoryStatus.Preterminal,
     forecast: HistoryStatus.Normal,
+    graph: mockGraph
   },
   {
     id: 4,
@@ -43,6 +48,7 @@ export const mockHistory: CTGHistoryDTO[] = [{
     acceleration: 4,
     figo: HistoryStatus.Doubtful,
     forecast: HistoryStatus.Normal,
+    graph: mockGraph
   },
   {
     id: 5,
@@ -54,6 +60,7 @@ export const mockHistory: CTGHistoryDTO[] = [{
     acceleration: 5,
     figo: HistoryStatus.Preterminal,
     forecast: HistoryStatus.Preterminal,
+    graph: mockGraph
   },
   {
     id: 6,
@@ -65,6 +72,7 @@ export const mockHistory: CTGHistoryDTO[] = [{
     acceleration: 2,
     figo: HistoryStatus.Doubtful,
     forecast: HistoryStatus.Pathological,
+    graph: mockGraph
   },
   {
     id: 7,
@@ -76,6 +84,7 @@ export const mockHistory: CTGHistoryDTO[] = [{
     acceleration: 4,
     figo: HistoryStatus.Normal,
     forecast: HistoryStatus.Normal,
+    graph: mockGraph
   },
   {
     id: 8,
@@ -87,6 +96,7 @@ export const mockHistory: CTGHistoryDTO[] = [{
     acceleration: 2,
     figo: HistoryStatus.Preterminal,
     forecast: HistoryStatus.Pathological,
+    graph: mockGraph
   },
   {
     id: 9,
@@ -98,6 +108,7 @@ export const mockHistory: CTGHistoryDTO[] = [{
     acceleration: 2,
     figo: HistoryStatus.Preterminal,
     forecast: HistoryStatus.Doubtful,
+    graph: mockGraph
   },
   {
     id: 10,
@@ -109,6 +120,7 @@ export const mockHistory: CTGHistoryDTO[] = [{
     acceleration: 5,
     figo: HistoryStatus.Normal,
     forecast: HistoryStatus.Doubtful,
+    graph: mockGraph
   },
   {
     id: 11,
@@ -120,6 +132,7 @@ export const mockHistory: CTGHistoryDTO[] = [{
     acceleration: 1,
     figo: HistoryStatus.Preterminal,
     forecast: HistoryStatus.Pathological,
+    graph: mockGraph
   },
   {
     id: 12,
@@ -131,6 +144,7 @@ export const mockHistory: CTGHistoryDTO[] = [{
     acceleration: 1,
     figo: HistoryStatus.Doubtful,
     forecast: HistoryStatus.Pathological,
+    graph: mockGraph
   },
   {
     id: 13,
@@ -142,6 +156,7 @@ export const mockHistory: CTGHistoryDTO[] = [{
     acceleration: 5,
     figo: HistoryStatus.Doubtful,
     forecast: HistoryStatus.Doubtful,
+    graph: mockGraph
   },
   {
     id: 14,
@@ -153,6 +168,7 @@ export const mockHistory: CTGHistoryDTO[] = [{
     acceleration: 1,
     figo: HistoryStatus.Normal,
     forecast: HistoryStatus.Doubtful,
+    graph: mockGraph
   },
   {
     id: 15,
@@ -164,4 +180,5 @@ export const mockHistory: CTGHistoryDTO[] = [{
     acceleration: 2,
     figo: HistoryStatus.Pathological,
     forecast: HistoryStatus.Doubtful,
+    graph: mockGraph
   }];
