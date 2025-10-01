@@ -3,7 +3,6 @@ import {useAppDispatch, useAppSelector} from "@app/store/store";
 import {selectHeartRates, selectUterineContractions} from "@entities/session-stream/model/selectors";
 import {Dashboard} from "@widgets/dashboard";
 import * as style from "./DashboardStream.module.css";
-import IndicatorsPanel from "@widgets/indicators-panel";
 import {WebsocketContext} from "@app/providers/websocket-provider/lib/context";
 import {playSessionEffect} from "@features/session-stream";
 
@@ -21,12 +20,9 @@ const DashboardStream: FC = ({}) => {
   }, [message, dispatch]);
 
   return (
-    <div className={style.dashboard}>
-      <Dashboard className={style.border}
-                 fhrData={fhrData}
-                 ucData={ucData}/>
-      <IndicatorsPanel/>
-    </div>
+    <Dashboard className={style.dashboardContainer}
+               fhrData={fhrData}
+               ucData={ucData}/>
   );
 };
 

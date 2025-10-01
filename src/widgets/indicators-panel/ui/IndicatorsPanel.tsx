@@ -1,25 +1,38 @@
 import React, {FC} from 'react';
 import * as style from './IndicatorsPanel.module.css'
-import {useAppDispatch, useAppSelector} from "@app/store/store";
+import {useAppSelector} from "@app/store/store";
 import IndicatorContainer from "@shared/ui/indicator-container";
+import {selectLastHR, selectLastUC} from "@entities/session-stream";
+
+
+export enum IndicatorsPanelPlacement {
+  Grid = "grid",
+  Row = "row"
+}
 
 interface IndicatorsPanelProps {
-
+  placement?: IndicatorsPanelPlacement;
 }
 
 
-const IndicatorsPanel: FC<IndicatorsPanelProps> = ({}) => {
-  const global = useAppSelector(state => state.global);
-  const dispatch = useAppDispatch();
+const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
+                                                     placement = IndicatorsPanelPlacement.Grid
+                                                   }) => {
+  const hr = useAppSelector(selectLastHR);
+  const uc = useAppSelector(selectLastUC);
 
   return (
-    <div className={style.panel}>
+    <div className={[
+      style.panel,
+      style[placement]
+    ].join(' ')}>
       <div className={[
         style.panel__twoColumns,
         style.panel__doubleDataInColumn
       ].join(' ')}>
         <IndicatorContainer name={"БЧСС"}
-                            value={130}
+                            valueClassName={!hr?.y && style.panel__noData}
+                            value={hr?.y || "Нет данных"}
                             label={"DECG"}
                             subLabel={"уд./мин"}/>
 
@@ -35,7 +48,8 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({}) => {
                           subLabel={"мм.рт.ст."}/>
 
       <IndicatorContainer name={"Маточная активность"}
-                          value={60}
+                          valueClassName={!hr?.y && style.panel__noData}
+                          value={uc?.y || "Нет данных"}
                           label={"TOCO"}
                           subLabel={"%"}/>
 

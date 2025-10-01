@@ -9,6 +9,8 @@ import ColorSignalWrapper from "@widgets/color-signal-wrapper";
 import ColorProvider from "@app/providers/color-provider";
 import {WebsocketProvider} from "@app/providers/websocket-provider/ui/WebsocketProvider";
 import {$wsApiUrl} from "@shared/const/constants";
+import IndicatorsPanel from "@widgets/indicators-panel";
+import {IndicatorsPanelPlacement} from "@widgets/indicators-panel/ui/IndicatorsPanel";
 
 const Home: FC = () => {
   const streaming = useAppSelector((state) => state.sessionStream.streaming);

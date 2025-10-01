@@ -2,17 +2,19 @@ import React, {FC} from 'react';
 import * as style from './IndicatorContainer.module.css'
 
 interface IndicatorContainerProps {
-  name: string,
-  value: number | string
-  label?: string
-  subLabel: string
+  name: string;
+  value: number | string;
+  label?: string;
+  subLabel: string;
+  valueClassName?: string;
 }
 
 const IndicatorContainer: FC<IndicatorContainerProps> = ({
                                                            name,
                                                            value,
                                                            label,
-                                                           subLabel
+                                                           subLabel,
+                                                           valueClassName
                                                          }) => {
   return (
     <div className={style.indicatorContainer}>
@@ -23,7 +25,10 @@ const IndicatorContainer: FC<IndicatorContainerProps> = ({
             <p className={style.indicatorContainer__indicatorLabel}>{label}</p>
         }
       </div>
-      <p className={style.indicatorContainer__value}>{value}</p>
+      <p className={[
+        style.indicatorContainer__value,
+        valueClassName
+      ].join(' ')}>{value}</p>
       <span className={style.indicatorContainer__subLabel}>{subLabel}</span>
     </div>
   );

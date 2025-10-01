@@ -1,10 +1,6 @@
-.dashboard {
-  display: flex;
-
+.dashboardContainer {
+  border: 1px solid var(--obvodka-blokov);
   background: var(--belyy-);
 
-}
-
-.border {
-  border: 1px solid var(--obvodka-blokov);
+  flex: 1;
 }

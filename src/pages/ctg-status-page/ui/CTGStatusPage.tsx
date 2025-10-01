@@ -8,6 +8,8 @@ import {WebsocketProvider} from "@app/providers/websocket-provider/ui/WebsocketP
 import {$wsApiUrl} from "@shared/const/constants";
 import {DashboardStream} from "@widgets/dashboard";
 import PreloaderContainer from "@widgets/preloader-container";
+import IndicatorsPanel from "@widgets/indicators-panel";
+import {IndicatorsPanelPlacement} from "@widgets/indicators-panel/ui/IndicatorsPanel";
 
 interface CTGStatusPageProps {
 
@@ -21,7 +23,8 @@ const CTGStatusPage: FC<CTGStatusPageProps> = ({}) => {
       <ColorProvider>
         <ColorSignalWrapper>
           <HeaderGraph/>
-          <main className={style.main}>
+          <main className={style.statusPage}>
+            <IndicatorsPanel placement={IndicatorsPanelPlacement.Row}/>
             <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
               <DashboardStream/>
             </WebsocketProvider>

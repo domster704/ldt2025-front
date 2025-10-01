@@ -5,3 +5,6 @@ export const selectHeartRates = (state: RootState) => state.sessionStream.heartR
 export const selectUterineContractions = (state: RootState) => state.sessionStream.uterineContractions;
 
 export const selectHealthStatus = (state: RootState) => state.sessionStream.status;
+
+export const selectLastHR = (state: RootState) => state.sessionStream.heartRates.at(-1);
+export const selectLastUC = (state: RootState) => state.sessionStream.uterineContractions.at(-1);

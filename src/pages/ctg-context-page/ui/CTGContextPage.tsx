@@ -8,6 +8,8 @@ import {WebsocketProvider} from "@app/providers/websocket-provider/ui/WebsocketP
 import {$wsApiUrl} from "@shared/const/constants";
 import {DashboardStream} from "@widgets/dashboard";
 import PreloaderContainer from "@widgets/preloader-container";
+import IndicatorsPanel from "@widgets/indicators-panel";
+import {IndicatorsPanelPlacement} from "@widgets/indicators-panel/ui/IndicatorsPanel";
 
 interface CTGContextPageProps {
 
@@ -23,7 +25,10 @@ const CTGContextPage: FC<CTGContextPageProps> = ({}) => {
           <HeaderGraph/>
           <main className={style.context}>
             <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
-              <DashboardStream/>
+              <div className={style.dashboard}>
+                <DashboardStream/>
+                <IndicatorsPanel placement={IndicatorsPanelPlacement.Grid}/>
+              </div>
             </WebsocketProvider>
           </main>
         </ColorSignalWrapper>
