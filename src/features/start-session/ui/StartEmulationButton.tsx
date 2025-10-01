@@ -4,17 +4,19 @@ import {validateFile} from "@features/start-session/lib/validation";
 
 import startIcon from "@shared/assets/img/start.svg";
 import OpenPageButton from "@shared/ui/open-page-button";
-import {HOME_PAGE_URL, PATIENT_PICKER_PAGE_URL} from "@shared/const/constants";
+import {CONTEXT_PAGE_URL, HOME_PAGE_URL, PATIENT_PICKER_PAGE_URL, STATUS_PAGE_URL} from "@shared/const/constants";
 import {startStreaming} from "@entities/session-stream/model/sessionStreamSlice";
 import ActionButton from "@shared/ui/action-button";
 import {selectChosenPatient} from "@entities/patient/model/selectors";
 import {useNavigate} from "react-router-dom";
+import {selectCurrentPage} from "@entities/global/model/selectors";
 
 const StartEmulationButton: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const patient = useAppSelector(selectChosenPatient);
+  const currentPage = useAppSelector(selectCurrentPage);
 
   const handleClick = () => {
     fileInputRef.current?.click();
@@ -26,7 +28,9 @@ const StartEmulationButton: FC = () => {
       return;
     }
 
-    navigate(HOME_PAGE_URL);
+    if (!currentPage.startsWith(STATUS_PAGE_URL) && !currentPage.startsWith(CONTEXT_PAGE_URL)) {
+      navigate(STATUS_PAGE_URL);
+    }
     await runEmulation();
   }
 

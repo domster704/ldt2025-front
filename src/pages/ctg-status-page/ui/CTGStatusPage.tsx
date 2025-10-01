@@ -24,15 +24,17 @@ const CTGStatusPage: FC<CTGStatusPageProps> = ({}) => {
       <ColorProvider>
         <ColorSignalWrapper>
           <HeaderGraph/>
+
           <main className={style.statusPage}>
             <IndicatorsPanel placement={IndicatorsPanelPlacement.Row}/>
-            <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
-              <div className={style.dashboardWithLogs}>
-                <HistoryLogs/>
+            <div className={style.dashboardWithLogs}>
+              <HistoryLogs/>
+              <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
                 <DashboardStream/>
-              </div>
-            </WebsocketProvider>
+              </WebsocketProvider>
+            </div>
           </main>
+
         </ColorSignalWrapper>
       </ColorProvider>
       <PreloaderContainer/>

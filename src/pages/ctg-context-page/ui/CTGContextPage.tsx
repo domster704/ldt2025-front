@@ -11,6 +11,7 @@ import PreloaderContainer from "@widgets/preloader-container";
 import IndicatorsPanel from "@widgets/indicators-panel";
 import {IndicatorsPanelPlacement} from "@widgets/indicators-panel/ui/IndicatorsPanel";
 import HistoryLogs from "@widgets/history-logs";
+import Anamnesis from "@widgets/anamnesis";
 
 interface CTGContextPageProps {
 
@@ -24,15 +25,19 @@ const CTGContextPage: FC<CTGContextPageProps> = ({}) => {
       <ColorProvider>
         <ColorSignalWrapper>
           <HeaderGraph/>
+
           <main className={style.context}>
-            <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
-              <div className={style.dashboardWithLogs}>
-                <HistoryLogs/>
+            <div className={style.dashboardWithLogs}>
+              <HistoryLogs/>
+              <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
                 <DashboardStream/>
-                <IndicatorsPanel placement={IndicatorsPanelPlacement.Grid}/>
-              </div>
-            </WebsocketProvider>
+              </WebsocketProvider>
+              <IndicatorsPanel placement={IndicatorsPanelPlacement.Grid}/>
+            </div>
+
+            <Anamnesis/>
           </main>
+
         </ColorSignalWrapper>
       </ColorProvider>
       <PreloaderContainer/>
