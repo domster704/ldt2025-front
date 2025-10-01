@@ -1,5 +1,15 @@
 .header {
   display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  width: 100%;
+  height: max-content;
+  margin-bottom: 1rem;
+}
+
+.header__main {
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -7,7 +17,6 @@
   padding: 1.375rem;
   background: var(--indicator-color);
 
-  margin-bottom: 0.25rem;
 }
 
 .info {
@@ -33,4 +42,65 @@
   color: var(--belyy-);
 
   text-transform: uppercase;
+}
+
+.header__sub {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 100%;
+
+  border: 2px solid var(--obvodka-blokov);
+  background: var(--belyy-);
+
+  padding-right: 1.625rem;
+}
+
+.sub__label {
+  width: max-content;
+
+  background: var(--indicator-color);
+  padding: 0.5rem 1.25rem;
+
+  font-family: var(--second-family);
+  font-weight: 500;
+  font-size: 1.75rem;
+  color: var(--belyy-);
+}
+
+.predictionText {
+  font-family: var(--second-family);
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: var(--chernyy-);
+}
+
+.figo {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  p {
+    font-family: var(--second-family);
+    font-weight: 500;
+    font-size: 1.25rem;
+    color: var(--chernyy-);
+  }
+}
+
+.figo__indicator {
+  height: 100%;
+  background: var(--indicator-color);
+
+  padding: 0.625rem;
+  border-radius: 0.75rem;
+
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 1rem;
+  text-align: right;
+  color: var(--chernyy-);
 }

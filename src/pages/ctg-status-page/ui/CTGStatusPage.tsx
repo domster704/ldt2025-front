@@ -18,7 +18,6 @@ const CTGStatusPage: FC<CTGStatusPageProps> = ({}) => {
 
   return (
     <>
-      1
       <ColorProvider>
         <ColorSignalWrapper>
           <HeaderGraph/>

@@ -22,7 +22,7 @@ const FooterActionsPanel: FC = () => {
                       icon={patientsImg}
                       text="Пациенты"/>
       <ActionButton icon={withoutSoundImg} text="Без звука"/>
-      <ActionButton icon={autoZeroImg} text="Auto Zero"/>
+      {/*<ActionButton icon={autoZeroImg} text="Auto Zero"/>*/}
       <ActionButton icon={printImg}
                     text="Печать"
                     onClick={() => {

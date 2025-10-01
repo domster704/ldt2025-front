@@ -28,13 +28,24 @@ const HeaderGraph: FC = () => {
 
   return (
     <header className={style.header}>
-      <div className={style.info}>
-        <img src={userIcon} alt={""}/>
-        <p>{patient.name}</p>
-        <p>Срок: 38+2 нед</p>
+      <div className={style.header__main}>
+        <div className={style.info}>
+          <img src={userIcon} alt={""}/>
+          <p>{patient.name}</p>
+          <p>Срок: 38+2 нед</p>
+        </div>
+        <div className={style.status}>
+          <h4>Состояние: {statusText}</h4>
+        </div>
       </div>
-      <div className={style.status}>
-        <h4>Состояние: {statusText}</h4>
+      <div className={style.header__sub}>
+        <div className={style.sub__label}>Общий прогноз</div>
+        <p className={style.predictionText}>Подозрение на брадикардию (БЧСС = 95 уд/мин, -32 уд/мин). Учащение децераций (+3 за 10 мин)</p>
+
+        <div className={style.figo}>
+          <p>FIGO:</p>
+          <span className={style.figo__indicator}>Сомнительная</span>
+        </div>
       </div>
     </header>
   );
