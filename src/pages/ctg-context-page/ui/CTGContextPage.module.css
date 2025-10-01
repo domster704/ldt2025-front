@@ -1,3 +1,11 @@
+.contextContainer {
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+  height: 100%;
+  min-height: 0;
+  flex: 1;
+}
+
 .context {
   flex: 1;
   display: flex;
@@ -8,9 +16,16 @@
 }
 
 .dashboardWithLogs {
-  flex: 0 0 60%;
+  flex: 0 0 65%;
   display: grid;
-  grid-template-columns: 1fr 5fr 2fr;
+  grid-template-columns: 1fr 4fr;
+  height: 100%;
+  min-height: 0;
+}
+
+.context__analytics {
+  flex: 1;
+  display: flex;
   height: 100%;
   min-height: 0;
 }

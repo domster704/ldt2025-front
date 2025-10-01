@@ -1,0 +1,27 @@
+.stbPredictionContainer {
+  background: var(--belyy-);
+
+  padding: 4rem 2rem 1rem 2rem;
+
+  width: 100%;
+  height: min-content;
+}
+
+.stbPredictionContainer table {
+  width: 100%;
+  border-collapse: collapse;
+
+  tr:nth-child(odd) {
+    background: var(--fony-sistemnye-);
+  }
+
+  td {
+    padding: 0.5rem;
+
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 150%;
+    letter-spacing: -0.01em;
+  }
+}

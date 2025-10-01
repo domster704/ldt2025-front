@@ -12,6 +12,7 @@ import IndicatorsPanel from "@widgets/indicators-panel";
 import {IndicatorsPanelPlacement} from "@widgets/indicators-panel/ui/IndicatorsPanel";
 import HistoryLogs from "@widgets/history-logs";
 import Anamnesis from "@widgets/anamnesis";
+import STVPrediction from "@widgets/stv-predict";
 
 interface CTGContextPageProps {
 
@@ -26,16 +27,20 @@ const CTGContextPage: FC<CTGContextPageProps> = ({}) => {
         <ColorSignalWrapper>
           <HeaderGraph/>
 
-          <main className={style.context}>
-            <div className={style.dashboardWithLogs}>
-              <HistoryLogs/>
-              <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
-                <DashboardStream/>
-              </WebsocketProvider>
-              <IndicatorsPanel placement={IndicatorsPanelPlacement.Grid}/>
+          <main className={style.contextContainer}>
+            <div className={style.context}>
+              <div className={style.dashboardWithLogs}>
+                <HistoryLogs/>
+                <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
+                  <DashboardStream/>
+                </WebsocketProvider>
+              </div>
+              <div className={style.context__analytics}>
+                <Anamnesis/>
+                <STVPrediction/>
+              </div>
             </div>
-
-            <Anamnesis/>
+            <IndicatorsPanel placement={IndicatorsPanelPlacement.Grid}/>
           </main>
 
         </ColorSignalWrapper>

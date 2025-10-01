@@ -21,6 +21,12 @@ export interface ProcessNotification {
   color: NotificationColor;
 }
 
+export interface STVForecast {
+  stv_3m: number | null,
+  stv_5m: number | null,
+  stv_10m: number | null,
+}
+
 export interface ProcessInfo {
   time_sec: number;
   notifications: Record<number, ProcessNotification[]>;
@@ -28,7 +34,7 @@ export interface ProcessInfo {
   current_fhr: number | null;
   current_uterus: number | null;
   stv: number | null;
-  stv_forecast: Record<string, number | null> | null;
+  stv_forecast: STVForecast | null;
   median_fhr_10min: number | null;
   hypoxia_proba: number | null;
 }
