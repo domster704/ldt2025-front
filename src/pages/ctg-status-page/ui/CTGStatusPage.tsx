@@ -10,6 +10,7 @@ import {DashboardStream} from "@widgets/dashboard";
 import PreloaderContainer from "@widgets/preloader-container";
 import IndicatorsPanel from "@widgets/indicators-panel";
 import {IndicatorsPanelPlacement} from "@widgets/indicators-panel/ui/IndicatorsPanel";
+import HistoryLogs from "@widgets/history-logs";
 
 interface CTGStatusPageProps {
 
@@ -26,7 +27,10 @@ const CTGStatusPage: FC<CTGStatusPageProps> = ({}) => {
           <main className={style.statusPage}>
             <IndicatorsPanel placement={IndicatorsPanelPlacement.Row}/>
             <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
-              <DashboardStream/>
+              <div className={style.dashboardWithLogs}>
+                <HistoryLogs/>
+                <DashboardStream/>
+              </div>
             </WebsocketProvider>
           </main>
         </ColorSignalWrapper>

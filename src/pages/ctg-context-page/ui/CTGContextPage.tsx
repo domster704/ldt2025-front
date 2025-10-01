@@ -10,6 +10,7 @@ import {DashboardStream} from "@widgets/dashboard";
 import PreloaderContainer from "@widgets/preloader-container";
 import IndicatorsPanel from "@widgets/indicators-panel";
 import {IndicatorsPanelPlacement} from "@widgets/indicators-panel/ui/IndicatorsPanel";
+import HistoryLogs from "@widgets/history-logs";
 
 interface CTGContextPageProps {
 
@@ -25,7 +26,8 @@ const CTGContextPage: FC<CTGContextPageProps> = ({}) => {
           <HeaderGraph/>
           <main className={style.context}>
             <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
-              <div className={style.dashboard}>
+              <div className={style.dashboardWithLogs}>
+                <HistoryLogs/>
                 <DashboardStream/>
                 <IndicatorsPanel placement={IndicatorsPanelPlacement.Grid}/>
               </div>

@@ -66,9 +66,9 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
                             subLabel={"мс"}
                             style={{
                               color:
-                                hrZone === "good"
+                                stvZone === "good"
                                   ? goodColor
-                                  : hrZone === "bad"
+                                  : stvZone === "bad"
                                     ? warningColor
                                     : "inherit"
                             }}/>
@@ -86,9 +86,9 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
                           subLabel={"%"}
                           style={{
                             color:
-                              hrZone === "good"
+                              ucZone === "good"
                                 ? goodColor
-                                : hrZone === "bad"
+                                : ucZone === "bad"
                                   ? warningColor
                                   : "inherit"
                           }}/>
