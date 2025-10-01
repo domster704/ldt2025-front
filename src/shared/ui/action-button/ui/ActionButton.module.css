@@ -15,6 +15,11 @@
     gap: 3.125rem;
     align-items: center;
   }
+
+  &:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 .actionButton__img {

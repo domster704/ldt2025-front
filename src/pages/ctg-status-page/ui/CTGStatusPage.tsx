@@ -1,21 +1,24 @@
 import React, {FC} from 'react';
-import * as style from './Home.module.css';
-import {DashboardStream} from "@widgets/dashboard";
+import * as style from './CTGStatusPage.module.css'
 import {useAppSelector} from "@app/store/store";
-import {selectLoadingStatus} from "@entities/session-upload/model/selectors";
-import PreLoader from "@shared/ui/preloader";
-import {HeaderGraph} from "@widgets/header";
-import ColorSignalWrapper from "@widgets/color-signal-wrapper";
 import ColorProvider from "@app/providers/color-provider";
+import ColorSignalWrapper from "@widgets/color-signal-wrapper";
+import {HeaderGraph} from "@widgets/header";
 import {WebsocketProvider} from "@app/providers/websocket-provider/ui/WebsocketProvider";
 import {$wsApiUrl} from "@shared/const/constants";
+import {DashboardStream} from "@widgets/dashboard";
+import PreloaderContainer from "@widgets/preloader-container";
 
-const Home: FC = () => {
+interface CTGStatusPageProps {
+
+}
+
+const CTGStatusPage: FC<CTGStatusPageProps> = ({}) => {
   const streaming = useAppSelector((state) => state.sessionStream.streaming);
-  const isLoading = useAppSelector(selectLoadingStatus);
 
   return (
     <>
+      1
       <ColorProvider>
         <ColorSignalWrapper>
           <HeaderGraph/>
@@ -26,16 +29,9 @@ const Home: FC = () => {
           </main>
         </ColorSignalWrapper>
       </ColorProvider>
-      {
-        isLoading &&
-          <div className={style.preloaderContainer}>
-              <div className={style.preloaderContent}>
-                  <PreLoader/>
-              </div>
-          </div>
-      }
+      <PreloaderContainer/>
     </>
   );
-};
+}
 
-export default Home;
+export default CTGStatusPage;

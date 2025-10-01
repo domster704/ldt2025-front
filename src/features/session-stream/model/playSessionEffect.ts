@@ -1,5 +1,5 @@
 import {AppDispatch} from "@app/store/store";
-import {addFhrPoint, addUcPoint} from "@entities/session-stream/model/sessionStreamSlice";
+import {addFhrPoint, addResult, addUcPoint} from "@entities/session-stream/model/sessionStreamSlice";
 import {StreamData} from "@entities/session-stream/model/types";
 
 export const playSessionEffect =
@@ -14,6 +14,7 @@ export const playSessionEffect =
     dispatch(addUcPoint({
       x: t,
       y: msg.uc
-    }))
+    }));
+    dispatch(addResult(msg.process));
     return;
   };

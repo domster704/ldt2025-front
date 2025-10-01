@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {StreamPoint, StreamState} from "@entities/session-stream/model/types";
+import {ProcessInfo, StreamPoint, StreamState} from "@entities/session-stream/model/types";
 import {ColorHealthStatus} from "@app/providers/color-provider/model/types";
 
 const initialState: StreamState = {
@@ -23,7 +23,7 @@ const sessionStreamSlice = createSlice({
     stopStreaming: (state) => {
       state.streaming = false;
     },
-    addResult: (state, action: PayloadAction<any>) => {
+    addResult: (state, action: PayloadAction<ProcessInfo>) => {
       state.results.push(action.payload);
     },
     addFhrPoint: (state, action: PayloadAction<StreamPoint>) => {

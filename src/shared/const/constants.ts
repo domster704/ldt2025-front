@@ -5,9 +5,14 @@ export type APP_URL =
   | '/'
   | '/settings'
   | '/history'
-  | '/patient-picker';
+  | '/patient-picker'
+  | '/status'
+  | '/context'
+  ;
 
 export const HOME_PAGE_URL: APP_URL = '/';
 export const SETTINGS_PAGE_URL: APP_URL = '/settings';
+export const STATUS_PAGE_URL: APP_URL = '/status';
+export const CONTEXT_PAGE_URL: APP_URL = '/context';
 export const HISTORY_PAGE_URL: APP_URL = '/history';
 export const PATIENT_PICKER_PAGE_URL: APP_URL = '/patient-picker';

@@ -38,8 +38,6 @@ export function useChartScales({
     const right = maxX - scrollOffset;
     const left = Math.max(minX, right - window_);
 
-    console.log(left, right, minX, maxX)
-
     const xScale = scaleLinear<number>({
       domain: [left, right],
       range: [0, xMax],

@@ -6,7 +6,7 @@ import {APP_URL} from "@shared/const/constants";
 import * as style from './OpenPageButton.module.css';
 
 interface SettingsButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  page: APP_URL;
+  page: APP_URL | null;
   icon: string;
   text?: string;
 }
@@ -17,6 +17,11 @@ const OpenPageButton: FC<SettingsButtonProps> = ({
                                                    text,
                                                    ...props
                                                  }) => {
+  if (!page) {
+    return <ActionButton {...props}
+                         icon={icon}
+                         text={text}/>;
+  }
   return (
     <Link to={page} className={style.buttonLink}>
       <ActionButton {...props}
