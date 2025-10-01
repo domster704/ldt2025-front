@@ -3,6 +3,7 @@ import {useAppDispatch, useAppSelector} from "@app/store/store";
 import {validateFile} from "@features/start-session/lib/validation";
 
 import startIcon from "@shared/assets/img/start.svg";
+import stopIcon from "@shared/assets/img/stop.svg";
 import {CONTEXT_PAGE_URL, PATIENT_PICKER_PAGE_URL, STATUS_PAGE_URL} from "@shared/const/constants";
 import {resetStream, startStreaming, stopStreaming} from "@entities/session-stream/model/sessionStreamSlice";
 import ActionButton from "@shared/ui/action-button";
@@ -65,8 +66,8 @@ const StartEmulationButton: FC = () => {
 
   return (
     <>
-      <ActionButton icon={startIcon}
-                    text="Старт"
+      <ActionButton icon={streaming ? stopIcon : startIcon}
+                    text={streaming ? "Стоп" : "Старт"}
                     type="button"
                     onClick={async () => await handleStartEmulationClick()}
       />
