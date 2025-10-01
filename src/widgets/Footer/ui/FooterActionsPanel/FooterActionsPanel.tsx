@@ -2,8 +2,6 @@ import React, {FC} from "react";
 import * as style from './FooterActionsPanel.module.css'
 import ActionButton from "@shared/ui/action-button";
 import StartEmulationButton from "@features/start-session/ui/StartEmulationButton";
-
-import autoZeroImg from '@shared/assets/img/autoZero.svg';
 import brightnessImg from '@shared/assets/img/brightness.svg';
 import exportImg from '@shared/assets/img/export.svg';
 import printImg from '@shared/assets/img/print.svg';

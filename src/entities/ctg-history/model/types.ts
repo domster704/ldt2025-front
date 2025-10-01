@@ -1,19 +1,14 @@
 import {EntityState} from "@reduxjs/toolkit";
 import {SessionUploaded} from "@entities/session-upload";
+import {CTGStatus} from "@shared/const/ctgColors";
 
-export enum HistoryStatus {
-  Normal = "Нормальный",
-  Doubtful = "Сомнительный",
-  Pathological = "Патологическая",
-  Preterminal = "Претерминальная",
-}
 
 export interface CTGHistory {
   id: number;
   date: Date;
   gestation: string;
-  figo: HistoryStatus;
-  forecast: HistoryStatus;
+  figo: CTGStatus;
+  forecast: CTGStatus;
 
   stv: number;
   hr: number;
@@ -35,10 +30,3 @@ export interface CTGHistoryState {
 export interface CTGHistoryData {
   data: CTGHistoryDTO[];
 }
-
-export const historyColors: Record<HistoryStatus, string> = {
-  [HistoryStatus.Normal]: "#83e462",
-  [HistoryStatus.Doubtful]: "#ffa653",
-  [HistoryStatus.Pathological]: "#ff7053",
-  [HistoryStatus.Preterminal]: "#d9bbff",
-};

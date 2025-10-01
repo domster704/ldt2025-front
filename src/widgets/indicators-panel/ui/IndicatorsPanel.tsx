@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import * as style from './IndicatorsPanel.module.css'
 import {useAppSelector} from "@app/store/store";
 import IndicatorContainer from "@shared/ui/indicator-container";
-import {selectLastHR, selectLastUC} from "@entities/session-stream";
+import {selectLastHR, selectLastSTV, selectLastUC} from "@entities/session-stream";
 
 
 export enum IndicatorsPanelPlacement {
@@ -20,6 +20,7 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
                                                    }) => {
   const hr = useAppSelector(selectLastHR);
   const uc = useAppSelector(selectLastUC);
+  const stv = useAppSelector(selectLastSTV);
 
   return (
     <div className={[
@@ -37,7 +38,8 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
                             subLabel={"уд./мин"}/>
 
         <IndicatorContainer name={"Вариабельность"}
-                            value={8.2}
+                            valueClassName={!stv && style.panel__noData}
+                            value={stv || "Нет данных"}
                             label={"STV"}
                             subLabel={"мс"}/>
       </div>

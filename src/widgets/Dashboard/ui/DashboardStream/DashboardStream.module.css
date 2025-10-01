@@ -3,4 +3,15 @@
   background: var(--belyy-);
 
   flex: 1;
+  min-height: 0;
+  height: 100%;
+}
+
+.dashboardWithLogs {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  flex: 1;
+
+  height: 100%;
+  min-height: 0;
 }

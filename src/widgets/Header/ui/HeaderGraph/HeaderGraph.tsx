@@ -40,7 +40,8 @@ const HeaderGraph: FC = () => {
       </div>
       <div className={style.header__sub}>
         <div className={style.sub__label}>Общий прогноз</div>
-        <p className={style.predictionText}>Подозрение на брадикардию (БЧСС = 95 уд/мин, -32 уд/мин). Учащение децераций (+3 за 10 мин)</p>
+        <p className={style.predictionText}>Подозрение на брадикардию (БЧСС = 95 уд/мин, -32 уд/мин). Учащение децераций
+          (+3 за 10 мин)</p>
 
         <div className={style.figo}>
           <p>FIGO:</p>

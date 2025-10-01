@@ -17,7 +17,7 @@ const Dashboard: FC<DashboardProps> = ({
                                          slideWindowTime,
                                          maxPoints,
                                          ...props
-}) => {
+                                       }) => {
   return (
     <div {...props} className={[
       style.dashboard__graphs,

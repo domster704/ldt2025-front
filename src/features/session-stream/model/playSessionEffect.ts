@@ -1,20 +1,27 @@
-import {AppDispatch} from "@app/store/store";
-import {addFhrPoint, addResult, addUcPoint} from "@entities/session-stream/model/sessionStreamSlice";
+import {AppDispatch, RootState} from "@app/store/store";
+import {addFhrPoint, addResult, addUcPoint, setNotification} from "@entities/session-stream/model/sessionStreamSlice";
 import {StreamData} from "@entities/session-stream/model/types";
 
+const PRECISION: number = 1;
+
 export const playSessionEffect =
-  (msg: StreamData) => (dispatch: AppDispatch) => {
+  (msg: StreamData) => (dispatch: AppDispatch, getState: () => RootState) => {
     if (!msg || typeof msg !== "object") return;
 
+    const state = getState();
+    const startTime = state.sessionStream.startTime ?? Date.now();
+
     const t = msg.timestamp * 1000;
+    console.log(msg.process)
     dispatch(addFhrPoint({
-      x: t,
-      y: msg.bpm
+      x: startTime + t,
+      y: Math.round((msg.bpm + Number.EPSILON) * PRECISION) / PRECISION
     }));
     dispatch(addUcPoint({
-      x: t,
-      y: msg.uc
+      x: startTime + t,
+      y: Math.round((msg.uc + Number.EPSILON) * PRECISION) / PRECISION
     }));
     dispatch(addResult(msg.process));
-    return;
+    dispatch(setNotification(msg.process.notifications));
   };
+

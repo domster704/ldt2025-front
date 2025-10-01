@@ -4,8 +4,9 @@ import * as style from "./HistoryTable.module.css";
 import arrowRightImg from "@shared/assets/img/arrowRight.svg";
 import {useAppSelector} from "@app/store/store";
 import {selectAllCTGHistory} from "@entities/ctg-history/model/selectors";
-import {CTGHistory, historyColors} from "@entities/ctg-history/model/types";
+import {CTGHistory} from "@entities/ctg-history/model/types";
 import {useCTGHistory} from "@features/ctg-history-selection-provider";
+import {ctgColors} from "@shared/const/ctgColors";
 
 const HistoryTable: FC = () => {
   const {selected, toggle} = useCTGHistory();
@@ -35,8 +36,8 @@ const HistoryTable: FC = () => {
           <tbody>
           {
             ctgHistory.map((ctgHistoryItem: CTGHistory) => {
-              const figoColor = historyColors[ctgHistoryItem.figo];
-              const forecastColor = historyColors[ctgHistoryItem.forecast];
+              const figoColor = ctgColors[ctgHistoryItem.figo];
+              const forecastColor = ctgColors[ctgHistoryItem.forecast];
               const isSelected = selected.includes(ctgHistoryItem.id);
 
               return (

@@ -5,7 +5,7 @@ import {validateFile} from "@features/start-session/lib/validation";
 import startIcon from "@shared/assets/img/start.svg";
 import OpenPageButton from "@shared/ui/open-page-button";
 import {HOME_PAGE_URL} from "@shared/const/constants";
-import {resetStream, startStreaming} from "@entities/session-stream/model/sessionStreamSlice";
+import {startStreaming} from "@entities/session-stream/model/sessionStreamSlice";
 
 const StartEmulationButton: FC = () => {
   const dispatch = useAppDispatch();

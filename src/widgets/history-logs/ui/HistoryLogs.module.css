@@ -1,0 +1,45 @@
+.logsList {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  min-height: 0;
+  padding: 3.75rem 0 0.75rem 0.625rem;
+
+  background: var(--belyy-);
+}
+
+.logsListWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+
+  flex: 1;
+  overflow-y: auto;
+}
+
+.logItem {
+  display: flex;
+  gap: 0.25rem;
+  align-items: start;
+
+  padding: 0.125rem;
+}
+
+.logTime {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 150%;
+  letter-spacing: -0.01em;
+  color: var(--chernyy-);
+}
+
+.logMessage {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 150%;
+  letter-spacing: -0.01em;
+  color: var(--chernyy-);
+}

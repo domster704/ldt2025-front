@@ -1,13 +1,15 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ProcessInfo, StreamPoint, StreamState} from "@entities/session-stream/model/types";
+import {ProcessInfo, ProcessNotification, StreamPoint, StreamState} from "@entities/session-stream/model/types";
 import {ColorHealthStatus} from "@app/providers/color-provider/model/types";
 
 const initialState: StreamState = {
   results: [],
   heartRates: [],
   uterineContractions: [],
+  notifications: [],
   status: ColorHealthStatus.Good,
-  streaming: false
+  streaming: false,
+  startTime: null
 };
 
 const sessionStreamSlice = createSlice({
@@ -19,12 +21,29 @@ const sessionStreamSlice = createSlice({
       state.results = [];
       state.heartRates = [];
       state.uterineContractions = [];
+      state.startTime = Date.now();
     },
     stopStreaming: (state) => {
       state.streaming = false;
     },
     addResult: (state, action: PayloadAction<ProcessInfo>) => {
       state.results.push(action.payload);
+    },
+    setNotification: (state, action: PayloadAction<Record<number, ProcessNotification[]>>) => {
+      if (!state.startTime) return;
+      const notifications = action.payload;
+      const base = state.startTime;
+
+      state.notifications = Object
+        .entries(notifications)
+        .flatMap(([offset, list]) =>
+          list.map(n => ({
+            time: base + Number(offset) * 1000,
+            message: n.message,
+            color: n.color,
+          }))
+        )
+        .reverse();
     },
     addFhrPoint: (state, action: PayloadAction<StreamPoint>) => {
       state.heartRates.push(action.payload);
@@ -39,8 +58,9 @@ const sessionStreamSlice = createSlice({
 export const {
   startStreaming,
   stopStreaming,
+  setNotification,
   addResult,
-    addFhrPoint,
+  addFhrPoint,
   addUcPoint,
   resetStream
 } = sessionStreamSlice.actions;

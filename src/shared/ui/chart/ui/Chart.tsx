@@ -119,8 +119,8 @@ const Chart = forwardRef<SVGSVGElement, ChartProps>(
                         scale={xScale}
                         numTicks={6}
                         tickFormat={(v) => {
-                          const base = startTimeRef.current || Date.now();
-                          const time = new Date(base + (v as number));
+                          // const base = startTimeRef.current || Date.now();
+                          const time = new Date(v as number);
                           return time.toLocaleTimeString("ru-RU", {
                             hour: "2-digit",
                             minute: "2-digit",

@@ -2,18 +2,19 @@ import React, {FC, useMemo, useRef} from "react";
 import {extent, scalePoint, scaleTime, timeFormat} from "d3";
 import {AxisBottom, AxisLeft} from "@visx/axis";
 import {LinePath} from "@visx/shape";
-import {CTGHistory, historyColors, HistoryStatus} from "@entities/ctg-history/model/types";
+import {CTGHistory} from "@entities/ctg-history/model/types";
 import {useResizeObserver} from "@shared/lib/hooks/useResizeObserver";
+import {ctgColors, CTGStatus} from "@shared/const/ctgColors";
 
 interface FIGOChartProps {
   data: CTGHistory[];
 }
 
-const figoLevels: HistoryStatus[] = [
-  HistoryStatus.Normal,
-  HistoryStatus.Doubtful,
-  HistoryStatus.Pathological,
-  HistoryStatus.Preterminal,
+const figoLevels: CTGStatus[] = [
+  CTGStatus.Normal,
+  CTGStatus.Doubtful,
+  CTGStatus.Pathological,
+  CTGStatus.Preterminal,
 ];
 
 const pad = 24 * 60 * 60 * 1000;
@@ -56,7 +57,7 @@ const FIGOChart: FC<FIGOChartProps> = ({data}) => {
 
   const yScale = useMemo(
     () =>
-      scalePoint<HistoryStatus>()
+      scalePoint<CTGStatus>()
         .domain(figoLevels)
         .range([innerHeight, 0])
         .padding(0.5),
@@ -89,7 +90,7 @@ const FIGOChart: FC<FIGOChartProps> = ({data}) => {
                   y1={yScale(level)!}
                   x2={innerWidth}
                   y2={yScale(level)!}
-                  stroke={historyColors[level]}
+                  stroke={ctgColors[level]}
                   strokeWidth={7}
             />
           ))
