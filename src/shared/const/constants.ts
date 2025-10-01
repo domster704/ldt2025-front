@@ -10,7 +10,6 @@ export type APP_URL =
   | '/context'
   ;
 
-export const HOME_PAGE_URL: APP_URL = '/';
 export const SETTINGS_PAGE_URL: APP_URL = '/settings';
 export const STATUS_PAGE_URL: APP_URL = '/status';
 export const CONTEXT_PAGE_URL: APP_URL = '/context';

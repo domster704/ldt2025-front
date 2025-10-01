@@ -11,6 +11,7 @@ import patientsImg from '@shared/assets/img/patients.svg';
 
 import OpenPageButton from "@shared/ui/open-page-button";
 import {PATIENT_PICKER_PAGE_URL, SETTINGS_PAGE_URL} from "@shared/const/constants";
+import ExportButton from "@features/export-button";
 
 const FooterActionsPanel: FC = () => {
   return (
@@ -26,7 +27,7 @@ const FooterActionsPanel: FC = () => {
                     onClick={() => {
                       print();
                     }}/>
-      <ActionButton icon={exportImg} text="Выгрузка"/>
+      <ExportButton/>
       <ActionButton icon={brightnessImg} text="Яркость"/>
       <OpenPageButton page={SETTINGS_PAGE_URL}
                       icon={settingsImg}

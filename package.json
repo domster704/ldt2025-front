@@ -19,6 +19,7 @@
     "axios": "^1.11.0",
     "d3": "^7.9.0",
     "d3-shape": "^3.2.0",
+    "html2canvas": "^1.4.1",
     "idb-keyval": "^6.2.2",
     "papaparse": "^5.5.3",
     "re-reselect": "^5.1.0",

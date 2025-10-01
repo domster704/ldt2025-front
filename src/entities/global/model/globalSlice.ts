@@ -1,8 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {APP_URL, HOME_PAGE_URL} from "@shared/const/constants";
+import {APP_URL, STATUS_PAGE_URL} from "@shared/const/constants";
 
 let initialState = {
-  currentPage: HOME_PAGE_URL,
+  currentPage: STATUS_PAGE_URL,
 };
 
 const globalSlice = createSlice({

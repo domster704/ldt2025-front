@@ -1,4 +1,4 @@
-import React, {FC, useMemo, useRef} from "react";
+import React, {FC, useEffect, useMemo, useRef} from "react";
 import {useResizeObserver} from "@shared/lib/hooks/useResizeObserver";
 import Chart, {useChartScales} from "@shared/ui/chart";
 import {useChartScroll} from "@features/chart-scroll/lib/hooks/useChartScroll";
@@ -30,14 +30,13 @@ const SessionChart: FC<SessionChartProps> = ({
                                                slideWindowTime = SLIDE_WINDOW_TIME,
                                                maxPoints = 1000,
                                              }) => {
-  const ref = useRef<SVGSVGElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const {width, height} = useResizeObserver(ref);
   const sampledData = useMemo(() =>
       downsample(dataSource, maxPoints),
     [dataSource, maxPoints]
   );
-
 
   const {
     scrollOffset,

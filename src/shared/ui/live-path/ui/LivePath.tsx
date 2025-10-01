@@ -15,7 +15,7 @@ const LivePath: FC<LivePathProps> = ({
                                        color,
                                        dataSource,
                                        xScale,
-                                       yScale
+                                       yScale,
                                      }) => {
   const pathD = useMemo(() => {
     const lineGenerator = line<StreamPoint>()

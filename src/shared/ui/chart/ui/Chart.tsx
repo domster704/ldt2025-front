@@ -35,7 +35,7 @@ interface ChartProps {
   onTouchEnd?: (e: React.TouchEvent<SVGSVGElement>) => void;
 }
 
-const Chart = forwardRef<SVGSVGElement, ChartProps>(
+const Chart = forwardRef<HTMLDivElement, ChartProps>(
   (
     {
       margins,
@@ -67,9 +67,8 @@ const Chart = forwardRef<SVGSVGElement, ChartProps>(
     }, [dataSource]);
 
     return (
-      <div className={style.container}>
-        <svg ref={ref}
-             width="100%"
+      <div ref={ref} className={style.container}>
+        <svg width="100%"
              onWheel={onWheel}
              onMouseDown={onMouseDown}
              onMouseMove={onMouseMove}

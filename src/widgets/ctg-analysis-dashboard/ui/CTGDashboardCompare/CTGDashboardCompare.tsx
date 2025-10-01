@@ -1,13 +1,14 @@
-import React, {useMemo} from "react";
+import React, {useMemo, useState} from "react";
 import * as style from "./CTGDashboardCompare.module.css";
 import {useAppSelector} from "@app/store/store";
 import {selectAllCTGHistory} from "@entities/ctg-history/model/selectors";
 import {CTGHistory} from "@entities/ctg-history/model/types";
 import CTGHistoryParamsTable from "@entities/ctg-history/ui/CTGHistoryParamsTable";
-import {DashboardInContainer} from "@widgets/dashboard";
+import {Dashboard, DashboardInContainer} from "@widgets/dashboard";
 import {StreamPoint} from "@entities/session-stream";
 
 import loupeIcon from "@shared/assets/img/loupe.svg";
+import Modal from "@shared/ui/modal";
 
 interface CTGDashboardCompareProps {
   ids: number[];
@@ -30,6 +31,7 @@ function formatValue(value: unknown): string {
 
 const CTGDashboardCompare: React.FC<CTGDashboardCompareProps> = ({ids}) => {
   const history = useAppSelector(selectAllCTGHistory);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const ctg1 = history.find((h) => h.id === ids[0]);
   const ctg2 = history.find((h) => h.id === ids[1]);
@@ -53,7 +55,7 @@ const CTGDashboardCompare: React.FC<CTGDashboardCompareProps> = ({ids}) => {
   }, [ctg2]);
 
   const handleOpenDashboards = () => {
-    console.log(1)
+    setIsModalOpen(true);
   }
 
   return (
@@ -70,6 +72,7 @@ const CTGDashboardCompare: React.FC<CTGDashboardCompareProps> = ({ids}) => {
             <p>Открыть</p>
           </div>
         </div>
+
         <DashboardInContainer label={ctg1.date.toLocaleDateString()}
                               fhrData={fhrData1}
                               ucData={ucData1}/>
@@ -77,6 +80,23 @@ const CTGDashboardCompare: React.FC<CTGDashboardCompareProps> = ({ids}) => {
                               fhrData={fhrData2}
                               ucData={ucData2}/>
       </div>
+
+      <Modal className={style.modalDashboards}
+             isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <div className={[
+          style.modalDashboards__content,
+          'modalDashboards__content_'
+        ].join(' ')}>
+          <DashboardInContainer className={style.modal__dashboardItem}
+                                label={ctg1.date.toLocaleDateString()}
+                                fhrData={fhrData1}
+                                ucData={ucData1}/>
+          <DashboardInContainer className={style.modal__dashboardItem}
+                                label={ctg2.date.toLocaleDateString()}
+                                fhrData={fhrData2}
+                                ucData={ucData2}/>
+        </div>
+      </Modal>
     </div>
   );
 };

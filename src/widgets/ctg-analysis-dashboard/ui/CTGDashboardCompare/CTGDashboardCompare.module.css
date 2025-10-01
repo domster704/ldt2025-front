@@ -50,3 +50,18 @@
     color: var(--belyy-);
   }
 }
+
+.modalDashboards {
+  width: 80vw;
+}
+
+.modalDashboards__content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.modal__dashboardItem {
+  width: 100%;
+}

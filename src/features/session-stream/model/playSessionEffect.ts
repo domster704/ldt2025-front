@@ -19,7 +19,7 @@ export const playSessionEffect =
     const startTime = state.sessionStream.startTime ?? Date.now();
 
     const t = msg.timestamp * 1000;
-    console.log(msg.process)
+
     dispatch(addFhrPoint({
       x: startTime + t,
       y: Math.round((msg.bpm + Number.EPSILON) * PRECISION) / PRECISION

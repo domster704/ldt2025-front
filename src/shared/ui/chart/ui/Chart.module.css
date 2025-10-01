@@ -1,8 +1,13 @@
 .container {
+  width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
 
   overscroll-behavior-x: contain;
+}
+
+:global(.modalDashboards__content_) .container {
+  width: 76vw;
 }
 
 .container svg {
