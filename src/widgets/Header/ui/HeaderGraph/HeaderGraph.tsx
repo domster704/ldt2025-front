@@ -3,18 +3,22 @@ import * as style from './HeaderGraph.module.css'
 
 import userIcon from "@shared/assets/img/userWhite.svg";
 import {useColorsStatus} from "@app/providers/color-provider";
-import {ColorHealthStatus} from "@app/providers/color-provider/model/types";
 import {useAppSelector} from "@app/store/store";
 import {selectChosenPatient} from "@entities/patient/model/selectors";
+import {selectLastFIGO, selectLastHypoxiaProbability} from "@entities/session-stream";
+import {CTGStatus} from "@shared/const/ctgColors";
 
 const HeaderGraph: FC = () => {
   const patient = useAppSelector(selectChosenPatient);
+  const hypoxiaProbability = useAppSelector(selectLastHypoxiaProbability);
+  const figoStatus = useAppSelector(selectLastFIGO);
+
   const {status} = useColorsStatus();
 
   const statusText = useMemo(() => {
-    if (status === ColorHealthStatus.Good) {
+    if (status === CTGStatus.Normal) {
       return "В норме";
-    } else if (status === ColorHealthStatus.Warning) {
+    } else {
       return "Требуется внимание";
     }
   }, [status]);
@@ -40,12 +44,16 @@ const HeaderGraph: FC = () => {
       </div>
       <div className={style.header__sub}>
         <div className={style.sub__label}>Общий прогноз</div>
-        <p className={style.predictionText}>Подозрение на брадикардию (БЧСС = 95 уд/мин, -32 уд/мин). Учащение децераций
-          (+3 за 10 мин)</p>
+        <p className={style.predictionText}>
+          {
+            hypoxiaProbability &&
+            "Вероятность гипоксии в данный момент " + hypoxiaProbability.toFixed(2) + "%"
+          }
+        </p>
 
         <div className={style.figo}>
           <p>FIGO:</p>
-          <span className={style.figo__indicator}>Сомнительная</span>
+          <span className={style.figo__indicator}>{figoStatus}</span>
         </div>
       </div>
     </header>

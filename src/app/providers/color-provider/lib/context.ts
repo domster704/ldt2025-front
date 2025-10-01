@@ -1,8 +1,8 @@
 import {createContext} from "react";
-import {ColorHealthStatus} from "@app/providers/color-provider/model/types";
+import {CTGStatus} from "@shared/const/ctgColors";
 
 export interface IColorContext {
-  status: ColorHealthStatus;
+  status: CTGStatus;
   color: {
     hex: string;
     rgb: string;

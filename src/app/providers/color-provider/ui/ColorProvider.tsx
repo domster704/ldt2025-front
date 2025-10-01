@@ -1,9 +1,9 @@
 import React, {FC, ReactNode} from "react";
 import {ColorContext} from "@app/providers/color-provider/lib/context";
 import {RootState, useAppSelector} from "@app/store/store";
-import {ColorHealthStatus} from "@app/providers/color-provider/model/types";
 import {selectGoodColor, selectWarningColor} from "@entities/settings/model/selectors";
 import {hexToRgb} from "@shared/lib/utils/convertHEXToRGB";
+import {CTGStatus} from "@shared/const/ctgColors";
 
 
 interface ColorProviderProps {
@@ -15,7 +15,7 @@ export const ColorProvider: FC<ColorProviderProps> = ({children}) => {
   const chosenWarningColor = useAppSelector(selectWarningColor);
   const chosenGoodColor = useAppSelector(selectGoodColor);
 
-  const current = status === ColorHealthStatus.Warning ? chosenWarningColor : chosenGoodColor;
+  const current = status === CTGStatus.Normal ? chosenGoodColor : chosenWarningColor;
   const currentRGB = hexToRgb(current);
 
   return (

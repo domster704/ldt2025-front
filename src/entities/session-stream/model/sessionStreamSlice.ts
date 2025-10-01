@@ -1,13 +1,13 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ProcessInfo, ProcessNotification, StreamPoint, StreamState} from "@entities/session-stream/model/types";
-import {ColorHealthStatus} from "@app/providers/color-provider/model/types";
+import {CTGStatus} from "@shared/const/ctgColors";
 
 const initialState: StreamState = {
   results: [],
   heartRates: [],
   uterineContractions: [],
   notifications: [],
-  status: ColorHealthStatus.Good,
+  status: CTGStatus.Normal,
   streaming: false,
   startTime: null
 };
@@ -25,6 +25,9 @@ const sessionStreamSlice = createSlice({
     },
     stopStreaming: (state) => {
       state.streaming = false;
+    },
+    setStatus: (state, action: PayloadAction<CTGStatus>) => {
+      state.status = action.payload;
     },
     addResult: (state, action: PayloadAction<ProcessInfo>) => {
       state.results.push(action.payload);
@@ -62,7 +65,8 @@ export const {
   addResult,
   addFhrPoint,
   addUcPoint,
-  resetStream
+  resetStream,
+  setStatus
 } = sessionStreamSlice.actions;
 
 export default sessionStreamSlice.reducer;

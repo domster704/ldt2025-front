@@ -1,6 +1,13 @@
 import {AppDispatch, RootState} from "@app/store/store";
-import {addFhrPoint, addResult, addUcPoint, setNotification} from "@entities/session-stream/model/sessionStreamSlice";
+import {
+  addFhrPoint,
+  addResult,
+  addUcPoint,
+  setNotification,
+  setStatus
+} from "@entities/session-stream/model/sessionStreamSlice";
 import {StreamData} from "@entities/session-stream/model/types";
+import {CTGStatus, figoToCTGStatus} from "@shared/const/ctgColors";
 
 const PRECISION: number = 1;
 
@@ -23,5 +30,8 @@ export const playSessionEffect =
     }));
     dispatch(addResult(msg.process));
     dispatch(setNotification(msg.process.notifications));
+    dispatch(setStatus(
+      figoToCTGStatus[msg.process.figo_situation || CTGStatus.Normal.toString()]
+    ));
   };
 

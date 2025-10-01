@@ -1,5 +1,4 @@
-import {ColorHealthStatus} from "@app/providers/color-provider/model/types";
-import {NotificationColor} from "@shared/const/ctgColors";
+import {CTGStatus, NotificationColor} from "@shared/const/ctgColors";
 
 export interface StreamPoint {
   x: number;
@@ -46,7 +45,7 @@ export interface StreamState {
   heartRates: StreamPoint[];
   uterineContractions: StreamPoint[];
   notifications: NotificationEntry[];
-  status: ColorHealthStatus;
+  status: CTGStatus;
   streaming: boolean;
   startTime: number | null;
 }

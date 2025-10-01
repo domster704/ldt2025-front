@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import * as style from './IndicatorContainer.module.css'
 
-interface IndicatorContainerProps {
+interface IndicatorContainerProps extends React.HTMLAttributes<HTMLParagraphElement> {
   name: string;
   value: number | string;
   label?: string;
@@ -14,7 +14,8 @@ const IndicatorContainer: FC<IndicatorContainerProps> = ({
                                                            value,
                                                            label,
                                                            subLabel,
-                                                           valueClassName
+                                                           valueClassName,
+                                                           ...props
                                                          }) => {
   return (
     <div className={style.indicatorContainer}>
@@ -25,7 +26,7 @@ const IndicatorContainer: FC<IndicatorContainerProps> = ({
             <p className={style.indicatorContainer__indicatorLabel}>{label}</p>
         }
       </div>
-      <p className={[
+      <p {...props} className={[
         style.indicatorContainer__value,
         valueClassName
       ].join(' ')}>{value}</p>

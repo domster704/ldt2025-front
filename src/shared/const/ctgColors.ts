@@ -25,3 +25,10 @@ export const colorToCTGStatus: Record<NotificationColor, CTGStatus> = {
   [NotificationColor.RED]: CTGStatus.Pathological,
   [NotificationColor.PURPLE]: CTGStatus.Preterminal,
 };
+
+export const figoToCTGStatus: Record<string, CTGStatus> = {
+  "Нормальное": CTGStatus.Normal,
+  "Сомнительное": CTGStatus.Doubtful,
+  "Патологическое": CTGStatus.Pathological,
+  "Претерминальное": CTGStatus.Preterminal,
+};

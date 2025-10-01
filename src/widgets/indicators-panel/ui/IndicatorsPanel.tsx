@@ -3,6 +3,9 @@ import * as style from './IndicatorsPanel.module.css'
 import {useAppSelector} from "@app/store/store";
 import IndicatorContainer from "@shared/ui/indicator-container";
 import {selectLastHR, selectLastSTV, selectLastUC} from "@entities/session-stream";
+import {getZone} from "@widgets/indicators-panel/lib/getZone";
+import {HR_CONFIG, STV_CONFIG, UC_CONFIG} from "@widgets/indicators-panel/model/configs";
+import {selectGoodColor, selectWarningColor} from "@entities/settings/model/selectors";
 
 
 export enum IndicatorsPanelPlacement {
@@ -18,9 +21,20 @@ interface IndicatorsPanelProps {
 const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
                                                      placement = IndicatorsPanelPlacement.Grid
                                                    }) => {
+  const goodColor = useAppSelector(selectGoodColor);
+  const warningColor = useAppSelector(selectWarningColor);
+
   const hr = useAppSelector(selectLastHR);
   const uc = useAppSelector(selectLastUC);
   const stv = useAppSelector(selectLastSTV);
+
+  const hrValue = hr?.y ?? null;
+  const stvValue = stv ?? null;
+  const ucValue = uc?.y ?? null;
+
+  const hrZone = getZone(hrValue, HR_CONFIG);
+  const stvZone = getZone(stvValue, STV_CONFIG);
+  const ucZone = getZone(ucValue, UC_CONFIG);
 
   return (
     <div className={[
@@ -32,16 +46,32 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
         style.panel__doubleDataInColumn
       ].join(' ')}>
         <IndicatorContainer name={"БЧСС"}
-                            valueClassName={!hr?.y && style.panel__noData}
-                            value={hr?.y || "Нет данных"}
+                            valueClassName={!hrValue && style.panel__noData}
+                            value={hrValue || "Нет данных"}
                             label={"DECG"}
-                            subLabel={"уд./мин"}/>
+                            subLabel={"уд./мин"}
+                            style={{
+                              color:
+                                hrZone === "good"
+                                  ? goodColor
+                                  : hrZone === "bad"
+                                    ? warningColor
+                                    : "inherit"
+                            }}/>
 
         <IndicatorContainer name={"Вариабельность"}
-                            valueClassName={!stv && style.panel__noData}
-                            value={stv || "Нет данных"}
+                            valueClassName={!stvValue && style.panel__noData}
+                            value={stvValue || "Нет данных"}
                             label={"STV"}
-                            subLabel={"мс"}/>
+                            subLabel={"мс"}
+                            style={{
+                              color:
+                                hrZone === "good"
+                                  ? goodColor
+                                  : hrZone === "bad"
+                                    ? warningColor
+                                    : "inherit"
+                            }}/>
       </div>
 
       <IndicatorContainer name={"Внутриматочное давление"}
@@ -50,10 +80,18 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
                           subLabel={"мм.рт.ст."}/>
 
       <IndicatorContainer name={"Маточная активность"}
-                          valueClassName={!hr?.y && style.panel__noData}
-                          value={uc?.y || "Нет данных"}
+                          valueClassName={!ucValue && style.panel__noData}
+                          value={ucValue || "Нет данных"}
                           label={"TOCO"}
-                          subLabel={"%"}/>
+                          subLabel={"%"}
+                          style={{
+                            color:
+                              hrZone === "good"
+                                ? goodColor
+                                : hrZone === "bad"
+                                  ? warningColor
+                                  : "inherit"
+                          }}/>
 
       <IndicatorContainer name={"SpO₂"}
                           value={98}
