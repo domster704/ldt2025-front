@@ -22,28 +22,3 @@
 
   padding-top: 0.625rem;
 }
-
-.params__predict {
-  & > div {
-    display: flex;
-    justify-content: space-between;
-  }
-}
-
-.params table {
-  width: 100%;
-  border-collapse: collapse;
-
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 1.12rem;
-  color: var(--chernyy-);
-}
-
-.params td {
-  padding: 0.125rem 0.75rem;
-}
-
-.params tr:nth-child(odd) {
-  background: var(--fony-sistemnye-);
-}

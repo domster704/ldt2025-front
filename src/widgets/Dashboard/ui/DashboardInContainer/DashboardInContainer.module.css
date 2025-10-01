@@ -1,0 +1,10 @@
+.params__chartsContainer {
+  flex: 1;
+  min-height: 0;
+  padding: 3rem 1rem 1rem 1rem;
+  height: 100%;
+}
+
+.params__dashboard {
+  height: 100%;
+}

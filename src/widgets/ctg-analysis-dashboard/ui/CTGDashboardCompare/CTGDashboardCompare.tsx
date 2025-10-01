@@ -1,8 +1,13 @@
-import React from "react";
+import React, {useMemo} from "react";
 import * as style from "./CTGDashboardCompare.module.css";
 import {useAppSelector} from "@app/store/store";
 import {selectAllCTGHistory} from "@entities/ctg-history/model/selectors";
 import {CTGHistory} from "@entities/ctg-history/model/types";
+import CTGHistoryParamsTable from "@entities/ctg-history/ui/CTGHistoryParamsTable";
+import {DashboardInContainer} from "@widgets/dashboard";
+import {StreamPoint} from "@entities/session-stream";
+
+import loupeIcon from "@shared/assets/img/loupe.svg";
 
 interface CTGDashboardCompareProps {
   ids: number[];
@@ -33,30 +38,45 @@ const CTGDashboardCompare: React.FC<CTGDashboardCompareProps> = ({ids}) => {
     return <div className={style.compare}>Не удалось загрузить данные для сравнения</div>;
   }
 
+  const {fhrData1, ucData1} = useMemo(() => {
+    return {
+      fhrData1: ctg1.graph.bpm.map(p => ({x: p.time_sec, y: p.value})) as StreamPoint[],
+      ucData1: ctg1.graph.uc.map(p => ({x: p.time_sec, y: p.value})) as StreamPoint[],
+    };
+  }, [ctg1]);
+
+  const {fhrData2, ucData2} = useMemo(() => {
+    return {
+      fhrData2: ctg2.graph.bpm.map(p => ({x: p.time_sec, y: p.value})) as StreamPoint[],
+      ucData2: ctg2.graph.uc.map(p => ({x: p.time_sec, y: p.value})) as StreamPoint[],
+    };
+  }, [ctg2]);
+
+  const handleOpenDashboards = () => {
+    console.log(1)
+  }
+
   return (
     <div className={style.compare}>
-      <table className={style.compare__table}>
-        <thead>
-        <tr>
-          <th>Параметр</th>
-          <th>
-            {ctg1.date.toLocaleDateString()} {ctg1.gestation}
-          </th>
-          <th>
-            {ctg2.date.toLocaleDateString()} {ctg2.gestation}
-          </th>
-        </tr>
-        </thead>
-        <tbody>
-        {PARAMS.map((param) => (
-          <tr key={param.key as string}>
-            <td>{param.label}</td>
-            <td>{formatValue(ctg1[param.key])}</td>
-            <td>{formatValue(ctg2[param.key])}</td>
-          </tr>
-        ))}
-        </tbody>
-      </table>
+      <CTGHistoryParamsTable className={style.compare__paramsTable} mode={"compare"} data={[
+        ctg1,
+        ctg2,
+      ]}/>
+
+      <div className={style.compare__dashboards}>
+        <div className={style.dashboards__overlay}>
+          <div className={style.dashboards__overlayContent} onClick={() => handleOpenDashboards()}>
+            <img src={loupeIcon} alt={""}/>
+            <p>Открыть</p>
+          </div>
+        </div>
+        <DashboardInContainer label={ctg1.date.toLocaleDateString()}
+                              fhrData={fhrData1}
+                              ucData={ucData1}/>
+        <DashboardInContainer label={ctg2.date.toLocaleDateString()}
+                              fhrData={fhrData2}
+                              ucData={ucData2}/>
+      </div>
     </div>
   );
 };

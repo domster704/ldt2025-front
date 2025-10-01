@@ -1,0 +1,50 @@
+.table {
+  flex-shrink: 0;
+  border: 1px solid var(--obvodka-blokov);
+
+  padding-top: 0.625rem;
+  border-collapse: collapse;
+}
+
+.table.table__compare thead th {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 1.38rem;
+  text-align: center;
+
+  &:nth-child(even) {
+    background: var(--sistemnyy-siniy);
+    color: var(--belyy-);
+  }
+
+  &:nth-child(odd) {
+    color: var(--sistemnyy-siniy);
+  }
+}
+
+.table__predict > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 1.12rem;
+  color: var(--chernyy-);
+}
+
+.table td {
+  padding: 0.25rem 0.75rem;
+}
+
+.table.table__compare td {
+  padding-block: 0.125rem;
+}
+
+.table tbody tr:nth-child(odd) {
+  background: var(--fony-sistemnye-);
+}
