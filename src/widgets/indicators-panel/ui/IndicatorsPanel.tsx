@@ -77,7 +77,10 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
       <IndicatorContainer name={"Внутриматочное давление"}
                           value={60}
                           label={"IUP"}
-                          subLabel={"мм.рт.ст."}/>
+                          subLabel={"мм.рт.ст."}
+                          style={{
+                            color: goodColor
+                          }}/>
 
       <IndicatorContainer name={"Маточная активность"}
                           valueClassName={!ucValue && style.panel__noData}
@@ -95,19 +98,28 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
 
       <IndicatorContainer name={"SpO₂"}
                           value={98}
-                          subLabel={"%"}/>
+                          subLabel={"%"}
+                          style={{
+                            color: goodColor
+                          }}/>
 
       <IndicatorContainer name={"ЧСС матери"}
                           value={110}
                           label={"MECG"}
-                          subLabel={"уд./мин"}/>
+                          subLabel={"уд./мин"}
+                          style={{
+                            color: goodColor
+                          }}/>
 
 
       <div className={style.panel__twoColumns}>
         <IndicatorContainer name={"Неинвазивное артериальное давление"}
                             value={"120/80"}
                             label={"NIBP"}
-                            subLabel={"%"}/>
+                            subLabel={"%"}
+                            style={{
+                              color: goodColor
+                            }}/>
       </div>
     </div>
   );
