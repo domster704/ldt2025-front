@@ -1,5 +1,6 @@
 export const $apiUrl: string = process.env.API_URL ?? 'http://127.0.0.1:8010';
-export const $wsApiUrl: string = process.env.WS_URL ?? 'ws://127.0.0.1:8010/ws/streaming';
+export const $apiEmulatorUrl: string = process.env.EMULATOR_API_URL ?? 'http://127.0.0.1:8000';
+export const $wsApiUrl: string = process.env.WS_URL ?? 'ws://127.0.0.1:8010/ws/streaming/';
 
 export type APP_URL =
   | '/'

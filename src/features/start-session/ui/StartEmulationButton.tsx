@@ -4,7 +4,7 @@ import {validateFile} from "@features/start-session/lib/validation";
 
 import startIcon from "@shared/assets/img/start.svg";
 import stopIcon from "@shared/assets/img/stop.svg";
-import {CONTEXT_PAGE_URL, PATIENT_PICKER_PAGE_URL, STATUS_PAGE_URL} from "@shared/const/constants";
+import {$apiEmulatorUrl, CONTEXT_PAGE_URL, PATIENT_PICKER_PAGE_URL, STATUS_PAGE_URL} from "@shared/const/constants";
 import {resetStream, startStreaming, stopStreaming} from "@entities/session-stream/model/sessionStreamSlice";
 import ActionButton from "@shared/ui/action-button";
 import {selectChosenPatient} from "@entities/patient/model/selectors";
@@ -20,10 +20,12 @@ const StartEmulationButton: FC = () => {
   const currentPage = useAppSelector(selectCurrentPage);
 
   const handleClick = () => {
-    fileInputRef.current?.click();
-  }
+    if (streaming) {
+      dispatch(stopStreaming());
+      dispatch(resetStream());
+      return;
+    }
 
-  const handleStartEmulationClick = async () => {
     if (!patient) {
       navigate(PATIENT_PICKER_PAGE_URL);
       return;
@@ -31,20 +33,11 @@ const StartEmulationButton: FC = () => {
 
     if (!currentPage.startsWith(STATUS_PAGE_URL) && !currentPage.startsWith(CONTEXT_PAGE_URL)) {
       navigate(STATUS_PAGE_URL);
+      return;
     }
 
-    if (streaming) {
-      dispatch(stopStreaming());
-      dispatch(resetStream());
-    } else {
-      dispatch(startStreaming());
-    }
+    fileInputRef.current?.click();
   }
-
-  const runEmulation = async () => {
-    dispatch(startStreaming());
-  }
-
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
     const file = e.target.files?.[0];
@@ -56,12 +49,27 @@ const StartEmulationButton: FC = () => {
       return;
     }
 
-    await runEmulation();
-    // const resultAction = await dispatch(fetchMonitoringSession(file));
-    // if (fetchMonitoringSession.fulfilled.match(resultAction)) {
-    //   const newSession = resultAction.payload;
-    //   dispatch(playSessionEffect(newSession));
-    // }
+    try {
+      const formData = new FormData();
+      formData.append("archive", file);
+
+      const res = await fetch(`${$apiEmulatorUrl}/start`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        throw new Error("Ошибка при запуске эмуляции");
+      }
+
+      dispatch(startStreaming());
+    } catch (err) {
+      dispatch(stopStreaming());
+      dispatch(resetStream());
+      console.error(err);
+    } finally {
+      e.target.value = "";
+    }
   };
 
   return (
@@ -69,7 +77,7 @@ const StartEmulationButton: FC = () => {
       <ActionButton icon={streaming ? stopIcon : startIcon}
                     text={streaming ? "Стоп" : "Старт"}
                     type="button"
-                    onClick={async () => await handleStartEmulationClick()}
+                    onClick={() => handleClick()}
       />
       <input ref={fileInputRef}
              type="file"

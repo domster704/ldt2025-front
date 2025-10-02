@@ -15,12 +15,15 @@ const uploadSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchMonitoringSession.pending, (state, action) => {
+        console.log(1)
         state.loading = true;
       })
       .addCase(fetchMonitoringSession.rejected, (state, action) => {
+        console.log(3)
         state.loading = false;
       })
       .addCase(fetchMonitoringSession.fulfilled, (state, action: PayloadAction<SessionUploaded>) => {
+        console.log(2)
         state.loading = false;
         sessionUploadedAdapter.addOne(state.items, action.payload);
       })

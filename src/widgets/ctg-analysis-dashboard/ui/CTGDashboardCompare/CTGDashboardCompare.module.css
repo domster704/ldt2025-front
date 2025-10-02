@@ -1,5 +1,4 @@
 .compare {
-  flex: 1;
   min-height: 0;
 
   display: flex;
@@ -14,8 +13,6 @@
 
 .compare__dashboards {
   position: relative;
-  flex: 1;
-
   display: flex;
   flex-direction: column;
 }

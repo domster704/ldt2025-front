@@ -2,7 +2,6 @@
   border: 1px solid var(--obvodka-blokov);
   background: var(--belyy-);
 
-  flex: 1;
   min-height: 0;
   height: 100%;
 }
