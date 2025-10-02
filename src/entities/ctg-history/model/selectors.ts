@@ -74,3 +74,5 @@ export const selectCTGHistoryById = createCachedSelector(
 )(
   (_state, id) => id
 );
+
+export const selectAnalysisText = (state: RootState) => state.ctgHistory.analysis;

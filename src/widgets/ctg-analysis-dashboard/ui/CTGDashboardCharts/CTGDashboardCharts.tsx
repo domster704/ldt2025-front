@@ -2,7 +2,7 @@ import React from "react";
 import * as style from "./CTGDashboardCharts.module.css";
 import FIGOChart from "@shared/ui/figo-chart";
 import {useAppSelector} from "@app/store/store";
-import {selectAllCTGHistory} from "@entities/ctg-history/model/selectors";
+import {selectAllCTGHistory, selectAnalysisText} from "@entities/ctg-history/model/selectors";
 import CTGThresholdCharts from "@widgets/ctg-analysis-dashboard/ui/CTGDashboardCharts/ui";
 
 /**
@@ -50,6 +50,7 @@ import CTGThresholdCharts from "@widgets/ctg-analysis-dashboard/ui/CTGDashboardC
  */
 const CTGDashboardCharts = () => {
   const ctgHistory = useAppSelector(selectAllCTGHistory);
+  const analysisText = useAppSelector(selectAnalysisText);
 
   return (
     <div className={style.charts}>
@@ -61,7 +62,7 @@ const CTGDashboardCharts = () => {
       <CTGThresholdCharts ctgHistory={ctgHistory}/>
 
       <div className={style.charts__trand}>
-        <p><b>Тренд:</b> повышение БЧСС, вероятность тахикардии</p>
+        <p><b>Тренд:</b> {analysisText}</p>
       </div>
     </div>
   );

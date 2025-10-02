@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {ThunkApi} from "@shared/types/types";
-import {CTGHistoryData} from "@entities/ctg-history/model/types";
+import {AnalysisResult, CTGHistoryData} from "@entities/ctg-history/model/types";
 import {$apiUrl} from "@shared/const/constants";
 
 /**
@@ -48,5 +48,16 @@ export const fetchAllCTGHistory = createAsyncThunk<CTGHistoryData, number, Thunk
     return {
       "data": await response.json()
     } as CTGHistoryData;
+  }
+);
+
+export const fetchAllCTGHistoryAnalysis = createAsyncThunk<AnalysisResult, number, ThunkApi>(
+  'ctg/fetchAllCTGHistoryAnalysis',
+  async (patientId: number, {getState}) => {
+    const response = await fetch(`${$apiUrl}/ml/analizing/${patientId}`, {
+      method: 'GET'
+    });
+
+    return await response.json() as AnalysisResult;
   }
 );

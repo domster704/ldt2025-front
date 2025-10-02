@@ -64,4 +64,9 @@ export interface CTGHistoryData {
 /** Redux slice state */
 export interface CTGHistoryState {
   items: EntityState<CTGHistoryDTO, number>;
+  analysis: string | null;
+}
+
+export interface AnalysisResult {
+  analysis: string;
 }

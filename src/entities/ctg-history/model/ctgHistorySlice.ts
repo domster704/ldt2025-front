@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {CTGHistory, CTGHistoryData, CTGHistoryDTO, CTGHistoryState} from "@entities/ctg-history/model/types";
+import {AnalysisResult, CTGHistoryData, CTGHistoryDTO, CTGHistoryState} from "@entities/ctg-history/model/types";
 import {ctgHistoryAdapter} from "@entities/ctg-history/model/adapters";
-import {fetchAllCTGHistory} from "@entities/ctg-history/api/ctgHistoryThunk";
+import {fetchAllCTGHistory, fetchAllCTGHistoryAnalysis} from "@entities/ctg-history/api/ctgHistoryThunk";
 import {mockGraph} from "@entities/ctg-history/model/mockGraphHistory";
 import {figoToCTGStatus} from "@shared/const/ctgColors";
 
@@ -12,7 +12,8 @@ import {figoToCTGStatus} from "@shared/const/ctgColors";
  * - сгенерировать пустое состояние `getInitialState()`;
  */
 const initialState: CTGHistoryState = {
-  items: ctgHistoryAdapter.getInitialState()
+  items: ctgHistoryAdapter.getInitialState(),
+  analysis: null
 };
 
 /**
@@ -71,7 +72,13 @@ const ctgHistorySlice = createSlice({
           } as CTGHistoryDTO;
         });
         ctgHistoryAdapter.setAll(state.items, newData);
-      });
+      })
+      .addCase(fetchAllCTGHistoryAnalysis.fulfilled, (state, action: PayloadAction<AnalysisResult>) => {
+        state.analysis = action.payload.analysis;
+      })
+      .addCase(fetchAllCTGHistoryAnalysis.rejected, (state, action: PayloadAction<AnalysisResult>) => {
+        state.analysis = null;
+      })
   },
 });
 
