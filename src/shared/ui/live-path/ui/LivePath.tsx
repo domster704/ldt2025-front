@@ -54,7 +54,7 @@ interface LivePathProps {
  * );
  * ```
  */
-const LivePath: FC<LivePathProps> = ({
+const  LivePath: FC<LivePathProps> = ({
                                        color,
                                        dataSource,
                                        xScale,

@@ -14,6 +14,7 @@ interface DashboardInContainerProps extends React.HTMLAttributes<HTMLDivElement>
 
   /** Данные маточных сокращений (UC) */
   ucData: StreamPoint[];
+  isUseClipPath?: boolean;
 }
 
 /**
@@ -61,6 +62,7 @@ const DashboardInContainer: FC<DashboardInContainerProps> = ({
                                                                label,
                                                                fhrData,
                                                                ucData,
+                                                               isUseClipPath,
                                                                ...props
                                                              }) => {
   return (
@@ -79,6 +81,7 @@ const DashboardInContainer: FC<DashboardInContainerProps> = ({
         ucData={ucData}
         slideWindowTime={10 * 60 * 3600}
         maxPoints={4000}
+        isUseClipPath={isUseClipPath}
       />
     </ContainerWithLabel>
   );

@@ -40,6 +40,8 @@ interface ChartProps {
   /** Подсветка диапазонов (например, зона нормы или риска) */
   highlightBands?: HighlightBand[];
 
+  isUseClipPath?: boolean;
+
   /** Обработчики событий мыши и тач-жестов */
   onWheel?: (e: React.WheelEvent<SVGSVGElement>) => void;
   onMouseDown?: (e: React.MouseEvent<SVGSVGElement>) => void;
@@ -126,6 +128,7 @@ const Chart = forwardRef<HTMLDivElement, ChartProps>(
       onTouchStart,
       onTouchMove,
       onTouchEnd,
+      isUseClipPath=true,
     },
     ref
   ) => {
@@ -158,7 +161,7 @@ const Chart = forwardRef<HTMLDivElement, ChartProps>(
           </defs>
 
           <g transform={`translate(${margins.left},${margins.top})`}>
-            <g clipPath="url(#chart-area)">
+            <g clipPath={isUseClipPath && "url(#chart-area)" || undefined}>
 
               {/* Подсветка диапазонов */}
               {highlightBands?.map((band, i) => {

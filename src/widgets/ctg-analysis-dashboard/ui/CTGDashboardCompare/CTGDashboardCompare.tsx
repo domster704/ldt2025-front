@@ -99,8 +99,6 @@ const CTGDashboardCompare: React.FC<CTGDashboardCompareProps> = ({ids}) => {
                                ctg1,
                                ctg2,
                              ]}/>
-
-      {/* Блок с графиками */}
       <div className={style.compare__dashboards}>
         <div className={style.dashboards__overlay}>
           <div className={style.dashboards__overlayContent} onClick={() => handleOpenDashboards()}>
@@ -122,16 +120,17 @@ const CTGDashboardCompare: React.FC<CTGDashboardCompareProps> = ({ids}) => {
              isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div className={[
           style.modalDashboards__content,
-          'modalDashboards__content_'
         ].join(' ')}>
           <DashboardInContainer className={style.modal__dashboardItem}
                                 label={ctg1.date.toLocaleDateString()}
                                 fhrData={fhrData1}
-                                ucData={ucData1}/>
+                                ucData={ucData1}
+                                isUseClipPath={false}/>
           <DashboardInContainer className={style.modal__dashboardItem}
                                 label={ctg2.date.toLocaleDateString()}
                                 fhrData={fhrData2}
-                                ucData={ucData2}/>
+                                ucData={ucData2}
+                                isUseClipPath={false}/>
         </div>
       </Modal>
     </div>

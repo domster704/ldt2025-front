@@ -6,10 +6,6 @@
   overscroll-behavior-x: contain;
 }
 
-:global(.modalDashboards__content_) .container {
-  width: 76vw;
-}
-
 .container svg {
   overflow: hidden;
   display: block;

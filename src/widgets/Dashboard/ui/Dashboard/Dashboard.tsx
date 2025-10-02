@@ -19,6 +19,7 @@ interface DashboardProps extends React.HTMLAttributes<HTMLDivElement> {
    * Остальные будут прорежены (downsampling).
    */
   maxPoints?: number;
+  isUseClipPath?: boolean;
 }
 
 /**
@@ -71,6 +72,7 @@ const Dashboard: FC<DashboardProps> = ({
                                          ucData,
                                          slideWindowTime,
                                          maxPoints,
+                                         isUseClipPath,
                                          ...props
                                        }) => {
   return (
@@ -83,6 +85,7 @@ const Dashboard: FC<DashboardProps> = ({
                     slideWindowTime={slideWindowTime}
                     maxPoints={maxPoints}
                     dataSource={fhrData}
+                    isUseClipPath={isUseClipPath}
                     highlightBands={[{
                       from: 110,
                       to: 150,
@@ -92,6 +95,7 @@ const Dashboard: FC<DashboardProps> = ({
       <SessionChart color={"#003459"}
                     slideWindowTime={slideWindowTime}
                     maxPoints={maxPoints}
+                    isUseClipPath={isUseClipPath}
                     dataSource={ucData}/>
     </div>
   );

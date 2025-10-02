@@ -21,6 +21,7 @@ interface SessionChartProps {
   slideWindowTime?: number;
   /** Максимальное число точек (остальные будут прорежены) */
   maxPoints?: number;
+  isUseClipPath?: boolean;
 }
 
 /**
@@ -66,6 +67,7 @@ const SessionChart: FC<SessionChartProps> = ({
                                                color,
                                                dataSource,
                                                highlightBands,
+                                               isUseClipPath,
                                                slideWindowTime = SLIDE_WINDOW_TIME,
                                                maxPoints = 1000,
                                              }) => {
@@ -110,6 +112,7 @@ const SessionChart: FC<SessionChartProps> = ({
            xScale={xScale}
            yScale={yScale}
            xMax={xMax}
+           isUseClipPath={isUseClipPath}
            yMax={yMax}
            highlightBands={highlightBands}
            isDragging={isDragging}
