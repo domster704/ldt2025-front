@@ -106,14 +106,22 @@ const CTGHistoryParamsTable: React.FC<CTGHistoryParamsTableProps> = ({
         <tr>
           <th></th>
           <th>
-            {ctg1.date?.toLocaleDateString?.() ?? "Исследование 1"}
-            <br/>
-            {ctg1.gestation ?? ""}
+            {
+              ctg1.result?.timestamp &&
+                <>
+                  {new Date(ctg1.result.timestamp).toLocaleDateString() ?? "Исследование 1"}<br/>
+                </>
+            }
+            {ctg1.result?.gest_age ?? ""}
           </th>
           <th>
-            {ctg2.date?.toLocaleDateString?.() ?? "Исследование 2"}
-            <br/>
-            {ctg2.gestation ?? ""}
+            {
+              ctg2.result?.timestamp &&
+                <>
+                  {new Date(ctg2.result.timestamp).toLocaleDateString() ?? "Исследование 1"}<br/>
+                </>
+            }
+            {ctg1.result?.gest_age ?? ""}
           </th>
         </tr>
         </thead>

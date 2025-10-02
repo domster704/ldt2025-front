@@ -48,8 +48,8 @@ const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
   const stvData = useMemo(() => {
     return ctgHistory.map((item) => {
       return {
-        value: item.stv,
-        date: item.date
+        value: item.result?.stv || NaN,
+        date: item.result?.timestamp || new Date(0),
       }
     })
   }, [ctgHistory]);
@@ -58,8 +58,8 @@ const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
   const hrData = useMemo(() => {
     return ctgHistory.map((item) => {
       return {
-        value: item.hr,
-        date: item.date
+        value: item.result?.bpm || NaN,
+        date: item.result?.timestamp || new Date(0)
       };
     });
   }, [ctgHistory]);
@@ -68,8 +68,8 @@ const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
   const accelerationData = useMemo(() => {
     return ctgHistory.map((item) => {
       return {
-        value: item.acceleration,
-        date: item.date
+        value: item.result?.accellations || NaN,
+        date: item.result?.timestamp || new Date(0)
       };
     });
   }, [ctgHistory]);

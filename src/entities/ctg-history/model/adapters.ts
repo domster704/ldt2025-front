@@ -1,5 +1,5 @@
 import {createEntityAdapter} from '@reduxjs/toolkit';
-import {CTGHistoryDTO} from "@entities/ctg-history/model/types";
+import {CTGHistory} from "@entities/ctg-history/model/types";
 
 /**
  * Entity Adapter для управления коллекцией записей КТГ (Cardiotocography History).
@@ -11,14 +11,9 @@ import {CTGHistoryDTO} from "@entities/ctg-history/model/types";
  * ```ts
  * {
  *   ids: number[],        // массив идентификаторов
- *   entities: { [id]: CTGHistoryDTO } // словарь сущностей по id
+ *   entities: { [id]: CTGHistory } // словарь сущностей по id
  * }
  * ```
- *
- * ### Конфигурация:
- * - Тип сущности: {@link CTGHistoryDTO}.
- * - Тип идентификатора: `number`.
- * - `selectId: (ctg) => ctg.id` — в качестве ключа идентификации используется поле `id`.
  *
  * ### Использование:
  * Внутри `ctgHistorySlice` адаптер применяется для:
@@ -46,6 +41,6 @@ import {CTGHistoryDTO} from "@entities/ctg-history/model/types";
  *
  * export default ctgHistorySlice.reducer;
  */
-export const ctgHistoryAdapter = createEntityAdapter<CTGHistoryDTO, number>({
-  selectId: ctg => ctg.id,
+export const ctgHistoryAdapter = createEntityAdapter<CTGHistory, number>({
+  selectId: ctg => ctg.id || 0,
 });

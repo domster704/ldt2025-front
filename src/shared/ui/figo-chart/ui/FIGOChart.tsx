@@ -63,8 +63,12 @@ const FIGOChart: FC<FIGOChartProps> = ({data}) => {
   // Убираем наложения по времени (сдвигаем повторяющиеся даты)
   const normalizedData = useMemo(() => {
     const seen = new Map<number, number>();
+
     return data.map(d => {
-      const time = d.date.getTime();
+      const time = d.result?.timestamp
+        ? new Date(d.result.timestamp).getTime()
+        : Date.now(); // fallback
+
       const count = seen.get(time) ?? 0;
       seen.set(time, count + 1);
 
@@ -130,24 +134,22 @@ const FIGOChart: FC<FIGOChartProps> = ({data}) => {
           />
         ))}
 
-        {/* Линия FIGO-тренда */}
-        <LinePath data={normalizedData}
-                  x={d => xScale(d.uniqueDate) ?? 0}
-                  y={d => yScale(d.figo) ?? 0}
-                  stroke="#003c66"
-                  strokeWidth={4}
+        <LinePath
+          data={normalizedData}
+          x={d => xScale(d.uniqueDate) ?? 0}
+          y={d => d.result?.figo ? yScale(d.result.figo) ?? 0 : 0}
+          stroke="#003c66"
+          strokeWidth={4}
         />
 
-        {/* Точки FIGO */}
         {normalizedData.map(d => (
           <circle key={`circle-${d.id}`}
                   cx={xScale(d.uniqueDate)}
-                  cy={yScale(d.figo)!}
+                  cy={d.result?.figo ? yScale(d.result.figo)! : 0}
                   r={4}
                   fill="white"
                   stroke="steelblue"
-                  strokeWidth={2}
-          />
+                  strokeWidth={2}/>
         ))}
 
         {/* Ось X (даты) */}

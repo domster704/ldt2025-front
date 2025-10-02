@@ -107,10 +107,10 @@ const CTGDashboardCompare: React.FC<CTGDashboardCompareProps> = ({ids}) => {
           </div>
         </div>
 
-        <DashboardInContainer label={ctg1.date.toLocaleDateString()}
+        <DashboardInContainer label={ctg1?.result?.timestamp.toLocaleDateString() || ""}
                               fhrData={fhrData1}
                               ucData={ucData1}/>
-        <DashboardInContainer label={ctg2.date.toLocaleDateString()}
+        <DashboardInContainer label={ctg2?.result?.timestamp.toLocaleDateString() || ""}
                               fhrData={fhrData2}
                               ucData={ucData2}/>
       </div>
@@ -122,12 +122,12 @@ const CTGDashboardCompare: React.FC<CTGDashboardCompareProps> = ({ids}) => {
           style.modalDashboards__content,
         ].join(' ')}>
           <DashboardInContainer className={style.modal__dashboardItem}
-                                label={ctg1.date.toLocaleDateString()}
+                                label={ctg1?.result?.timestamp.toLocaleDateString() || ""}
                                 fhrData={fhrData1}
                                 ucData={ucData1}
                                 isUseClipPath={false}/>
           <DashboardInContainer className={style.modal__dashboardItem}
-                                label={ctg2.date.toLocaleDateString()}
+                                label={ctg2?.result?.timestamp.toLocaleDateString() || ""}
                                 fhrData={fhrData2}
                                 ucData={ucData2}
                                 isUseClipPath={false}/>

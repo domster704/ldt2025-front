@@ -6,7 +6,7 @@ import {useAppSelector} from "@app/store/store";
 import {selectAllCTGHistory} from "@entities/ctg-history/model/selectors";
 import {CTGHistory} from "@entities/ctg-history/model/types";
 import {useCTGHistory} from "@features/ctg-history-selection-provider";
-import {ctgColors} from "@shared/const/ctgColors";
+import {ctgColors, CTGStatus} from "@shared/const/ctgColors";
 
 /**
  * **HistoryTable** — таблица для отображения списка исследований КТГ.
@@ -79,32 +79,32 @@ const HistoryTable: FC = () => {
           </thead>
           <tbody>
           {ctgHistory.map((ctgHistoryItem: CTGHistory) => {
-            const figoColor = ctgColors[ctgHistoryItem.figo];
-            const forecastColor = ctgColors[ctgHistoryItem.forecast];
-            const isSelected = selected.includes(ctgHistoryItem.id);
+            const figoColor = ctgColors[ctgHistoryItem?.result?.figo || CTGStatus.Normal];
+            const forecastColor = ctgColors[ctgHistoryItem?.result?.figo_prognosis || CTGStatus.Normal];
+            const isSelected = selected.includes(ctgHistoryItem?.id || NaN);
 
             return (
               <tr key={ctgHistoryItem.id}
                   className={isSelected ? style.selected : ""}>
-                <td>{ctgHistoryItem.date.toLocaleDateString()}</td>
-                <td>{ctgHistoryItem.gestation}</td>
-                <td>{ctgHistoryItem.hr}</td>
-                <td>{ctgHistoryItem.uc}</td>
+                <td>{ctgHistoryItem.result?.timestamp?.toLocaleDateString()}</td>
+                <td>{ctgHistoryItem.result?.gest_age}</td>
+                <td>{ctgHistoryItem.result?.bpm}</td>
+                <td>{ctgHistoryItem.result?.uc}</td>
                 <td>
                   <span className={style.status}
                         style={{backgroundColor: figoColor}}>
-                    {ctgHistoryItem.figo}
+                    {ctgHistoryItem?.result?.figo}
                   </span>
                 </td>
                 <td>
                   <span className={style.status}
                         style={{backgroundColor: forecastColor}}>
-                    {ctgHistoryItem.forecast}
+                    {ctgHistoryItem?.result?.figo_prognosis}
                   </span>
                 </td>
                 <td>
                   <button className={style.selectButton}
-                          onClick={() => selectCTGHistoryItem(ctgHistoryItem.id)}>
+                          onClick={() => selectCTGHistoryItem(ctgHistoryItem.id || NaN)}>
                     <img src={arrowRightImg} alt=""/>
                   </button>
                 </td>

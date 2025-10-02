@@ -45,6 +45,8 @@ export const fetchAllCTGHistory = createAsyncThunk<CTGHistoryData, number, Thunk
       method: 'GET'
     });
 
-    return await response.json() as CTGHistoryData;
+    return {
+      "data": await response.json()
+    } as CTGHistoryData;
   }
 );

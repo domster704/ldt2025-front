@@ -1,7 +1,7 @@
 import {createAppSelector, RootState} from "@app/store/store";
 import {ctgHistoryAdapter} from "@entities/ctg-history/model/adapters";
-import {CTGHistoryDTO} from "@entities/ctg-history/model/types";
 import {createCachedSelector} from "re-reselect";
+import {CTGHistory} from "@entities/ctg-history/model/types";
 
 const baseSelector = (state: RootState) => state.ctgHistory.items;
 const selectors = ctgHistoryAdapter.getSelectors();
@@ -29,11 +29,11 @@ export const selectAllCTGHistory = createAppSelector(
   (state) =>
     selectors
       .selectAll(state)
-      .map((d: CTGHistoryDTO) => ({
-        ...d,
-        date: new Date(d.date),
-      }))
-      .sort((a, b) => a.date.getTime() - b.date.getTime())
+      .sort((a, b) => {
+        if (!a.result?.timestamp) return -1;
+        if (!b.result?.timestamp) return 1;
+        return a.result.timestamp.getTime() - b.result.timestamp.getTime();
+      })
 );
 
 /**
@@ -59,11 +59,8 @@ export const selectAllCTGHistory = createAppSelector(
 export const selectCTGHistoryById = createCachedSelector(
   [baseSelector, selectCTGHistoryId],
   (items, id) => {
-    const select_: CTGHistoryDTO = selectors.selectById(items, id);
-    return {
-      ...select_,
-      date: new Date(select_.date),
-    };
+    const select_: CTGHistory = selectors.selectById(items, id);
+    return select_
   }
 )(
   (_state, id) => id

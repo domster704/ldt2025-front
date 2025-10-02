@@ -1,8 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {CTGHistoryData, CTGHistoryState} from "@entities/ctg-history/model/types";
+import {CTGHistory, CTGHistoryData, CTGHistoryState} from "@entities/ctg-history/model/types";
 import {ctgHistoryAdapter} from "@entities/ctg-history/model/adapters";
 import {fetchAllCTGHistory} from "@entities/ctg-history/api/ctgHistoryThunk";
 import {mockGraph} from "@entities/ctg-history/model/mockGraphHistory";
+import {figoToCTGStatus} from "@shared/const/ctgColors";
 
 /**
  * Начальное состояние slice истории КТГ.
@@ -55,14 +56,22 @@ const ctgHistorySlice = createSlice({
     builder
       .addCase(fetchAllCTGHistory.fulfilled, (state, action: PayloadAction<CTGHistoryData>) => {
         const {data = null} = action.payload;
-        console.log(data)
         if (data === null) {
           return;
         }
-        data.forEach((item) => {
-          item.graph = mockGraph;
+        const newData: CTGHistory[] = data.map((item) => {
+          return {
+            ...item,
+            graph: mockGraph,
+            result: {
+              ...item.result,
+              figo: item.result?.figo ? figoToCTGStatus[item.result?.figo] : null,
+              figo_prognosis: item.result?.figo_prognosis ? figoToCTGStatus[item.result?.figo_prognosis] : null,
+              timestamp: item.result ? new Date(item.result.timestamp) : null,
+            }
+          } as CTGHistory;
         });
-        ctgHistoryAdapter.setAll(state.items, data);
+        ctgHistoryAdapter.setAll(state.items, newData);
       });
   },
 });

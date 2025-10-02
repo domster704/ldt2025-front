@@ -65,7 +65,7 @@ const CTGDashboardParams: FC<CTGDashboardParamsProps> = ({ctgHistoryId}) => {
       {/* Графики в контейнере с подписью */}
       <ContainerWithLabel className={style.params__chartsContainer}
                           labelPosition={LabelPosition.RIGHT}
-                          label={ctgHistory.date.toLocaleDateString()}>
+                          label={ctgHistory.result?.timestamp.toLocaleDateString() || ''}>
         <Dashboard className={style.params__dashboard}
                    fhrData={fhrData}
                    ucData={ucData}

@@ -26,7 +26,9 @@ const selectors = patientAdapter.getSelectors();
  */
 export const selectAllPatients = createAppSelector(
   baseSelector,
-  (state) => selectors.selectAll(state)
+  (state) => selectors
+    .selectAll(state)
+    .sort((a, b) => a.id - b.id)
 );
 
 /**
