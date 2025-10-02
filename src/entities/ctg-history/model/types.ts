@@ -37,15 +37,22 @@ export interface CTGHistoryAPI {
   graph: SessionUploaded;
 }
 
-export interface CTGResult extends Omit<CTGResultAPI, 'timestamp' | 'figo' | 'figo_prognosis'> {
-  timestamp: Date;
+export interface CTGResultDTO extends Omit<CTGResultAPI, 'figo' | 'figo_prognosis'> {
   figo: CTGStatus;
   figo_prognosis: CTGStatus | null;
 }
 
+export interface CTGResult extends Omit<CTGResultAPI, 'timestamp'> {
+  timestamp: Date;
+}
+
 /** История КТГ (базовая информация о файле/сессии) */
+export interface CTGHistoryDTO extends Omit<CTGHistoryAPI, 'result'> {
+  result?: CTGResultDTO;
+}
+
 export interface CTGHistory extends Omit<CTGHistoryAPI, 'result'> {
-  result?: CTGResult;
+  result: CTGResult;
 }
 
 
@@ -56,5 +63,5 @@ export interface CTGHistoryData {
 
 /** Redux slice state */
 export interface CTGHistoryState {
-  items: EntityState<CTGHistory, number>;
+  items: EntityState<CTGHistoryDTO, number>;
 }

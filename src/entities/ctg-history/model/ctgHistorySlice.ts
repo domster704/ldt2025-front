@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {CTGHistory, CTGHistoryData, CTGHistoryState} from "@entities/ctg-history/model/types";
+import {CTGHistory, CTGHistoryData, CTGHistoryDTO, CTGHistoryState} from "@entities/ctg-history/model/types";
 import {ctgHistoryAdapter} from "@entities/ctg-history/model/adapters";
 import {fetchAllCTGHistory} from "@entities/ctg-history/api/ctgHistoryThunk";
 import {mockGraph} from "@entities/ctg-history/model/mockGraphHistory";
@@ -59,7 +59,7 @@ const ctgHistorySlice = createSlice({
         if (data === null) {
           return;
         }
-        const newData: CTGHistory[] = data.map((item) => {
+        const newData: CTGHistoryDTO[] = data.map((item) => {
           return {
             ...item,
             graph: mockGraph,
@@ -67,9 +67,8 @@ const ctgHistorySlice = createSlice({
               ...item.result,
               figo: item.result?.figo ? figoToCTGStatus[item.result?.figo] : null,
               figo_prognosis: item.result?.figo_prognosis ? figoToCTGStatus[item.result?.figo_prognosis] : null,
-              timestamp: item.result ? new Date(item.result.timestamp) : null,
             }
-          } as CTGHistory;
+          } as CTGHistoryDTO;
         });
         ctgHistoryAdapter.setAll(state.items, newData);
       });

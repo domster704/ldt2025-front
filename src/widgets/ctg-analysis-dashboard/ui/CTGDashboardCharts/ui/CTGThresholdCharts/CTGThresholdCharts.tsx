@@ -48,7 +48,7 @@ const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
   const stvData = useMemo(() => {
     return ctgHistory.map((item) => {
       return {
-        value: item.result?.stv || NaN,
+        value: item.result?.stv || 0,
         date: item.result?.timestamp || new Date(0),
       }
     })
@@ -58,7 +58,7 @@ const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
   const hrData = useMemo(() => {
     return ctgHistory.map((item) => {
       return {
-        value: item.result?.bpm || NaN,
+        value: item.result?.bpm || 0,
         date: item.result?.timestamp || new Date(0)
       };
     });
@@ -68,7 +68,7 @@ const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
   const accelerationData = useMemo(() => {
     return ctgHistory.map((item) => {
       return {
-        value: item.result?.accellations || NaN,
+        value: item.result?.accellations || 0,
         date: item.result?.timestamp || new Date(0)
       };
     });
@@ -98,7 +98,7 @@ const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
                             {label: "dangerous", ranges: [[-1000, 5]], color: "#ffc2ac"},
                           ]}
                           data={accelerationData}
-                          padding={[2, 2]}/>
+                          padding={[5, 5]}/>
     </div>
   );
 }
