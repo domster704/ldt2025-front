@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {ThunkApi} from "@shared/types/types";
 import {$apiUrl} from "@shared/const/constants";
-import {PatientData} from "@entities/patient/model/types";
+import {Patient, PatientData} from "@entities/patient/model/types";
 
 export const fetchAllPatient = createAsyncThunk<PatientData, void, ThunkApi>(
   'patient/fetchAllPatient',
@@ -16,13 +16,13 @@ export const fetchAllPatient = createAsyncThunk<PatientData, void, ThunkApi>(
   }
 );
 
-export const fetchPatientByID = createAsyncThunk<PatientData, number, ThunkApi>(
+export const fetchPatientByID = createAsyncThunk<Patient, number, ThunkApi>(
   'patient/fetchPatientByID',
   async (patient_id: number, {getState}) => {
     const response = await fetch(`${$apiUrl}/http/crud/patients/${patient_id}`, {
       method: 'GET'
     });
 
-    return await response.json() as PatientData;
+    return await response.json() as Patient;
   }
 );

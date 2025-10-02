@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Patient, PatientData, PatientState} from "@entities/patient/model/types";
-import {fetchAllPatient} from "@entities/patient/api/patientThunk";
+import {fetchAllPatient, fetchPatientByID} from "@entities/patient/api/patientThunk";
 import {patientAdapter} from "@entities/patient/model/adapters";
 
 const initialState: PatientState = {
@@ -12,9 +12,6 @@ const patientSlice = createSlice({
   name: 'patient',
   initialState,
   reducers: {
-    setChosen(state, action: PayloadAction<Patient>) {
-      state.chosen = action.payload;
-    }
   },
   extraReducers: builder => {
     builder
@@ -26,10 +23,11 @@ const patientSlice = createSlice({
 
         patientAdapter.setAll(state.items, data);
       })
+      .addCase(fetchPatientByID.fulfilled, (state, action: PayloadAction<Patient>) => {
+        state.chosen = action.payload;
+      })
   },
 });
 
-export const {
-  setChosen
-} = patientSlice.actions;
+export const {} = patientSlice.actions;
 export default patientSlice.reducer;
