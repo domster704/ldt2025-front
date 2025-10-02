@@ -17,15 +17,13 @@
 
   overflow-y: auto;
 
-  * {
+  p {
     font-family: var(--font-family);
     font-size: 1rem;
     line-height: 150%;
     letter-spacing: -0.01em;
     color: var(--chernyy-);
-  }
-}
 
-.anamnesis__scrollWrapper ul {
-  padding-left: 1.5rem;
+    white-space: pre-line;
+  }
 }

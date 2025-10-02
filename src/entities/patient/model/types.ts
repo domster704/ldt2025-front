@@ -20,6 +20,7 @@ export interface PatientAdditionalInfo {
   blood_gap_glu: number | null;
   blood_gap_lac: number | null;
   blood_gap_be: number | null;
+  anamnesis: string | null;
 }
 
 /**
