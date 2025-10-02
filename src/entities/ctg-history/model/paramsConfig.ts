@@ -36,32 +36,32 @@
  */
 export const PARAM_GROUPS = [
   [
-    {key: "hr", label: "Базальная ЧСС, уд/мин"},
-    {key: "osc_amplitude", label: "Амплитуда осцилляций, уд/мин"},
-    {key: "osc_frequency", label: "Частота осцилляций, осц/мин"},
+    {key: "result.bhr", label: "Базальная ЧСС, уд/мин"},
+    {key: "result.amplitude_oscillations", label: "Амплитуда осцилляций, уд/мин"},
+    {key: "result.oscillation_frequency", label: "Частота осцилляций, осц/мин"},
   ],
   [
-    {key: "ltv", label: "ДВВ (LTV) за сеанс, мс"},
-    {key: "stv", label: "КВВ (STV) за сеанс, мс"},
-    {key: "stv10", label: "КВВ (STV) за 10 мин, мс"},
+    {key: "result.ltv", label: "ДВВ (LTV) за сеанс, мс"},
+    {key: "result.stv", label: "КВВ (STV) за сеанс, мс"},
+    {key: "result.stv_little", label: "КВВ (STV) за 10 мин, мс"},
   ],
   [
-    {key: "acc15", label: "Акцелерации >15 уд/мин"},
-    {key: "acc10", label: "Акцелерации >10 уд/мин"},
-    {key: "decelerations_all", label: "Децелерации все"},
+    {key: "result.accellations", label: "Акцелерации >15 уд/мин"},
+    {key: "result.accellations_little", label: "Акцелерации >10 уд/мин"},
+    {key: "result.deceleration", label: "Децелерации все"},
   ],
   [
-    {key: "decelerations_s", label: "Децелерации S >20 ударов"},
-    {key: "uc", label: "Сокращений матки"},
-    {key: "variability_high", label: "Высокая вариабельность, мин"},
+    {key: "result.deceleration_little", label: "Децелерации S >20 ударов"},
+    {key: "result.uterine_contractions", label: "Сокращений матки"},
+    {key: "result.high_variability", label: "Высокая вариабельность, мин"},
   ],
   [
-    {key: "fetal_movements_session", label: "Шевелений плода, за сеанс"},
-    {key: "variability_low", label: "Низкая вариабельность, мин"},
-    {key: "fetal_movements_hour", label: "Шевелений плода, в час"},
+    {key: "result.fetal_movements", label: "Шевелений плода, за сеанс"},
+    {key: "result.low_variability", label: "Низкая вариабельность, мин"},
+    {key: "result.fetal_movements_little", label: "Шевелений плода, в час"},
   ],
   [
-    {key: "signal_loss", label: "Потеря сигнала (%)"},
+    {key: "result.loss_signals", label: "Потеря сигнала (%)"},
   ],
 ];
 
@@ -72,6 +72,6 @@ export const PARAM_GROUPS = [
  * - `forecast` — прогноз FIGO (ожидаемое изменение состояния).
  */
 export const PREDICTIONS = [
-  {key: "figo", label: "КТГ по FIGO"},
-  {key: "forecast", label: "Прогноз FIGO"},
+  {key: "result.figo", label: "КТГ по FIGO"},
+  {key: "result.figo_prognosis", label: "Прогноз FIGO"},
 ];

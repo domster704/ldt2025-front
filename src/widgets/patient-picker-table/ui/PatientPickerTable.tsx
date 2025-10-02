@@ -7,6 +7,7 @@ import userBlackImg from '@shared/assets/img/userBlack.svg';
 import {Patient} from "@entities/patient/model/types";
 import {useNavigate} from "react-router-dom";
 import {fetchPatientByID} from "@entities/patient/api/patientThunk";
+import {fetchAllCTGHistory} from "@entities/ctg-history/api/ctgHistoryThunk";
 
 interface PatientPickerTableProps {
 }
@@ -60,7 +61,8 @@ const PatientPickerTable: FC<PatientPickerTableProps> = ({}) => {
    * Загружает данные пациента и возвращает пользователя назад.
    */
   const handleSelectPatient = async (patient: Patient) => {
-    await dispatch(fetchPatientByID(patient.id)).unwrap();
+    await dispatch(fetchPatientByID(patient.id));
+    await dispatch(fetchAllCTGHistory(patient.id));
     navigate(-1);
   }
 

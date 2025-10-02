@@ -38,10 +38,10 @@ import {$apiUrl} from "@shared/const/constants";
  *   dispatch(fetchAllCTGHistory());
  * }, [dispatch]);
  */
-export const fetchAllCTGHistory = createAsyncThunk<CTGHistoryData, void, ThunkApi>(
+export const fetchAllCTGHistory = createAsyncThunk<CTGHistoryData, number, ThunkApi>(
   'ctg/fetchAllCTGHistory',
-  async (_, {getState}) => {
-    const response = await fetch(`${$apiUrl}/history`, {
+  async (patientId: number, {getState}) => {
+    const response = await fetch(`${$apiUrl}/http/crud/ctg_histories?patient=${patientId}`, {
       method: 'GET'
     });
 

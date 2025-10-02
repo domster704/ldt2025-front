@@ -153,8 +153,8 @@ function formatValue(value: unknown) {
 }
 
 /** Универсальный геттер поля по ключу */
-function getValue(ctg: CTGHistory, key: string) {
-  return (ctg as any)[key];
+function getValue(obj: any, path: string) {
+  return path.split('.').reduce((acc, part) => acc?.[part], obj);
 }
 
 /** Определение цвета ячейки для FIGO/прогноза */

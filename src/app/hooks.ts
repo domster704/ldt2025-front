@@ -3,6 +3,7 @@ import {useEffect} from "react";
 import {setInitialColors} from "@entities/settings/model/settingsSlice";
 import {setInitialSounds} from "@entities/sound/model/soundSlice";
 import {fetchAllPatient} from "@entities/patient/api/patientThunk";
+import {fetchAllCTGHistory} from "@entities/ctg-history/api/ctgHistoryThunk";
 
 /**
  * Хук для начальной инициализации приложения.

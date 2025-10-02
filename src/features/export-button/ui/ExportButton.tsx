@@ -1,50 +1,26 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useAppSelector} from "@app/store/store";
-import {selectHeartRates, selectUterineContractions} from "@entities/session-stream";
+import {selectHeartRates, selectLastHypoxiaProbability, selectUterineContractions} from "@entities/session-stream";
 import {DashboardInContainer} from "@widgets/dashboard";
 import ActionButton from "@shared/ui/action-button";
 import exportImg from "@shared/assets/img/export.svg";
 import html2canvas from "html2canvas";
 
-/**
- * Кнопка для экспорта графика КТГ (FHR/UC) в изображение.
- *
- * ---
- * ### Основная логика:
- * - При нажатии на кнопку рендерит скрытый блок с {@link DashboardInContainer},
- *   который содержит графики ЧСС плода (FHR) и маточной активности (UC).
- * - Использует библиотеку **html2canvas**, чтобы превратить этот блок в canvas.
- * - Преобразует canvas в `dataURL` и автоматически скачивает файл как `ctg-export.jpg`.
- *
- * ---
- * ### Состояния:
- * - `renderDashboard: boolean` — отвечает за то, рендерится ли временный контейнер с графиком для экспорта.
- *
- * ---
- * ### Технические детали:
- * - `setTimeout(100ms)` используется, чтобы гарантировать отрисовку DOM перед захватом.
- * - Используется `useCORS: true` для поддержки загрузки ресурсов (например, шрифтов, иконок).
- * - После экспорта временный контейнер удаляется (чтобы не мешал UI).
- *
- * ---
- * @component
- * @example
- * ```tsx
- * import ExportButton from "@features/export-button";
- *
- * const Toolbar = () => (
- *   <div>
- *     <ExportButton />
- *   </div>
- * );
- * ```
- */
 const ExportButton: React.FC = () => {
   const fhrData = useAppSelector(selectHeartRates);
   const ucData = useAppSelector(selectUterineContractions);
+  const hypoxiaProba = useAppSelector(selectLastHypoxiaProbability);
 
   const ref = useRef<HTMLDivElement>(null);
   const [renderDashboard, setRenderDashboard] = useState(false);
+
+  // считаем длительность по FHR
+  const sessionMinutes = React.useMemo(() => {
+    if (fhrData.length < 2) return 0;
+    const start = fhrData[0].x;
+    const end = fhrData[fhrData.length - 1].x;
+    return Math.round((end - start) / 1000 / 60); // минуты
+  }, [fhrData]);
 
   useEffect(() => {
     const doExport = async () => {
@@ -61,13 +37,11 @@ const ExportButton: React.FC = () => {
           backgroundColor: "#fff"
         });
 
-        // Превращаем canvas в изображение
         const data = canvas.toDataURL("image/jpg");
         const link = document.createElement("a");
         link.href = data;
         link.download = "ctg-export.jpg";
 
-        // Автоскачивание
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -97,15 +71,77 @@ const ExportButton: React.FC = () => {
           inset: "0",
           width: "100vw",
           height: "100vh",
-          backgroundColor: "#fff"
+          backgroundColor: "#fff",
+          padding: "20px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "20px",
+          transform: "translateY(-400vw)", // скрыто из UI
         }}>
+          {/* Верхний текст */}
+          <div style={{textAlign: "center"}}>
+            <h3>Кардиотокография плода (КТГ)</h3>
+            <p>
+              Дата: {new Date().toLocaleDateString("ru-RU")} | Сеанс: {sessionMinutes} мин
+            </p>
+          </div>
+
+          {/* Графики */}
           <DashboardInContainer
             label="График FHR/UC"
             fhrData={fhrData}
             ucData={ucData}
+            style={{flex: 1}}
           />
+
+          {/* Нижние показатели */}
+          <div style={{
+            marginTop: "20px",
+            borderTop: "1px solid #ccc",
+            paddingTop: "15px"
+          }}>
+            <h4 style={{marginBottom: "10px"}}>Показатели</h4>
+            <table style={{width: "100%", borderCollapse: "collapse", marginBottom: "15px"}}>
+              <tbody>
+              <tr>
+                <td style={{padding: "4px 8px", fontWeight: 500}}>Базальная ЧСС</td>
+                <td style={{padding: "4px 8px"}}>139 уд/мин</td>
+              </tr>
+              <tr style={{backgroundColor: "#f9f9f9"}}>
+                <td style={{padding: "4px 8px", fontWeight: 500}}>Амплитуда осцилляций</td>
+                <td style={{padding: "4px 8px"}}>12 уд/мин</td>
+              </tr>
+              <tr>
+                <td style={{padding: "4px 8px", fontWeight: 500}}>Частота осцилляций</td>
+                <td style={{padding: "4px 8px"}}>11 осц/мин</td>
+              </tr>
+              <tr style={{backgroundColor: "#f9f9f9"}}>
+                <td style={{padding: "4px 8px", fontWeight: 500}}>STV</td>
+                <td style={{padding: "4px 8px"}}>3.2 мс</td>
+              </tr>
+              <tr>
+                <td style={{padding: "4px 8px", fontWeight: 500}}>Потеря сигнала</td>
+                <td style={{padding: "4px 8px"}}>5%</td>
+              </tr>
+              <tr style={{backgroundColor: "#f9f9f9"}}>
+                <td style={{padding: "4px 8px", fontWeight: 500}}>FIGO</td>
+                <td style={{padding: "4px 8px"}}>Подозрительная</td>
+              </tr>
+              </tbody>
+            </table>
+
+            <h4 style={{marginBottom: "5px"}}>Заключение</h4>
+            <p style={{
+              background: "#f5f5f5",
+              padding: "10px 12px",
+              borderRadius: "6px"
+            }}>
+              Вероятность гипоксии: {hypoxiaProba != null ? (hypoxiaProba * 100).toFixed(1) + "%" : "нет данных"}
+            </p>
+          </div>
         </div>
       )}
+
     </div>
   );
 };

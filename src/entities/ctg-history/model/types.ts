@@ -1,62 +1,48 @@
 import {EntityState} from "@reduxjs/toolkit";
 import {SessionUploaded} from "@entities/session-upload";
-import {CTGStatus} from "@shared/const/ctgColors";
 
-/**
- * Модель одной записи истории КТГ (Cardiotocography History).
- *
- * ### Поля:
- * - `id` — уникальный идентификатор записи.
- * - `date` — дата исследования (в виде {@link Date}).
- * - `gestation` — срок беременности (например, `"38+2 нед"`).
- * - `figo` — оценка КТГ по классификации FIGO ({@link CTGStatus}).
- * - `forecast` — прогноз по FIGO ({@link CTGStatus}).
- * - `stv` — краткосрочная вариабельность (Short-Term Variability).
- * - `hr` — базальная частота сердечных сокращений плода (уд./мин).
- * - `uc` — маточные сокращения.
- * - `acceleration` — количество акцелераций.
- * - `graph` — загруженный график сессии ({@link SessionUploaded}).
- */
+/** Полный результат КТГ (анализ, вычисляемые метрики) */
+export interface CTGResult {
+  ctg_id: number;
+  gest_age: number | null;
+  bpm: number | null;
+  uc: number | null;
+  figo: string | null;
+  figo_prognosis: string | null;
+  bhr: number | null;
+  amplitude_oscillations: number | null;
+  oscillation_frequency: number | null;
+  ltv: number | null;
+  stv: number | null;
+  stv_little: number | null;
+  accellations: number | null;
+  deceleration: number | null;
+  uterine_contractions: number | null;
+  fetal_movements: number | null;
+  fetal_movements_little: number | null;
+  accellations_little: number | null;
+  deceleration_little: number | null;
+  high_variability: number | null;
+  low_variability: number | null;
+  loss_signals: number | null;
+  timestamp: string; // или Date, если парсишь на фронте
+}
+
+/** История КТГ (базовая информация о файле/сессии) */
 export interface CTGHistory {
   id: number;
-  date: Date;
-  gestation: string;
-  figo: CTGStatus;
-  forecast: CTGStatus;
-
-  stv: number;
-  hr: number;
-  uc: number;
-  acceleration: number;
-
-  graph: SessionUploaded;
+  file_path: string;
+  archive_path: string;
+  graph?: SessionUploaded;
+  result?: CTGResult;  // прикреплённый результат, если есть
 }
 
-/**
- * DTO-версия {@link CTGHistory}, в которой поле `date` хранится как строка.
- *
- * Используется при работе с API (сервер возвращает дату строкой).
- */
-export interface CTGHistoryDTO extends Omit<CTGHistory, "date"> {
-  /** Дата исследования в строковом формате (например, `"2025-08-19"`) */
-  date: string;
-}
-
-/**
- * Состояние slice истории КТГ.
- *
- * - `items` — нормализованный список записей истории
- *   (создаётся через {@link createEntityAdapter}).
- */
-export interface CTGHistoryState {
-  items: EntityState<CTGHistoryDTO, number>;
-}
-
-/**
- * Формат данных, возвращаемый API при запросе истории КТГ.
- *
- * - `data` — массив DTO-записей {@link CTGHistoryDTO}.
- */
+/** DTO для API: список историй по пациенту */
 export interface CTGHistoryData {
-  data: CTGHistoryDTO[];
+  data: CTGHistory[];
+}
+
+/** Redux slice state */
+export interface CTGHistoryState {
+  items: EntityState<CTGHistory, number>;
 }
