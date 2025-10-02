@@ -6,7 +6,7 @@ import {HighlightBand} from "@shared/ui/chart/ui/Chart";
 import {StreamPoint} from "@entities/session-stream";
 
 const MARGIN = {top: 8, right: 32, bottom: 24, left: 30};
-const PADDING = 30;
+const PADDING = 50;
 /** Дефолтное окно отображения: 6 минут */
 const SLIDE_WINDOW_TIME = 6 * 60 * 1000;
 
