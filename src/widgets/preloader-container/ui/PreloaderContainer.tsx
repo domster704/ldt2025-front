@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import * as style from './PreloaderContainer.module.css'
 import {useAppSelector} from "@app/store/store";
-import PreLoader from "@shared/ui/preloader/ui/Preloader/Preloader";
+import Preloader from "@shared/ui/preloader";
 import {selectLoadingStatus} from "@entities/session-upload/model/selectors";
 
 interface PreloaderContainerProps {
@@ -17,7 +17,7 @@ const PreloaderContainer: FC<PreloaderContainerProps> = ({}) => {
   return (
     <div className={style.preloaderContainer}>
       <div className={style.preloaderContent}>
-        <PreLoader/>
+        <Preloader/>
       </div>
     </div>
   );
