@@ -37,7 +37,7 @@ const PatientPickerTable: FC<PatientPickerTableProps> = ({}) => {
           <tr key={patient.id} onClick={() => handleSelectPatient(patient)}>
             <td className={style.patientName}>
               <img src={userBlackImg} alt={"userBlackImg"}/>
-              {patient.name}
+              {patient.fio}
             </td>
             <td>12:30</td>
             <td>29.09.25</td>

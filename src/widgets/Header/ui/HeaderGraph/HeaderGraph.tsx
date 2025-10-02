@@ -35,7 +35,7 @@ const HeaderGraph: FC = () => {
       <div className={style.header__main}>
         <div className={style.info}>
           <img src={userIcon} alt={""}/>
-          <p>{patient.name}</p>
+          <p>{patient.fio}</p>
           <p>Срок: 38+2 нед</p>
         </div>
         <div className={style.status}>

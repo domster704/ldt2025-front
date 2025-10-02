@@ -2,13 +2,9 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Patient, PatientData, PatientState} from "@entities/patient/model/types";
 import {fetchAllPatient} from "@entities/patient/api/patientThunk";
 import {patientAdapter} from "@entities/patient/model/adapters";
-import {mockPatients} from "@entities/patient/model/mockData";
 
 const initialState: PatientState = {
-  items: patientAdapter.setAll(
-    patientAdapter.getInitialState(),
-    mockPatients
-  ),
+  items: patientAdapter.getInitialState(),
   chosen: null
 };
 

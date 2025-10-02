@@ -15,8 +15,8 @@ export const STV_CONFIG: IndicatorConfig = {
   label: "STV",
   subLabel: "мс",
   zones: [
-    {label: "good", ranges: [[3, Infinity]]},
-    {label: "bad", ranges: [[0, 2.9]]},
+    {label: "good", ranges: [[5, 25], [25, 40]]},
+    {label: "bad", ranges: [[0, 4.99], [40, Infinity]]},
   ],
 };
 
@@ -25,7 +25,7 @@ export const UC_CONFIG: IndicatorConfig = {
   label: "TOCO",
   subLabel: "%",
   zones: [
-    {label: "good", ranges: [[0, 60]]},
-    {label: "bad", ranges: [[61, Infinity]]},
+    {label: "good", ranges: [[0, Infinity]]},
+    {label: "bad", ranges: []},
   ],
 };

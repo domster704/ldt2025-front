@@ -2,6 +2,7 @@ import {useAppDispatch} from "@app/store/store";
 import {useEffect} from "react";
 import {setInitialColors} from "@entities/settings/model/settingsSlice";
 import {setInitialSounds} from "@entities/sound/model/soundSlice";
+import {fetchAllPatient} from "@entities/patient/api/patientThunk";
 
 export function useBootstrap() {
   const dispatch = useAppDispatch();
@@ -25,6 +26,7 @@ export function useBootstrap() {
     }
 
     async function init() {
+      await dispatch(fetchAllPatient());
     }
 
     init().then();
