@@ -10,7 +10,7 @@ COPY build/ build/
 COPY src/ src/
 COPY .babelrc tsconfig.json webpack.config.js ./
 
-RUN npm ci
+RUN npm i --force
 RUN npm run-script build
 
 FROM nginx:1.27.1-alpine3.20 AS nginx
