@@ -1,6 +1,44 @@
 import {useContext} from "react";
 import {CTGHistorySelectionContext} from "@features/ctg-history-selection-provider/lib/context";
 
+/**
+ * Кастомный хук для работы с контекстом выбора КТГ-истории.
+ *
+ * 🔹 Оборачивает {@link useContext} для {@link CTGHistorySelectionContext}.
+ * Гарантирует, что хук используется только внутри провайдера {@link CTGHistorySelectionProvider}.
+ *
+ * ---
+ * ### Что возвращает:
+ * Объект контекста:
+ * - `selected: number[]` — массив id выбранных КТГ-записей.
+ * - `toggle(id: number)` — переключение выбора записи.
+ * - `clear()` — очистка выбора.
+ *
+ * ---
+ * ### Ошибки:
+ * - Если хук вызван вне `CTGHistorySelectionProvider`, выбрасывает исключение:
+ *   `"useCTGHistory must be used within CTGHistorySelectionProvider"`.
+ *
+ * ---
+ * @example
+ * ```tsx
+ * import {useCTGHistory} from "@features/ctg-history-selection-provider";
+ *
+ * const HistoryTableRow = ({id}: {id: number}) => {
+ *   const {selected, toggle} = useCTGHistory();
+ *   const isSelected = selected.includes(id);
+ *
+ *   return (
+ *     <tr
+ *       style={{background: isSelected ? "#eef" : "transparent"}}
+ *       onClick={() => toggle(id)}
+ *     >
+ *       <td>Исследование {id}</td>
+ *     </tr>
+ *   );
+ * };
+ * ```
+ */
 export function useCTGHistory() {
   const ctx = useContext(CTGHistorySelectionContext);
   if (!ctx) {

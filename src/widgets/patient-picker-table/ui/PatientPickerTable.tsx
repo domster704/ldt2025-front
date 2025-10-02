@@ -4,20 +4,61 @@ import {useAppDispatch, useAppSelector} from "@app/store/store";
 import {selectAllPatients} from "@entities/patient/model/selectors";
 
 import userBlackImg from '@shared/assets/img/userBlack.svg';
-import {setChosen} from "@entities/patient/model/patientSlice";
 import {Patient} from "@entities/patient/model/types";
 import {useNavigate} from "react-router-dom";
 import {fetchPatientByID} from "@entities/patient/api/patientThunk";
 
 interface PatientPickerTableProps {
-
 }
 
+/**
+ * **PatientPickerTable** — таблица для выбора пациента из списка.
+ *
+ * ---
+ * ### Основные задачи:
+ * - Получает список пациентов из Redux Store через {@link selectAllPatients}.
+ * - Отображает каждого пациента строкой таблицы:
+ *   - ФИО.
+ *   - Время приёма (пока статично — `12:30`).
+ *   - Дата (пока статично — `29.09.25`).
+ * - При клике по строке:
+ *   1. Загружает подробную информацию о пациенте (через {@link fetchPatientByID}).
+ *   2. Устанавливает выбранного пациента в `Redux Store`.
+ *   3. Возвращает пользователя на предыдущую страницу (`navigate(-1)`).
+ *
+ * ---
+ * ### Визуальная структура:
+ * ```
+ * ┌───────────────────────────────────────────────┐
+ * | Пациент            | Время приёма |   Дата    |
+ * ├───────────────────────────────────────────────┤
+ * | Иванов Иван Иван   |     12:30    | 29.09.25  |
+ * | Петров Петр Петр   |     12:30    | 29.09.25  |
+ * └───────────────────────────────────────────────┘
+ * ```
+ *
+ * ---
+ * ### Пример использования:
+ * ```tsx
+ * import PatientPickerTable from "@widgets/patient-picker-table";
+ *
+ * const PatientPickerPage = () => (
+ *   <div>
+ *     <h2>Выбор пациента</h2>
+ *     <PatientPickerTable />
+ *   </div>
+ * );
+ * ```
+ */
 const PatientPickerTable: FC<PatientPickerTableProps> = ({}) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const patients = useAppSelector(selectAllPatients);
 
+  /**
+   * Обработчик выбора пациента.
+   * Загружает данные пациента и возвращает пользователя назад.
+   */
   const handleSelectPatient = async (patient: Patient) => {
     await dispatch(fetchPatientByID(patient.id)).unwrap();
     navigate(-1);
@@ -33,18 +74,17 @@ const PatientPickerTable: FC<PatientPickerTableProps> = ({}) => {
       </tr>
       </thead>
       <tbody>
-      {
-        patients.map((patient: Patient) => (
-          <tr key={patient.id} onClick={() => handleSelectPatient(patient)}>
-            <td className={style.patientName}>
-              <img src={userBlackImg} alt={"userBlackImg"}/>
-              {patient.fio}
-            </td>
-            <td>12:30</td>
-            <td>29.09.25</td>
-          </tr>
-        ))
-      }
+      {patients.map((patient: Patient) => (
+        <tr key={patient.id} onClick={() => handleSelectPatient(patient)}>
+          <td className={style.patientName}>
+            <img src={userBlackImg} alt="user icon"/>
+            {patient.fio}
+          </td>
+          {/*  TODO: Пока время и дата статичны, но можно будет заменить на реальные данные */}
+          <td>12:30</td>
+          <td>29.09.25</td>
+        </tr>
+      ))}
       </tbody>
     </table>
   );

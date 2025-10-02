@@ -2,9 +2,57 @@ import React, {FC, useCallback, useState} from 'react';
 import {CTGHistorySelectionContext} from "../lib/context";
 
 interface CTGHistorySelectionProviderProps {
+  /** Дочерние элементы, которые получат доступ к контексту выбора истории КТГ */
   children: React.ReactNode;
 }
 
+/**
+ * Провайдер контекста выбора записей истории КТГ.
+ *
+ * ### Назначение:
+ * Управляет выбором 0–2 записей истории КТГ для отображения:
+ * - 0 записей → режим графиков (charts).
+ * - 1 запись → просмотр параметров одного исследования.
+ * - 2 записи → режим сравнения.
+ *
+ * ### Логика выбора:
+ * - Если элемент уже выбран → он снимается.
+ * - Если выбран один элемент → добавляется второй.
+ * - Если выбрано два элемента → сохраняется последний + новый.
+ *
+ * ### Контекст:
+ * В {@link CTGHistorySelectionContext} передаются:
+ * - `selected: number[]` — массив выбранных ID.
+ * - `toggle(id: number)` — переключение элемента.
+ * - `clear()` — очистка выбора.
+ *
+ * @example
+ * ```tsx
+ * import {useCTGHistory} from "@features/ctg-history-selection-provider";
+ *
+ * const HistoryRow = ({id}: {id: number}) => {
+ *   const {selected, toggle, clear} = useCTGHistory();
+ *
+ *   return (
+ *     <div>
+ *       <button
+ *         style={{background: selected.includes(id) ? "lightblue" : "white"}}
+ *         onClick={() => toggle(id)}
+ *       >
+ *         Выбрать {id}
+ *       </button>
+ *       <button onClick={clear}>Очистить</button>
+ *     </div>
+ *   );
+ * };
+ *
+ * // Подключение провайдера
+ * <CTGHistorySelectionProvider>
+ *   <HistoryRow id={1} />
+ *   <HistoryRow id={2} />
+ * </CTGHistorySelectionProvider>
+ * ```
+ */
 export const CTGHistorySelectionProvider: FC<CTGHistorySelectionProviderProps> = ({children}) => {
   const [selected, setSelected] = useState<number[]>([]);
 

@@ -7,27 +7,44 @@ import {CTGHistory} from "@entities/ctg-history/model/types";
 type Mode = "single" | "compare";
 
 interface CTGHistoryParamsTableProps extends React.TableHTMLAttributes<HTMLTableElement> {
+  /**
+   * Режим отображения:
+   * - `"single"` — параметры для одной записи КТГ.
+   * - `"compare"` — сравнение двух исследований.
+   */
   mode: Mode;
+  /** Данные для отображения: одно исследование или массив из двух для сравнения */
   data: CTGHistory | CTGHistory[];
 }
 
-function formatValue(value: unknown) {
-  if (value instanceof Date) return value.toLocaleDateString();
-  if (value == null) return "—";
-  return String(value);
-}
-
-function getValue(ctg: CTGHistory, key: string) {
-  return (ctg as any)[key];
-}
-
-function getFIGOBg(value: CTGStatus): string | undefined {
-  if (!value) {
-    return;
-  }
-  return ctgColors[value];
-}
-
+/**
+ * Таблица параметров истории КТГ.
+ *
+ * ### Возможности:
+ * - В режиме `single` показывает параметры одного исследования:
+ *   - значения из {@link PARAM_GROUPS} (ЧСС, вариабельность, UC, акцелерации и т.п.);
+ *   - прогнозы из {@link PREDICTIONS} (FIGO, прогноз FIGO);
+ *   - цвет фона для FIGO и прогноза зависит от статуса ({@link CTGStatus}) и берётся из {@link ctgColors}.
+ *
+ * - В режиме `compare` отображает сравнение двух исследований:
+ *   - заголовок таблицы включает даты и срок гестации обоих исследований;
+ *   - каждая строка показывает параметр для обеих записей рядом;
+ *   - ячейки FIGO/прогноза подсвечиваются цветом статуса.
+ *
+ * ### Форматирование:
+ * - Дата (`Date`) → локализованная строка (`toLocaleDateString`).
+ * - `null`/`undefined` → `"—"`.
+ *
+ * ### Использование:
+ * @example
+ * ```tsx
+ * // Отобразить одно исследование
+ * <CTGHistoryParamsTable mode="single" data={historyItem} />
+ *
+ * // Сравнить два исследования
+ * <CTGHistoryParamsTable mode="compare" data={[historyItem1, historyItem2]} />
+ * ```
+ */
 const CTGHistoryParamsTable: React.FC<CTGHistoryParamsTableProps> = ({
                                                                        mode,
                                                                        data,
@@ -37,21 +54,20 @@ const CTGHistoryParamsTable: React.FC<CTGHistoryParamsTableProps> = ({
     const ctg = data as CTGHistory;
 
     return (
-      <table {...props} className={[
-        style.table,
-        props.className || '',
-      ].join(' ')}>
+      <table {...props} className={[style.table, props.className || ''].join(' ')}>
         <tbody>
         {PARAM_GROUPS.map((group, gi) => (
           <tr key={gi}>
             {group.map((param, pi) => (
               <React.Fragment key={pi}>
                 <td>{param.label}</td>
-                <td style={{
-                  backgroundColor: param.key.includes("figo") || param.key.includes("forecast")
-                    ? getFIGOBg(getValue(ctg, param.key))
-                    : undefined
-                }}>
+                <td
+                  style={{
+                    backgroundColor: param.key.includes("figo") || param.key.includes("forecast")
+                      ? getFIGOBg(getValue(ctg, param.key))
+                      : undefined
+                  }}
+                >
                   {formatValue(formatValue(getValue(ctg, param.key)))}
                 </td>
               </React.Fragment>
@@ -60,7 +76,9 @@ const CTGHistoryParamsTable: React.FC<CTGHistoryParamsTableProps> = ({
         ))}
         <tr>
           {PREDICTIONS.map((p, i) => (
-            <td key={i} className={style.table__predict} colSpan={2}
+            <td key={i}
+                className={style.table__predict}
+                colSpan={2}
                 style={{
                   backgroundColor: getFIGOBg(getValue(ctg, p.key))
                 }}>
@@ -80,15 +98,10 @@ const CTGHistoryParamsTable: React.FC<CTGHistoryParamsTableProps> = ({
 
   if (mode === "compare") {
     const [ctg1, ctg2] = data as CTGHistory[];
-
     const flatParams = [...PARAM_GROUPS.flat(), ...PREDICTIONS];
 
     return (
-      <table {...props} className={[
-        style.table,
-        style.table__compare,
-        props.className || '',
-      ].join(' ')}>
+      <table {...props} className={[style.table, style.table__compare, props.className || ''].join(' ')}>
         <thead>
         <tr>
           <th></th>
@@ -131,5 +144,23 @@ const CTGHistoryParamsTable: React.FC<CTGHistoryParamsTableProps> = ({
 
   return null;
 };
+
+/** Форматирование значения для отображения в таблице */
+function formatValue(value: unknown) {
+  if (value instanceof Date) return value.toLocaleDateString();
+  if (value == null) return "—";
+  return String(value);
+}
+
+/** Универсальный геттер поля по ключу */
+function getValue(ctg: CTGHistory, key: string) {
+  return (ctg as any)[key];
+}
+
+/** Определение цвета ячейки для FIGO/прогноза */
+function getFIGOBg(value: CTGStatus): string | undefined {
+  if (!value) return;
+  return ctgColors[value];
+}
 
 export default CTGHistoryParamsTable;

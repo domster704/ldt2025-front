@@ -5,12 +5,67 @@ import SessionChart from "@widgets/session-chart";
 import {StreamPoint} from "@entities/session-stream";
 
 interface DashboardProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Данные частоты сердечных сокращений плода (FHR) */
   fhrData: StreamPoint[];
+  /** Данные маточных сокращений (UC) */
   ucData: StreamPoint[];
+  /**
+   * Длительность окна отображения по оси X (в миллисекундах).
+   * Используется для скроллинга и масштабирования графика.
+   */
   slideWindowTime?: number;
+  /**
+   * Максимальное количество точек, которое может отображаться на графике.
+   * Остальные будут прорежены (downsampling).
+   */
   maxPoints?: number;
 }
 
+/**
+ * **Dashboard** — компонент для отображения двух основных графиков:
+ *
+ * - **FHR (частота сердечных сокращений плода)** — верхний график.
+ * - **UC (маточные сокращения)** — нижний график.
+ *
+ * ---
+ * ### Особенности:
+ * - Использует {@link SessionChart} для отрисовки каждого графика.
+ * - У FHR графика добавлена подсветка диапазона нормы (110–150 уд/мин).
+ * - Принимает параметры `slideWindowTime` и `maxPoints` для контроля
+ *   прокрутки и производительности.
+ * - Поддерживает стандартные HTML-пропсы `div` (например, `className`, `style`).
+ *
+ * ---
+ * ### Визуальная структура:
+ * ```
+ * +-----------------------------------+
+ * |  [График FHR] (с подсветкой нормы)|
+ * |-----------------------------------|
+ * |  [График UC]                      |
+ * +-----------------------------------+
+ * ```
+ *
+ * ---
+ * ### Пример использования:
+ * ```tsx
+ * import Dashboard from "@widgets/dashboard";
+ *
+ * const Example = () => (
+ *   <Dashboard
+ *     fhrData={[
+ *       {x: Date.now(), y: 140},
+ *       {x: Date.now() + 1000, y: 138},
+ *     ]}
+ *     ucData={[
+ *       {x: Date.now(), y: 15},
+ *       {x: Date.now() + 1000, y: 18},
+ *     ]}
+ *     slideWindowTime={60000}   // окно 1 минута
+ *     maxPoints={1000}          // максимум 1000 точек
+ *   />
+ * );
+ * ```
+ */
 const Dashboard: FC<DashboardProps> = ({
                                          fhrData,
                                          ucData,
@@ -23,6 +78,7 @@ const Dashboard: FC<DashboardProps> = ({
       style.dashboard__graphs,
       props.className || ''
     ].join(' ')}>
+      {/* График FHR (с подсветкой диапазона нормы) */}
       <SessionChart color={"#c59e00"}
                     slideWindowTime={slideWindowTime}
                     maxPoints={maxPoints}
@@ -32,6 +88,7 @@ const Dashboard: FC<DashboardProps> = ({
                       to: 150,
                       fill: "#ccedd1"
                     }]}/>
+      {/* График UC */}
       <SessionChart color={"#003459"}
                     slideWindowTime={slideWindowTime}
                     maxPoints={maxPoints}

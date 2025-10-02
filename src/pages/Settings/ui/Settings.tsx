@@ -8,9 +8,51 @@ import SoundManager from "@widgets/sound-manager";
 import ContainerWithLabel from "@shared/ui/container-with-label";
 
 interface SettingsProps {
-
 }
 
+/**
+ * Страница "Настройки".
+ *
+ * ---
+ * ### Основные секции:
+ * 1. **Цветовая индикация фона**
+ *    - Управляется компонентом {@link ColorsPicker}.
+ *    - Пользователь может выбрать цвета для нормального состояния и для предупреждений.
+ *
+ * 2. **Звуковые сигналы**
+ *    - Управляется компонентом {@link SoundManager}.
+ *    - Позволяет включать/выключать звуки, заменять стандартные аудиофайлы и сохранять настройки.
+ *
+ * 3. **Системная информация**
+ *    - Статический блок, показывающий состояние устройства:
+ *      - заполненность внутренней памяти;
+ *      - дата последней выгрузки архива.
+ *    - В реальном приложении этот блок может быть связан с API системы.
+ *
+ * ---
+ * ### Обёртки:
+ * - {@link PageWrapper} — общий каркас страницы.
+ * - {@link SimpleHeader} — заголовок "Настройки".
+ * - {@link ContainerWithLabel} — стилизованные контейнеры с заголовками для каждого раздела.
+ *
+ * ---
+ * ### Redux:
+ * - Через `useAppDispatch` можно расширять поведение (например, сохранять настройки на сервере).
+ * - На данный момент логика вынесена в {@link settingsSlice} и {@link soundSlice}.
+ *
+ * ---
+ * @component
+ * @example
+ * ```tsx
+ * import Settings from "@pages/settings";
+ *
+ * const AppRoutes = () => (
+ *   <Routes>
+ *     <Route path="/settings" element={<Settings />} />
+ *   </Routes>
+ * );
+ * ```
+ */
 const Settings: FC<SettingsProps> = ({}) => {
   const dispatch = useAppDispatch();
 

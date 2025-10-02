@@ -11,6 +11,47 @@ import {selectChosenPatient} from "@entities/patient/model/selectors";
 import {useNavigate} from "react-router-dom";
 import {selectCurrentPage} from "@entities/global/model/selectors";
 
+/**
+ * Кнопка для запуска и остановки эмуляции потока КТГ.
+ *
+ * ---
+ * ### Основная логика:
+ * - Если поток **уже запущен**:
+ *   - Останавливает его через {@link stopStreaming}.
+ *   - Полностью сбрасывает состояние через {@link resetStream}.
+ *
+ * - Если поток **не запущен**:
+ *   1. Проверяет, выбран ли пациент:
+ *      - Если нет — перенаправляет на страницу выбора пациента ({@link PATIENT_PICKER_PAGE_URL}).
+ *   2. Проверяет, находимся ли мы на странице статуса или контекста:
+ *      - Если нет — автоматически переходит на {@link STATUS_PAGE_URL}.
+ *   3. Открывает скрытый `<input type="file">` для загрузки архива `.zip`.
+ *
+ * - После выбора файла:
+ *   - Проверяет расширение (`.zip`) с помощью {@link validateFile}.
+ *   - Отправляет файл на сервер (`/http/crud/extract-signals`) через `FormData`.
+ *   - Если запрос успешен → запускает поток через {@link startStreaming}.
+ *   - Если ошибка → останавливает и сбрасывает поток.
+ *
+ * ---
+ * ### Состояния:
+ * - `streaming: boolean` — идёт ли сейчас эмуляция.
+ * - `patient` — выбранный пациент (если нет — переход на выбор пациента).
+ * - `currentPage` — текущая страница (нужна для проверки, где запускать эмуляцию).
+ *
+ * ---
+ * @component
+ * @example
+ * ```tsx
+ * import StartEmulationButton from "@features/start-session/ui/StartEmulationButton";
+ *
+ * const FooterActionsPanel = () => (
+ *   <nav>
+ *     <StartEmulationButton />
+ *   </nav>
+ * );
+ * ```
+ */
 const StartEmulationButton: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -19,6 +60,7 @@ const StartEmulationButton: FC = () => {
   const patient = useAppSelector(selectChosenPatient);
   const currentPage = useAppSelector(selectCurrentPage);
 
+  /** Обработчик клика по кнопке "Старт/Стоп" */
   const handleClick = () => {
     if (streaming) {
       dispatch(stopStreaming());
@@ -37,7 +79,9 @@ const StartEmulationButton: FC = () => {
     }
 
     fileInputRef.current?.click();
-  }
+  };
+
+  /** Обработчик выбора файла (.zip) для запуска эмуляции */
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
     const file = e.target.files?.[0];
@@ -74,16 +118,18 @@ const StartEmulationButton: FC = () => {
 
   return (
     <>
-      <ActionButton icon={streaming ? stopIcon : startIcon}
-                    text={streaming ? "Стоп" : "Старт"}
-                    type="button"
-                    onClick={() => handleClick()}
+      <ActionButton
+        icon={streaming ? stopIcon : startIcon}
+        text={streaming ? "Стоп" : "Старт"}
+        type="button"
+        onClick={() => handleClick()}
       />
-      <input ref={fileInputRef}
-             type="file"
-             accept=".zip"
-             style={{display: "none"}}
-             onChange={handleFile}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".zip"
+        style={{display: "none"}}
+        onChange={handleFile}
       />
     </>
   );

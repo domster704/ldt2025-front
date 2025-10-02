@@ -5,11 +5,46 @@ import {selectGoodColor, selectWarningColor} from "@entities/settings/model/sele
 import {hexToRgb} from "@shared/lib/utils/convertHEXToRGB";
 import {CTGStatus} from "@shared/const/ctgColors";
 
-
+/**
+ * Свойства компонента {@link ColorProvider}.
+ */
 interface ColorProviderProps {
+  /**
+   * Дочерние элементы, которые будут обёрнуты провайдером контекста.
+   */
   children: ReactNode;
 }
 
+/**
+ * Провайдер контекста для управления цветовой схемой интерфейса
+ * в зависимости от статуса КТГ (Cardiotocography).
+ *
+ * ### Основная логика:
+ * - Получает статус КТГ из `Redux store`.
+ * - Если статус равен {@link CTGStatus.Normal}, применяется «хороший» цвет.
+ * - Если статус отличается от нормы — применяется «предупреждающий» цвет.
+ * - Цвет преобразуется из HEX в RGB и передаётся в контекст.
+ *
+ * ### Что отдаёт контекст:
+ * - `status` — текущий статус КТГ.
+ * - `color.hex` — выбранный цвет в формате HEX.
+ * - `color.rgb` — выбранный цвет в формате `r, g, b`.
+ *
+ * ### Применение:
+ * Компонент создаёт CSS-переменные:
+ * - `--indicator-color` — выбранный HEX-цвет.
+ * - `--indicator-color-rgb` — RGB-значение.
+ *
+ * Эти переменные можно использовать в стилях дочерних компонентов.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <ColorProvider>
+ *   <App />
+ * </ColorProvider>
+ * ```
+ */
 export const ColorProvider: FC<ColorProviderProps> = ({children}) => {
   const status = useAppSelector((state: RootState) => state.sessionStream.status);
   const chosenWarningColor = useAppSelector(selectWarningColor);
@@ -20,7 +55,8 @@ export const ColorProvider: FC<ColorProviderProps> = ({children}) => {
 
   return (
     <ColorContext.Provider value={{
-      status, color: {
+      status,
+      color: {
         hex: current,
         rgb: currentRGB
       }

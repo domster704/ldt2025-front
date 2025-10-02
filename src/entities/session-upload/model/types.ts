@@ -1,5 +1,3 @@
-import {EntityState} from "@reduxjs/toolkit";
-
 export interface DataPoint {
   time_sec: number;
   value: number;
@@ -15,11 +13,6 @@ export interface SessionUploaded {
   }
 }
 
-export interface UploadState {
-  session: SessionUploaded | null;
-}
-
 export interface SessionUploadedState {
-  items: EntityState<SessionUploaded, string>;
   loading: boolean;
 }

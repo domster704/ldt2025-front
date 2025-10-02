@@ -6,9 +6,39 @@ import {SimpleHeader} from "@widgets/header";
 import PatientPickerTable from "@widgets/patient-picker-table";
 
 interface PatientPickerProps {
-
 }
 
+/**
+ * Страница "Выбор пациента".
+ *
+ * ---
+ * ### Основные элементы:
+ * - {@link PageWrapper} — общий контейнер страницы.
+ * - {@link SimpleHeader} — заголовок с текстом "Выбор пациента".
+ * - {@link PatientPickerTable} — таблица со списком доступных пациентов:
+ *   - отображает имя пациента и дополнительные данные;
+ *   - при клике на строку выбирает пациента и возвращает на предыдущую страницу.
+ *
+ * ---
+ * ### Логика:
+ * - Состояние пациентов хранится в Redux (см. `patientSlice`).
+ * - `PatientPickerTable` получает список пациентов через селектор `selectAllPatients`.
+ * - При выборе пациента вызывается thunk `fetchPatientByID`, чтобы загрузить детальную информацию.
+ * - После выбора выполняется `navigate(-1)` → возврат на предыдущую страницу (например, статус или контекст).
+ *
+ * ---
+ * @component
+ * @example
+ * ```tsx
+ * import PatientPicker from "@pages/patient-picker";
+ *
+ * const AppRoutes = () => (
+ *   <Routes>
+ *     <Route path="/patient-picker" element={<PatientPicker />} />
+ *   </Routes>
+ * );
+ * ```
+ */
 const PatientPicker: FC<PatientPickerProps> = ({}) => {
   const global = useAppSelector(state => state.global);
   const dispatch = useAppDispatch();

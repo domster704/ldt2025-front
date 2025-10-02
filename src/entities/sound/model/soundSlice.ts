@@ -8,6 +8,15 @@ import criticalSound from "@shared/assets/sounds/critical.mp3";
 
 const STORAGE_KEY = "soundsState";
 
+/**
+ * Начальный набор звуков приложения.
+ *
+ * Каждый звук имеет:
+ * - `id` — уникальный тип звука ({@link SoundType}).
+ * - `name` — читаемое название.
+ * - `fileName` — путь к звуковому файлу (по умолчанию встроенные).
+ * - `enabled` — активен ли звук.
+ */
 const initialSounds: Sound[] = [
   {
     id: SoundType.SensorShift,
@@ -29,7 +38,12 @@ const initialSounds: Sound[] = [
   },
 ];
 
-
+/**
+ * Восстановление состояния звуков из `localStorage`.
+ *
+ * - Если данные отсутствуют → возвращает {@link initialSounds}.
+ * - Если JSON повреждён → откат к начальному состоянию.
+ */
 function loadFromStorage(): SoundState {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -40,8 +54,55 @@ function loadFromStorage(): SoundState {
   }
 }
 
+/**
+ * Начальное состояние слайса звуков.
+ * - Загружается из `localStorage`, если данные там есть.
+ * - В противном случае используется дефолтный список {@link initialSounds}.
+ */
 const initialState: SoundState = loadFromStorage();
 
+/**
+ * Slice Redux для управления звуками приложения.
+ *
+ * ### Состояние:
+ * - `items: Sound[]` — список доступных звуков (вкл/выкл, имя файла, кастомность).
+ * - `playing: SoundType | null` — текущий проигрываемый звук.
+ *
+ * ### Reducers:
+ * - `toggleSound(SoundType)`
+ *   Переключает состояние звука (вкл/выкл).
+ *
+ * - `replaceSound({id, fileName})`
+ *   Заменяет файл для конкретного звука.
+ *   Устанавливает флаг `custom = true`, чтобы пометить заменённый звук.
+ *
+ * - `setPlaying(SoundType | null)`
+ *   Устанавливает идентификатор текущего проигрываемого звука
+ *   или `null`, если воспроизведение остановлено.
+ *
+ * - `setInitialSounds(SoundState)`
+ *   Полностью заменяет состояние (например, при восстановлении из `localStorage`).
+ *
+ * ### LocalStorage:
+ * - Все изменения синхронизируются с `localStorage` через listener middleware (`soundListeners`).
+ *
+ * @example
+ * ```tsx
+ * const dispatch = useAppDispatch();
+ *
+ * // Выключить звук предупреждения
+ * dispatch(toggleSound(SoundType.Warning));
+ *
+ * // Заменить звук критического состояния
+ * dispatch(replaceSound({id: SoundType.Critical, fileName: "new-critical.mp3"}));
+ *
+ * // Воспроизведение звука
+ * dispatch(setPlaying(SoundType.SensorShift));
+ *
+ * // Восстановление состояния из сохранённых данных
+ * dispatch(setInitialSounds(savedState));
+ * ```
+ */
 const soundSlice = createSlice({
   name: "sounds",
   initialState,
@@ -74,4 +135,5 @@ export const {
   setPlaying,
   setInitialSounds
 } = soundSlice.actions;
+
 export default soundSlice.reducer;

@@ -4,10 +4,47 @@ import ThresholdChartCard from "@widgets/threshold-chart-card";
 import {CTGHistory} from "@entities/ctg-history/model/types";
 
 interface CTGThresholdChartsProps {
+  /** История КТГ для отображения динамики параметров */
   ctgHistory: CTGHistory[]
 }
 
+/**
+ * **CTGThresholdCharts** — компонент для отображения
+ * трёх графиков параметров КТГ с пороговыми зонами:
+ *
+ * - **STV (Short-Term Variability, мс)** — кратковременная вариабельность.
+ * - **Базальная ЧСС (уд/мин)** — частота сердечных сокращений плода.
+ * - **Количество акцелераций (шт)**.
+ *
+ * ---
+ * ### Основные задачи:
+ * - Преобразует массив `ctgHistory` в три отдельных датасета:
+ *   - `stvData` — динамика STV,
+ *   - `hrData` — динамика базальной ЧСС,
+ *   - `accelerationData` — динамика количества акцелераций.
+ * - Передаёт данные в {@link ThresholdChartCard}, где
+ *   визуализируются линии с подсветкой зон «норма», «сомнительно», «опасно».
+ *
+ * ---
+ * ### Цветовые зоны (пример для STV):
+ * - `#c3ffac` — зелёная зона (норма).
+ * - `#ffe7ac` — жёлтая зона (сомнительное значение).
+ * - `#ffc2ac` — красная зона (опасное значение).
+ *
+ * ---
+ * ### Пример использования:
+ * ```tsx
+ * import {useAppSelector} from "@app/store/store";
+ * import {selectAllCTGHistory} from "@entities/ctg-history/model/selectors";
+ *
+ * const AnalysisSection = () => {
+ *   const history = useAppSelector(selectAllCTGHistory);
+ *   return <CTGThresholdCharts ctgHistory={history} />;
+ * };
+ * ```
+ */
 const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
+  // подготовка данных для графика STV
   const stvData = useMemo(() => {
     return ctgHistory.map((item) => {
       return {
@@ -17,22 +54,24 @@ const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
     })
   }, [ctgHistory]);
 
+  // подготовка данных для графика ЧСС
   const hrData = useMemo(() => {
     return ctgHistory.map((item) => {
       return {
         value: item.hr,
         date: item.date
-      }
-    })
+      };
+    });
   }, [ctgHistory]);
 
+  // подготовка данных для графика акцелераций
   const accelerationData = useMemo(() => {
     return ctgHistory.map((item) => {
       return {
         value: item.acceleration,
         date: item.date
-      }
-    })
+      };
+    });
   }, [ctgHistory]);
 
   return (

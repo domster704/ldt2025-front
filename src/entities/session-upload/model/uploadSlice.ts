@@ -1,10 +1,7 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {SessionUploaded, SessionUploadedState} from "@entities/session-upload/model/types";
-import {fetchMonitoringSession} from "@entities/session-upload/api/sessionUploadThunk";
-import {sessionUploadedAdapter} from "@entities/session-upload/model/adapter";
+import {createSlice} from "@reduxjs/toolkit";
+import {SessionUploadedState} from "@entities/session-upload/model/types";
 
 const initialState: SessionUploadedState = {
-  items: sessionUploadedAdapter.getInitialState(),
   loading: false
 };
 
@@ -13,17 +10,6 @@ const uploadSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder
-      .addCase(fetchMonitoringSession.pending, (state, action) => {
-        state.loading = true;
-      })
-      .addCase(fetchMonitoringSession.rejected, (state, action) => {
-        state.loading = false;
-      })
-      .addCase(fetchMonitoringSession.fulfilled, (state, action: PayloadAction<SessionUploaded>) => {
-        state.loading = false;
-        sessionUploadedAdapter.addOne(state.items, action.payload);
-      })
   }
 });
 

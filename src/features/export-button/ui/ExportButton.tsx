@@ -6,6 +6,39 @@ import ActionButton from "@shared/ui/action-button";
 import exportImg from "@shared/assets/img/export.svg";
 import html2canvas from "html2canvas";
 
+/**
+ * Кнопка для экспорта графика КТГ (FHR/UC) в изображение.
+ *
+ * ---
+ * ### Основная логика:
+ * - При нажатии на кнопку рендерит скрытый блок с {@link DashboardInContainer},
+ *   который содержит графики ЧСС плода (FHR) и маточной активности (UC).
+ * - Использует библиотеку **html2canvas**, чтобы превратить этот блок в canvas.
+ * - Преобразует canvas в `dataURL` и автоматически скачивает файл как `ctg-export.jpg`.
+ *
+ * ---
+ * ### Состояния:
+ * - `renderDashboard: boolean` — отвечает за то, рендерится ли временный контейнер с графиком для экспорта.
+ *
+ * ---
+ * ### Технические детали:
+ * - `setTimeout(100ms)` используется, чтобы гарантировать отрисовку DOM перед захватом.
+ * - Используется `useCORS: true` для поддержки загрузки ресурсов (например, шрифтов, иконок).
+ * - После экспорта временный контейнер удаляется (чтобы не мешал UI).
+ *
+ * ---
+ * @component
+ * @example
+ * ```tsx
+ * import ExportButton from "@features/export-button";
+ *
+ * const Toolbar = () => (
+ *   <div>
+ *     <ExportButton />
+ *   </div>
+ * );
+ * ```
+ */
 const ExportButton: React.FC = () => {
   const fhrData = useAppSelector(selectHeartRates);
   const ucData = useAppSelector(selectUterineContractions);
@@ -28,10 +61,13 @@ const ExportButton: React.FC = () => {
           backgroundColor: "#fff"
         });
 
+        // Превращаем canvas в изображение
         const data = canvas.toDataURL("image/jpg");
         const link = document.createElement("a");
         link.href = data;
         link.download = "ctg-export.jpg";
+
+        // Автоскачивание
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);

@@ -13,9 +13,41 @@ import {IndicatorsPanelPlacement} from "@widgets/indicators-panel/ui/IndicatorsP
 import HistoryLogs from "@widgets/history-logs";
 
 interface CTGStatusPageProps {
-
 }
 
+/**
+ * Страница "Статус КТГ".
+ *
+ * ---
+ * ### Основные элементы:
+ * - {@link ColorProvider} — контекст цветовой схемы (норма / предупреждение).
+ * - {@link ColorSignalWrapper} — обёртка для фоновой цветовой индикации состояния.
+ * - {@link HeaderGraph} — панель с ФИО пациента, прогнозом и текущим FIGO-статусом.
+ * - {@link IndicatorsPanel} (в режиме {@link IndicatorsPanelPlacement.Row}) —
+ *   отображает ключевые показатели (ЧСС, STV, UC и др.) в строке под хедером.
+ * - {@link HistoryLogs} — список уведомлений (журнал событий за сессию).
+ * - {@link DashboardStream} — график ЧСС плода (FHR) и маточной активности (UC),
+ *   данные для которого приходят из {@link WebsocketProvider}.
+ * - {@link PreloaderContainer} — оверлей-загрузчик, показывается во время загрузки данных.
+ *
+ * ---
+ * ### Логика:
+ * - Подключение к WebSocket (`$wsApiUrl`) осуществляется только если включён флаг `streaming` в Redux.
+ * - Все данные (графики, статус FIGO, уведомления) обновляются в реальном времени из WebSocket.
+ *
+ * ---
+ * @component
+ * @example
+ * ```tsx
+ * import CTGStatusPage from "@pages/ctg-status-page";
+ *
+ * const AppRoutes = () => (
+ *   <Routes>
+ *     <Route path="/status" element={<CTGStatusPage />} />
+ *   </Routes>
+ * );
+ * ```
+ */
 const CTGStatusPage: FC<CTGStatusPageProps> = ({}) => {
   const streaming = useAppSelector((state) => state.sessionStream.streaming);
 
@@ -34,12 +66,11 @@ const CTGStatusPage: FC<CTGStatusPageProps> = ({}) => {
               </WebsocketProvider>
             </div>
           </main>
-
         </ColorSignalWrapper>
       </ColorProvider>
       <PreloaderContainer/>
     </>
   );
-}
+};
 
 export default CTGStatusPage;

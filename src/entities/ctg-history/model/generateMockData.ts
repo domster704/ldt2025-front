@@ -34,7 +34,7 @@ function randomDateString(): string {
 }
 
 export function generateMockHistory(count = 15): string {
-  return Array.from({ length: count }, (_, i) => {
+  return Array.from({length: count}, (_, i) => {
     const date = randomDateString();
 
     const figoKey = randomStatusKey();
