@@ -33,7 +33,7 @@ export const selectAllCTGHistory = createAppSelector(
         ...d,
         result: {
           ...d.result,
-          timestamp: new Date(d.result?.timestamp || new Date()),
+          timestamp: new Date(d.result?.timestamp || Date.now()),
         }
       } as CTGHistory))
       .sort((a, b) => a.result.timestamp.getTime() - a.result.timestamp.getTime()) as CTGHistory[]
@@ -67,7 +67,7 @@ export const selectCTGHistoryById = createCachedSelector(
       ...select_,
       result: {
         ...select_.result,
-        timestamp: new Date(select_.result?.timestamp || new Date())
+        timestamp: new Date(select_.result?.timestamp || Date.now())
       }
     } as CTGHistory;
   }
