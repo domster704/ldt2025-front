@@ -3,7 +3,7 @@ import {AnalysisResult, CTGHistoryData, CTGHistoryDTO, CTGHistoryState} from "@e
 import {ctgHistoryAdapter} from "@entities/ctg-history/model/adapters";
 import {fetchAllCTGHistory, fetchAllCTGHistoryAnalysis} from "@entities/ctg-history/api/ctgHistoryThunk";
 import {mockGraph} from "@entities/ctg-history/model/mockGraphHistory";
-import {figoToCTGStatus} from "@shared/const/ctgColors";
+import {CTGStatus, figoToCTGStatus} from "@shared/const/ctgColors";
 
 /**
  * Начальное состояние slice истории КТГ.
@@ -61,16 +61,25 @@ const ctgHistorySlice = createSlice({
           return;
         }
         const newData: CTGHistoryDTO[] = data.map((item) => {
+          const res = item.result
+            ? {
+              ...item.result,
+              figo: figoToCTGStatus[item.result.figo] ?? CTGStatus.Normal,
+              figo_prognosis: item.result.figo_prognosis
+                ? figoToCTGStatus[item.result.figo_prognosis]
+                : null,
+              accelerations: (item.result as any).accelerations ?? 0,
+              accelerations_little: (item.result as any).accelerations_little ?? 0,
+            }
+            : undefined;
+
           return {
             ...item,
-            graph: mockGraph,
-            result: {
-              ...item.result,
-              figo: item.result?.figo ? figoToCTGStatus[item.result?.figo] : null,
-              figo_prognosis: item.result?.figo_prognosis ? figoToCTGStatus[item.result?.figo_prognosis] : null,
-            }
+            graph: item.graph ?? mockGraph,
+            result: res as any,
           } as CTGHistoryDTO;
         });
+
         ctgHistoryAdapter.setAll(state.items, newData);
       })
       .addCase(fetchAllCTGHistoryAnalysis.fulfilled, (state, action: PayloadAction<AnalysisResult>) => {

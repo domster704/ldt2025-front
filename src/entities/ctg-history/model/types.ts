@@ -16,12 +16,12 @@ export interface CTGResultAPI {
   ltv: number;
   stv: number;
   stv_little: number;
-  accellations: number;
+  accelerations: number;
   deceleration: number;
   uterine_contractions: number;
   fetal_movements: number;
   fetal_movements_little: number;
-  accellations_little: number;
+  accelerations_little: number;
   deceleration_little: number;
   high_variability: number;
   low_variability: number;
@@ -31,7 +31,7 @@ export interface CTGResultAPI {
 
 export interface CTGHistoryAPI {
   id: number | null;
-  file_path: string;
+  dir_path: string;
   archive_path: string | null;
   result?: CTGResultAPI;
   graph: SessionUploaded;
@@ -42,7 +42,7 @@ export interface CTGResultDTO extends Omit<CTGResultAPI, 'figo' | 'figo_prognosi
   figo_prognosis: CTGStatus | null;
 }
 
-export interface CTGResult extends Omit<CTGResultAPI, 'timestamp'> {
+export interface CTGResult extends Omit<CTGResultDTO, 'timestamp'> {
   timestamp: Date;
 }
 

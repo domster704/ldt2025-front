@@ -4,7 +4,8 @@ import {AxisBottom, AxisLeft} from "@visx/axis";
 import {LinePath} from "@visx/shape";
 import {CTGHistory} from "@entities/ctg-history/model/types";
 import {useResizeObserver} from "@shared/lib/hooks/useResizeObserver";
-import {ctgColors, CTGStatus} from "@shared/const/ctgColors";
+import {CTGStatus} from "@shared/const/ctgColors";
+import {getColorByCTGStatus} from "@shared/lib/utils/ctgColorUtils";
 
 interface FIGOChartProps {
   /** История КТГ (массив обследований) */
@@ -129,7 +130,7 @@ const FIGOChart: FC<FIGOChartProps> = ({data}) => {
                 y1={yScale(level)!}
                 x2={innerWidth}
                 y2={yScale(level)!}
-                stroke={ctgColors[level]}
+                stroke={getColorByCTGStatus(level)}
                 strokeWidth={7}
           />
         ))}

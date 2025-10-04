@@ -6,7 +6,7 @@ import {useAppSelector} from "@app/store/store";
 import {selectAllCTGHistory} from "@entities/ctg-history/model/selectors";
 import {CTGHistory} from "@entities/ctg-history/model/types";
 import {useCTGHistory} from "@features/ctg-history-selection-provider";
-import {ctgColors, CTGStatus} from "@shared/const/ctgColors";
+import {getColorByCTGStatus} from "@shared/lib/utils/ctgColorUtils";
 
 /**
  * **HistoryTable** — таблица для отображения списка исследований КТГ.
@@ -79,8 +79,8 @@ const HistoryTable: FC = () => {
           </thead>
           <tbody>
           {ctgHistory.map((ctgHistoryItem: CTGHistory) => {
-            const figoColor = ctgColors[ctgHistoryItem?.result?.figo || CTGStatus.Normal];
-            const forecastColor = ctgColors[ctgHistoryItem?.result?.figo_prognosis || CTGStatus.Normal];
+            const figoColor = getColorByCTGStatus(ctgHistoryItem.result?.figo);
+            const forecastColor = getColorByCTGStatus(ctgHistoryItem.result?.figo_prognosis);
             const isSelected = selected.includes(ctgHistoryItem?.id || NaN);
 
             return (

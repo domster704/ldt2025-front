@@ -14,12 +14,11 @@ const ExportButton: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [renderDashboard, setRenderDashboard] = useState(false);
 
-  // считаем длительность по FHR
   const sessionMinutes = React.useMemo(() => {
     if (fhrData.length < 2) return 0;
     const start = fhrData[0].x;
     const end = fhrData[fhrData.length - 1].x;
-    return Math.round((end - start) / 1000 / 60); // минуты
+    return Math.round((end - start) / 1000 / 60);
   }, [fhrData]);
 
   useEffect(() => {
@@ -76,9 +75,8 @@ const ExportButton: React.FC = () => {
           display: "flex",
           flexDirection: "column",
           gap: "20px",
-          transform: "translateY(-400vw)", // скрыто из UI
+          transform: "translateY(-400vw)",
         }}>
-          {/* Верхний текст */}
           <div style={{textAlign: "center"}}>
             <h3>Кардиотокография плода (КТГ)</h3>
             <p>
@@ -86,7 +84,6 @@ const ExportButton: React.FC = () => {
             </p>
           </div>
 
-          {/* Графики */}
           <DashboardInContainer
             label="График FHR/UC"
             fhrData={fhrData}
@@ -94,7 +91,6 @@ const ExportButton: React.FC = () => {
             style={{flex: 1}}
           />
 
-          {/* Нижние показатели */}
           <div style={{
             marginTop: "20px",
             borderTop: "1px solid #ccc",

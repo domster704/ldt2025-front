@@ -29,7 +29,7 @@ export interface IWebsocketContext {
    * Функция для отправки данных на сервер через WebSocket.
    * Должна сериализовать объект в JSON или отправить строку.
    */
-  send: (data: any) => void;
+  send: (data: unknown) => void;
 }
 
 /**

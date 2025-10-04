@@ -4,12 +4,13 @@ import {validateFile} from "@features/start-session/lib/validation";
 
 import startIcon from "@shared/assets/img/start.svg";
 import stopIcon from "@shared/assets/img/stop.svg";
-import {$apiUrl, CONTEXT_PAGE_URL, PATIENT_PICKER_PAGE_URL, STATUS_PAGE_URL} from "@shared/const/constants";
+import {CONTEXT_PAGE_URL, PATIENT_PICKER_PAGE_URL, STATUS_PAGE_URL} from "@shared/const/constants";
 import {resetStream, startStreaming, stopStreaming} from "@entities/session-stream/model/sessionStreamSlice";
 import ActionButton from "@shared/ui/action-button";
 import {selectChosenPatient} from "@entities/patient/model/selectors";
 import {useNavigate} from "react-router-dom";
 import {selectCurrentPage} from "@entities/global/model/selectors";
+import {startEmulation} from "@entities/session-upload/api/startEmulationThunk";
 
 /**
  * Кнопка для запуска и остановки эмуляции потока КТГ.
@@ -55,10 +56,12 @@ import {selectCurrentPage} from "@entities/global/model/selectors";
 const StartEmulationButton: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const streaming = useAppSelector((state) => state.sessionStream.streaming);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const patient = useAppSelector(selectChosenPatient);
   const currentPage = useAppSelector(selectCurrentPage);
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   /** Обработчик клика по кнопке "Старт/Стоп" */
   const handleClick = () => {
@@ -94,18 +97,7 @@ const StartEmulationButton: FC = () => {
     }
 
     try {
-      const formData = new FormData();
-      formData.append("archive", file);
-
-      const res = await fetch(`${$apiUrl}/http/crud/extract-signals`, {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!res.ok) {
-        throw new Error("Ошибка при запуске эмуляции");
-      }
-
+      await dispatch(startEmulation(file)).unwrap();
       dispatch(startStreaming());
     } catch (err) {
       dispatch(stopStreaming());

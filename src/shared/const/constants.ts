@@ -7,7 +7,7 @@
  * @example
  * fetch(`${$apiUrl}/http/crud/patients`)
  */
-export const $apiUrl: string = process.env.API_URL ?? 'https://api.lct2025.ln-kr.ru';
+export const $apiUrl: string = process.env.API_URL ?? 'http://127.0.0.1:8010';
 
 /**
  * Базовый URL для WebSocket API.
@@ -18,7 +18,7 @@ export const $apiUrl: string = process.env.API_URL ?? 'https://api.lct2025.ln-kr
  * @example
  * const ws = new WebSocket($wsApiUrl);
  */
-export const $wsApiUrl: string = process.env.WS_URL ?? 'ws://api.lct2025.ln-kr.ru/ws/streaming/';
+export const $wsApiUrl: string = process.env.WS_URL ?? 'ws://127.0.0.1:8010/ws/streaming/';
 
 /**
  * Тип всех допустимых путей внутри приложения.

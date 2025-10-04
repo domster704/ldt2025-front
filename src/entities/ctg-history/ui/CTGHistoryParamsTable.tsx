@@ -1,8 +1,9 @@
 import React from "react";
 import * as style from "./CTGHistoryParamsTable.module.css";
 import {PARAM_GROUPS, PREDICTIONS} from "@entities/ctg-history/model/paramsConfig";
-import {ctgColors, CTGStatus} from "@shared/const/ctgColors";
+import {CTGStatus} from "@shared/const/ctgColors";
 import {CTGHistory} from "@entities/ctg-history/model/types";
+import {getColorByCTGStatus} from "@shared/lib/utils/ctgColorUtils";
 
 type Mode = "single" | "compare";
 
@@ -168,7 +169,7 @@ function getValue(obj: any, path: string) {
 /** Определение цвета ячейки для FIGO/прогноза */
 function getFIGOBg(value: CTGStatus): string | undefined {
   if (!value) return;
-  return ctgColors[value];
+  return getColorByCTGStatus(value);
 }
 
 export default CTGHistoryParamsTable;

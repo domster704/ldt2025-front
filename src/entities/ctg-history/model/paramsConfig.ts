@@ -46,8 +46,8 @@ export const PARAM_GROUPS = [
     {key: "result.stv_little", label: "КВВ (STV) за 10 мин, мс"},
   ],
   [
-    {key: "result.accellations", label: "Акцелерации >15 уд/мин"},
-    {key: "result.accellations_little", label: "Акцелерации >10 уд/мин"},
+    {key: "result.accelerations", label: "Акцелерации >15 уд/мин"},
+    {key: "result.accelerations_little", label: "Акцелерации >10 уд/мин"},
     {key: "result.deceleration", label: "Децелерации все"},
   ],
   [

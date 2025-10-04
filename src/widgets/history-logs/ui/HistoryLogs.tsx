@@ -4,7 +4,7 @@ import {useAppSelector} from "@app/store/store";
 import {selectAllNotifications} from "@entities/session-stream";
 import ContainerWithLabel from "@shared/ui/container-with-label";
 import {NotificationEntry, ProcessNotification} from "@entities/session-stream/model/types";
-import {colorToCTGStatus, ctgColors, NotificationColor} from "@shared/const/ctgColors";
+import {getColorByNotification} from "@shared/lib/utils/ctgColorUtils";
 
 interface HistoryLogItemProps {
   /** Время события (в миллисекундах) */
@@ -32,8 +32,7 @@ interface HistoryLogItemProps {
 const HistoryLogItem: FC<HistoryLogItemProps> = memo(({time, notification}) => {
   const date = new Date(time);
 
-  const status = colorToCTGStatus[notification.color as NotificationColor];
-  const bgColor = ctgColors[status];
+  const bgColor = getColorByNotification(notification.color);
 
   return (
     <div className={style.logItem} style={{backgroundColor: bgColor}}>

@@ -46,32 +46,26 @@ interface CTGThresholdChartsProps {
 const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
   // подготовка данных для графика STV
   const stvData = useMemo(() => {
-    return ctgHistory.map((item) => {
-      return {
-        value: item.result?.stv || 0,
-        date: item.result?.timestamp || new Date(0),
-      }
-    })
+    return ctgHistory.map((item) => ({
+      value: item.result?.stv || 0,
+      date: item.result?.timestamp || new Date(0),
+    }));
   }, [ctgHistory]);
 
   // подготовка данных для графика ЧСС
   const hrData = useMemo(() => {
-    return ctgHistory.map((item) => {
-      return {
-        value: item.result?.bpm || 0,
-        date: item.result?.timestamp || new Date(0)
-      };
-    });
+    return ctgHistory.map((item) => ({
+      value: item.result?.bpm || 0,
+      date: item.result?.timestamp || new Date(0),
+    }));
   }, [ctgHistory]);
 
   // подготовка данных для графика акцелераций
   const accelerationData = useMemo(() => {
-    return ctgHistory.map((item) => {
-      return {
-        value: item.result?.accellations || 0,
-        date: item.result?.timestamp || new Date(0)
-      };
-    });
+    return ctgHistory.map((item) => ({
+      value: item.result?.accelerations || 0,
+      date: item.result?.timestamp || new Date(0),
+    }));
   }, [ctgHistory]);
 
   return (

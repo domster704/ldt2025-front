@@ -26,7 +26,8 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",
-    "react-router-dom": "^7.6.3"
+    "react-router-dom": "^7.6.3",
+    "zod": "^4.1.11"
   },
   "scripts": {
     "dev": "webpack-dev-server --host 0.0.0.0",
@@ -42,12 +43,10 @@
     "@svgr/webpack": "^8.1.0",
     "@types/d3": "^7.4.3",
     "@types/d3-shape": "^3.1.7",
-    "@types/fork-ts-checker-webpack-plugin": "^0.4.5",
     "@types/papaparse": "^5.3.16",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@types/webpack": "^5.28.5",
-    "@types/webpack-dev-server": "^4.7.2",
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
     "file-loader": "^6.2.0",

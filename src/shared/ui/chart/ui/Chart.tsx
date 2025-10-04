@@ -4,7 +4,7 @@ import {GridColumns, GridRows} from "@visx/grid";
 import {AxisBottom, AxisLeft} from "@visx/axis";
 
 import * as style from "./Chart.module.css";
-import {ScaleLinear} from "d3";
+import type {ScaleLinear} from "d3";
 
 /**
  * Диапазон для подсветки областей на графике.

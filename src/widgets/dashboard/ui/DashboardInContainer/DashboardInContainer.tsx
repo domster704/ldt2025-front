@@ -79,7 +79,7 @@ const DashboardInContainer: FC<DashboardInContainerProps> = ({
         className={style.params__dashboard}
         fhrData={fhrData}
         ucData={ucData}
-        slideWindowTime={10 * 60 * 3600}
+        slideWindowTime={10 * 60 * 1000}
         maxPoints={4000}
         isUseClipPath={isUseClipPath}
       />

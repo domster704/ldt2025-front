@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
     resolve: {
@@ -29,17 +30,15 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
-                use: [
-                    "style-loader",
-                    {
-                        loader: "css-loader",
-                        options: {
-                            modules: true,
-                        }
-                    }
-                ]
-            }, {
+                test: /\.module\.css$/i,
+                use: ["style-loader", { loader: "css-loader", options: { modules: true } }]
+            },
+            {
+                test: /\.css$/i,
+                exclude: /\.module\.css$/i,
+                use: ["style-loader", "css-loader"]
+            },
+            {
                 test: /\.svg$/i,
                 issuer: /\.[jt]sx?$/,
                 use: [
@@ -64,7 +63,11 @@ module.exports = {
         new webpack.DefinePlugin({
             "process.env": JSON.stringify(process.env)
         }),
+        new ForkTsCheckerWebpackPlugin({ async: false })
     ],
+    watchOptions: {
+        ignored: /node_modules/,
+    },
     devServer: {
         static: {
             directory: __dirname + '/build',

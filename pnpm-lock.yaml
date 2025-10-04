@@ -80,6 +80,9 @@ importers:
       react-router-dom:
         specifier: ^7.6.3
         version: 7.7.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      zod:
+        specifier: ^4.1.11
+        version: 4.1.11
     devDependencies:
       '@babel/core':
         specifier: ^7.28.0
@@ -108,9 +111,6 @@ importers:
       '@types/d3-shape':
         specifier: ^3.1.7
         version: 3.1.7
-      '@types/fork-ts-checker-webpack-plugin':
-        specifier: ^0.4.5
-        version: 0.4.5(typescript@5.9.2)(webpack@5.101.0)
       '@types/papaparse':
         specifier: ^5.3.16
         version: 5.3.16
@@ -123,9 +123,6 @@ importers:
       '@types/webpack':
         specifier: ^5.28.5
         version: 5.28.5(webpack-cli@6.0.1)
-      '@types/webpack-dev-server':
-        specifier: ^4.7.2
-        version: 4.7.2(webpack-cli@6.0.1)(webpack@5.101.0)
       babel-loader:
         specifier: ^10.0.0
         version: 10.0.0(@babel/core@7.28.0)(webpack@5.101.0)
@@ -1197,10 +1194,6 @@ packages:
   '@types/express@4.17.23':
     resolution: {integrity: sha512-Crp6WY9aTYP3qPi2wGDo9iUe/rceX01UMhnF1jmwDcKCFM6cx7YhGP/Mpr3y9AASpfHixIG0E6azCcL5OcDHsQ==}
 
-  '@types/fork-ts-checker-webpack-plugin@0.4.5':
-    resolution: {integrity: sha512-xb9bErGrHZ0ypV3ls0tNekGItPoS6tSLi74zjfNOTbCcDOdG7lokSQi24DFXvvh3TwyTfVv2U9LJ172Wz82DrA==}
-    deprecated: This is a stub types definition. fork-ts-checker-webpack-plugin provides its own type definitions, so you do not need this installed.
-
   '@types/geojson@7946.0.16':
     resolution: {integrity: sha512-6C8nqWur3j98U6+lXDfTUWIfgvZU+EumvpHKcYjujKH7woYyLj2sUmff0tRhrqM7BohUw7Pz3ZB1jj2gW9Fvmg==}
 
@@ -1262,10 +1255,6 @@ packages:
 
   '@types/use-sync-external-store@0.0.6':
     resolution: {integrity: sha512-zFDAD+tlpf2r4asuHEj0XH6pY6i0g5NeAHPn+15wk3BV6JA69eERFXC1gyGThDkVa1zCyKr5jox1+2LbV/AMLg==}
-
-  '@types/webpack-dev-server@4.7.2':
-    resolution: {integrity: sha512-Y3p0Fmfvp0MHBDoCzo+xFJaWTw0/z37mWIo6P15j+OtmUDLvznJWdZNeD7Q004R+MpQlys12oXbXsrXRmxwg4Q==}
-    deprecated: This is a stub types definition. webpack-dev-server provides its own type definitions, so you do not need this installed.
 
   '@types/webpack@5.28.5':
     resolution: {integrity: sha512-wR87cgvxj3p6D0Crt1r5avwqffqPXUkNlnQ1mjU93G7gCuFjufZR4I6j8cz5g1F1tTYpfOOFvly+cmIQwL9wvw==}
@@ -3354,6 +3343,9 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  zod@4.1.11:
+    resolution: {integrity: sha512-WPsqwxITS2tzx1bzhIKsEs19ABD5vmCVa4xBo2tq/SrV4RNZtfws1EnCWQXM6yh8bD08a1idvkB5MZSBiZsjwg==}
+
 snapshots:
 
   '@ampproject/remapping@2.3.0':
@@ -4553,13 +4545,6 @@ snapshots:
       '@types/qs': 6.14.0
       '@types/serve-static': 1.15.8
 
-  '@types/fork-ts-checker-webpack-plugin@0.4.5(typescript@5.9.2)(webpack@5.101.0)':
-    dependencies:
-      fork-ts-checker-webpack-plugin: 9.1.0(typescript@5.9.2)(webpack@5.101.0)
-    transitivePeerDependencies:
-      - typescript
-      - webpack
-
   '@types/geojson@7946.0.16': {}
 
   '@types/http-errors@2.0.5': {}
@@ -4622,17 +4607,6 @@ snapshots:
   '@types/telegram-web-app@7.10.1': {}
 
   '@types/use-sync-external-store@0.0.6': {}
-
-  '@types/webpack-dev-server@4.7.2(webpack-cli@6.0.1)(webpack@5.101.0)':
-    dependencies:
-      webpack-dev-server: 5.2.2(webpack-cli@6.0.1)(webpack@5.101.0)
-    transitivePeerDependencies:
-      - bufferutil
-      - debug
-      - supports-color
-      - utf-8-validate
-      - webpack
-      - webpack-cli
 
   '@types/webpack@5.28.5(webpack-cli@6.0.1)':
     dependencies:
@@ -6987,3 +6961,5 @@ snapshots:
   yallist@3.1.1: {}
 
   yocto-queue@0.1.0: {}
+
+  zod@4.1.11: {}

@@ -94,7 +94,7 @@ const HeaderGraph: FC = () => {
         <div className={style.sub__label}>Общий прогноз</div>
         <p className={style.predictionText}>
           {hypoxiaProbability &&
-            "Вероятность гипоксии в данный момент " + hypoxiaProbability.toFixed(2) + "%"}
+            "Вероятность гипоксии в данный момент " + (hypoxiaProbability * 100).toFixed(1) + "%"}
         </p>
 
         <div className={style.figo}>

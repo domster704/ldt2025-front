@@ -112,23 +112,31 @@ export const WebsocketProvider: FC<WebsocketProviderProps> = ({
     };
     socket.onerror = (e) => console.error("WS error:", e);
 
+    const queue: any[] = [];
+    let raf = 0;
+
     socket.onmessage = (event) => {
       let parsed: any = event.data;
       try {
         parsed = JSON.parse(event.data);
       } catch {
-        // если не JSON, остаётся строкой
       }
 
-      setMessage(parsed);
+      queue.push(parsed);
 
-      if (onMessageRef.current) {
-        onMessageRef.current(parsed);
+      if (!raf) {
+        raf = requestAnimationFrame(() => {
+          const msg = queue.shift() ?? null;
+          setMessage(msg);
+          onMessageRef.current?.(msg);
+          raf = 0;
+        });
       }
     };
 
     ws.current = socket;
     return () => {
+      if (raf) cancelAnimationFrame(raf);
       socket.close();
       ws.current = null;
     };
@@ -140,12 +148,13 @@ export const WebsocketProvider: FC<WebsocketProviderProps> = ({
    *
    * @param data Данные для отправки (строка или объект).
    */
-  const safeSend = (data: string) => {
-    if (ws.current && ws.current.readyState === WebSocket.OPEN) {
-      ws.current.send(JSON.stringify(data));
-    } else {
+  const safeSend = (data: unknown) => {
+    if (!ws.current || ws.current.readyState !== WebSocket.OPEN) {
       console.warn("WebSocket не готов для отправки");
+      return;
     }
+    const payload = typeof data === 'string' ? data : JSON.stringify(data);
+    ws.current.send(payload);
   };
 
   return (

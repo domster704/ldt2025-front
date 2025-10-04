@@ -5,13 +5,13 @@ LABEL developer="domster704"
 WORKDIR /var/www/ntv
 
 COPY package*.json ./
+RUN RUN npm ci --omit=dev
 
 COPY build/ build/
 COPY src/ src/
 COPY .babelrc tsconfig.json webpack.config.js ./
 
-RUN npm i --force
-RUN npm run-script build
+RUN npm run build
 
 FROM nginx:1.27.1-alpine3.20 AS nginx
 

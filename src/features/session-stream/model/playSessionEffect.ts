@@ -8,6 +8,7 @@ import {
 } from "@entities/session-stream/model/sessionStreamSlice";
 import {StreamData} from "@entities/session-stream/model/types";
 import {CTGStatus, figoToCTGStatus} from "@shared/const/ctgColors";
+import {StreamDataSchema} from "@entities/session-stream/model/schema";
 
 const PRECISION: number = 1;
 
@@ -51,22 +52,29 @@ export const playSessionEffect =
   (msg: StreamData) => (dispatch: AppDispatch, getState: () => RootState) => {
     if (!msg || typeof msg !== "object") return;
 
+    const result = StreamDataSchema.safeParse(msg);
+    if (!result.success) {
+      console.warn("Неверный формат WS-сообщения", result.error);
+      return;
+    }
+    const data = result.data;
+
     const state = getState();
     const startTime = state.sessionStream.startTime ?? Date.now();
 
-    const t = msg.timestamp * 1000;
+    const t = data.timestamp * 1000;
 
     dispatch(addFhrPoint({
       x: startTime + t,
-      y: Math.round((msg.bpm + Number.EPSILON) * PRECISION) / PRECISION
+      y: Math.round((data.bpm + Number.EPSILON) * PRECISION) / PRECISION
     }));
     dispatch(addUcPoint({
       x: startTime + t,
-      y: Math.round((msg.uc + Number.EPSILON) * PRECISION) / PRECISION
+      y: Math.round((data.uc + Number.EPSILON) * PRECISION) / PRECISION
     }));
-    dispatch(addResult(msg.process));
-    dispatch(setNotification(msg.process.notifications));
+    dispatch(addResult(data.process));
+    dispatch(setNotification(data.process.notifications));
     dispatch(setStatus(
-      figoToCTGStatus[msg.process.figo_situation || CTGStatus.Normal.toString()]
+      figoToCTGStatus[data.process.figo_situation || CTGStatus.Normal.toString()]
     ));
   };
