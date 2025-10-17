@@ -11,7 +11,7 @@ import {APP_URL, CONTEXT_PAGE_URL, HISTORY_PAGE_URL, STATUS_PAGE_URL} from "@sha
 import {useIsPageWithBackButton} from "@widgets/footer/hooks/useIsPageWithBackButton";
 import FooterActionsPanel from "@widgets/footer/ui/FooterActionsPanel/FooterActionsPanel";
 import {useAppSelector} from "@app/store/store";
-import {selectCurrentPage} from "@entities/global/model/selectors";
+import {selectCurrentPage, selectIsWidgetLayoutEdit} from "@entities/global/model/selectors";
 
 const NAV_PAGES: APP_URL[] = [
   STATUS_PAGE_URL,
@@ -65,8 +65,8 @@ const Footer: FC = () => {
   const navigate = useNavigate();
   const isSettingsPage = useIsPageWithBackButton();
   const currentPage = useAppSelector(selectCurrentPage);
+  const isWidgetsLayoutEdit = useAppSelector(selectIsWidgetLayoutEdit);
 
-  // На страницах настроек или выбора пациента — только "Назад"
   if (isSettingsPage) {
     return (
       <footer className={[
@@ -85,7 +85,6 @@ const Footer: FC = () => {
     );
   }
 
-  // Индекс текущей страницы в массиве навигации
   const index = NAV_PAGES.indexOf(currentPage as APP_URL);
   const prevPage = index > 0 ? NAV_PAGES[index - 1] : null;
   const nextPage = index < NAV_PAGES.length - 1 ? NAV_PAGES[index + 1] : null;
@@ -93,11 +92,11 @@ const Footer: FC = () => {
   return (
     <footer className={style.footer}>
       <OpenPageButton page={prevPage}
-                      disabled={!prevPage}
+                      disabled={!prevPage || isWidgetsLayoutEdit}
                       icon={arrowLeftImg}/>
       <FooterActionsPanel/>
       <OpenPageButton page={nextPage}
-                      disabled={!nextPage}
+                      disabled={!nextPage || isWidgetsLayoutEdit}
                       icon={arrowRightImg}/>
     </footer>
   );

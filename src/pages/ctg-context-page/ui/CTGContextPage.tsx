@@ -14,23 +14,21 @@ import Anamnesis from "@widgets/anamnesis";
 import STVPrediction from "@widgets/stv-predict";
 import WidgetsLayout from "@widgets/widgets-layoyt";
 
+const GRID_ROWS = 36;
+const GRID_COLUMNS = 48;
+
 const CTGContextPage = () => {
   const streaming = useAppSelector((s) => s.sessionStream.streaming);
 
   const widgets = [
     {
-      id: "indicators",
-      layout: {x: 0, y: 0, w: 48, h: 12},
-      element: <IndicatorsPanel placement={IndicatorsPanelPlacement.Row}/>,
-    },
-    {
       id: "logs",
-      layout: {x: 0, y: 0, w: 6, h: 20},
+      layout: {x: 0, y: 0, w: 6, h: 24},
       element: <HistoryLogs/>,
     },
     {
       id: "dashboard",
-      layout: {x: 6, y: 0, w: 18, h: 20},
+      layout: {x: 6, y: 0, w: 30, h: 24},
       element: (
         <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
           <DashboardStream/>
@@ -38,13 +36,18 @@ const CTGContextPage = () => {
       ),
     },
     {
+      id: "indicators",
+      layout: {x: 42, y: 0, w: 12, h: 24},
+      element: <IndicatorsPanel placement={IndicatorsPanelPlacement.Grid}/>,
+    },
+    {
       id: "anamnesis",
-      layout: {x: 0, y: 0, w: 12, h: 16},
+      layout: {x: 0, y: 24, w: 24, h: 12},
       element: <Anamnesis/>,
     },
     {
       id: "stv",
-      layout: {x: 12, y: 0, w: 12, h: 16},
+      layout: {x: 24, y: 24, w: 12, h: 12},
       element: <STVPrediction/>,
     },
   ];
@@ -55,6 +58,8 @@ const CTGContextPage = () => {
         <HeaderGraph/>
         <WidgetsLayout widgets={widgets}
                        storageKey="ctg-context-layout"
+                       rows={GRID_ROWS}
+                       cols={GRID_COLUMNS}
         />
         <PreloaderContainer/>
       </ColorSignalWrapper>

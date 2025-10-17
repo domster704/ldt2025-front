@@ -1,5 +1,4 @@
 import React, {FC} from 'react';
-import * as style from './CTGStatusPage.module.css'
 import {useAppSelector} from "@app/store/store";
 import ColorProvider from "@app/providers/color-provider";
 import ColorSignalWrapper from "@widgets/color-signal-wrapper";
@@ -11,9 +10,11 @@ import PreloaderContainer from "@widgets/preloader-container";
 import IndicatorsPanel from "@widgets/indicators-panel";
 import {IndicatorsPanelPlacement} from "@widgets/indicators-panel/ui/IndicatorsPanel";
 import HistoryLogs from "@widgets/history-logs";
+import WidgetsLayout from "@widgets/widgets-layoyt";
 
-interface CTGStatusPageProps {
-}
+
+const GRID_ROWS = 36;
+const GRID_COLUMNS = 48;
 
 /**
  * Страница "Статус КТГ".
@@ -35,24 +36,42 @@ interface CTGStatusPageProps {
  * - Подключение к WebSocket (`$wsApiUrl`) осуществляется только если включён флаг `streaming` в Redux.
  * - Все данные (графики, статус FIGO, уведомления) обновляются в реальном времени из WebSocket.
  */
-const CTGStatusPage: FC<CTGStatusPageProps> = ({}) => {
+const CTGStatusPage: FC = () => {
   const streaming = useAppSelector((state) => state.sessionStream.streaming);
+
+  const widgets = [
+    {
+      id: "indicators",
+      layout: {x: 0, y: 0, w: 48, h: 8},
+      element: <IndicatorsPanel placement={IndicatorsPanelPlacement.Row}/>,
+    },
+    {
+      id: "logs",
+      layout: {x: 0, y: 8, w: 6, h: 28},
+      element: <HistoryLogs/>,
+    },
+    {
+      id: "dashboard",
+      layout: {x: 6, y: 8, w: 42, h: 28},
+      element: (
+        <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
+          <DashboardStream/>
+        </WebsocketProvider>
+      ),
+    },
+  ];
 
   return (
     <>
       <ColorProvider>
         <ColorSignalWrapper>
           <HeaderGraph/>
-
-          <main className={style.statusPage}>
-            <IndicatorsPanel placement={IndicatorsPanelPlacement.Row}/>
-            <div className={style.dashboardWithLogs}>
-              <HistoryLogs/>
-              <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
-                <DashboardStream/>
-              </WebsocketProvider>
-            </div>
-          </main>
+          <WidgetsLayout widgets={widgets}
+                         storageKey="ctg-status-layout"
+                         rows={GRID_ROWS}
+                         cols={GRID_COLUMNS}
+          />
+          <PreloaderContainer/>
         </ColorSignalWrapper>
       </ColorProvider>
       <PreloaderContainer/>

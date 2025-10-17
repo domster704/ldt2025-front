@@ -61,7 +61,7 @@ const WidgetsLayout: React.FC<WidgetsLayoutProps> = ({
   const handleLayoutChange = (newLayout: Layout[]) => {
     setLayout(newLayout);
     if (storageKey) {
-      // localStorage.setItem(storageKey, JSON.stringify(newLayout));
+      localStorage.setItem(storageKey, JSON.stringify(newLayout));
     }
   };
 
