@@ -49,7 +49,6 @@ interface CTGDashboardParamsProps {
  * ```
  */
 const CTGDashboardParams: FC<CTGDashboardParamsProps> = ({ctgHistoryId}) => {
-  // Извлекаем запись истории КТГ по ID
   const ctgHistory: CTGHistory = useAppSelector(state => selectCTGHistoryById(state, ctgHistoryId));
 
   // Преобразуем bpm и uc в точки для графиков

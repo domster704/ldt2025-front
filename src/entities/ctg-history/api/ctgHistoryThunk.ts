@@ -1,7 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {ThunkApi} from "@shared/types/types";
-import {AnalysisResult, CTGHistoryData} from "@entities/ctg-history/model/types";
+import {AnalysisResult, CTGHistoryDTO} from "@entities/ctg-history/model/types";
 import {$apiUrl} from "@shared/const/constants";
+import {CTGHistoryAPI, CTGHistoryListSchema} from "@entities/ctg-history/api/schemas";
+import {mapHistoryApiToDto} from "@entities/ctg-history/model/adapters";
 
 /**
  * Асинхронный thunk для загрузки всей истории КТГ (Cardiotocography History).
@@ -9,7 +11,6 @@ import {$apiUrl} from "@shared/const/constants";
  * ### Основные задачи:
  * - Отправляет `GET`-запрос на `${$apiUrl}/history`.
  * - Получает список исторических данных КТГ с бэкенда.
- * - Возвращает результат в формате {@link CTGHistoryData}, который попадает в Redux-хранилище.
  *
  * ### Использование в slice:
  * Этот thunk можно обрабатывать в `extraReducers`:
@@ -28,16 +29,23 @@ import {$apiUrl} from "@shared/const/constants";
  * @function fetchAllCTGHistory
  * @throws {Error} Если сервер вернёт невалидный JSON или произойдёт ошибка сети.
  */
-export const fetchAllCTGHistory = createAsyncThunk<CTGHistoryData, number, ThunkApi>(
+export const fetchAllCTGHistory = createAsyncThunk<CTGHistoryDTO[], number, ThunkApi>(
   'ctg/fetchAllCTGHistory',
-  async (patientId: number) => {
-    const response = await fetch(`${$apiUrl}/http/crud/ctg_histories?patient=${patientId}`, {
-      method: 'GET'
-    });
+  async (patientId: number, {rejectWithValue}) => {
+    const res = await fetch(`${$apiUrl}/http/crud/ctg_histories?patient=${patientId}`);
+    if (!res.ok) {
+      throw new Error(`Ошибка загрузки: ${res.statusText}`);
+    }
 
-    return {
-      "data": await response.json()
-    } as CTGHistoryData;
+    const json = await res.json();
+
+    const parsed = CTGHistoryListSchema.safeParse(json);
+    if (!parsed.success) {
+      console.error("Невалидный ответ от API /ctg_histories", parsed.error);
+      return rejectWithValue("Invalid API data");
+    }
+
+    return parsed.data.map((item: CTGHistoryAPI) => mapHistoryApiToDto(item));
   }
 );
 

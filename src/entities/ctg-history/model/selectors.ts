@@ -1,7 +1,6 @@
 import {createAppSelector, RootState} from "@app/store/store";
-import {ctgHistoryAdapter} from "@entities/ctg-history/model/adapters";
+import {ctgHistoryAdapter, mapHistoryDtoToDomain} from "@entities/ctg-history/model/adapters";
 import {createCachedSelector} from "re-reselect";
-import {CTGHistory, CTGHistoryDTO, CTGResult} from "@entities/ctg-history/model/types";
 
 const baseSelector = (state: RootState) => state.ctgHistory.items;
 const selectors = ctgHistoryAdapter.getSelectors();
@@ -18,29 +17,11 @@ const selectCTGHistoryId = (_: RootState, id: number) => id;
  * @param state глобальное состояние Redux
  * @returns массив КТГ-записей, отсортированных по дате
  */
-export const selectAllCTGHistory = createAppSelector(
-  baseSelector,
-  (state) =>
-    selectors
-      .selectAll(state)
-      .map((ctgHistory): CTGHistory => ({
-        ...ctgHistory,
-        result: ctgHistory.result
-          ? {
-            ...ctgHistory.result,
-            timestamp: new Date(ctgHistory.result.timestamp)
-          }
-          : {
-            timestamp: new Date(),
-            figo: null,
-            figo_prognosis: null,
-            bpm: 0,
-            uc: 0,
-          } as unknown as CTGResult,
-      } as CTGHistory))
-      .sort((a, b) =>
-        (a.result?.timestamp?.getTime() ?? 0) - (b.result?.timestamp?.getTime() ?? 0)
-      ) as CTGHistory[]
+export const selectAllCTGHistory = createAppSelector(baseSelector, (items) =>
+  selectors
+    .selectAll(items)
+    .map(mapHistoryDtoToDomain)
+    .sort((a, b) => a.result.timestamp.getTime() - b.result.timestamp.getTime())
 );
 
 /**
@@ -58,14 +39,8 @@ export const selectAllCTGHistory = createAppSelector(
 export const selectCTGHistoryById = createCachedSelector(
   [baseSelector, selectCTGHistoryId],
   (items, id) => {
-    const select_: CTGHistoryDTO = selectors.selectById(items, id);
-    return {
-      ...select_,
-      result: {
-        ...select_.result,
-        timestamp: new Date(select_.result?.timestamp || Date.now())
-      }
-    } as CTGHistory;
+    const dto = selectors.selectById(items, id);
+    return mapHistoryDtoToDomain(dto);
   }
 )(
   (_state, id) => id

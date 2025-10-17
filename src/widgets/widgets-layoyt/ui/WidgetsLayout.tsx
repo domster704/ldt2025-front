@@ -87,7 +87,8 @@ const WidgetsLayout: React.FC<WidgetsLayoutProps> = ({
                       autoSize={false}
                       margin={margin}
                       containerPadding={containerPadding}
-                      onLayoutChange={handleLayoutChange}>
+                      onDragStop={handleLayoutChange}
+                      onResizeStop={handleLayoutChange}>
             {
               widgets.map((w) => (
                 <div key={w.id} data-grid={layout.find((l) => l.i === w.id)}>

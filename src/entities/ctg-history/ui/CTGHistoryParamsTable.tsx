@@ -59,7 +59,7 @@ const CTGHistoryParamsTable: React.FC<CTGHistoryParamsTableProps> = ({
                       : undefined
                   }}
                 >
-                  {formatValue(formatValue(getValue(ctg, param.key)))}
+                  {formatValue(getValue(ctg, param.key))}
                 </td>
               </React.Fragment>
             ))}
@@ -75,7 +75,7 @@ const CTGHistoryParamsTable: React.FC<CTGHistoryParamsTableProps> = ({
                 }}>
               <div>
                 <p>{p.label}</p>
-                <p>{formatValue(formatValue(getValue(ctg, p.key)))}</p>
+                <p>{formatValue(getValue(ctg, p.key))}</p>
               </div>
             </td>
           ))}

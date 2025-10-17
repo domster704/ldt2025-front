@@ -1,15 +1,15 @@
 import {EntityState} from "@reduxjs/toolkit";
-import {SessionUploaded} from "@entities/session-upload";
 import {CTGStatus} from "@shared/const/ctgColors";
+import {SessionUploaded} from "@entities/session-upload";
 
-/** Полный результат КТГ (анализ, вычисляемые метрики) */
-export interface CTGResultAPI {
+/** DTO: сериализуемый слой (хранится в Redux) */
+export interface CTGResultDTO {
   ctg_id: number;
   gest_age: string;
-  bpm: number;
+  bpm: number | null;
   uc: number;
-  figo: string;
-  figo_prognosis: string;
+  figo: CTGStatus;
+  figo_prognosis: CTGStatus | null;
   bhr: number;
   amplitude_oscillations: number;
   oscillation_frequency: number;
@@ -29,36 +29,23 @@ export interface CTGResultAPI {
   timestamp: string;
 }
 
-export interface CTGHistoryAPI {
-  id: number | null;
+/** История в DTO (в Redux) */
+export interface CTGHistoryDTO {
+  id: number;
   dir_path: string;
   archive_path: string | null;
-  result?: CTGResultAPI;
   graph: SessionUploaded;
-}
-
-export interface CTGResultDTO extends Omit<CTGResultAPI, 'figo' | 'figo_prognosis'> {
-  figo: CTGStatus;
-  figo_prognosis: CTGStatus | null;
-}
-
-export interface CTGResult extends Omit<CTGResultDTO, 'timestamp'> {
-  timestamp: Date;
-}
-
-/** История КТГ (базовая информация о файле/сессии) */
-export interface CTGHistoryDTO extends Omit<CTGHistoryAPI, 'result'> {
   result?: CTGResultDTO;
 }
 
-export interface CTGHistory extends Omit<CTGHistoryAPI, 'result'> {
-  result: CTGResult;
+/** Domain: бизнес-логика (Date, вычисляемые поля и т.д.) */
+export interface CTGResult extends Omit<CTGResultDTO, "timestamp"> {
+  timestamp: Date;
 }
 
-
-/** DTO для API: список историй по пациенту */
-export interface CTGHistoryData {
-  data: CTGHistoryAPI[];
+/** История в Domain (для бизнес-логики и UI) */
+export interface CTGHistory extends Omit<CTGHistoryDTO, "result"> {
+  result: CTGResult;
 }
 
 /** Redux slice state */

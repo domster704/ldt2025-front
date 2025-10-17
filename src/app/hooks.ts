@@ -46,11 +46,10 @@ export function useBootstrap() {
       }
     }
 
-    async function init() {
+    (async () => {
       await dispatch(fetchAllPatient());
-    }
+    })();
 
-    init().then();
     initColors();
     initSounds();
   }, [dispatch]);
