@@ -4,6 +4,7 @@
  * Используются для интерпретации результатов FIGO и прогнозов.
  */
 export enum CTGStatus {
+  None = "",
   Normal = "Нормальный",
   Doubtful = "Сомнительный",
   Pathological = "Патологическая",
@@ -19,6 +20,7 @@ export enum CTGStatus {
  * - индикации на графиках и панелях.
  */
 export const ctgColors: Record<CTGStatus, string> = {
+  [CTGStatus.None]: "#83e462",       // зелёный — норма
   [CTGStatus.Normal]: "#83e462",       // зелёный — норма
   [CTGStatus.Doubtful]: "#ffa653",     // оранжевый — сомнительно
   [CTGStatus.Pathological]: "#ff7053", // красный — патологически

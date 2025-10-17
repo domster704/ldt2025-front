@@ -17,40 +17,6 @@ import * as style from '../styles/App.module.css'
  * - Оборачивает вложенные маршруты в {@link React.Suspense}, показывая
  *   {@link Preloader} во время загрузки.
  * - Добавляет футер ({@link Footer}), который отображается на всех страницах.
- *
- * ### Структура:
- * ```
- * <div className={style.layout}>
- *   <div className={style.content}>
- *     <Suspense fallback={<Preloader/>}>
- *       <Outlet />  // здесь рендерятся дочерние роуты
- *     </Suspense>
- *   </div>
- *   <Footer />       // фиксированный футер
- * </div>
- * ```
- *
- * @component
- *
- * @example
- * ```tsx
- * import {createHashRouter, RouterProvider} from "react-router-dom";
- * import RootLayout from "@app/routes/RootLayout";
- * import CTGStatusPage from "@pages/ctg-status-page";
- *
- * const router = createHashRouter([
- *   {
- *     path: "/",
- *     element: <RootLayout />,
- *     children: [
- *       { index: true, element: <CTGStatusPage /> },
- *       { path: "/status", element: <CTGStatusPage /> }
- *     ]
- *   }
- * ]);
- *
- * const App = () => <RouterProvider router={router} />;
- * ```
  */
 const RootLayout = () => {
   const location = useLocation();

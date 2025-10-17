@@ -35,17 +35,6 @@ const initialState: CTGHistoryState = {
  * ### Состояние:
  * - `items`: EntityState<CTGHistoryDTO> — нормализованное состояние (ids + entities).
  *
- * @example
- * // Подключение в store:
- * import {configureStore} from "@reduxjs/toolkit";
- * import ctgHistoryReducer from "@entities/ctg-history/model/ctgHistorySlice";
- *
- * const store = configureStore({
- *   reducer: {
- *     ctgHistory: ctgHistoryReducer,
- *   },
- * });
- *
  * @see fetchAllCTGHistory
  * @see ctgHistoryAdapter
  */
@@ -85,7 +74,7 @@ const ctgHistorySlice = createSlice({
       .addCase(fetchAllCTGHistoryAnalysis.fulfilled, (state, action: PayloadAction<AnalysisResult>) => {
         state.analysis = action.payload.analysis;
       })
-      .addCase(fetchAllCTGHistoryAnalysis.rejected, (state, action: PayloadAction<AnalysisResult>) => {
+      .addCase(fetchAllCTGHistoryAnalysis.rejected, (state) => {
         state.analysis = null;
       })
   },

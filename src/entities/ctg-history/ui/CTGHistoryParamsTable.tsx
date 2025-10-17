@@ -35,16 +35,6 @@ interface CTGHistoryParamsTableProps extends React.TableHTMLAttributes<HTMLTable
  * ### Форматирование:
  * - Дата (`Date`) → локализованная строка (`toLocaleDateString`).
  * - `null`/`undefined` → `"—"`.
- *
- * ### Использование:
- * @example
- * ```tsx
- * // Отобразить одно исследование
- * <CTGHistoryParamsTable mode="single" data={historyItem} />
- *
- * // Сравнить два исследования
- * <CTGHistoryParamsTable mode="compare" data={[historyItem1, historyItem2]} />
- * ```
  */
 const CTGHistoryParamsTable: React.FC<CTGHistoryParamsTableProps> = ({
                                                                        mode,

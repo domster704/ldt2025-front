@@ -5,13 +5,8 @@ export interface StreamPoint {
   y: number;
 }
 
-export interface TimeRange {
-  start: number;
-  end: number;
-}
-
 export interface NotificationEntry {
-  time: number; // мс
+  time: number;
   message: string;
   color: NotificationColor;
 }

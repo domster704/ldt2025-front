@@ -26,24 +26,6 @@ import {Patient} from "@entities/patient/model/types";
  *   }
  * }
  * ```
- *
- * ### Использование:
- * В `patientSlice` адаптер применяется для:
- * - заполнения состояния при загрузке всех пациентов (`setAll`);
- * - выборки данных через `selectors` в `patient/model/selectors.ts`.
- *
- * @example
- * ```ts
- * // Установка новых данных
- * patientAdapter.setAll(state.items, patientsArray);
- *
- * // Добавление одного пациента
- * patientAdapter.addOne(state.items, newPatient);
- *
- * // Получение всех пациентов (через селекторы)
- * const selectors = patientAdapter.getSelectors();
- * const allPatients = selectors.selectAll(state.items);
- * ```
  */
 export const patientAdapter = createEntityAdapter<Patient, number>({
   selectId: patient => patient.id,

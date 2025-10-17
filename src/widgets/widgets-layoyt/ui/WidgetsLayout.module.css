@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+}
+
+.toolbar {
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  background: #f3f3f3;
+  border-bottom: 1px solid #ccc;
+}
+
+.layoutContainer {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+.layout {
+  flex: 1 1 auto;
+  height: 100%;
+  width: 100%;
+}
+
+.widget {
+  height: 100%;
+}

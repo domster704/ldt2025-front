@@ -8,7 +8,6 @@ export const selectAllNotifications = (state: RootState) =>
   state.sessionStream.notifications;
 
 
-// LAST VALUES
 export const selectLastHR = (state: RootState) => state.sessionStream.heartRates.at(-1);
 export const selectLastUC = (state: RootState) => state.sessionStream.uterineContractions.at(-1);
 export const selectLastSTV = (state: RootState) => state.sessionStream.results.at(-1)?.stv;

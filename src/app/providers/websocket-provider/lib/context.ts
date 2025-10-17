@@ -49,28 +49,6 @@ export interface IWebsocketContext {
  * и обновляет состояние.
  *
  * @see WebsocketProvider
- *
- * @example
- * ```tsx
- * import {useContext, useEffect} from "react";
- * import {WebsocketContext} from "@app/providers/websocket-provider/lib/context";
- *
- * const Notifications = () => {
- *   const ws = useContext(WebsocketContext);
- *
- *   useEffect(() => {
- *     if (ws.message) {
- *       console.log("Новое сообщение:", ws.message);
- *     }
- *   }, [ws.message]);
- *
- *   return (
- *     <button onClick={() => ws.send({type: "ping"})}>
- *       Отправить ping
- *     </button>
- *   );
- * };
- * ```
  */
 export const WebsocketContext = createContext<IWebsocketContext>({
   isReady: false,

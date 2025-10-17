@@ -39,20 +39,6 @@ const initialState: PatientState = {
  * - {@link fetchPatientByID.fulfilled}
  *   Устанавливает выбранного пациента в `state.chosen`.
  *
- * ### Пример использования:
- * ```tsx
- * const dispatch = useAppDispatch();
- *
- * // Загрузить всех пациентов
- * useEffect(() => {
- *   dispatch(fetchAllPatient());
- * }, []);
- *
- * // Выбрать пациента по id
- * const handleSelect = (id: number) => {
- *   dispatch(fetchPatientByID(id));
- * };
- * ```
  */
 const patientSlice = createSlice({
   name: 'patient',

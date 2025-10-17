@@ -85,23 +85,6 @@ const initialState: SoundState = loadFromStorage();
  *
  * ### LocalStorage:
  * - Все изменения синхронизируются с `localStorage` через listener middleware (`soundListeners`).
- *
- * @example
- * ```tsx
- * const dispatch = useAppDispatch();
- *
- * // Выключить звук предупреждения
- * dispatch(toggleSound(SoundType.Warning));
- *
- * // Заменить звук критического состояния
- * dispatch(replaceSound({id: SoundType.Critical, fileName: "new-critical.mp3"}));
- *
- * // Воспроизведение звука
- * dispatch(setPlaying(SoundType.SensorShift));
- *
- * // Восстановление состояния из сохранённых данных
- * dispatch(setInitialSounds(savedState));
- * ```
  */
 const soundSlice = createSlice({
   name: "sounds",

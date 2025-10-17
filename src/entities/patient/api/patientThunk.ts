@@ -20,14 +20,6 @@ import {Patient, PatientData} from "@entities/patient/model/types";
  * @async
  * @function fetchAllPatient
  * @returns {PatientData} объект с массивом пациентов
- *
- * @example
- * ```tsx
- * const dispatch = useAppDispatch();
- * useEffect(() => {
- *   dispatch(fetchAllPatient());
- * }, [dispatch]);
- * ```
  */
 export const fetchAllPatient = createAsyncThunk<PatientData, void, ThunkApi>(
   'patient/fetchAllPatient',

@@ -27,16 +27,6 @@ import {$apiUrl} from "@shared/const/constants";
  * @async
  * @function fetchAllCTGHistory
  * @throws {Error} Если сервер вернёт невалидный JSON или произойдёт ошибка сети.
- *
- * @example
- * import {useAppDispatch} from "@app/store/store";
- * import {fetchAllCTGHistory} from "@entities/ctg-history/api/ctgHistoryThunk";
- *
- * const dispatch = useAppDispatch();
- *
- * useEffect(() => {
- *   dispatch(fetchAllCTGHistory());
- * }, [dispatch]);
  */
 export const fetchAllCTGHistory = createAsyncThunk<CTGHistoryData, number, ThunkApi>(
   'ctg/fetchAllCTGHistory',

@@ -34,19 +34,6 @@ interface CTGStatusPageProps {
  * ### Логика:
  * - Подключение к WebSocket (`$wsApiUrl`) осуществляется только если включён флаг `streaming` в Redux.
  * - Все данные (графики, статус FIGO, уведомления) обновляются в реальном времени из WebSocket.
- *
- * ---
- * @component
- * @example
- * ```tsx
- * import CTGStatusPage from "@pages/ctg-status-page";
- *
- * const AppRoutes = () => (
- *   <Routes>
- *     <Route path="/status" element={<CTGStatusPage />} />
- *   </Routes>
- * );
- * ```
  */
 const CTGStatusPage: FC<CTGStatusPageProps> = ({}) => {
   const streaming = useAppSelector((state) => state.sessionStream.streaming);

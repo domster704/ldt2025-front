@@ -39,19 +39,6 @@ interface SettingsProps {
  * ### Redux:
  * - Через `useAppDispatch` можно расширять поведение (например, сохранять настройки на сервере).
  * - На данный момент логика вынесена в {@link settingsSlice} и {@link soundSlice}.
- *
- * ---
- * @component
- * @example
- * ```tsx
- * import Settings from "@pages/settings";
- *
- * const AppRoutes = () => (
- *   <Routes>
- *     <Route path="/settings" element={<Settings />} />
- *   </Routes>
- * );
- * ```
  */
 const Settings: FC<SettingsProps> = ({}) => {
   const dispatch = useAppDispatch();

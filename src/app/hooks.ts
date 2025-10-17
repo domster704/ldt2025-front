@@ -25,19 +25,6 @@ import {fetchAllCTGHistory} from "@entities/ctg-history/api/ctgHistoryThunk";
  * ### Когда использовать:
  * Хук вызывается один раз на уровне корневого компонента {@link AppProviders},
  * чтобы гарантировать, что глобальные данные и настройки подгружаются при старте приложения.
- *
- * @example
- * ```tsx
- * import React from "react";
- * import {useBootstrap} from "@app/hooks";
- *
- * const AppProviders: React.FC<{children: React.ReactNode}> = ({children}) => {
- *   // Запускаем инициализацию при старте приложения
- *   useBootstrap();
- *
- *   return <>{children}</>;
- * };
- * ```
  */
 export function useBootstrap() {
   const dispatch = useAppDispatch();

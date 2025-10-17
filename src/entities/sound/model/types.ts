@@ -24,17 +24,6 @@ export enum SoundType {
  * ### Используется в:
  * - Redux-срезе {@link soundSlice}.
  * - UI-компонентах для управления звуками (например, SoundManager).
- *
- * @example
- * ```ts
- * const sound: Sound = {
- *   id: SoundType.Warning,
- *   name: "Ухудшение состояния",
- *   fileName: "warning.mp3",
- *   enabled: true,
- *   custom: false
- * };
- * ```
  */
 export interface Sound {
   id: SoundType;

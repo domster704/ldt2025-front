@@ -30,20 +30,6 @@ interface ColorsPickerProps {
  *   - {@link setChosenGoodColor} — для нормального состояния.
  *   - {@link setChosenWarningColor} — для предупреждающего состояния.
  * - Выбранные значения сохраняются в `localStorage` через slice настроек.
- *
- * ---
- * @component
- * @example
- * ```tsx
- * import ColorsPicker from "@features/settings-colors-picker";
- *
- * const SettingsPage = () => (
- *   <section>
- *     <h3>Цветовая индикация</h3>
- *     <ColorsPicker />
- *   </section>
- * );
- * ```
  */
 const ColorsPicker: FC<ColorsPickerProps> = ({}) => {
   const dispatch = useAppDispatch();

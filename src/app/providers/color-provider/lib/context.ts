@@ -36,23 +36,5 @@ export interface IColorContext {
  * в {@link ColorProvider}.
  *
  * @see ColorProvider
- *
- * @example
- * ```tsx
- * import {useContext} from "react";
- * import {ColorContext} from "@app/providers/color-provider/lib/context";
- *
- * const Indicator = () => {
- *   const ctx = useContext(ColorContext);
- *
- *   if (!ctx) return null;
- *
- *   return (
- *     <div style={{ backgroundColor: ctx.color.hex }}>
- *       Текущий статус: {ctx.status}
- *     </div>
- *   );
- * };
- * ```
  */
 export const ColorContext = createContext<IColorContext | null>(null);

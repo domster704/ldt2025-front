@@ -36,21 +36,13 @@ interface ColorProviderProps {
  * - `--indicator-color-rgb` — RGB-значение.
  *
  * Эти переменные можно использовать в стилях дочерних компонентов.
- *
- * @component
- * @example
- * ```tsx
- * <ColorProvider>
- *   <App />
- * </ColorProvider>
- * ```
  */
 export const ColorProvider: FC<ColorProviderProps> = ({children}) => {
   const status = useAppSelector((state: RootState) => state.sessionStream.status);
   const chosenWarningColor = useAppSelector(selectWarningColor);
   const chosenGoodColor = useAppSelector(selectGoodColor);
 
-  const current = status === CTGStatus.Normal ? chosenGoodColor : chosenWarningColor;
+  const current = [CTGStatus.None, CTGStatus.Normal].includes(status) ? chosenGoodColor : chosenWarningColor;
   const currentRGB = hexToRgb(current);
 
   return (

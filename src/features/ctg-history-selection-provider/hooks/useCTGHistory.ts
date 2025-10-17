@@ -18,26 +18,6 @@ import {CTGHistorySelectionContext} from "@features/ctg-history-selection-provid
  * ### Ошибки:
  * - Если хук вызван вне `CTGHistorySelectionProvider`, выбрасывает исключение:
  *   `"useCTGHistory must be used within CTGHistorySelectionProvider"`.
- *
- * ---
- * @example
- * ```tsx
- * import {useCTGHistory} from "@features/ctg-history-selection-provider";
- *
- * const HistoryTableRow = ({id}: {id: number}) => {
- *   const {selected, toggle} = useCTGHistory();
- *   const isSelected = selected.includes(id);
- *
- *   return (
- *     <tr
- *       style={{background: isSelected ? "#eef" : "transparent"}}
- *       onClick={() => toggle(id)}
- *     >
- *       <td>Исследование {id}</td>
- *     </tr>
- *   );
- * };
- * ```
  */
 export function useCTGHistory() {
   const ctx = useContext(CTGHistorySelectionContext);

@@ -17,12 +17,6 @@ const selectCTGHistoryId = (_: RootState, id: number) => id;
  *
  * @param state глобальное состояние Redux
  * @returns массив КТГ-записей, отсортированных по дате
- *
- * @example
- * ```tsx
- * const history = useAppSelector(selectAllCTGHistory);
- * history.forEach(item => console.log(item.date.toLocaleDateString()));
- * ```
  */
 export const selectAllCTGHistory = createAppSelector(
   baseSelector,
@@ -60,14 +54,6 @@ export const selectAllCTGHistory = createAppSelector(
  * @param state глобальное состояние Redux
  * @param id идентификатор записи КТГ
  * @returns запись истории КТГ или `undefined`, если id не найден
- *
- * @example
- * ```tsx
- * const ctg = useAppSelector(state => selectCTGHistoryById(state, 5));
- * if (ctg) {
- *   console.log("Дата:", ctg.date.toLocaleDateString());
- * }
- * ```
  */
 export const selectCTGHistoryById = createCachedSelector(
   [baseSelector, selectCTGHistoryId],

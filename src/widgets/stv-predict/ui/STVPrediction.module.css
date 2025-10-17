@@ -2,9 +2,8 @@
   background: var(--belyy-);
 
   padding: 4rem 2rem 1rem 2rem;
-
+  height: 100%;
   width: 100%;
-  height: min-content;
 }
 
 .stbPredictionContainer table {

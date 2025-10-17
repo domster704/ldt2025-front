@@ -26,26 +26,6 @@ let initialState = {
  *   Обычно диспатчится из layout-компонентов (например, {@link RootLayout}),
  *   чтобы при каждом изменении маршрута обновлять Redux.
  *
- * @example
- * ```tsx
- * import {useAppDispatch, useAppSelector} from "@app/store/store";
- * import {setCurrentPage} from "@entities/global/model/globalSlice";
- * import {selectCurrentPage} from "@entities/global/model/selectors";
- *
- * const Navigation = () => {
- *   const dispatch = useAppDispatch();
- *   const currentPage = useAppSelector(selectCurrentPage);
- *
- *   return (
- *     <nav>
- *       <button onClick={() => dispatch(setCurrentPage("/status"))}>
- *         Перейти к статусу
- *       </button>
- *       <p>Текущая страница: {currentPage}</p>
- *     </nav>
- *   );
- * };
- * ```
  */
 const globalSlice = createSlice({
   name: 'global',

@@ -26,32 +26,6 @@ interface CTGHistorySelectionProviderProps {
  * - `toggle(id: number)` — переключение элемента.
  * - `clear()` — очистка выбора.
  *
- * @example
- * ```tsx
- * import {useCTGHistory} from "@features/ctg-history-selection-provider";
- *
- * const HistoryRow = ({id}: {id: number}) => {
- *   const {selected, toggle, clear} = useCTGHistory();
- *
- *   return (
- *     <div>
- *       <button
- *         style={{background: selected.includes(id) ? "lightblue" : "white"}}
- *         onClick={() => toggle(id)}
- *       >
- *         Выбрать {id}
- *       </button>
- *       <button onClick={clear}>Очистить</button>
- *     </div>
- *   );
- * };
- *
- * // Подключение провайдера
- * <CTGHistorySelectionProvider>
- *   <HistoryRow id={1} />
- *   <HistoryRow id={2} />
- * </CTGHistorySelectionProvider>
- * ```
  */
 export const CTGHistorySelectionProvider: FC<CTGHistorySelectionProviderProps> = ({children}) => {
   const [selected, setSelected] = useState<number[]>([]);

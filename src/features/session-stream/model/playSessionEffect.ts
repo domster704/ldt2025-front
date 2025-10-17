@@ -32,21 +32,6 @@ const PRECISION: number = 1;
  * ---
  * ### Параметры:
  * @param msg входящие данные потока ({@link StreamData}).
- *
- * ---
- * ### Пример использования:
- * ```tsx
- * import {useAppDispatch} from "@app/store/store";
- * import {playSessionEffect} from "@features/session-stream/model/playSessionEffect";
- *
- * const dispatch = useAppDispatch();
- *
- * // При получении сообщения из WebSocket
- * socket.onmessage = (event) => {
- *   const data: StreamData = JSON.parse(event.data);
- *   dispatch(playSessionEffect(data));
- * };
- * ```
  */
 export const playSessionEffect =
   (msg: StreamData) => (dispatch: AppDispatch, getState: () => RootState) => {

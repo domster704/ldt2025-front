@@ -7,7 +7,7 @@ const initialState: StreamState = {
   heartRates: [],
   uterineContractions: [],
   notifications: [],
-  status: CTGStatus.Normal,
+  status: CTGStatus.None,
   streaming: false,
   startTime: null
 };

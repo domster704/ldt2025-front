@@ -17,17 +17,6 @@
  * ---
  * @param hex Цвет в HEX-формате (например, `#ff0000` или `#f00`).
  * @returns Строка `"r, g, b"`, где r/g/b — целые числа от 0 до 255.
- *
- * ---
- * @example
- * ```ts
- * hexToRgb("#ff0000"); // "255, 0, 0"
- * hexToRgb("#0f0");    // "0, 255, 0"
- * hexToRgb("0000ff");  // "0, 0, 255"
- *
- * // Ошибка:
- * hexToRgb("#xyz");    // Error: Invalid HEX color: xyz
- * ```
  */
 export function hexToRgb(hex: string): string {
   hex = hex.replace(/^#/, '');

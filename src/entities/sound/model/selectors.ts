@@ -19,24 +19,5 @@ import {RootState} from "@app/store/store";
  *
  * @param state глобальное состояние Redux
  * @returns массив звуков {@link Sound[]}
- *
- * @example
- * ```tsx
- * import {useAppSelector} from "@app/store/store";
- * import {selectAllSounds} from "@entities/sound/model/selectors";
- *
- * const SoundList = () => {
- *   const sounds = useAppSelector(selectAllSounds);
- *   return (
- *     <ul>
- *       {sounds.map(s => (
- *         <li key={s.id}>
- *           {s.name} {s.enabled ? "(вкл)" : "(выкл)"}
- *         </li>
- *       ))}
- *     </ul>
- *   );
- * };
- * ```
  */
 export const selectAllSounds = (state: RootState) => state.sound.items;

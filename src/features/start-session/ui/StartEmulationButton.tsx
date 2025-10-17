@@ -39,19 +39,6 @@ import {startEmulation} from "@entities/session-upload/api/startEmulationThunk";
  * - `streaming: boolean` — идёт ли сейчас эмуляция.
  * - `patient` — выбранный пациент (если нет — переход на выбор пациента).
  * - `currentPage` — текущая страница (нужна для проверки, где запускать эмуляцию).
- *
- * ---
- * @component
- * @example
- * ```tsx
- * import StartEmulationButton from "@features/start-session/ui/StartEmulationButton";
- *
- * const FooterActionsPanel = () => (
- *   <nav>
- *     <StartEmulationButton />
- *   </nav>
- * );
- * ```
  */
 const StartEmulationButton: FC = () => {
   const navigate = useNavigate();

@@ -25,19 +25,6 @@ interface PatientPickerProps {
  * - `PatientPickerTable` получает список пациентов через селектор `selectAllPatients`.
  * - При выборе пациента вызывается thunk `fetchPatientByID`, чтобы загрузить детальную информацию.
  * - После выбора выполняется `navigate(-1)` → возврат на предыдущую страницу (например, статус или контекст).
- *
- * ---
- * @component
- * @example
- * ```tsx
- * import PatientPicker from "@pages/patient-picker";
- *
- * const AppRoutes = () => (
- *   <Routes>
- *     <Route path="/patient-picker" element={<PatientPicker />} />
- *   </Routes>
- * );
- * ```
  */
 const PatientPicker: FC<PatientPickerProps> = ({}) => {
   const global = useAppSelector(state => state.global);

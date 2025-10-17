@@ -30,36 +30,6 @@ import React, {useCallback, useRef, useState} from "react";
  * ### Алгоритм:
  * - При **скролле колесом** смещение увеличивается или уменьшается на фиксированный шаг.
  * - При **drag мышью/тачем** смещение пересчитывается в зависимости от сдвига (`dx`) и коэффициента `secPerPx = window_ / xMax`.
- *
- * ---
- * @example
- * ```tsx
- * const {
- *   scrollOffset,
- *   isDragging,
- *   handleWheel,
- *   handleMouseDown,
- *   handleMouseMove,
- *   handleMouseUp,
- *   handleTouchStart,
- *   handleTouchMove,
- *   handleTouchEnd,
- * } = useChartScroll({ window_: 60000, xMax: 800 });
- *
- * return (
- *   <svg
- *     onWheel={handleWheel}
- *     onMouseDown={handleMouseDown}
- *     onMouseMove={handleMouseMove}
- *     onMouseUp={handleMouseUp}
- *     onTouchStart={handleTouchStart}
- *     onTouchMove={handleTouchMove}
- *     onTouchEnd={handleTouchEnd}
- *   >
- *     {/* график /*}
- *   </svg>
- * );
- * ```
  */
 export function useChartScroll({window_, xMax}: { window_: number; xMax: number }) {
   const [scrollOffset, setScrollOffset] = useState(0);

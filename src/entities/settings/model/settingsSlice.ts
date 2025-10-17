@@ -34,23 +34,6 @@ let initialState: SettingsState = {
  * ### LocalStorage:
  * - `goodColor` — сохраняется при вызове `setChosenGoodColor`.
  * - `warningColor` — сохраняется при вызове `setChosenWarningColor`.
- *
- * @example
- * ```tsx
- * const dispatch = useAppDispatch();
- *
- * // Сменить цвет "нормы"
- * dispatch(setChosenGoodColor("#00a619"));
- *
- * // Сменить цвет "предупреждения"
- * dispatch(setChosenWarningColor("#ff0000"));
- *
- * // Восстановить из localStorage
- * dispatch(setInitialColors({
- *   goodColor: localStorage.getItem("goodColor") ?? undefined,
- *   warningColor: localStorage.getItem("warningColor") ?? undefined,
- * }));
- * ```
  */
 const settingsSlice = createSlice({
   name: 'settings',

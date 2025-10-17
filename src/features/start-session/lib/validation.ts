@@ -7,15 +7,6 @@
  *
  * @param file объект файла, выбранного пользователем через `<input type="file">`.
  * @returns `true`, если файл имеет расширение `.zip`, иначе `false`.
- *
- * @example
- * ```ts
- * const file = new File(["data"], "signals.zip");
- * console.log(validateFile(file)); // true
- *
- * const badFile = new File(["data"], "notes.txt");
- * console.log(validateFile(badFile)); // false
- * ```
  */
 export function validateFile(file: File): boolean {
   return file.name.endsWith(".zip");

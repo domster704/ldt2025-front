@@ -65,7 +65,6 @@ const IndicatorContainer: FC<IndicatorContainerProps> = ({
                                                          }) => {
   return (
     <div className={style.indicatorContainer}>
-      {/* Заголовок: название и метка */}
       <div className={style.indicatorContainer__header}>
         <p className={style.indicatorContainer__indicatorName}>{name}</p>
         {label && (
@@ -73,13 +72,11 @@ const IndicatorContainer: FC<IndicatorContainerProps> = ({
         )}
       </div>
 
-      {/* Основное значение */}
       <p {...props} className={[
         style.indicatorContainer__value,
         valueClassName
       ].join(' ')}>{value}</p>
 
-      {/* Подпись единиц измерения */}
       <span className={style.indicatorContainer__subLabel}>{subLabel}</span>
     </div>
   );

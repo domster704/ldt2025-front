@@ -20,24 +20,6 @@ import App from "@app/App";
  * - `store` импортируется из `@app/store/store` и содержит всю конфигурацию Redux (редьюсеры, middleware, типизацию).
  * - Корневой DOM-элемент (`#root`) ищется в `public/index.html`.
  * - Включение `StrictMode` не влияет на продакшен, но даёт больше полезных предупреждений в dev-среде.
- *
- * @example
- * // index.tsx
- * import React from "react";
- * import ReactDOM from "react-dom/client";
- * import {Provider} from "react-redux";
- * import store from "@app/store/store";
- * import App from "@app/App";
- *
- * const root = ReactDOM.createRoot(document.getElementById("root")!);
- *
- * root.render(
- *   <React.StrictMode>
- *     <Provider store={store}>
- *       <App />
- *     </Provider>
- *   </React.StrictMode>
- * );
  */
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 

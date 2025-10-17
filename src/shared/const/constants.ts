@@ -1,22 +1,10 @@
 /**
  * Базовый URL для HTTP API-бэкенда.
- *
- * - Если установлена переменная окружения `API_URL`, используется она.
- * - Иначе — локальный сервер по адресу `http://127.0.0.1:8010`.
- *
- * @example
- * fetch(`${$apiUrl}/http/crud/patients`)
  */
 export const $apiUrl: string = process.env.API_URL ?? 'http://127.0.0.1:8010';
 
 /**
  * Базовый URL для WebSocket API.
- *
- * - Если установлена переменная окружения `WS_URL`, используется она.
- * - Иначе — локальный сервер `ws://127.0.0.1:8010/ws/streaming/`.
- *
- * @example
- * const ws = new WebSocket($wsApiUrl);
  */
 export const $wsApiUrl: string = process.env.WS_URL ?? 'ws://127.0.0.1:8010/ws/streaming/';
 

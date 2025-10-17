@@ -31,19 +31,6 @@ interface HistoryProps {
  * - Пользователь выбирает записи в {@link HistoryTable}.
  * - Провайдер {@link CTGHistorySelectionProvider} сохраняет выбранные ID.
  * - {@link CTGAnalysisDashboard} автоматически переключается в нужный режим (графики / параметры / сравнение).
- *
- * ---
- * @component
- * @example
- * ```tsx
- * import History from "@pages/history";
- *
- * const AppRoutes = () => (
- *   <Routes>
- *     <Route path="/history" element={<History />} />
- *   </Routes>
- * );
- * ```
  */
 const History: FC<HistoryProps> = ({}) => {
   return (
