@@ -4,7 +4,7 @@ import {colorToCTGStatus, ctgColors, CTGStatus, NotificationColor} from "@shared
  * Возвращает цвет ячейки по FIGO-статусу.
  */
 export function getColorByCTGStatus(status?: CTGStatus | null): string | undefined {
-  if (!status) return undefined;
+  if (status === null || status === undefined) return undefined;
   return ctgColors[status];
 }
 

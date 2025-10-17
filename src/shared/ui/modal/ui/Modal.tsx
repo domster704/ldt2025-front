@@ -1,5 +1,6 @@
 import React, {FC} from "react";
 import * as style from "./Modal.module.css";
+import {createPortal} from "react-dom";
 
 interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Флаг открытия модального окна */
@@ -35,28 +36,6 @@ interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
  * |   +---------------------------+   |
  * +-----------------------------------+
  * ```
- *
- * ---
- * ### Использование:
- * @example
- * ```tsx
- * import React, {useState} from "react";
- * import Modal from "@shared/ui/modal";
- *
- * export const Example = () => {
- *   const [open, setOpen] = useState(false);
- *
- *   return (
- *     <>
- *       <button onClick={() => setOpen(true)}>Открыть модалку</button>
- *       <Modal isOpen={open} onClose={() => setOpen(false)}>
- *         <h2>Привет 👋</h2>
- *         <p>Это содержимое модалки</p>
- *       </Modal>
- *     </>
- *   );
- * };
- * ```
  */
 const Modal: FC<ModalProps> = ({
                                  isOpen,
@@ -66,7 +45,7 @@ const Modal: FC<ModalProps> = ({
                                }) => {
   if (!isOpen) return null;
 
-  return (
+  const modalContent = (
     <div className={style.overlay} onClick={onClose}>
       <div {...props} className={[
         style.content,
@@ -78,6 +57,8 @@ const Modal: FC<ModalProps> = ({
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 };
 
 export default Modal;

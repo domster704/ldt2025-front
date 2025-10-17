@@ -33,15 +33,16 @@ function normalizeNumber(v: number | null | undefined): number {
 }
 
 /**
- * API -> DTO (сериализуемо, безопасно)
+ * Result
+ * API -> DTO
  * @param api
  */
-export function mapResultApiToDto(api?: CTGResultAPI): CTGResultDTO | undefined {
+function mapResultApiToDto(api?: CTGResultAPI): CTGResultDTO | undefined {
   if (!api) return undefined;
 
-  const figo = api.figo ? figoToCTGStatus[api.figo] : CTGStatus.Normal;
+  const figo = api.figo ? figoToCTGStatus[api.figo] : CTGStatus.None;
   const figo_prognosis =
-    api.figo_prognosis ? (figoToCTGStatus[api.figo_prognosis] ?? null) : null;
+    api.figo_prognosis ? (figoToCTGStatus[api.figo_prognosis] ?? null) : CTGStatus.None;
 
   return {
     ctg_id: api.ctg_id ?? 0,
@@ -70,6 +71,11 @@ export function mapResultApiToDto(api?: CTGResultAPI): CTGResultDTO | undefined 
   };
 }
 
+/**
+ * History
+ * API -> DTO
+ * @param api
+ */
 export function mapHistoryApiToDto(api: CTGHistoryAPI): CTGHistoryDTO {
   return {
     id: api.id ?? 0,
@@ -80,12 +86,17 @@ export function mapHistoryApiToDto(api: CTGHistoryAPI): CTGHistoryDTO {
   };
 }
 
-export function mapResultDtoToDomain(dto?: CTGResultDTO) {
+/**
+ * Result
+ * DTO -> Domain
+ * @param dto
+ */
+function mapResultDtoToDomain(dto?: CTGResultDTO) {
   if (!dto) {
     return {
       timestamp: new Date(),
-      figo: null,
-      figo_prognosis: null,
+      figo: CTGStatus.None,
+      figo_prognosis: CTGStatus.None,
       bpm: 0,
       uc: 0,
     } as any;
@@ -96,6 +107,11 @@ export function mapResultDtoToDomain(dto?: CTGResultDTO) {
   };
 }
 
+/**
+ * History
+ * DTO -> Domain
+ * @param dto
+ */
 export function mapHistoryDtoToDomain(dto: CTGHistoryDTO): CTGHistory {
   return {
     ...dto,

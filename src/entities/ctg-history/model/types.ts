@@ -9,7 +9,7 @@ export interface CTGResultDTO {
   bpm: number | null;
   uc: number;
   figo: CTGStatus;
-  figo_prognosis: CTGStatus | null;
+  figo_prognosis: CTGStatus;
   bhr: number;
   amplitude_oscillations: number;
   oscillation_frequency: number;

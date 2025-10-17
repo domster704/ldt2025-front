@@ -61,7 +61,7 @@ export function useThresholdChartScales(
     const [minDateRaw, maxDateRaw] = extent(data, d => d.date) as [Date, Date];
     const [minVal, maxVal] = extent(data, d => d.value) as [number, number];
 
-    const yMin = Math.max(-1, (minVal ?? 0) - padding[0]);
+    const yMin = Math.max(-0.5, (minVal ?? 0) - padding[0]);
     const yMax = (maxVal ?? 0) + padding[1];
 
     const xPadMs = Math.max(

@@ -1,4 +1,4 @@
-import React, {FC, useRef} from "react";
+import React, {FC, useMemo, useRef} from "react";
 import {timeFormat} from "d3";
 import {AxisBottom, AxisLeft} from "@visx/axis";
 import {LinePath} from "@visx/shape";
@@ -126,8 +126,13 @@ const ThresholdChart: FC<ThresholdChartProps> = ({zones, data, padding}) => {
 
           {/* Точки графика */}
           {data.map((d, i) => (
-            <circle key={i} cx={xScale(d.date)} cy={yScale(d.value)} r={4}
-                    fill="white" stroke="#003c66" strokeWidth={2}/>
+            <circle key={i}
+                    cx={xScale(d.date)}
+                    cy={yScale(d.value)}
+                    r={4}
+                    fill="white"
+                    stroke="#003c66"
+                    strokeWidth={2}/>
           ))}
         </g>
 

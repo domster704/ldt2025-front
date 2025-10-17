@@ -56,7 +56,7 @@ const CTGDashboardCharts = () => {
     <div className={style.charts}>
       <h4 className={style.charts__headerText}>Динамика FIGO по истории КТГ</h4>
       <div className={style.charts__figo}>
-        <FIGOChart data={ctgHistory}/>
+        <FIGOChart ctgHistory={ctgHistory}/>
       </div>
 
       <CTGThresholdCharts ctgHistory={ctgHistory}/>

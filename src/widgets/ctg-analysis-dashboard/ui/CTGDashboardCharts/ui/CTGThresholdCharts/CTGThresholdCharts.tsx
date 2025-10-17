@@ -30,21 +30,8 @@ interface CTGThresholdChartsProps {
  * - `#c3ffac` — зелёная зона (норма).
  * - `#ffe7ac` — жёлтая зона (сомнительное значение).
  * - `#ffc2ac` — красная зона (опасное значение).
- *
- * ---
- * ### Пример использования:
- * ```tsx
- * import {useAppSelector} from "@app/store/store";
- * import {selectAllCTGHistory} from "@entities/ctg-history/model/selectors";
- *
- * const AnalysisSection = () => {
- *   const history = useAppSelector(selectAllCTGHistory);
- *   return <CTGThresholdCharts ctgHistory={history} />;
- * };
- * ```
  */
 const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
-  // подготовка данных для графика STV
   const stvData = useMemo(() => {
     return ctgHistory.map((item) => ({
       value: item.result?.stv || 0,
@@ -52,7 +39,6 @@ const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
     }));
   }, [ctgHistory]);
 
-  // подготовка данных для графика ЧСС
   const hrData = useMemo(() => {
     return ctgHistory.map((item) => ({
       value: item.result?.bpm || 0,
@@ -60,7 +46,6 @@ const CTGThresholdCharts: FC<CTGThresholdChartsProps> = ({ctgHistory}) => {
     }));
   }, [ctgHistory]);
 
-  // подготовка данных для графика акцелераций
   const accelerationData = useMemo(() => {
     return ctgHistory.map((item) => ({
       value: item.result?.accelerations || 0,
