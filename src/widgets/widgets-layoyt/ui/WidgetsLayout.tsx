@@ -5,6 +5,8 @@ import "react-resizable/css/styles.css";
 import * as style from "./WidgetsLayout.module.css";
 import {Widget} from "../model/types";
 import {useResizeObserver} from "@shared/lib/hooks/useResizeObserver";
+import {useAppSelector} from "@app/store/store";
+import {selectIsWidgetLayoutEdit} from "@entities/global/model/selectors";
 
 const GRID_COLS = 48;
 const GRID_ROWS = 48;
@@ -16,6 +18,9 @@ interface WidgetsLayoutProps {
   storageKey?: string;
   defaultEditable?: boolean;
 }
+
+const margin: [number, number] = [4, 4];
+const containerPadding: [number, number] = [0, 0];
 
 /**
  * Универсальный шаблон виджетов.
@@ -31,15 +36,16 @@ const WidgetsLayout: React.FC<WidgetsLayoutProps> = ({
                                                      }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const {width, height} = useResizeObserver(containerRef);
+  const isWidgetsLayoutEdit = useAppSelector(selectIsWidgetLayoutEdit);
 
   const [layout, setLayout] = useState<Layout[]>(
     widgets.map((w) => ({i: w.id, ...w.layout}))
   );
-  const [editMode, setEditMode] = useState(defaultEditable);
 
-  // const rowHeight = height ? Math.floor(height / rows) : 100;
-  const rowHeight = height / rows;
-  const gridHeight = rowHeight * rows;
+  const rowHeight =
+    rows > 0
+      ? (height - containerPadding[1] * 2 - (rows - 1) * margin[1]) / rows
+      : 0;
 
   useEffect(() => {
     if (!storageKey) return;
@@ -61,12 +67,6 @@ const WidgetsLayout: React.FC<WidgetsLayoutProps> = ({
 
   return (
     <div className={style.wrapper}>
-      <div className={style.toolbar}>
-        <button onClick={() => setEditMode((v) => !v)}>
-          {editMode ? "Зафиксировать" : "Редактировать"}
-        </button>
-      </div>
-
       <div className={style.layoutContainer} ref={containerRef}>
         {width > 0 && height > 0 && (
           <GridLayout layout={layout}
@@ -74,21 +74,25 @@ const WidgetsLayout: React.FC<WidgetsLayoutProps> = ({
                       width={width}
                       rowHeight={rowHeight}
                       maxRows={GRID_ROWS}
-                      isDraggable={editMode}
-                      isResizable={editMode}
+                      isDraggable={isWidgetsLayoutEdit}
+                      isResizable={isWidgetsLayoutEdit}
                       preventCollision={true}
+                      resizeHandles={['se', 'sw', 'ne', 'nw']}
                       isBounded={true}
                       compactType={null}
                       autoSize={false}
-                      margin={[0, 0]}
-                      containerPadding={[0, 0]}>
-            {widgets.map((w) => (
-              <div key={w.id} data-grid={layout.find((l) => l.i === w.id)}>
-                <div className={style.widget}>
-                  {w.element}
+                      margin={margin}
+                      containerPadding={containerPadding}
+                      onLayoutChange={handleLayoutChange}>
+            {
+              widgets.map((w) => (
+                <div key={w.id} data-grid={layout.find((l) => l.i === w.id)}>
+                  <div className={style.widget}>
+                    {w.element}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            }
           </GridLayout>
         )}
       </div>

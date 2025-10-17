@@ -11,6 +11,8 @@ import patientsImg from '@shared/assets/img/patients.svg';
 import OpenPageButton from "@shared/ui/open-page-button";
 import {PATIENT_PICKER_PAGE_URL, SETTINGS_PAGE_URL} from "@shared/const/constants";
 import ExportButton from "@features/export-button";
+import EditWidgetsLayoutButton from "@features/edit-widgets-layout";
+import {useIsEditablePage} from "@widgets/footer/hooks/useIsPageWithBackButton";
 
 /**
  * **FooterActionsPanel** — панель действий в футере приложения.
@@ -53,6 +55,8 @@ import ExportButton from "@features/export-button";
  * ```
  */
 const FooterActionsPanel: FC = () => {
+  const isEditablePage = useIsEditablePage();
+
   return (
     <nav className={style.actionsPanel}>
       <StartEmulationButton/>
@@ -66,6 +70,10 @@ const FooterActionsPanel: FC = () => {
                       print();
                     }}/>
       <ExportButton/>
+      {
+        isEditablePage &&
+          <EditWidgetsLayoutButton/>
+      }
       <ActionButton icon={brightnessImg} text="Яркость"/>
       <OpenPageButton page={SETTINGS_PAGE_URL}
                       icon={settingsImg}

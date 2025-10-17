@@ -1,13 +1,15 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {APP_URL, STATUS_PAGE_URL} from "@shared/const/constants";
+import {GlobalState} from "@entities/global/model/types";
 
 /**
  * Начальное состояние глобального среза приложения.
  *
  * - `currentPage` — текущая активная страница (по умолчанию `/status`).
  */
-let initialState = {
+let initialState: GlobalState = {
   currentPage: STATUS_PAGE_URL,
+  isWidgetLayoutEdit: false,
 };
 
 /**
@@ -33,9 +35,15 @@ const globalSlice = createSlice({
   reducers: {
     setCurrentPage: (state, action: PayloadAction<APP_URL>) => {
       state.currentPage = action.payload;
+    },
+    setWidgetLayoutEdit: (state, action: PayloadAction<boolean>) => {
+      state.isWidgetLayoutEdit = action.payload;
     }
   }
 });
 
-export const {setCurrentPage} = globalSlice.actions;
+export const {
+  setCurrentPage,
+  setWidgetLayoutEdit
+} = globalSlice.actions;
 export default globalSlice.reducer;
