@@ -10,9 +10,9 @@ interface LivePathProps {
   /** Источник данных — массив точек (x, y) */
   dataSource: StreamPoint[];
   /** Масштаб по оси X (время или номер точки → пиксели) */
-  xScale: ScaleLinear<number, number, never>;
+  xScale: ScaleLinear<number, number>;
   /** Масштаб по оси Y (значение параметра → пиксели) */
-  yScale: ScaleLinear<number, number, never>;
+  yScale: ScaleLinear<number, number>;
 }
 
 /**

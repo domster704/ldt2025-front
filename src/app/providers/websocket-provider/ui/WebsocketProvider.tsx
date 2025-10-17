@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useRef, useState} from "react";
-import {WebsocketContext} from "@app/providers/websocket-provider/lib/context";
+import {sendSignature, WebsocketContext} from "@app/providers/websocket-provider/lib/context";
 
 /**
  * Свойства компонента {@link WebsocketProvider}.
@@ -148,7 +148,7 @@ export const WebsocketProvider: FC<WebsocketProviderProps> = ({
    *
    * @param data Данные для отправки (строка или объект).
    */
-  const safeSend = (data: unknown) => {
+  const safeSend: sendSignature = (data: unknown) => {
     if (!ws.current || ws.current.readyState !== WebSocket.OPEN) {
       console.warn("WebSocket не готов для отправки");
       return;

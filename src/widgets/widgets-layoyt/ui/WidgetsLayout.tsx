@@ -16,7 +16,6 @@ interface WidgetsLayoutProps {
   cols?: number;
   rows?: number;
   storageKey?: string;
-  defaultEditable?: boolean;
 }
 
 const margin: [number, number] = [4, 4];
@@ -31,8 +30,7 @@ const WidgetsLayout: React.FC<WidgetsLayoutProps> = ({
                                                        widgets,
                                                        cols = GRID_COLS,
                                                        rows = GRID_ROWS,
-                                                       storageKey,
-                                                       defaultEditable = false,
+                                                       storageKey
                                                      }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const {width, height} = useResizeObserver(containerRef);
@@ -48,9 +46,15 @@ const WidgetsLayout: React.FC<WidgetsLayoutProps> = ({
       : 0;
 
   useEffect(() => {
-    if (!storageKey) return;
+    if (!storageKey) {
+      return;
+    }
     const saved = localStorage.getItem(storageKey);
-    if (!saved) return;
+
+    if (!saved) {
+      return;
+    }
+
     try {
       setLayout(JSON.parse(saved));
     } catch {
@@ -70,7 +74,7 @@ const WidgetsLayout: React.FC<WidgetsLayoutProps> = ({
       <div className={style.layoutContainer} ref={containerRef}>
         {width > 0 && height > 0 && (
           <GridLayout layout={layout}
-                      cols={GRID_COLS}
+                      cols={cols}
                       width={width}
                       rowHeight={rowHeight}
                       maxRows={GRID_ROWS}

@@ -30,7 +30,7 @@ import {$apiUrl} from "@shared/const/constants";
  */
 export const fetchAllCTGHistory = createAsyncThunk<CTGHistoryData, number, ThunkApi>(
   'ctg/fetchAllCTGHistory',
-  async (patientId: number, {getState}) => {
+  async (patientId: number) => {
     const response = await fetch(`${$apiUrl}/http/crud/ctg_histories?patient=${patientId}`, {
       method: 'GET'
     });
@@ -43,7 +43,7 @@ export const fetchAllCTGHistory = createAsyncThunk<CTGHistoryData, number, Thunk
 
 export const fetchAllCTGHistoryAnalysis = createAsyncThunk<AnalysisResult, number, ThunkApi>(
   'ctg/fetchAllCTGHistoryAnalysis',
-  async (patientId: number, {getState}) => {
+  async (patientId: number) => {
     const response = await fetch(`${$apiUrl}/ml/analizing/${patientId}`, {
       method: 'GET'
     });

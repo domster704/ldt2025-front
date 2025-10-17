@@ -1,6 +1,5 @@
 import React, {FC} from 'react';
 import * as style from './PatientPicker.module.css'
-import {useAppDispatch, useAppSelector} from "@app/store/store";
 import PageWrapper from "@shared/ui/page-wrapper";
 import {SimpleHeader} from "@widgets/header";
 import PatientPickerTable from "@widgets/patient-picker-table";
@@ -27,9 +26,6 @@ interface PatientPickerProps {
  * - После выбора выполняется `navigate(-1)` → возврат на предыдущую страницу (например, статус или контекст).
  */
 const PatientPicker: FC<PatientPickerProps> = ({}) => {
-  const global = useAppSelector(state => state.global);
-  const dispatch = useAppDispatch();
-
   return (
     <PageWrapper>
       <SimpleHeader headerText={"Выбор пациента"}/>

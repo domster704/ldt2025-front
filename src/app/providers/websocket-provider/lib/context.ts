@@ -5,7 +5,7 @@ import {createContext} from "react";
  *
  * @param data Данные для отправки (строка или сериализуемый объект).
  */
-export type sendSignature = (data: string) => void;
+export type sendSignature = (data: unknown) => void;
 
 /**
  * Интерфейс описывает структуру значения,
@@ -29,7 +29,7 @@ export interface IWebsocketContext {
    * Функция для отправки данных на сервер через WebSocket.
    * Должна сериализовать объект в JSON или отправить строку.
    */
-  send: (data: unknown) => void;
+  send: sendSignature;
 }
 
 /**

@@ -2,7 +2,6 @@ import React, {FC} from 'react';
 import * as style from './Settings.module.css'
 import PageWrapper from "@shared/ui/page-wrapper";
 import {SimpleHeader} from "@widgets/header";
-import {useAppDispatch} from "@app/store/store";
 import ColorsPicker from "@features/settings-colors-picker";
 import SoundManager from "@widgets/sound-manager";
 import ContainerWithLabel from "@shared/ui/container-with-label";
@@ -34,15 +33,8 @@ interface SettingsProps {
  * - {@link PageWrapper} — общий каркас страницы.
  * - {@link SimpleHeader} — заголовок "Настройки".
  * - {@link ContainerWithLabel} — стилизованные контейнеры с заголовками для каждого раздела.
- *
- * ---
- * ### Redux:
- * - Через `useAppDispatch` можно расширять поведение (например, сохранять настройки на сервере).
- * - На данный момент логика вынесена в {@link settingsSlice} и {@link soundSlice}.
  */
 const Settings: FC<SettingsProps> = ({}) => {
-  const dispatch = useAppDispatch();
-
   return (
     <PageWrapper>
       <SimpleHeader headerText={"Настройки"}/>

@@ -41,7 +41,6 @@ export interface Patient {
  * Состояние Redux-среза пациентов.
  *
  * - `items` — нормализованный список всех пациентов
- *   (создаётся через {@link createEntityAdapter}).
  * - `chosen` — выбранный пациент или `null`.
  */
 export interface PatientState {

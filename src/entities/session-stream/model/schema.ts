@@ -1,8 +1,7 @@
 import {z} from "zod";
-import {CTGStatus, NotificationColor} from "@shared/const/ctgColors";
+import {NotificationColor} from "@shared/const/ctgColors";
 
 export const NotificationColorSchema = z.enum(NotificationColor);
-export const CTGStatusSchema = z.enum(CTGStatus);
 export const ProcessNotificationSchema = z.object({
   message: z.string(),
   color: NotificationColorSchema,

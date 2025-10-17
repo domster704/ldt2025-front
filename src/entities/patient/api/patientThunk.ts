@@ -14,16 +14,13 @@ import {Patient, PatientData} from "@entities/patient/model/types";
  * - Сервер возвращает массив пациентов.
  * - Оборачивается в объект `{ data: Patient[] }` для совместимости с {@link PatientData}.
  *
- * ### Использование в Slice:
- * - Обрабатывается в `extraReducers` {@link patientSlice}, где заполняет `state.items`.
- *
  * @async
  * @function fetchAllPatient
  * @returns {PatientData} объект с массивом пациентов
  */
 export const fetchAllPatient = createAsyncThunk<PatientData, void, ThunkApi>(
   'patient/fetchAllPatient',
-  async (_, {getState}) => {
+  async (_) => {
     const response = await fetch(`${$apiUrl}/http/crud/patients`, {
       method: 'GET'
     });
@@ -44,9 +41,6 @@ export const fetchAllPatient = createAsyncThunk<PatientData, void, ThunkApi>(
  * ### Ответ:
  * - Сервер возвращает объект пациента ({@link Patient}).
  *
- * ### Использование в Slice:
- * - Обрабатывается в `extraReducers` {@link patientSlice}, где сохраняется в `state.chosen`.
- *
  * @async
  * @function fetchPatientByID
  * @param patient_id идентификатор пациента
@@ -62,7 +56,7 @@ export const fetchAllPatient = createAsyncThunk<PatientData, void, ThunkApi>(
  */
 export const fetchPatientByID = createAsyncThunk<Patient, number, ThunkApi>(
   'patient/fetchPatientByID',
-  async (patient_id: number, {getState}) => {
+  async (patient_id: number) => {
     const response = await fetch(`${$apiUrl}/http/crud/patients/${patient_id}`, {
       method: 'GET'
     });

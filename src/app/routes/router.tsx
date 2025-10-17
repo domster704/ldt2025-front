@@ -75,8 +75,6 @@ export const routes: RouteObject[] = [
 /**
  * Конфигурированный экземпляр роутера.
  *
- * Используется внутри {@link RouterProvider} в `App.tsx`.
- *
  * @example
  * ```tsx
  * import {RouterProvider} from "react-router-dom";
