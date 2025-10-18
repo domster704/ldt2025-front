@@ -56,8 +56,6 @@ export const fetchAllCTGHistoryAnalysis = createAsyncThunk<AnalysisResult, numbe
       method: 'GET'
     });
 
-    return {
-      "analysis": await response.json()
-    } as AnalysisResult;
+    return await response.json() as AnalysisResult;
   }
 );

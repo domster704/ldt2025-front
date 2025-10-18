@@ -12,7 +12,8 @@ import {IndicatorsPanelPlacement} from "@widgets/indicators-panel/ui/IndicatorsP
 import HistoryLogs from "@widgets/history-logs";
 import Anamnesis from "@widgets/anamnesis";
 import STVPrediction from "@widgets/stv-predict";
-import WidgetsLayout from "@widgets/widgets-layoyt";
+import WidgetsLayout from "@widgets/widgets-layout";
+import ClassificationEstimation from "@widgets/classification-estimation";
 
 const GRID_ROWS = 36;
 const GRID_COLUMNS = 48;
@@ -23,12 +24,12 @@ const CTGContextPage = () => {
   const widgets = [
     {
       id: "logs",
-      layout: {x: 0, y: 0, w: 6, h: 24},
+      layout: {x: 0, y: 0, w: 7, h: 22},
       element: <HistoryLogs/>,
     },
     {
       id: "dashboard",
-      layout: {x: 6, y: 0, w: 30, h: 24},
+      layout: {x: 7, y: 0, w: 30, h: 22},
       element: (
         <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
           <DashboardStream/>
@@ -37,19 +38,24 @@ const CTGContextPage = () => {
     },
     {
       id: "indicators",
-      layout: {x: 42, y: 0, w: 12, h: 24},
+      layout: {x: 37, y: 0, w: 11, h: 36},
       element: <IndicatorsPanel placement={IndicatorsPanelPlacement.Grid}/>,
     },
     {
       id: "anamnesis",
-      layout: {x: 0, y: 24, w: 24, h: 12},
+      layout: {x: 0, y: 22, w: 25, h: 14},
       element: <Anamnesis/>,
     },
     {
       id: "stv",
-      layout: {x: 24, y: 24, w: 12, h: 12},
+      layout: {x: 25, y: 22, w: 12, h: 7},
       element: <STVPrediction/>,
     },
+    {
+      id: "classification-estimation",
+      layout: {x: 25, y: 28, w: 12, h: 7},
+      element: <ClassificationEstimation/>,
+    }
   ];
 
   return (

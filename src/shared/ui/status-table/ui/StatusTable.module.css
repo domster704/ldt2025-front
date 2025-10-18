@@ -1,4 +1,4 @@
-.stvPredictionContainer {
+.statusTable {
   background: var(--belyy-);
 
   padding: 3.125rem 0 1rem 0;
@@ -6,7 +6,7 @@
   width: 100%;
 }
 
-.stvPredictionContainer table {
+.statusTable table {
   width: 100%;
   border-collapse: collapse;
 
@@ -23,4 +23,10 @@
     line-height: 150%;
     letter-spacing: -0.01em;
   }
+}
+
+.rowName {
+  width:     12rem;
+  min-width: 12rem;
+  max-width: 12rem;
 }

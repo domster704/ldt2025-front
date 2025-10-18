@@ -1,0 +1,20 @@
+.statusLabel {
+  width: max-content;
+
+  border-radius: 0.75rem;
+  padding: 0.19rem 0.62rem;
+
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 1rem;
+  text-align: right;
+  color: var(--chernyy-);
+
+  &.bad {
+    background: var(--status-ktg-somnitelnyy);
+  }
+
+  &.good {
+    background: var(--status-ktg-norma);
+  }
+}

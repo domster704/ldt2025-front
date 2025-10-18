@@ -82,7 +82,6 @@ const WidgetsLayout: React.FC<WidgetsLayoutProps> = ({
                       isResizable={isWidgetsLayoutEdit}
                       preventCollision={true}
                       resizeHandles={['se', 'sw', 'ne', 'nw']}
-                      isBounded={true}
                       compactType={null}
                       autoSize={false}
                       margin={margin}

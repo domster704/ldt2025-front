@@ -25,6 +25,13 @@ export const ProcessInfoSchema = z.object({
   stv_forecast: STVForecastSchema.nullable(),
   median_fhr_10min: z.number().nullable(),
   hypoxia_proba: z.number().nullable(),
+
+  savelyeva_score: z.number().nullable(),
+  savelyeva_category: z.string().nullable(),
+  fischer_score: z.number().nullable(),
+  fischer_category: z.string().nullable(),
+  accelerations_count: z.number(),
+  decelerations_count: z.number(),
 });
 
 export const StreamDataSchema = z.object({
@@ -33,6 +40,3 @@ export const StreamDataSchema = z.object({
   timestamp: z.number(),
   process: ProcessInfoSchema,
 });
-
-export type ProcessInfoParsed = z.infer<typeof ProcessInfoSchema>;
-export type StreamDataParsed = z.infer<typeof StreamDataSchema>;

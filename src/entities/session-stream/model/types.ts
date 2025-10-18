@@ -32,6 +32,13 @@ export interface ProcessInfo {
   stv_forecast: STVForecast | null;
   median_fhr_10min: number | null;
   hypoxia_proba: number | null;
+
+  savelyeva_score: number | null;
+  savelyeva_category: string | null;
+  fischer_score: number | null;
+  fischer_category: string | null;
+  accelerations_count: number;
+  decelerations_count: number;
 }
 
 export interface StreamData {
@@ -49,4 +56,20 @@ export interface StreamState {
   status: CTGStatus;
   streaming: boolean;
   startTime: number | null;
+}
+
+export interface SituationWithScore {
+  situation: string | null;
+  score: number | null;
+}
+
+export interface STVForecastStatus {
+  value: number | null;
+  status: "Нормальная" | "Аномальная";
+}
+
+export interface STVForecastWithStatus {
+  stv_3m: STVForecastStatus;
+  stv_5m: STVForecastStatus;
+  stv_10m: STVForecastStatus;
 }

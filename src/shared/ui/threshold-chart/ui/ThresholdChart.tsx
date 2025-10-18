@@ -1,4 +1,4 @@
-import React, {FC, useMemo, useRef} from "react";
+import React, {FC, useRef} from "react";
 import {timeFormat} from "d3";
 import {AxisBottom, AxisLeft} from "@visx/axis";
 import {LinePath} from "@visx/shape";

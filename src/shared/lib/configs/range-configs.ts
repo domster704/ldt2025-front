@@ -1,4 +1,4 @@
-import {IndicatorConfig} from "@shared/ui/indicator-container/model/types";
+import {IndicatorConfig} from "@shared/types/indicator-zone";
 
 /**
  * Конфигурация индикатора для **Базальной частоты сердечных сокращений (БЧСС)**.
@@ -14,7 +14,7 @@ export const HR_CONFIG: IndicatorConfig = {
   subLabel: "уд./мин",
   zones: [
     {label: "good", ranges: [[110, 150]]},
-    {label: "bad", ranges: [[0, 109], [151, Infinity]]},
+    {label: "bad", ranges: [[0, 110], [151, Infinity]]},
   ],
 };
 
@@ -34,7 +34,7 @@ export const STV_CONFIG: IndicatorConfig = {
   subLabel: "мс",
   zones: [
     {label: "good", ranges: [[5, 25], [25, 40]]},
-    {label: "bad", ranges: [[0, 4.99], [40, Infinity]]},
+    {label: "bad", ranges: [[0, 5], [40, Infinity]]},
   ],
 };
 
@@ -55,5 +55,23 @@ export const UC_CONFIG: IndicatorConfig = {
   zones: [
     {label: "good", ranges: [[0, Infinity]]},
     {label: "bad", ranges: []},
+  ],
+};
+
+export const ACCELERATION_CONFIG: IndicatorConfig = {
+  name: "Акцелерация",
+  subLabel: "%",
+  zones: [
+    {label: "good", ranges: [[5, Infinity]]},
+    {label: "bad", ranges: [[0, 5]]},
+  ],
+};
+
+export const DECELERATION_CONFIG: IndicatorConfig = {
+  name: "Децелерация",
+  subLabel: "%",
+  zones: [
+    {label: "good", ranges: [[0, 0]]},
+    {label: "bad", ranges: [[1, Infinity]]},
   ],
 };

@@ -10,7 +10,7 @@ import PreloaderContainer from "@widgets/preloader-container";
 import IndicatorsPanel from "@widgets/indicators-panel";
 import {IndicatorsPanelPlacement} from "@widgets/indicators-panel/ui/IndicatorsPanel";
 import HistoryLogs from "@widgets/history-logs";
-import WidgetsLayout from "@widgets/widgets-layoyt";
+import WidgetsLayout from "@widgets/widgets-layout";
 
 
 const GRID_ROWS = 36;

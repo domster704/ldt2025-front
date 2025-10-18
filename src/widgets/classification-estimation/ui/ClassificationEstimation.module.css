@@ -1,4 +1,4 @@
-.stvPredictionContainer {
+.classificationEstimationContainer {
   background: var(--belyy-);
 
   padding: 3.125rem 0 1rem 0;
@@ -6,7 +6,7 @@
   width: 100%;
 }
 
-.stvPredictionContainer table {
+.classificationEstimationContainer table {
   width: 100%;
   border-collapse: collapse;
 

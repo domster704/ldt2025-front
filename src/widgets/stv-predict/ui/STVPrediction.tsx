@@ -1,71 +1,40 @@
-import React, {FC} from 'react';
-import * as style from './STVPrediction.module.css'
+import React, {FC} from "react";
+import * as style from "./STVPrediction.module.css";
 import {useAppSelector} from "@app/store/store";
-import ContainerWithLabel from "@shared/ui/container-with-label";
 import {selectLastSTVForecast} from "@entities/session-stream";
+import {STV_CONFIG} from "@shared/lib/configs/range-configs";
+import StatusTable from "@shared/ui/status-table";
 
-interface STVPredictionProps {
-}
+const STVPrediction: FC = () => {
+  const stv = useAppSelector(selectLastSTVForecast);
 
-/**
- * **STVPrediction** — компонент для отображения прогноза кратковременной вариабельности (STV).
- *
- * ---
- * ### Основные задачи:
- * - Получает из Redux Store последний прогноз STV через {@link selectLastSTVForecast}.
- * - Отображает значения STV для разных временных интервалов:
- *   - 3 минуты.
- *   - 5 минут.
- *   - 10 минут.
- * - Если данных нет, выводит строку `"Нет данных"`.
- * - Оборачивается в {@link ContainerWithLabel} с заголовком «Прогноз STV».
- *
- * ---
- * ### Визуальная структура:
- * ```
- * ┌────────────── Прогноз STV ──────────────┐
- * | STV 3 минуты   |  2.8                  |
- * | STV 5 минут    |  3.1                  |
- * | STV 10 минут   |  Нет данных           |
- * └────────────────────────────────────────┘
- * ```
- *
- * ---
- * ### Пример использования:
- * ```tsx
- * import STVPrediction from "@widgets/stv-predict";
- *
- * const AnalyticsPanel = () => (
- *   <section>
- *     <STVPrediction />
- *   </section>
- * );
- * ```
- */
-const STVPrediction: FC<STVPredictionProps> = ({}) => {
-  const stvForecast = useAppSelector(selectLastSTVForecast);
+  const rows = [
+    {
+      label: "STV 3 минуты",
+      score: stv?.stv_3m.value ?? null,
+      situation: stv?.stv_3m.status ?? null,
+      config: STV_CONFIG,
+    },
+    {
+      label: "STV 5 минут",
+      score: stv?.stv_5m.value ?? null,
+      situation: stv?.stv_5m.status ?? null,
+      config: STV_CONFIG,
+    },
+    {
+      label: "STV 10 минут",
+      score: stv?.stv_10m.value ?? null,
+      situation: stv?.stv_10m.status ?? null,
+      config: STV_CONFIG,
+    },
+  ];
 
   return (
-    <ContainerWithLabel label={"Прогноз STV"}
-                        className={style.stbPredictionContainer}>
-      <table>
-        <tbody>
-        <tr>
-          <td>STV 3 минуты</td>
-          <td>{stvForecast?.stv_3m || 'Нет данных'}</td>
-        </tr>
-        <tr>
-          <td>STV 5 минут</td>
-          <td>{stvForecast?.stv_5m || 'Нет данных'}</td>
-        </tr>
-        <tr>
-          <td>STV 10 минут</td>
-          <td>{stvForecast?.stv_10m || 'Нет данных'}</td>
-        </tr>
-        </tbody>
-      </table>
-    </ContainerWithLabel>
+    <StatusTable title="Прогноз STV"
+                 rows={rows}
+                 className={style.stvPredictionContainer}
+    />
   );
-}
+};
 
 export default STVPrediction;

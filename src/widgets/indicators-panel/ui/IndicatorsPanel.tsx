@@ -2,10 +2,22 @@ import React, {FC} from 'react';
 import * as style from './IndicatorsPanel.module.css'
 import {useAppSelector} from "@app/store/store";
 import IndicatorContainer from "@shared/ui/indicator-container";
-import {selectLastHR, selectLastSTV, selectLastUC} from "@entities/session-stream";
-import {getZone} from "@widgets/indicators-panel/lib/getZone";
-import {HR_CONFIG, STV_CONFIG, UC_CONFIG} from "@widgets/indicators-panel/model/configs";
+import {
+  selectLastAccelerationCount,
+  selectLastDecelerationCount,
+  selectLastHR,
+  selectLastSTV,
+  selectLastUC
+} from "@entities/session-stream";
 import {selectGoodColor, selectWarningColor} from "@entities/settings/model/selectors";
+import {getZone} from "@shared/lib/utils/getZone";
+import {
+  ACCELERATION_CONFIG,
+  DECELERATION_CONFIG,
+  HR_CONFIG,
+  STV_CONFIG,
+  UC_CONFIG
+} from "@shared/lib/configs/range-configs";
 
 export enum IndicatorsPanelPlacement {
   /** Разметка в виде сетки */
@@ -20,10 +32,9 @@ interface IndicatorsPanelProps {
 }
 
 /**
- * **IndicatorsPanel** — панель для отображения физиологических показателей пациента.
+ * IndicatorsPanel — панель для отображения физиологических показателей пациента.
  *
- * ---
- * ### Основные задачи:
+ * Основные задачи:
  * - Получает последние значения параметров из Redux Store:
  *   - ЧСС плода (HR) через {@link selectLastHR}.
  *   - Вариабельность (STV) через {@link selectLastSTV}.
@@ -40,30 +51,6 @@ interface IndicatorsPanelProps {
  *   - SpO₂,
  *   - ЧСС матери (MECG),
  *   - Артериальное давление (NIBP).
- *
- * ---
- * ### Визуальная структура:
- * ```
- * ┌─────────────── ПАНЕЛЬ ────────────────┐
- * | БЧСС: 140 уд/мин (зелёный)            |
- * | STV: 4.5 мс (красный, вне нормы)      |
- * | IUP: 60 мм.рт.ст.                     |
- * | UC: 22 % (зелёный)                    |
- * | SpO₂: 98 %                            |
- * | ЧСС матери: 110 уд/мин                |
- * | NIBP: 120/80                          |
- * └───────────────────────────────────────┘
- * ```
- *
- * ---
- * ### Пример использования:
- * ```tsx
- * import IndicatorsPanel, {IndicatorsPanelPlacement} from "@widgets/indicators-panel";
- *
- * const StatusPage = () => (
- *   <IndicatorsPanel placement={IndicatorsPanelPlacement.Row} />
- * );
- * ```
  */
 const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
                                                      placement = IndicatorsPanelPlacement.Grid
@@ -74,6 +61,8 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
   const hr = useAppSelector(selectLastHR);
   const uc = useAppSelector(selectLastUC);
   const stv = useAppSelector(selectLastSTV);
+  const accelerationCount = useAppSelector(selectLastAccelerationCount);
+  const decelerationCount = useAppSelector(selectLastDecelerationCount);
 
   const hrValue = hr?.y ?? null;
   const stvValue = stv ?? null;
@@ -82,6 +71,9 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
   const hrZone = getZone(hrValue, HR_CONFIG);
   const stvZone = getZone(stvValue, STV_CONFIG);
   const ucZone = getZone(ucValue, UC_CONFIG);
+  const accelerationZone = getZone(accelerationCount, ACCELERATION_CONFIG);
+  const decelerationZone = getZone(decelerationCount, DECELERATION_CONFIG);
+
 
   return (
     <div className={[
@@ -165,6 +157,31 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
                             subLabel={"%"}
                             style={{color: goodColor}}/>
       </div>
+      <IndicatorContainer name={"Акцелерации"}
+                          valueClassName={!accelerationCount && style.panel__noData}
+                          value={accelerationCount || "Нет данных"}
+                          subLabel={"шт"}
+                          style={{
+                            color:
+                              accelerationZone === "good"
+                                ? goodColor
+                                : accelerationZone === "bad"
+                                  ? warningColor
+                                  : "inherit"
+                          }}/>
+
+      <IndicatorContainer name={"Децелерации "}
+                          valueClassName={!decelerationCount && style.panel__noData}
+                          value={decelerationCount || "Нет данных"}
+                          subLabel={"шт"}
+                          style={{
+                            color:
+                              decelerationZone === "good"
+                                ? goodColor
+                                : decelerationZone === "bad"
+                                  ? warningColor
+                                  : "inherit"
+                          }}/>
     </div>
   );
 }

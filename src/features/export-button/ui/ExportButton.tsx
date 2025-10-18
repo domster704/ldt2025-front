@@ -3,7 +3,8 @@ import {useAppSelector} from "@app/store/store";
 import {
   selectHeartRates,
   selectLastFIGO,
-  selectLastHypoxiaProbability, selectLastSTV,
+  selectLastHypoxiaProbability,
+  selectLastSTV,
   selectUterineContractions
 } from "@entities/session-stream";
 import {DashboardInContainer} from "@widgets/dashboard";
