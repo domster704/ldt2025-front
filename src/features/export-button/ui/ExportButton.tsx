@@ -1,6 +1,11 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useAppSelector} from "@app/store/store";
-import {selectHeartRates, selectLastHypoxiaProbability, selectUterineContractions} from "@entities/session-stream";
+import {
+  selectHeartRates,
+  selectLastFIGO,
+  selectLastHypoxiaProbability, selectLastSTV,
+  selectUterineContractions
+} from "@entities/session-stream";
 import {DashboardInContainer} from "@widgets/dashboard";
 import ActionButton from "@shared/ui/action-button";
 import exportImg from "@shared/assets/img/export.svg";
@@ -9,7 +14,9 @@ import html2canvas from "html2canvas";
 const ExportButton: React.FC = () => {
   const fhrData = useAppSelector(selectHeartRates);
   const ucData = useAppSelector(selectUterineContractions);
-  const hypoxiaProba = useAppSelector(selectLastHypoxiaProbability);
+  const hypoxiaProbability = useAppSelector(selectLastHypoxiaProbability);
+  const figo = useAppSelector(selectLastFIGO);
+  const stv = useAppSelector(selectLastSTV);
 
   const ref = useRef<HTMLDivElement>(null);
   const [renderDashboard, setRenderDashboard] = useState(false);
@@ -101,11 +108,11 @@ const ExportButton: React.FC = () => {
               <tbody>
               <tr>
                 <td style={{padding: "4px 8px", fontWeight: 500}}>Базальная ЧСС</td>
-                <td style={{padding: "4px 8px"}}>139 уд/мин</td>
+                <td style={{padding: "4px 8px"}}>{fhrData.at(-1)?.y + " уд/мин" || "Нет данных"}</td>
               </tr>
               <tr style={{backgroundColor: "#f9f9f9"}}>
-                <td style={{padding: "4px 8px", fontWeight: 500}}>Амплитуда осцилляций</td>
-                <td style={{padding: "4px 8px"}}>12 уд/мин</td>
+                <td style={{padding: "4px 8px", fontWeight: 500}}>Маточные сокращения</td>
+                <td style={{padding: "4px 8px"}}>{ucData.at(-1)?.y || "Нет данных"}</td>
               </tr>
               <tr>
                 <td style={{padding: "4px 8px", fontWeight: 500}}>Частота осцилляций</td>
@@ -113,7 +120,7 @@ const ExportButton: React.FC = () => {
               </tr>
               <tr style={{backgroundColor: "#f9f9f9"}}>
                 <td style={{padding: "4px 8px", fontWeight: 500}}>STV</td>
-                <td style={{padding: "4px 8px"}}>3.2 мс</td>
+                <td style={{padding: "4px 8px"}}>{stv + " мс" || "Нет данных"}</td>
               </tr>
               <tr>
                 <td style={{padding: "4px 8px", fontWeight: 500}}>Потеря сигнала</td>
@@ -121,7 +128,7 @@ const ExportButton: React.FC = () => {
               </tr>
               <tr style={{backgroundColor: "#f9f9f9"}}>
                 <td style={{padding: "4px 8px", fontWeight: 500}}>FIGO</td>
-                <td style={{padding: "4px 8px"}}>Подозрительная</td>
+                <td style={{padding: "4px 8px"}}>{figo || "Нет данных"}</td>
               </tr>
               </tbody>
             </table>
@@ -132,7 +139,7 @@ const ExportButton: React.FC = () => {
               padding: "10px 12px",
               borderRadius: "6px"
             }}>
-              Вероятность гипоксии: {hypoxiaProba != null ? (hypoxiaProba * 100).toFixed(1) + "%" : "нет данных"}
+              Вероятность гипоксии: {hypoxiaProbability != null ? (hypoxiaProbability * 100).toFixed(1) + "%" : "нет данных"}
             </p>
           </div>
         </div>
