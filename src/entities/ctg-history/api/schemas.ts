@@ -1,4 +1,15 @@
 import {z} from "zod";
+
+export const DataPointSchema = z.object({
+  time_sec: z.number(),
+  value: z.number()
+})
+export const GraphSchema = z.object({
+  id: z.string(),
+  bpm: z.array(DataPointSchema),
+  uc: z.array(DataPointSchema),
+})
+
 export const CTGResultAPISchema = z.object({
   ctg_id: z.number(),
   gest_age: z.string(),
@@ -30,6 +41,7 @@ export const CTGHistoryAPISchema = z.object({
   dir_path: z.string(),
   archive_path: z.string().nullable(),
   result: CTGResultAPISchema.optional().nullable(),
+  graph: GraphSchema.optional().nullable(),
 });
 
 export const CTGHistoryListSchema = z.array(CTGHistoryAPISchema);
