@@ -7,8 +7,9 @@ import {
   setStatus
 } from "@entities/session-stream/model/sessionStreamSlice";
 import {StreamData} from "@entities/session-stream/model/types";
-import {CTGStatus, figoToCTGStatus} from "@shared/const/ctgColors";
+import {CTGStatus, classificationToCTGStatus} from "@shared/const/ctgColors";
 import {StreamDataSchema} from "@entities/session-stream/model/schema";
+import {ClassificationType} from "@entities/global/model/types";
 
 const PRECISION: number = 1;
 
@@ -27,7 +28,7 @@ const PRECISION: number = 1;
  *    - Маточные сокращения (UC) через {@link addUcPoint}.
  * 5. Сохраняет результаты анализа из `msg.process` в `results` через {@link addResult}.
  * 6. Добавляет уведомления (`notifications`) через {@link setNotification}.
- * 7. Обновляет статус FIGO с помощью {@link setStatus}, сопоставляя строковое значение через {@link figoToCTGStatus}.
+ * 7. Обновляет статус FIGO с помощью {@link setStatus}, сопоставляя строковое значение через {@link classificationToCTGStatus}.
  *
  * ---
  * ### Параметры:
@@ -59,7 +60,25 @@ export const playSessionEffect =
     }));
     dispatch(addResult(data.process));
     dispatch(setNotification(data.process.notifications));
-    dispatch(setStatus(
-      figoToCTGStatus[data.process.figo_situation || CTGStatus.Normal.toString()]
-    ));
+
+
+    const classification = state.global.classification;
+    let situation: string | null = null;
+    switch (classification) {
+      case ClassificationType.FIGO:
+        situation = data.process.figo_situation;
+        break;
+      case ClassificationType.FISCHER:
+        situation = data.process.fischer_category;
+        break;
+      case ClassificationType.SAVELYEVA:
+        situation = data.process.savelyeva_category;
+        break;
+    }
+
+    const ctgStatus =
+      classificationToCTGStatus[situation || CTGStatus.Normal.toString()] ??
+      CTGStatus.Normal;
+
+    dispatch(setStatus(ctgStatus));
   };

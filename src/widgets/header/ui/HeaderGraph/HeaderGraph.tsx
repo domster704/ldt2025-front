@@ -5,35 +5,29 @@ import userIcon from "@shared/assets/img/userWhite.svg";
 import {useColorsStatus} from "@app/providers/color-provider";
 import {useAppSelector} from "@app/store/store";
 import {selectChosenPatient} from "@entities/patient/model/selectors";
-import {selectLastFIGO, selectLastHypoxiaProbability} from "@entities/session-stream";
+import {
+  selectLastFIGO,
+  selectLastFischer,
+  selectLastHypoxiaProbability,
+  selectLastSavelyeva
+} from "@entities/session-stream";
 import {CTGStatus} from "@shared/const/ctgColors";
+import {ClassificationType} from "@entities/global/model/types";
+import {selectClassificationType} from "@entities/global/model/selectors";
 
 /**
- * **HeaderGraph** — компонент заголовка для экрана с графиками КТГ.
- *
- * ---
- * ### Основные задачи:
- * - Отображает информацию о выбранном пациенте (ФИО, срок беременности).
- * - Показывает текущее состояние по статусу КТГ:
- *   - `"В норме"`, если статус равен {@link CTGStatus.Normal}.
- *   - `"Требуется внимание"` во всех остальных случаях.
- * - Выводит прогноз вероятности гипоксии (если данные доступны).
- * - Показывает текущее значение FIGO.
- *
- * ---
- * ### Источники данных:
- * - {@link selectChosenPatient} — выбранный пациент из Redux Store.
- * - {@link useColorsStatus} — статус цвета, отражающий текущее состояние.
- * - {@link selectLastHypoxiaProbability} — вероятность гипоксии по последнему измерению.
- * - {@link selectLastFIGO} — последнее значение FIGO.
+ * HeaderGraph — компонент заголовка для экрана с графиками КТГ.
  */
 const HeaderGraph: FC = () => {
   const patient = useAppSelector(selectChosenPatient);
   const hypoxiaProbability = useAppSelector(selectLastHypoxiaProbability);
+
+  const classification = useAppSelector(selectClassificationType);
   const figoStatus = useAppSelector(selectLastFIGO);
+  const fischerStatus = useAppSelector(selectLastFischer);
+  const savelyevaStatus = useAppSelector(selectLastSavelyeva);
 
   const {status} = useColorsStatus();
-  console.log(status)
 
   const statusText = useMemo(() => {
     if (status === CTGStatus.None) {
@@ -44,6 +38,19 @@ const HeaderGraph: FC = () => {
       return "Требуется внимание";
     }
   }, [status]);
+
+  const activeClassificationLabel = useMemo(() => {
+    switch (classification) {
+      case ClassificationType.FIGO:
+        return { name: "FIGO", value: figoStatus };
+      case ClassificationType.FISCHER:
+        return { name: "Фишер", value: fischerStatus };
+      case ClassificationType.SAVELYEVA:
+        return { name: "Савельева", value: savelyevaStatus };
+      default:
+        return { name: "FIGO", value: figoStatus };
+    }
+  }, [classification, figoStatus, fischerStatus, savelyevaStatus]);
 
   return (
     <header className={style.header}>
@@ -67,8 +74,8 @@ const HeaderGraph: FC = () => {
         {
           figoStatus &&
             <div className={style.figo}>
-                <p>FIGO:</p>
-                <span className={style.figo__indicator}>{figoStatus}</span>
+                <p>{activeClassificationLabel.name}:</p>
+                <span className={style.figo__indicator}>{activeClassificationLabel.value}</span>
             </div>
         }
       </div>

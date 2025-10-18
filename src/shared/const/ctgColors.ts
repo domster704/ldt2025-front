@@ -60,7 +60,7 @@ export const colorToCTGStatus: Record<NotificationColor, CTGStatus> = {
  * figoToCTGStatus["Нормальное"]; // CTGStatus.Normal
  * ```
  */
-export const figoToCTGStatus: Record<string, CTGStatus> = {
+export const classificationToCTGStatus: Record<string, CTGStatus> = {
   "Нормальное": CTGStatus.Normal,
   "Сомнительное": CTGStatus.Doubtful,
   "Патологическое": CTGStatus.Pathological,

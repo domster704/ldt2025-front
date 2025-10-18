@@ -1,7 +1,7 @@
 import {createEntityAdapter} from '@reduxjs/toolkit';
 import {CTGHistory, CTGHistoryDTO, CTGResultDTO} from "@entities/ctg-history/model/types";
 import {CTGHistoryAPI, CTGResultAPI} from "@entities/ctg-history/api/schemas";
-import {CTGStatus, figoToCTGStatus} from "@shared/const/ctgColors";
+import {CTGStatus, classificationToCTGStatus} from "@shared/const/ctgColors";
 import {mockGraph} from "@entities/ctg-history/model/mockGraphHistory";
 
 /**
@@ -40,9 +40,9 @@ function normalizeNumber(v: number | null | undefined): number {
 function mapResultApiToDto(api?: CTGResultAPI): CTGResultDTO | undefined {
   if (!api) return undefined;
 
-  const figo = api.figo ? figoToCTGStatus[api.figo] : CTGStatus.None;
+  const figo = api.figo ? classificationToCTGStatus[api.figo] : CTGStatus.None;
   const figo_prognosis =
-    api.figo_prognosis ? (figoToCTGStatus[api.figo_prognosis] ?? null) : CTGStatus.None;
+    api.figo_prognosis ? (classificationToCTGStatus[api.figo_prognosis] ?? null) : CTGStatus.None;
 
   return {
     ctg_id: api.ctg_id ?? 0,
