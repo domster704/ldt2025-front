@@ -42,9 +42,21 @@
 }
 
 .table.table__compare td {
+  position: relative;
   padding-block: 0.125rem;
+  text-align: center;
 }
 
 .table tbody tr:nth-child(odd) {
   background: var(--fony-sistemnye-);
+}
+
+.compareArrow {
+  --padding-inline: 0.25rem;
+
+  position: absolute;
+  right: 1rem;
+  top: var(--padding-inline);
+  bottom: var(--padding-inline);
+  height: calc(100% - 2 * var(--padding-inline));
 }
