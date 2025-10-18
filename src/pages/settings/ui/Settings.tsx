@@ -5,44 +5,30 @@ import {SimpleHeader} from "@widgets/header";
 import ColorsPicker from "@features/settings-colors-picker";
 import SoundManager from "@widgets/sound-manager";
 import ContainerWithLabel from "@shared/ui/container-with-label";
+import ClassificationPicker from "@widgets/classification-picker";
 
 interface SettingsProps {
 }
 
 /**
  * Страница "Настройки".
- *
- * ---
- * ### Основные секции:
- * 1. **Цветовая индикация фона**
- *    - Управляется компонентом {@link ColorsPicker}.
- *    - Пользователь может выбрать цвета для нормального состояния и для предупреждений.
- *
- * 2. **Звуковые сигналы**
- *    - Управляется компонентом {@link SoundManager}.
- *    - Позволяет включать/выключать звуки, заменять стандартные аудиофайлы и сохранять настройки.
- *
- * 3. **Системная информация**
- *    - Статический блок, показывающий состояние устройства:
- *      - заполненность внутренней памяти;
- *      - дата последней выгрузки архива.
- *    - В реальном приложении этот блок может быть связан с API системы.
- *
- * ---
- * ### Обёртки:
- * - {@link PageWrapper} — общий каркас страницы.
- * - {@link SimpleHeader} — заголовок "Настройки".
- * - {@link ContainerWithLabel} — стилизованные контейнеры с заголовками для каждого раздела.
  */
 const Settings: FC<SettingsProps> = ({}) => {
   return (
     <PageWrapper>
       <SimpleHeader headerText={"Настройки"}/>
       <section className={style.settings}>
-        <ContainerWithLabel label={"Цветовая индикация фона"}
-                            className={style.settings__section}>
-          <ColorsPicker/>
-        </ContainerWithLabel>
+        <div className={style.twoContainers}>
+          <ContainerWithLabel label={"Цветовая индикация фона"}
+                              className={style.settings__section}>
+            <ColorsPicker/>
+          </ContainerWithLabel>
+
+          <ContainerWithLabel label={"Основная классификация"}
+                              className={style.settings__section}>
+            <ClassificationPicker/>
+          </ContainerWithLabel>
+        </div>
 
         <ContainerWithLabel label={"Звуковые сигналы"}
                             className={[

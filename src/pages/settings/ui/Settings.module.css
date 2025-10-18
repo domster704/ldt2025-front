@@ -35,3 +35,9 @@
   font-size: 1.75rem;
   color: var(--belyy-);
 }
+
+.twoContainers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.125rem;
+}

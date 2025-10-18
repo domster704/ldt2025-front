@@ -16,7 +16,7 @@ const ClassificationEstimation: FC = () => {
 
   const rows = [
     {label: "FIGO", score: figo.score, situation: figo.situation, config: FIGO_CONFIG},
-    {label: "Fisher", score: fischer.score, situation: fischer.situation, config: FISCHER_AND_SAVELYEVA_CONFIG},
+    {label: "Fischer", score: fischer.score, situation: fischer.situation, config: FISCHER_AND_SAVELYEVA_CONFIG},
     {label: "Савельева", score: savelyeva.score, situation: savelyeva.situation, config: FISCHER_AND_SAVELYEVA_CONFIG},
   ];
 
