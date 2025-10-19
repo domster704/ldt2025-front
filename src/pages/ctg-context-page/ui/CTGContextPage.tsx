@@ -19,8 +19,6 @@ const GRID_ROWS = 36;
 const GRID_COLUMNS = 48;
 
 const CTGContextPage = () => {
-  const streaming = useAppSelector((s) => s.sessionStream.streaming);
-
   const widgets = [
     {
       id: "logs",
@@ -30,11 +28,7 @@ const CTGContextPage = () => {
     {
       id: "dashboard",
       layout: {x: 7, y: 0, w: 30, h: 22},
-      element: (
-        <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
-          <DashboardStream/>
-        </WebsocketProvider>
-      ),
+      element: <DashboardStream/>
     },
     {
       id: "indicators",

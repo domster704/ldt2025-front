@@ -28,7 +28,7 @@ const StatusTable: FC<StatusTableProps> = ({title, rows, className}) => {
         {rows.map((row, i) => (
           <tr key={i}>
             <td className={style.rowName}>{row.label}</td>
-            <td><b>{row.score ?? "-"}</b></td>
+            <td className={style.rowValue}><b>{row.score ?? "-"}</b></td>
             <td>
               {
                 row.situation ?

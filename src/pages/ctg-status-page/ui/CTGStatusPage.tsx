@@ -53,11 +53,7 @@ const CTGStatusPage: FC = () => {
     {
       id: "dashboard",
       layout: {x: 6, y: 8, w: 42, h: 28},
-      element: (
-        <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
-          <DashboardStream/>
-        </WebsocketProvider>
-      ),
+      element: <DashboardStream/>,
     },
   ];
 

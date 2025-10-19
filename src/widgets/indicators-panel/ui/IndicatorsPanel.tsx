@@ -74,7 +74,6 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
   const accelerationZone = getZone(accelerationCount, ACCELERATION_CONFIG);
   const decelerationZone = getZone(decelerationCount, DECELERATION_CONFIG);
 
-
   return (
     <div className={[
       style.panel,
@@ -87,7 +86,7 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
         {/* Базальная ЧСС */}
         <IndicatorContainer name={"БЧСС"}
                             valueClassName={!hrValue && style.panel__noData}
-                            value={hrValue || "Нет данных"}
+                            value={hrValue ?? "Нет данных"}
                             label={"DECG"}
                             subLabel={"уд./мин"}
                             style={{
@@ -102,7 +101,7 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
         {/* Вариабельность */}
         <IndicatorContainer name={"Вариабельность"}
                             valueClassName={!stvValue && style.panel__noData}
-                            value={stvValue || "Нет данных"}
+                            value={stvValue ?? "Нет данных"}
                             label={"STV"}
                             subLabel={"мс"}
                             style={{
@@ -125,7 +124,7 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
       {/* Маточная активность */}
       <IndicatorContainer name={"Маточная активность"}
                           valueClassName={!ucValue && style.panel__noData}
-                          value={ucValue || "Нет данных"}
+                          value={ucValue ?? "Нет данных"}
                           label={"TOCO"}
                           subLabel={"%"}
                           style={{
@@ -158,8 +157,8 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
                             style={{color: goodColor}}/>
       </div>
       <IndicatorContainer name={"Акцелерации"}
-                          valueClassName={!accelerationCount && style.panel__noData}
-                          value={accelerationCount || "Нет данных"}
+                          valueClassName={!accelerationCount && accelerationCount !== 0 && style.panel__noData}
+                          value={accelerationCount ?? "Нет данных"}
                           subLabel={"шт"}
                           style={{
                             color:
@@ -171,8 +170,8 @@ const IndicatorsPanel: FC<IndicatorsPanelProps> = ({
                           }}/>
 
       <IndicatorContainer name={"Децелерации "}
-                          valueClassName={!decelerationCount && style.panel__noData}
-                          value={decelerationCount || "Нет данных"}
+                          valueClassName={!decelerationCount && decelerationCount !== 0 && style.panel__noData}
+                          value={decelerationCount ?? "Нет данных"}
                           subLabel={"шт"}
                           style={{
                             color:

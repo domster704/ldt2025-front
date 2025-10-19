@@ -2,6 +2,9 @@ import React, {FC} from "react";
 import {RouterProvider} from "react-router-dom";
 import AppProviders from "./providers/AppProviders";
 import {router} from "@app/routes/router";
+import {$wsApiUrl} from "@shared/const/constants";
+import {WebsocketProvider} from "@app/providers/websocket-provider/ui/WebsocketProvider";
+import {useAppSelector} from "@app/store/store";
 
 /**
  * Корневой компонент приложения.
@@ -12,9 +15,13 @@ import {router} from "@app/routes/router";
  * - Подключает роутинг через {@link RouterProvider}, используя преднастроенный {@link router}.
  */
 const App: FC = () => {
+  const streaming = useAppSelector((s) => s.sessionStream.streaming);
+
   return (
     <AppProviders>
-      <RouterProvider router={router}/>
+      <WebsocketProvider wsUrl={$wsApiUrl} enabled={streaming}>
+        <RouterProvider router={router}/>
+      </WebsocketProvider>
     </AppProviders>
   );
 };

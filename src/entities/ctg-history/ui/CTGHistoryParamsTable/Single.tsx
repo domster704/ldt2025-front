@@ -3,6 +3,7 @@ import {CTGHistory} from "@entities/ctg-history/model/types";
 import * as style from "./CTGHistoryParamsTable.module.css";
 import {PARAM_GROUPS, PREDICTIONS} from "@entities/ctg-history/model/paramsConfig";
 import {formatValue, getFIGOBg, getValue} from "@entities/ctg-history/lib/utils";
+import {chunk} from "@shared/lib/utils/chunk";
 
 interface SingleProps extends React.TableHTMLAttributes<HTMLTableElement> {
   data: CTGHistory;
@@ -33,21 +34,23 @@ const Single: React.FC<SingleProps> = ({
         ))}
       </tr>
     ))}
-    <tr>
-      {PREDICTIONS.map((p, i) => (
-        <td key={i}
-            className={style.table__predict}
-            colSpan={2}
-            style={{
-              backgroundColor: getFIGOBg(getValue(data, p.key))
-            }}>
-          <div>
-            <p>{p.label}</p>
-            <p>{formatValue(getValue(data, p.key))}</p>
-          </div>
-        </td>
-      ))}
-    </tr>
+    {chunk(PREDICTIONS, 2).map((pair, ri) => (
+      <tr key={`pred-${ri}`}>
+        {pair.map((p, i) => (
+          <td key={i}
+              className={style.table__predict}
+              colSpan={2}
+              style={{
+                backgroundColor: getFIGOBg(getValue(data, p.key)),
+              }}>
+            <div>
+              <p>{p.label}</p>
+              <p>{formatValue(getValue(data, p.key))}</p>
+            </div>
+          </td>
+        ))}
+      </tr>
+    ))}
     </tbody>
   </table>
 );

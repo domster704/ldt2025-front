@@ -62,7 +62,12 @@ export const fetchAllCTGHistoryAnalysis = createAsyncThunk<AnalysisResult, numbe
 
 export const fetchCTGHistoryGraph = createAsyncThunk<[number, GraphAPI], number, ThunkApi>(
   'ctg/fetchCTGHistoryGraph',
-  async (ctg_id: number, {rejectWithValue}) => {
+  async (ctg_id: number, {getState, rejectWithValue}) => {
+    const ctgHistory = getState().ctgHistory.items.entities[ctg_id];
+    if (ctgHistory.graph.bpm.length > 0) {
+      return rejectWithValue("Graph already exists");
+    }
+
     try {
       const response = await fetch(`${$apiUrl}/ctg_graphic?ctg_id=${ctg_id}`, {
         method: 'GET'

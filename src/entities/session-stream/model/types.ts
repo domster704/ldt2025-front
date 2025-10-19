@@ -42,9 +42,11 @@ export interface ProcessInfo {
 }
 
 export interface StreamData {
-  bpm: number;
-  uc: number;
-  timestamp: number;
+  points: {
+    bpm: number;
+    uc: number;
+    timestamp: number;
+  }[]
   process: ProcessInfo;
 }
 

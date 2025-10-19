@@ -3,6 +3,7 @@ import {SituationWithScore, STVForecastStatus, STVForecastWithStatus} from "@ent
 import {getZone} from "@shared/lib/utils/getZone";
 import {STV_CONFIG} from "@shared/lib/configs/range-configs";
 import {createSelector} from "@reduxjs/toolkit";
+import {classificationToCTGStatus, CTGStatus} from "@shared/const/ctgColors";
 
 export const selectHeartRates = (state: RootState) => state.sessionStream.heartRates;
 export const selectUterineContractions = (state: RootState) => state.sessionStream.uterineContractions;
@@ -24,16 +25,18 @@ export const selectLastDecelerationCount = (state: RootState) => state.sessionSt
 // FIGO
 export const selectLastFIGOSituation = createSelector(
   (state: RootState) => state.sessionStream.results.at(-1),
-  (last): SituationWithScore => ({
-    situation: last?.figo_situation ?? null,
-    score:
-      last?.figo_situation === "Нормальная" ? 0
-        : last?.figo_situation === "Сомнительная" ? 1
-          : last?.figo_situation === "Патологическая" ||
-          last?.figo_situation === "Претерминальная"
-            ? 2
-            : null,
-  })
+  (last): SituationWithScore => {
+    const ctgStatus = last?.figo_situation ? classificationToCTGStatus[last?.figo_situation] : null;
+
+    return {
+      situation: last?.figo_situation ?? null,
+      score:
+        ctgStatus === CTGStatus.Normal ? 0
+          : ctgStatus === CTGStatus.Doubtful ? 1
+            : ctgStatus === CTGStatus.Pathological || CTGStatus.Preterminal ? 2
+              : null,
+    }
+  }
 );
 
 // Савельева

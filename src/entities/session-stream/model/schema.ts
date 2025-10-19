@@ -34,9 +34,13 @@ export const ProcessInfoSchema = z.object({
   decelerations_count: z.number(),
 });
 
-export const StreamDataSchema = z.object({
+export const StreamPointsSchema = z.object({
   bpm: z.number(),
   uc: z.number(),
   timestamp: z.number(),
+})
+
+export const StreamDataSchema = z.object({
+  points: z.array(StreamPointsSchema),
   process: ProcessInfoSchema,
 });

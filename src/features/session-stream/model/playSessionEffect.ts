@@ -7,9 +7,10 @@ import {
   setStatus
 } from "@entities/session-stream/model/sessionStreamSlice";
 import {StreamData} from "@entities/session-stream/model/types";
-import {CTGStatus, classificationToCTGStatus} from "@shared/const/ctgColors";
+import {classificationToCTGStatus, CTGStatus} from "@shared/const/ctgColors";
 import {StreamDataSchema} from "@entities/session-stream/model/schema";
 import {ClassificationType} from "@entities/global/model/types";
+import {unstable_batchedUpdates} from "react-dom";
 
 const PRECISION: number = 1;
 
@@ -48,20 +49,6 @@ export const playSessionEffect =
     const state = getState();
     const startTime = state.sessionStream.startTime ?? Date.now();
 
-    const t = data.timestamp * 1000;
-
-    dispatch(addFhrPoint({
-      x: startTime + t,
-      y: Math.round((data.bpm + Number.EPSILON) * PRECISION) / PRECISION
-    }));
-    dispatch(addUcPoint({
-      x: startTime + t,
-      y: Math.round((data.uc + Number.EPSILON) * PRECISION) / PRECISION
-    }));
-    dispatch(addResult(data.process));
-    dispatch(setNotification(data.process.notifications));
-
-
     const classification = state.global.classification;
     let situation: string | null = null;
     switch (classification) {
@@ -80,5 +67,22 @@ export const playSessionEffect =
       classificationToCTGStatus[situation || CTGStatus.Normal.toString()] ??
       CTGStatus.Normal;
 
-    dispatch(setStatus(ctgStatus));
+    unstable_batchedUpdates(() => {
+      for (const point of data.points) {
+        const t = point.timestamp * 1000;
+
+        dispatch(addFhrPoint({
+          x: startTime + t,
+          y: Math.round((point.bpm + Number.EPSILON) * PRECISION) / PRECISION,
+        }));
+
+        dispatch(addUcPoint({
+          x: startTime + t,
+          y: Math.round((point.uc + Number.EPSILON) * PRECISION) / PRECISION,
+        }));
+      }
+      dispatch(addResult(data.process));
+      dispatch(setNotification(data.process.notifications));
+      dispatch(setStatus(ctgStatus));
+    });
   };
