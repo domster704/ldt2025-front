@@ -16,6 +16,8 @@ export const CTGResultAPISchema = z.object({
   bpm: z.number().nullable(),
   uc: z.number().nullable(),
   figo: z.string().nullable(),
+  savelyeva_status: z.string().nullable(),
+  fischer_status: z.string().nullable(),
   figo_prognosis: z.string().nullable(),
   bhr: z.number().nullable(),
   amplitude_oscillations: z.number().nullable(),

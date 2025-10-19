@@ -66,12 +66,11 @@ export const PARAM_GROUPS = [
 ];
 
 /**
- * Прогностические показатели, вычисляемые по FIGO.
- *
- * - `figo` — результат анализа КТГ по FIGO.
- * - `forecast` — прогноз FIGO (ожидаемое изменение состояния).
+ * Прогностические показатели, вычисляемые по разным классификациям
  */
 export const PREDICTIONS = [
   {key: "result.figo", label: "КТГ по FIGO"},
   {key: "result.figo_prognosis", label: "Прогноз FIGO"},
+  {key: "result.savelyeva_status", label: "Прогноз Савельевой"},
+  {key: "result.fischer_status", label: "Прогноз Фишера"},
 ];

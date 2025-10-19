@@ -68,6 +68,7 @@ const CTGDashboardCompare: React.FC<CTGDashboardCompareProps> = ({ids}) => {
                                        ctg1,
                                        ctg2,
                                      ]}/>
+
       <div className={style.compare__dashboards}>
         <div className={style.dashboards__overlay}>
           <div className={style.dashboards__overlayContent} onClick={() => handleOpenDashboards()}>

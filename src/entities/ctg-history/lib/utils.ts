@@ -5,7 +5,7 @@ import {getColorByCTGStatus} from "@shared/lib/utils/ctgColorUtils";
 export function formatHeader(ctg: CTGHistory) {
   const date = ctg.result?.timestamp?.toLocaleDateString("ru-RU");
   const gest = ctg.result?.gest_age ?? "";
-  return `${date ?? "—"} (${gest})`;
+  return `${date ?? "—"}\n${gest}`;
 }
 
 export function formatValue(value: unknown) {

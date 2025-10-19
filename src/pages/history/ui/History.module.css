@@ -1,6 +1,6 @@
 .content {
   display: grid;
-  grid-template-columns: 3fr 4fr;
+  grid-template-columns: 2fr 3fr;
   gap: 1rem;
   overflow: hidden;
 

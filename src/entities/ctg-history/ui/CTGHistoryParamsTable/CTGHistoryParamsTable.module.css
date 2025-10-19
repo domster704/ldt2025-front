@@ -12,6 +12,8 @@
   font-size: 1.38rem;
   text-align: center;
 
+  white-space: pre-line;
+
   &:nth-child(even) {
     background: var(--sistemnyy-siniy);
     color: var(--belyy-);
@@ -38,13 +40,16 @@
 }
 
 .table td {
-  padding: 0.25rem 0.75rem;
+  padding: 0 0.75rem;
 }
 
 .table.table__compare td {
   position: relative;
-  padding-block: 0.125rem;
   text-align: center;
+
+  &:first-child {
+    text-align: left;
+  }
 }
 
 .table tbody tr:nth-child(odd) {

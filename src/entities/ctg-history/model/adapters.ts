@@ -41,6 +41,8 @@ function mapResultApiToDto(api?: CTGResultAPI): CTGResultDTO | undefined {
   if (!api) return undefined;
 
   const figo = api.figo ? classificationToCTGStatus[api.figo] : CTGStatus.None;
+  const savelyeva_status = api.savelyeva_status ? classificationToCTGStatus[api.savelyeva_status] : CTGStatus.None;
+  const fischer_status = api.fischer_status ? classificationToCTGStatus[api.fischer_status] : CTGStatus.None;
   const figo_prognosis =
     api.figo_prognosis ? (classificationToCTGStatus[api.figo_prognosis] ?? null) : CTGStatus.None;
 
@@ -50,6 +52,8 @@ function mapResultApiToDto(api?: CTGResultAPI): CTGResultDTO | undefined {
     bpm: normalizeNumber(api.bpm),
     uc: normalizeNumber(api.uc),
     figo,
+    savelyeva_status,
+    fischer_status,
     figo_prognosis,
     bhr: normalizeNumber(api.bhr),
     amplitude_oscillations: normalizeNumber(api.amplitude_oscillations),
