@@ -6,7 +6,7 @@ export const $apiUrl: string = process.env.API_URL ?? 'https://api.lct2025.ln-kr
 /**
  * Базовый URL для WebSocket API.
  */
-export const $wsApiUrl: string = process.env.WS_URL ?? 'ws://api.lct2025.ln-kr.ru/ws/streaming/';
+export const $wsApiUrl: string = process.env.WS_URL ?? 'wss://api.lct2025.ln-kr.ru/ws/streaming/';
 
 /**
  * Тип всех допустимых путей внутри приложения.
