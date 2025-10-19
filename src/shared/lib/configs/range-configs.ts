@@ -13,7 +13,7 @@ export const HR_CONFIG: IndicatorConfig = {
   label: "DECG",
   subLabel: "уд./мин",
   zones: [
-    {label: "good", ranges: [[110, 150]]},
+    {label: "good", ranges: [[110, 161]]},
     {label: "bad", ranges: [[0, 110], [151, Infinity]]},
   ],
 };

@@ -24,6 +24,7 @@ export interface STVForecast {
 
 export interface ProcessInfo {
   time_sec: number;
+  current_status: string | null;
   notifications: Record<number, ProcessNotification[]>;
   figo_situation: string | null;
   current_fhr: number | null;

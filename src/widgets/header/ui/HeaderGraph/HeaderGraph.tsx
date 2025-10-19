@@ -8,7 +8,7 @@ import {selectChosenPatient} from "@entities/patient/model/selectors";
 import {
   selectLastFIGO,
   selectLastFischer,
-  selectLastHypoxiaProbability,
+  selectLastHypoxiaProbability, selectLastHypoxiaStatus,
   selectLastSavelyeva
 } from "@entities/session-stream";
 import {CTGStatus} from "@shared/const/ctgColors";
@@ -21,6 +21,7 @@ import {selectClassificationType} from "@entities/global/model/selectors";
 const HeaderGraph: FC = () => {
   const patient = useAppSelector(selectChosenPatient);
   const hypoxiaProbability = useAppSelector(selectLastHypoxiaProbability);
+  const hypoxiaStatus = useAppSelector(selectLastHypoxiaStatus);
 
   const classification = useAppSelector(selectClassificationType);
   const figoStatus = useAppSelector(selectLastFIGO);
@@ -67,12 +68,11 @@ const HeaderGraph: FC = () => {
       <div className={style.header__sub}>
         <div className={style.sub__label}>Общий прогноз</div>
         <p className={style.predictionText}>
-          {hypoxiaProbability &&
-            "Вероятность гипоксии в данный момент " + (hypoxiaProbability * 100).toFixed(1) + "%"}
+          {hypoxiaStatus ?? ""}
         </p>
 
         {
-          figoStatus &&
+          (figoStatus || fischerStatus || savelyevaStatus) &&
             <div className={style.figo}>
                 <p>{activeClassificationLabel.name}:</p>
                 <span className={style.figo__indicator}>{activeClassificationLabel.value}</span>

@@ -14,6 +14,7 @@ export const STVForecastSchema = z.object({
 
 export const ProcessInfoSchema = z.object({
   time_sec: z.number(),
+  current_status: z.string().nullable(),
   notifications: z.record(
     z.string(),
     z.array(ProcessNotificationSchema)

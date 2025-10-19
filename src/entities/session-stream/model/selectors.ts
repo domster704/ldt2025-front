@@ -18,6 +18,7 @@ export const selectLastFIGO = (state: RootState) => state.sessionStream.results.
 export const selectLastFischer = (state: RootState) => state.sessionStream.results.at(-1)?.fischer_category;
 export const selectLastSavelyeva = (state: RootState) => state.sessionStream.results.at(-1)?.savelyeva_category;
 export const selectLastHypoxiaProbability = (state: RootState) => state.sessionStream.results.at(-1)?.hypoxia_proba;
+export const selectLastHypoxiaStatus = (state: RootState) => state.sessionStream.results.at(-1)?.current_status;
 export const selectLastAccelerationCount = (state: RootState) => state.sessionStream.results.at(-1)?.accelerations_count;
 export const selectLastDecelerationCount = (state: RootState) => state.sessionStream.results.at(-1)?.decelerations_count;
 

@@ -1,12 +1,12 @@
 /**
  * Базовый URL для HTTP API-бэкенда.
  */
-export const $apiUrl: string = process.env.API_URL ?? 'http://127.0.0.1:8010';
+export const $apiUrl: string = process.env.API_URL ?? 'https://api.lct2025.ln-kr.ru';
 
 /**
  * Базовый URL для WebSocket API.
  */
-export const $wsApiUrl: string = process.env.WS_URL ?? 'ws://127.0.0.1:8010/ws/streaming/';
+export const $wsApiUrl: string = process.env.WS_URL ?? 'ws://api.lct2025.ln-kr.ru/ws/streaming/';
 
 /**
  * Тип всех допустимых путей внутри приложения.

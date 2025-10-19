@@ -3,6 +3,9 @@ import React, {FC} from "react";
 import * as style from './Dashboard.module.css';
 import SessionChart from "@widgets/session-chart";
 import {StreamPoint} from "@entities/session-stream";
+import {HR_CONFIG} from "@shared/lib/configs/range-configs";
+import {z} from "zod";
+import {IndicatorZone} from "@shared/types/indicator-zone";
 
 interface DashboardProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Данные частоты сердечных сокращений плода (FHR) */
@@ -75,6 +78,8 @@ const Dashboard: FC<DashboardProps> = ({
                                          isUseClipPath,
                                          ...props
                                        }) => {
+  const ranges: IndicatorZone | undefined = HR_CONFIG.zones.find((zone: IndicatorZone)  => zone.label === 'good');
+
   return (
     <div {...props} className={[
       style.dashboard__graphs,
@@ -87,8 +92,8 @@ const Dashboard: FC<DashboardProps> = ({
                     dataSource={fhrData}
                     isUseClipPath={isUseClipPath}
                     highlightBands={[{
-                      from: 110,
-                      to: 150,
+                      from: ranges?.ranges ? ranges.ranges[0][0] : 110,
+                      to: ranges?.ranges ? ranges.ranges[0][1] : 160,
                       fill: "#ccedd1"
                     }]}/>
       {/* График UC */}
