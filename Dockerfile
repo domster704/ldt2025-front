@@ -5,7 +5,7 @@ LABEL developer="domster704"
 WORKDIR /var/www/ntv
 
 COPY package*.json ./
-RUN RUN npm ci --omit=dev
+RUN RUN npm i --force --omit=dev
 
 COPY build/ build/
 COPY src/ src/
