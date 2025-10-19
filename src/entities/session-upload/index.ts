@@ -1,1 +1,1 @@
-export type {SessionUploaded} from './model/types'
+export type {GraphData} from './model/types'

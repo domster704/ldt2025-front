@@ -1,6 +1,6 @@
 import {EntityState} from "@reduxjs/toolkit";
 import {CTGStatus} from "@shared/const/ctgColors";
-import {SessionUploaded} from "@entities/session-upload";
+import {GraphData} from "@entities/session-upload";
 
 /** DTO: сериализуемый слой (хранится в Redux) */
 export interface CTGResultDTO {
@@ -36,7 +36,7 @@ export interface CTGHistoryDTO {
   id: number;
   dir_path: string;
   archive_path: string | null;
-  graph: SessionUploaded;
+  graph: GraphData;
   result?: CTGResultDTO;
 }
 

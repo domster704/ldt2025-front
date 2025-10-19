@@ -1,7 +1,13 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AnalysisResult, CTGHistoryDTO, CTGHistoryState} from "@entities/ctg-history/model/types";
 import {ctgHistoryAdapter} from "@entities/ctg-history/model/adapters";
-import {fetchAllCTGHistory, fetchAllCTGHistoryAnalysis} from "@entities/ctg-history/api/ctgHistoryThunk";
+import {
+  fetchAllCTGHistory,
+  fetchAllCTGHistoryAnalysis,
+  fetchCTGHistoryGraph
+} from "@entities/ctg-history/api/ctgHistoryThunk";
+import {GraphAPI} from "@entities/ctg-history/api/schemas";
+import {GraphData} from "@entities/session-upload";
 
 /**
  * Начальное состояние slice истории КТГ.
@@ -50,6 +56,14 @@ const ctgHistorySlice = createSlice({
       })
       .addCase(fetchAllCTGHistoryAnalysis.rejected, (state) => {
         state.analysis = null;
+      })
+      .addCase(fetchCTGHistoryGraph.fulfilled, (state, action: PayloadAction<[number, GraphAPI]>) => {
+        const graph = action.payload[1];
+        state.items.entities[action.payload[0]].graph = {
+          id: graph.id,
+          bpm: graph.bpm,
+          uc: graph.uc
+        } as GraphData;
       });
   },
 });

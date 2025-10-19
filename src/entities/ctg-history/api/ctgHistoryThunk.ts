@@ -2,7 +2,7 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {ThunkApi} from "@shared/types/types";
 import {AnalysisResult, CTGHistoryDTO} from "@entities/ctg-history/model/types";
 import {$apiUrl} from "@shared/const/constants";
-import {CTGHistoryAPI, CTGHistoryListSchema} from "@entities/ctg-history/api/schemas";
+import {CTGHistoryAPI, CTGHistoryListSchema, GraphAPI, GraphSchema} from "@entities/ctg-history/api/schemas";
 import {mapHistoryApiToDto} from "@entities/ctg-history/model/adapters";
 
 /**
@@ -59,3 +59,19 @@ export const fetchAllCTGHistoryAnalysis = createAsyncThunk<AnalysisResult, numbe
     return await response.json() as AnalysisResult;
   }
 );
+
+export const fetchCTGHistoryGraph = createAsyncThunk<[number, GraphAPI], number, ThunkApi>(
+  'ctg/fetchCTGHistoryGraph',
+  async (ctg_id: number, {rejectWithValue}) => {
+    try {
+      const response = await fetch(`${$apiUrl}/ctg_graphic?ctg_id=${ctg_id}`, {
+        method: 'GET'
+      });
+      const parsed = GraphSchema.parse(await response.json());
+      return [ctg_id, parsed as GraphAPI];
+    } catch (error: any) {
+      console.error("CTGHistoryGraph fetch failed", error);
+      return rejectWithValue("CTGHistoryGraph fetch failed")
+    }
+  }
+)

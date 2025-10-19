@@ -1,5 +1,7 @@
 import React, {FC, useCallback, useState} from 'react';
 import {CTGHistorySelectionContext} from "../lib/context";
+import {fetchCTGHistoryGraph} from "@entities/ctg-history/api/ctgHistoryThunk";
+import {useAppDispatch} from "@app/store/store";
 
 interface CTGHistorySelectionProviderProps {
   /** Дочерние элементы, которые получат доступ к контексту выбора истории КТГ */
@@ -28,9 +30,11 @@ interface CTGHistorySelectionProviderProps {
  *
  */
 export const CTGHistorySelectionProvider: FC<CTGHistorySelectionProviderProps> = ({children}) => {
+  const dispatch = useAppDispatch();
   const [selected, setSelected] = useState<number[]>([]);
 
   const toggle = useCallback((id: number) => {
+    dispatch(fetchCTGHistoryGraph(id));
     setSelected(prev => {
       if (prev.includes(id)) {
         return prev.filter(item => item !== id);

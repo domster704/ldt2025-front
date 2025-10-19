@@ -3,7 +3,7 @@ export interface DataPoint {
   value: number;
 }
 
-export interface SessionUploaded {
+export interface GraphData {
   id: string;
   bpm: DataPoint[];
   uc: DataPoint[];

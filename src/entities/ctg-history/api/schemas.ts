@@ -16,8 +16,8 @@ export const CTGResultAPISchema = z.object({
   bpm: z.number().nullable(),
   uc: z.number().nullable(),
   figo: z.string().nullable(),
-  savelyeva_status: z.string().nullable(),
-  fischer_status: z.string().nullable(),
+  // savelyeva_status: z.string().nullable(),
+  // fischer_status: z.string().nullable(),
   figo_prognosis: z.string().nullable(),
   bhr: z.number().nullable(),
   amplitude_oscillations: z.number().nullable(),
@@ -43,9 +43,10 @@ export const CTGHistoryAPISchema = z.object({
   dir_path: z.string(),
   archive_path: z.string().nullable(),
   result: CTGResultAPISchema.optional().nullable(),
-  graph: GraphSchema.optional().nullable(),
+  // graph: GraphSchema.optional().nullable(),
 });
 
 export const CTGHistoryListSchema = z.array(CTGHistoryAPISchema);
 export type CTGHistoryAPI = z.infer<typeof CTGHistoryAPISchema>;
 export type CTGResultAPI = z.infer<typeof CTGResultAPISchema>;
+export type GraphAPI = z.infer<typeof GraphSchema>;

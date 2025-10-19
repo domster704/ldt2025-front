@@ -2,7 +2,7 @@ import {createEntityAdapter} from '@reduxjs/toolkit';
 import {CTGHistory, CTGHistoryDTO, CTGResultDTO} from "@entities/ctg-history/model/types";
 import {CTGHistoryAPI, CTGResultAPI} from "@entities/ctg-history/api/schemas";
 import {CTGStatus, classificationToCTGStatus} from "@shared/const/ctgColors";
-import {mockGraph} from "@entities/ctg-history/model/mockGraphHistory";
+import {GraphData} from "@entities/session-upload";
 
 /**
  * Entity Adapter для управления коллекцией записей КТГ (Cardiotocography History).
@@ -41,8 +41,8 @@ function mapResultApiToDto(api?: CTGResultAPI): CTGResultDTO | undefined {
   if (!api) return undefined;
 
   const figo = api.figo ? classificationToCTGStatus[api.figo] : CTGStatus.None;
-  const savelyeva_status = api.savelyeva_status ? classificationToCTGStatus[api.savelyeva_status] : CTGStatus.None;
-  const fischer_status = api.fischer_status ? classificationToCTGStatus[api.fischer_status] : CTGStatus.None;
+  // const savelyeva_status = api.savelyeva_status ? classificationToCTGStatus[api.savelyeva_status] : CTGStatus.None;
+  // const fischer_status = api.fischer_status ? classificationToCTGStatus[api.fischer_status] : CTGStatus.None;
   const figo_prognosis =
     api.figo_prognosis ? (classificationToCTGStatus[api.figo_prognosis] ?? null) : CTGStatus.None;
 
@@ -52,8 +52,8 @@ function mapResultApiToDto(api?: CTGResultAPI): CTGResultDTO | undefined {
     bpm: normalizeNumber(api.bpm),
     uc: normalizeNumber(api.uc),
     figo,
-    savelyeva_status,
-    fischer_status,
+    savelyeva_status: CTGStatus.None,
+    fischer_status: CTGStatus.None,
     figo_prognosis,
     bhr: normalizeNumber(api.bhr),
     amplitude_oscillations: normalizeNumber(api.amplitude_oscillations),
@@ -85,7 +85,11 @@ export function mapHistoryApiToDto(api: CTGHistoryAPI): CTGHistoryDTO {
     id: api.id ?? 0,
     dir_path: api.dir_path,
     archive_path: api.archive_path ?? null,
-    graph: mockGraph,
+    graph: {
+      id: "1",
+      bpm: [],
+      uc: []
+    } as GraphData,
     result: api.result ? mapResultApiToDto(api.result) : undefined,
   };
 }
